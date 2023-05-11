@@ -44,9 +44,9 @@ if (empty($erreurs)) {
         header('location:/' . PATH_PROJECT . '/client/connexion/index');
     } else {
         $_SESSION['enregistrer-erreurs'] = $erreurs;
-        header('location: /'.PATH_PROJECT .'/client/mot_de_passe/nv_mot_passe/');
+        header('location: '.PATH_PROJECT .'client/mot_de_passe/nv_mot_passe/');
     }
 } else {
     $_SESSION['enregistrer-erreurs'] = $erreurs;
-    header('location: /'.PATH_PROJECT .'/client/mot_de_passe/nv_mot_passe/');
+    header('location: '.PATH_PROJECT .'client/mot_de_passe/nv_mot_passe/');
 }

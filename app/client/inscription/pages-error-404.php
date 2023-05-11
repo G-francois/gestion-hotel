@@ -21,24 +21,24 @@ if (!check_if_user_conneted()) {
     <meta content="" name="keywords" />
 
     <!-- outils CSS Files -->
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
     <!-- Custom fonts for this template-->
-    <link href="<?= '/' . PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this page -->
-    <link href="<?= '/' . PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?= '/' . PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
 
 
     <!-- Favicons -->
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/images/al_copyrighter.png" rel="icon" />
+    <link href="<?= PATH_PROJECT ?>public/images/al_copyrighter.png" rel="icon" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/images/al_copyrighter.png" rel="apple-touch-icon" />
+    <link href="<?= PATH_PROJECT ?>public/images/al_copyrighter.png" rel="apple-touch-icon" />
 
     <!-- Google Fonts -->
 
@@ -46,25 +46,25 @@ if (!check_if_user_conneted()) {
 
     <!-- outils CSS Files -->
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/animate.css/animate.min.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/aos/aos.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/aos/aos.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/boxicons/css/boxicons.min.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/glightbox/css/glightbox.min.css" rel="stylesheet" />
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
 
-    <link href="<?= '/' . PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
+    <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
 
 
@@ -76,7 +76,7 @@ if (!check_if_user_conneted()) {
     <header id="header" class="fixed-top d-flex align-items-cente">
       <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
         <h1 class="logo me-auto me-lg-0">
-          <a href="<?= '/' . PATH_PROJECT ?>/client/site/home">Sous les Cocotiers</a>
+          <a href="<?= PATH_PROJECT ?>/client/site/home">Sous les Cocotiers</a>
         </h1>
 
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -86,27 +86,27 @@ if (!check_if_user_conneted()) {
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a class="nav-link scrollto active" href="<?= '/' . PATH_PROJECT ?>/client/site/home">Acceuil</a>
+              <a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home">Acceuil</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/chambres">Chambres</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/galeries">Galeries</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/contact">Contact</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
             </li>
 
             <li>
-              <a href="<?= '/' . PATH_PROJECT ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
+              <a href="<?= PATH_PROJECT ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
             </li>
 
 
@@ -130,8 +130,8 @@ if (!check_if_user_conneted()) {
           <section class="section error-404 d-flex flex-column align-items-center justify-content-center">
             <h1>Oups</h1>
             <h2>Veuiller vérifier votre connexion ou reprenez l'inscription.</h2>
-            <a class="btn" href="<?= '/' . PATH_PROJECT ?>/client/inscription/index" style="color:#d9ba85;">Retourner à l'inscription</a>
-            <img src="<?= '/' . PATH_PROJECT ?>public/images/not-found.svg" class="img-fluid py-5" style="width: 360px;" alt="Page Not Found">
+            <a class="btn" href="<?= PATH_PROJECT ?>/client/inscription/index" style="color:#d9ba85;">Retourner à l'inscription</a>
+            <img src="<?= PATH_PROJECT ?>public/images/not-found.svg" class="img-fluid py-5" style="width: 360px;" alt="Page Not Found">
           </section>
 
         </div>

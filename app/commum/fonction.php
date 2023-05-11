@@ -15,7 +15,7 @@ function connect_db()
     $db = null;
 
     try {
-        $db = new PDO('mysql:host=localhost;dbname=' . DATABASE_NAME .';charset=utf8', DATABASE_USERNAME, DATABASE_PASSWORD);
+        $db = new PDO('mysql:host=' . DATABASE_HOST . ';dbname=' . DATABASE_NAME . ';charset=utf8', DATABASE_USERNAME, DATABASE_PASSWORD);
     } catch (\Exception $e) {
         $db = "Oups! Une erreur s'est produite lors de la connexion a la base de donnée.";
     }
@@ -37,20 +37,23 @@ function check_email_exist_in_db(string $email)
 
     $db = connect_db();
 
-    $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE email = :email and est_supprimer = :est_supprimer";
+    if (is_object($db)) {
 
-    $verifier_email = $db->prepare($requette);
+        $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE email = :email and est_supprimer = :est_supprimer";
 
-    $resultat = $verifier_email->execute([
-        'email' => $email,
-        'est_supprimer' => 0
-    ]);
+        $verifier_email = $db->prepare($requette);
 
-    if ($resultat) {
+        $resultat = $verifier_email->execute([
+            'email' => $email,
+            'est_supprimer' => 0
+        ]);
 
-        $nbr_utilisateur = $verifier_email->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+        if ($resultat) {
 
-        $check = ($nbr_utilisateur > 0) ? true : false;
+            $nbr_utilisateur = $verifier_email->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+            $check = ($nbr_utilisateur > 0) ? true : false;
+        }
     }
 
     return $check;
@@ -70,20 +73,23 @@ function check_user_name_exist_in_db(string $nom_utilisateur)
 
     $db = connect_db();
 
-    $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE nom_utilisateur = :nom_utilisateur and est_supprimer = :est_supprimer";
+    if (is_object($db)) {
 
-    $verifier_nom_utilisateur = $db->prepare($requette);
+        $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE nom_utilisateur = :nom_utilisateur and est_supprimer = :est_supprimer";
 
-    $resultat = $verifier_nom_utilisateur->execute([
-        'nom_utilisateur' => $nom_utilisateur,
-        'est_supprimer' => 0
-    ]);
+        $verifier_nom_utilisateur = $db->prepare($requette);
 
-    if ($resultat) {
+        $resultat = $verifier_nom_utilisateur->execute([
+            'nom_utilisateur' => $nom_utilisateur,
+            'est_supprimer' => 0
+        ]);
 
-        $nbr_utilisateur = $verifier_nom_utilisateur->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+        if ($resultat) {
 
-        $check = ($nbr_utilisateur > 0) ? true : false;
+            $nbr_utilisateur = $verifier_nom_utilisateur->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+            $check = ($nbr_utilisateur > 0) ? true : false;
+        }
     }
 
     return $check;
@@ -102,20 +108,23 @@ function check_telephone_exist_in_db(string $telephone)
 
     $db = connect_db();
 
-    $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE telephone = :telephone and est_supprimer = :est_supprimer";
+    if (is_object($db)) {
 
-    $verifier_email = $db->prepare($requette);
+        $requette = "SELECT count(*) as nbr_utilisateur FROM utilisateur WHERE telephone = :telephone and est_supprimer = :est_supprimer";
 
-    $resultat = $verifier_email->execute([
-        'telephone' => $telephone,
-        'est_supprimer' => 0
-    ]);
+        $verifier_email = $db->prepare($requette);
 
-    if ($resultat) {
+        $resultat = $verifier_email->execute([
+            'telephone' => $telephone,
+            'est_supprimer' => 0
+        ]);
 
-        $nbr_utilisateur = $verifier_email->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+        if ($resultat) {
 
-        $check = ($nbr_utilisateur > 0) ? true : false;
+            $nbr_utilisateur = $verifier_email->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+            $check = ($nbr_utilisateur > 0) ? true : false;
+        }
     }
 
     return $check;
@@ -155,13 +164,13 @@ function email(string $destination, string $subject, string $body): bool
             )
         );
 
-        $mail->Username = 'slescocotiers@gmail.com';
-        $mail->Password = 'wmiytltpsxnihyvr';
+        $mail->Username = MAIL_ADDRESS;
+        $mail->Password = MAIL_PASSWORD;
 
         // Sender and recipient settings
-        $mail->setFrom('slescocotiers@gmail.com', htmlspecialchars_decode('HOTEL_SOUS_LES_COCOTIERS'));
+        $mail->setFrom(MAIL_ADDRESS, htmlspecialchars_decode('HOTEL_SOUS_LES_COCOTIERS'));
         $mail->addAddress($destination, 'UTILISATEUR');
-        $mail->addReplyTo('slescocotiers@gmail.com', htmlspecialchars_decode('HOTEL_SOUS_LES_COCOTIERS'));
+        $mail->addReplyTo(MAIL_ADDRESS, htmlspecialchars_decode('HOTEL_SOUS_LES_COCOTIERS'));
 
         // Setting the email content
         $mail->IsHTML(true);
@@ -196,23 +205,26 @@ function insertion_token(int $user_id, string $type, string $token): bool
 
     $insertion_token = false;
 
-    $database = connect_db();
+    $db = connect_db();
 
-    $request = "INSERT INTO token (user_id, type, token) VALUES (:user_id, :type, :token)";
+    if (is_object($db)) {
 
-    $request_prepare = $database->prepare($request);
+        $request = "INSERT INTO token (user_id, type, token) VALUES (:user_id, :type, :token)";
 
-    $request_execution = $request_prepare->execute(
-        [
-            'user_id' => $user_id,
-            'type' => $type,
-            'token' => $token
-        ]
-    );
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(
+            [
+                'user_id' => $user_id,
+                'type' => $type,
+                'token' => $token
+            ]
+        );
 
-        $insertion_token = true;
+        if ($request_execution) {
+
+            $insertion_token = true;
+        }
     }
 
     return $insertion_token;
@@ -225,25 +237,29 @@ function recuperer_token(string $user_id)
 
     $token = [];
 
-    $database = connect_db();
+    $db = connect_db();
 
-    $request = "SELECT token FROM token WHERE user_id=:user_id";
+    if (is_object($db)) {
 
-    $request_prepare = $database->prepare($request);
+        $request = "SELECT token FROM token WHERE user_id=:user_id";
 
-    $request_execution = $request_prepare->execute([
-        'user_id' => $user_id
-    ]);
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute([
+            'user_id' => $user_id
+        ]);
 
-        $data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+        if ($request_execution) {
 
-        if (isset($data) && !empty($data) && is_array($data)) {
+            $data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
 
-            $token = $data;
+            if (isset($data) && !empty($data) && is_array($data)) {
+
+                $token = $data;
+            }
         }
     }
+
     return $token;
 }
 
@@ -254,23 +270,26 @@ function select_user_id(string $email)
 
     $user_id = [];
 
-    $database = connect_db();
+    $db = connect_db();
 
-    $request = "SELECT id FROM utilisateur WHERE email=:email";
+    if (is_object($db)) {
 
-    $request_prepare = $database->prepare($request);
+        $request = "SELECT id FROM utilisateur WHERE email=:email";
 
-    $request_execution = $request_prepare->execute([
-        'email' => $email
-    ]);
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute([
+            'email' => $email
+        ]);
 
-        $data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+        if ($request_execution) {
 
-        if (isset($data) && !empty($data) && is_array($data)) {
+            $data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
 
-            $user_id = $data;
+            if (isset($data) && !empty($data) && is_array($data)) {
+
+                $user_id = $data;
+            }
         }
     }
     return $user_id;
@@ -290,28 +309,30 @@ function check_id_utilisateur_exist_in_db(int $user_id, string $token, string $t
 
     $db = connect_db();
 
-    $requette = "SELECT * FROM token WHERE user_id = :user_id and token= :token and type= :type and est_actif= :est_actif and $est_supprimer= :est_supprimer";
+    if (is_object($db)) {
 
-    $verifier_id_utilisateur = $db->prepare($requette);
+        $requette = "SELECT * FROM token WHERE user_id = :user_id and token= :token and type= :type and est_actif= :est_actif and $est_supprimer= :est_supprimer";
 
-    $resultat = $verifier_id_utilisateur->execute([
-        'user_id' => $user_id,
-        'token' => $token,
-        'type' => $type,
-        'est_actif' => $est_actif,
-        'est_supprimer' => $est_supprimer
-    ]);
+        $verifier_id_utilisateur = $db->prepare($requette);
 
-    if ($resultat) {
+        $resultat = $verifier_id_utilisateur->execute([
+            'user_id' => $user_id,
+            'token' => $token,
+            'type' => $type,
+            'est_actif' => $est_actif,
+            'est_supprimer' => $est_supprimer
+        ]);
 
-        $data = $verifier_id_utilisateur->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultat) {
 
-        if (isset($data) && !empty($data) && is_array($data)) {
+            $data = $verifier_id_utilisateur->fetchAll(PDO::FETCH_ASSOC);
 
-            $check = true;
+            if (isset($data) && !empty($data) && is_array($data)) {
+
+                $check = true;
+            }
         }
     }
-
     return $check;
 }
 
@@ -329,22 +350,25 @@ function maj(int $id_utilisateur): bool
 
     $db = connect_db();
 
-    $request = "UPDATE token SET est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE user_id= :id_utilisateur";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE token SET est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE user_id= :id_utilisateur";
 
-    $request_execution = $request_prepare->execute(
-        [
-            'id_utilisateur' => $id_utilisateur,
-            'est_actif' => 0,
-            'est_supprimer' => 1,
-            'maj_le' => $date
-        ]
-    );
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(
+            [
+                'id_utilisateur' => $id_utilisateur,
+                'est_actif' => 0,
+                'est_supprimer' => 1,
+                'maj_le' => $date
+            ]
+        );
 
-        $maj = true;
+        if ($request_execution) {
+
+            $maj = true;
+        }
     }
 
     return $maj;
@@ -362,21 +386,24 @@ function maj1(int $id_utilisateur): bool
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id= :id_utilisateur";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id= :id_utilisateur";
 
-    $request_execution = $request_prepare->execute(
-        [
-            'id_utilisateur' => $id_utilisateur,
-            'est_actif' => 1,
-            'maj_le' => $date
-        ]
-    );
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(
+            [
+                'id_utilisateur' => $id_utilisateur,
+                'est_actif' => 1,
+                'maj_le' => $date
+            ]
+        );
 
-        $maj1 = true;
+        if ($request_execution) {
+
+            $maj1 = true;
+        }
     }
 
     return $maj1;
@@ -399,26 +426,30 @@ function check_if_user_exist(string $email_user_name, string $password, string $
 
     $db = connect_db();
 
-    $requette = "SELECT id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
 
-    $verifier_nom_utilisateur = $db->prepare($requette);
+    if (is_object($db)) {
 
-    $resultat = $verifier_nom_utilisateur->execute([
-        'email_user_name' => $email_user_name,
-        'nom_utilisateur' => $email_user_name,
-        'mot_passe' => sha1($password),
-        'profil' => $profil,
-        'est_actif' => $est_actif,
-        'est_supprimer' => $est_supprimer,
-    ]);
+        $requette = "SELECT id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
 
-    if ($resultat) {
+        $verifier_nom_utilisateur = $db->prepare($requette);
 
-        $utilisateur = $verifier_nom_utilisateur->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = $verifier_nom_utilisateur->execute([
+            'email_user_name' => $email_user_name,
+            'nom_utilisateur' => $email_user_name,
+            'mot_passe' => sha1($password),
+            'profil' => $profil,
+            'est_actif' => $est_actif,
+            'est_supprimer' => $est_supprimer,
+        ]);
 
-        $_SESSION['utilisateur_connecter'] = $utilisateur;
+        if ($resultat) {
 
-        $user = (isset($utilisateur) && !empty($utilisateur) && is_array($utilisateur)) ? true : false;
+            $utilisateur = $verifier_nom_utilisateur->fetchAll(PDO::FETCH_ASSOC);
+
+            $_SESSION['utilisateur_connecter'] = $utilisateur;
+
+            $user = (isset($utilisateur) && !empty($utilisateur) && is_array($utilisateur)) ? true : false;
+        }
     }
 
     return $user;
@@ -433,18 +464,22 @@ function check_password_exist(string $password, int $id)
 
     $db = connect_db();
 
-    $requette = $db->prepare('SELECT id from utilisateur WHERE mot_passe= :mot_passe AND id= :id');
+    if (is_object($db)) {
 
-    $requette->execute(array(
-        'mot_passe' => sha1($password),
-        'id' => $id
-    ));
+        $requette = $db->prepare('SELECT id from utilisateur WHERE mot_passe= :mot_passe AND id= :id');
 
-    $users = $requette->fetch();
-    if ($users) {
+        $requette->execute(array(
+            'mot_passe' => sha1($password),
+            'id' => $id
+        ));
 
-        $users = true;
+        $users = $requette->fetch();
+        if ($users) {
+
+            $users = true;
+        }
     }
+
     return $users;
 }
 
@@ -477,19 +512,22 @@ function maj_mot_passe(int $id, string $password): bool
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET mot_passe = :mot_passe, maj_le = :maj_le  WHERE id= :id";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET mot_passe = :mot_passe, maj_le = :maj_le  WHERE id= :id";
 
-    $request_execution = $request_prepare->execute(array(
-        'id' => $id,
-        'mot_passe' => sha1($password),
-        'maj_le' => $date
-    ));
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'mot_passe' => sha1($password),
+            'maj_le' => $date
+        ));
 
-        $maj3 = true;
+        if ($request_execution) {
+
+            $maj3 = true;
+        }
     }
 
     return $maj3;
@@ -507,21 +545,24 @@ function maj_avatar(int $id, string $avatar): bool
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET avatar = :avatar, maj_le = :maj_le  WHERE id= :id";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET avatar = :avatar, maj_le = :maj_le  WHERE id= :id";
 
-    $request_execution = $request_prepare->execute(
-        [
-            'id' => $id,
-            'avatar' => $avatar,
-            'maj_le' => $date,
-        ]
-    );
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(
+            [
+                'id' => $id,
+                'avatar' => $avatar,
+                'maj_le' => $date,
+            ]
+        );
 
-        $maj_avatar = true;
+        if ($request_execution) {
+
+            $maj_avatar = true;
+        }
     }
 
     return $maj_avatar;
@@ -539,22 +580,25 @@ function maj_nv_info_user(int $id, string $nom, string $prenom, string $telephon
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET nom = :nom, prenom = :prenom, telephone = :telephone, nom_utilisateur = :nom_utilisateur, maj_le = :maj_le WHERE id= :id";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET nom = :nom, prenom = :prenom, telephone = :telephone, nom_utilisateur = :nom_utilisateur, maj_le = :maj_le WHERE id= :id";
 
-    $request_execution = $request_prepare->execute(array(
-        'id' => $id,
-        'nom' => $nom,
-        'prenom' => $prenom,
-        'telephone' => $telephone,
-        'nom_utilisateur' => $nom_utilisateur,
-        'maj_le' => $date
-    ));
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'telephone' => $telephone,
+            'nom_utilisateur' => $nom_utilisateur,
+            'maj_le' => $date
+        ));
 
-        $modifier_profil = true;
+        if ($request_execution) {
+
+            $modifier_profil = true;
+        }
     }
 
     return $modifier_profil;
@@ -570,21 +614,25 @@ function recup_maj_nv_info_user($id): bool
 
     $db = connect_db();
 
-    $request_recupere = $db->prepare('SELECT  id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
+    if (is_object($db)) {
 
-    $resultat = $request_recupere->execute(array(
-        'id' => $id,
-    ));
+        $request_recupere = $db->prepare('SELECT  id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
 
-    if ($resultat) {
-        $donnees = [];
+        $resultat = $request_recupere->execute(array(
+            'id' => $id,
+        ));
 
-        $donnees = $request_recupere->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultat) {
+            $donnees = [];
 
-        $_SESSION['utilisateur_connecter'] = $donnees;
+            $donnees = $request_recupere->fetchAll(PDO::FETCH_ASSOC);
 
-        $recup = true;
+            $_SESSION['utilisateur_connecter'] = $donnees;
+
+            $recup = true;
+        }
     }
+
     return $recup;
 }
 
@@ -600,19 +648,22 @@ function desactiver_utilisateur(int $id): bool
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET  est_actif = :est_actif, maj_le = :maj_le WHERE id= :id";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET  est_actif = :est_actif, maj_le = :maj_le WHERE id= :id";
 
-    $request_execution = $request_prepare->execute(array(
-        'id' => $id,
-        'est_actif' => 0,
-        'maj_le' => $date
-    ));
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'est_actif' => 0,
+            'maj_le' => $date
+        ));
 
-        $profile_active = true;
+        if ($request_execution) {
+
+            $profile_active = true;
+        }
     }
 
     return $profile_active;
@@ -629,20 +680,23 @@ function supprimer_utilisateur(int $id): bool
 
     $db = connect_db();
 
-    $request = "UPDATE utilisateur SET est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE id= :id";
+    if (is_object($db)) {
 
-    $request_prepare = $db->prepare($request);
+        $request = "UPDATE utilisateur SET est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE id= :id";
 
-    $request_execution = $request_prepare->execute(array(
-        'id' => $id,
-        'est_actif' => 0,
-        'est_supprimer' => 1,
-        'maj_le' => $date
-    ));
+        $request_prepare = $db->prepare($request);
 
-    if ($request_execution) {
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'est_actif' => 0,
+            'est_supprimer' => 1,
+            'maj_le' => $date
+        ));
 
-        $profile_supprimer = true;
+        if ($request_execution) {
+
+            $profile_supprimer = true;
+        }
     }
 
     return $profile_supprimer;

@@ -1,6 +1,6 @@
 <?php
 
-$url = 'localhost/'.PATH_PROJECT .'/client/modification_mot_passe/index/{id_utilisateur}/{token}';
+$url = 'localhost/'.PATH_PROJECT .'client/modification_mot_passe/index/{id_utilisateur}/{token}';
 
 if (isset($_SESSION['modification_mot_passe']) && !empty($_SESSION['modification_mot_passe'])) {
     $id_utilisateur = $_SESSION['modification_mot_passe']['id_utilisateur'];

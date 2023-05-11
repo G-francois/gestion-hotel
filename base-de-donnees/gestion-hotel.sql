@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : jeu. 11 mai 2023 à 12:10
+-- Généré le : jeu. 11 mai 2023 à 12:46
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -187,33 +187,6 @@ CREATE TABLE `token` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `first_names` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `mail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `is_valid_mail` int(11) NOT NULL,
-  `is_valid_phone_number` int(11) NOT NULL,
-  `user_profile` int(11) NOT NULL,
-  `sex` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `birth_date` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `company_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `countrie` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `is_active` int(11) NOT NULL,
-  `is_deleted` int(11) NOT NULL,
-  `created_the` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `updated_on` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `utilisateur`
 --
 
@@ -307,12 +280,6 @@ ALTER TABLE `token`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
@@ -368,12 +335,6 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT pour la table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

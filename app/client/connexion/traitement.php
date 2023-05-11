@@ -55,7 +55,7 @@ if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"]) && isset($_POST["e
                 ]
             );
         }
-        header('location: /'.PATH_PROJECT .'/client/dashboard/index');
+        header('location: '.PATH_PROJECT .'client/dashboard/index');
     }else {
         $_SESSION['connexion-erreurs'] = $erreurs;
         $erreurs["mot-passe"] = "Le mot de passe est incorrecte. Veuiller le reéssayer.";
@@ -67,5 +67,5 @@ if (empty($erreurs)) {
 } else {
     $_SESSION['donnees-utilisateur'] = $donnees;
     $_SESSION['connexion-erreurs'] = $erreurs;
-    header('location: /'.PATH_PROJECT .'/client/connexion/index');
+    header('location: '.PATH_PROJECT .'client/connexion/index');
 }

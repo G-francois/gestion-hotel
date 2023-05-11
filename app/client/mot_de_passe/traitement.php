@@ -46,9 +46,9 @@ if (empty($erreurs)) {
         }
 
         $objet = 'Modification de mot de passe';
-        $message = buffer_html_file('../'.PATH_PROJECT .'/app/client/mot_de_passe/message_mail.php');
+        $message = buffer_html_file(PATH_PROJECT . 'app/client/mot_de_passe/message_mail.php');
         if (email($donnees["email"], $objet, $message)) {
-            
+
             $donnees = ($_POST["email"]);
             //Création du cookie
             setcookie(
@@ -63,15 +63,15 @@ if (empty($erreurs)) {
             );
 
             $_SESSION['validation2'] = "Veuiller bien consulter votre adresse mail pour effectuer la modification ";
-            header('location: /'.PATH_PROJECT .'/client/mot_de_passe/index');
+            header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
         } else {
             $_SESSION['verification'] = "Oups une erreur s'est produite lors de la réinitialisation";
-            header('location: /'.PATH_PROJECT .'/client/mot_de_passe/index');
+            header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
         }
     }
 } else {
 
     $_SESSION['verification-erreurs'] = $erreurs;
 
-    header('location: /'.PATH_PROJECT .'/client/mot_de_passe/index');
+    header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
 }

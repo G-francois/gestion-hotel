@@ -18,7 +18,7 @@ Pré-requis :
 - Configurer la constante PATH_PROJECT dans le fichier index.php a la racine du projet en spécifiant le path de votre projet a partir du répertoire web. 
 Exemple : C:\wamp64\www\gestion-hotel. Ma constante PROJECT aura comme valeur : /gestion-hotel/
 
-- Configurer les constantes DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD dans le fichier index.php a la racine du projet en spécifiant les informations de la base de données.
+- Configurer les constantes DATABASE_HOST, DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD dans le fichier index.php a la racine du projet en spécifiant les informations de la base de données.
 
 - Configurer les constantes MAIL_ADDRESS, MAIL_PASSWORD dans le fichier index.php a la racine du projet en spécifiant les informations de l'émetteur des mails dans l'application.
 

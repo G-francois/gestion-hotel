@@ -23,26 +23,26 @@ if (check_if_user_conneted()) {
         <title>SLC Client - Dashboard</title>
 
         <!-- Custom fonts for this template-->
-        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this page -->
-        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="<?= '/' . PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="<?= PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
 
 
         <!-- Custom fonts for this template-->
-        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles client for this template-->
-        <link href="<?= '/' . PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
+        <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
         <!-- outils CSS Files -->
-        <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+        <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
         <style>
             label {
@@ -71,7 +71,7 @@ if (check_if_user_conneted()) {
                         <header id="header" class="fixed-top d-flex align-items-cente">
                             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
                                 <h1 class="logo me-auto me-lg-0">
-                                    <a href="<?= '/' . PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                                    <a href="<?= PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                                 </h1>
 
                                 <!-- Uncomment below if you prefer to use an image logo -->
@@ -80,22 +80,22 @@ if (check_if_user_conneted()) {
 
                                 <nav id="navbar" class="navbar order-last order-lg-0">
                                     <ul>
-                                        <li><a class="nav-link scrollto active" href="<?= '/' . PATH_PROJECT ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+                                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/chambres" style="color: white;">Chambres</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres" style="color: white;">Chambres</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/restaurant" style="color: white;">Restaurant</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant" style="color: white;">Restaurant</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/galeries" style="color: white;">Galeries</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries" style="color: white;">Galeries</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/contact" style="color: white;">Contact</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact" style="color: white;">Contact</a>
                                         </li>
 
 
@@ -159,10 +159,10 @@ if (check_if_user_conneted()) {
                                             <!-- Dropdown - User Information -->
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                                 <div class="dropdown-item">
-                                                    <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? '/' . PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 8rem; height: 8rem;"> <br>
+                                                    <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 8rem; height: 8rem;"> <br>
                                                     <h4 class="mr-2" style="color: black;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h4>
                                                 </div>
-                                                <a class="dropdown-item" href="<?= '/' . PATH_PROJECT ?>/administrateur/dashboard/profile" style="color: black;">
+                                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>/administrateur/dashboard/profile" style="color: black;">
                                                     Gérer mon compte
                                                 </a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" style="color: black;">
@@ -192,7 +192,7 @@ if (check_if_user_conneted()) {
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between h3 mb-2">
                         <h4 class="h3 mb-0"><a href="#" style="color: white;">Ajouter une réservation</a></h4>
-                        <h4 class="m-0 font-weight-bold "><a href="<?= '/' . PATH_PROJECT ?>/client/dashboard/index">Liste des réservations</a></h4>
+                        <h4 class="m-0 font-weight-bold "><a href="<?= PATH_PROJECT ?>/client/dashboard/index">Liste des réservations</a></h4>
                     </div>
 
                     <form class="form-horizontal" action="?requette=ajout-auteur-traitement" method="POST">

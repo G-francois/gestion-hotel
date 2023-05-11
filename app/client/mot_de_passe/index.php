@@ -209,6 +209,6 @@ if (!check_if_user_conneted()) {
 
 <?php
 } else {
-    header('location: /'.PATH_PROJECT .'/client/connexion/index');
+    header('location: '.PATH_PROJECT .'client/connexion/index');
 }
 ?>

@@ -48,7 +48,7 @@ if (!isset($_POST["email"]) || empty($_POST["email"])) {
 }
 
 if (isset($_POST["email"]) && !empty($_POST["email"]) && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-    $donnees["email"] = trim(htmlentities( $_POST["email"]));
+    $donnees["email"] = trim(htmlentities($_POST["email"]));
 } else {
     $erreurs["email"] = "Le champs email est requis. Veuillez le renseigné.";
 }
@@ -159,21 +159,21 @@ if (empty($erreurs)) {
         }
 
         $objet = 'Validation de votre inscription';
-        $message = buffer_html_file('../'.PATH_PROJECT .'/app/client/inscription/message_mail.php');
+        $message = buffer_html_file(PATH_PROJECT . 'app/client/inscription/message_mail.php');
         if (email($donnees["email"], $objet, $message)) {
             $_SESSION['validation'] = "Veuiller bien consulter votre adresse mail pour valider votre compte ";
-            header('location: /'.PATH_PROJECT .'/client/inscription/index');
+            header('location: ' . PATH_PROJECT . 'client/inscription/index');
         } else {
-            header('location: /'.PATH_PROJECT .'/client/inscription/pages-error-404');
+            header('location: ' . PATH_PROJECT . 'client/inscription/pages-error-404');
         }
     } else {
         $_SESSION['inscription-erreurs-global'] = "Oupps ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
 
-        header('location: /'.PATH_PROJECT .'/client/inscription/index');
+        header('location: ' . PATH_PROJECT . 'client/inscription/index');
     }
 } else {
 
     $_SESSION['inscription-erreurs'] = $erreurs;
 
-    header('location: /'.PATH_PROJECT .'/client/inscription/index');
+    header('location: ' . PATH_PROJECT . 'client/inscription/index');
 }

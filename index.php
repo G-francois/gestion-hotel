@@ -5,13 +5,14 @@ require "vendor/autoload.php";
 define('PATH_PROJECT', '/stage/gestion-hotel/');
 
 // DATABASE ACCES
-define('DATABASE_NAME', 'gestion-hotel:8889');
+define('DATABASE_HOST', 'localhost');
+define('DATABASE_NAME', 'gestion-hotel');
 define('DATABASE_USERNAME', 'root');
 define('DATABASE_PASSWORD', 'root');
 
 // MAIL ACCES
-define('MAIL_ADDRESS', '');
-define('MAIL_PASSWORD', '');
+define('MAIL_ADDRESS', 'slescocotiers@gmail.com');
+define('MAIL_PASSWORD', 'wmiytltpsxnihyvr');
 
 $default_profile = "client";
 $default_profile_folder = "app/client/index.php";

@@ -1,6 +1,6 @@
 <?php
 
-$url = 'localhost/'.PATH_PROJECT .'/client/validation_de_compte/index/{id_utilisateur}/{token}';
+$url = 'localhost/'.PATH_PROJECT .'client/validation_de_compte/index/{id_utilisateur}/{token}';
 
 if (isset($_SESSION['validation_compte']) && !empty($_SESSION['validation_compte'])) {
     $id_utilisateur = $_SESSION['validation_compte']['id_utilisateur'];

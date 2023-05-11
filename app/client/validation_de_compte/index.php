@@ -8,5 +8,5 @@ if (check_id_utilisateur_exist_in_db($params[3], $params[4], "VALIDATION_COMPTE"
         header('location: /' . PATH_PROJECT . '/client/connexion/index');
     }
 } else {
-    header('location: /'.PATH_PROJECT .'/client/inscription/pages-error-404');
+    header('location: '.PATH_PROJECT .'client/inscription/pages-error-404');
 }
