@@ -15,8 +15,8 @@ function connect_db()
     $db = null;
 
     try {
-        $db = new PDO('mysql:host=localhost;dbname=gestion-hotel;charset=utf8', 'root', '');
-    } catch (Exception $e) {
+        $db = new PDO('mysql:host=localhost;dbname=' . DATABASE_NAME .';charset=utf8', DATABASE_USERNAME, DATABASE_PASSWORD);
+    } catch (\Exception $e) {
         $db = "Oups! Une erreur s'est produite lors de la connexion a la base de donnée.";
     }
 

@@ -41,12 +41,12 @@ $_SESSION['donnees-utilisateur'] = $donnees;
 
 if (empty($erreurs)) {
     if (maj_mot_passe($_SESSION['utilisateur_connecter'][0]['id'], $donnees["mot-passe"])) {
-        header('location:/' . GESTION_HOTEL . '/client/connexion/index');
+        header('location:/' . PATH_PROJECT . '/client/connexion/index');
     } else {
         $_SESSION['enregistrer-erreurs'] = $erreurs;
-        header('location: /'.GESTION_HOTEL .'/client/mot_de_passe/nv_mot_passe/');
+        header('location: /'.PATH_PROJECT .'/client/mot_de_passe/nv_mot_passe/');
     }
 } else {
     $_SESSION['enregistrer-erreurs'] = $erreurs;
-    header('location: /'.GESTION_HOTEL .'/client/mot_de_passe/nv_mot_passe/');
+    header('location: /'.PATH_PROJECT .'/client/mot_de_passe/nv_mot_passe/');
 }

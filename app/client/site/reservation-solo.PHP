@@ -14,15 +14,15 @@ include './app/commum/header_client.php'
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Solo/Solo4.jpg" class="d-block w-100" alt="..." />
+                  <img src="<?= PATH_PROJECT ?>public/images/Chambres/Solo/Solo4.jpg" class="d-block w-100" alt="..." />
                 </div>
 
                 <div class="carousel-item">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Solo/Solo3.jpg" class="d-block w-100" alt="..." />
+                  <img src="<?= PATH_PROJECT ?>public/images/Chambres/Solo/Solo3.jpg" class="d-block w-100" alt="..." />
                 </div>
 
                 <div class="carousel-item">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Solo/Solo2.jpg" class="d-block w-100" alt="..." />
+                  <img src="<?= PATH_PROJECT ?>public/images/Chambres/Solo/Solo2.jpg" class="d-block w-100" alt="..." />
                 </div>
               </div>
 
@@ -58,14 +58,14 @@ include './app/commum/header_client.php'
               </div>
             </div>
             <div>
-              <a title="Lits Twin" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Lits Twin" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-12.png" /></a>
-              <a title="Cocktail De Bienvenue" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Cocktail De Bienvenue" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-13.png" /></a>
-              <a title="Petit Déjeuner" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Petit Déjeuner" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-17.png" /></a>
-              <a title="Salle de bains privée" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Salle de bains privée" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-10.png" /></a>
-              <a title="Non fumeur" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Non fumeur" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-14.png" /></a>
-              <a title="satellite-tv" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="satellite-tv" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-18.png" /></a>
-              <a title="Blanchisserie" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Blanchisserie" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-15.png" /></a>
-              <a title="Wifi" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Wifi" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= '/'. GESTION_HOTEL ?>/public/images/Icons/icon-12-1.png" /></a>
+              <a title="Lits Twin" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Lits Twin" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12.png" /></a>
+              <a title="Cocktail De Bienvenue" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Cocktail De Bienvenue" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-13.png" /></a>
+              <a title="Petit Déjeuner" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Petit Déjeuner" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-17.png" /></a>
+              <a title="Salle de bains privée" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Salle de bains privée" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-10.png" /></a>
+              <a title="Non fumeur" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Non fumeur" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-14.png" /></a>
+              <a title="satellite-tv" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="satellite-tv" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-18.png" /></a>
+              <a title="Blanchisserie" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Blanchisserie" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-15.png" /></a>
+              <a title="Wifi" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Wifi" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12-1.png" /></a>
             </div>
 
 

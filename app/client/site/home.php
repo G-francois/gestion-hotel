@@ -134,7 +134,7 @@ include './app/commum/header_client.php'
         <section class="col-md-6 col-lg-4">
           <a href="#">
             <figure id="vignette1">
-              <img id="photo1" src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Solo/Solo.jpg" alt="Chambres Solo" />
+              <img id="photo1" src="<?= PATH_PROJECT ?>public/images/Chambres/Solo/Solo.jpg" alt="Chambres Solo" />
 
               <figcaption>
                 <h3 class="titre" id="intitule1">Chambres Solo</h3>
@@ -146,7 +146,7 @@ include './app/commum/header_client.php'
         <section class="col-md-6 col-lg-4 mb-5">
           <a href="#">
             <figure id="vignette2">
-              <img id="photo2" src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Suites/Suites.jpg" alt="Suite" />
+              <img id="photo2" src="<?= PATH_PROJECT ?>public/images/Chambres/Suites/Suites.jpg" alt="Suite" />
 
               <figcaption>
                 <h3 id="intitule2">Suite</h3>
@@ -156,7 +156,7 @@ include './app/commum/header_client.php'
 
           <a href="#">
             <figure id="vignette3">
-              <img id="photo3" src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Triples/Triples.jpg" alt="Chambres Triples" />
+              <img id="photo3" src="<?= PATH_PROJECT ?>public/images/Chambres/Triples/Triples.jpg" alt="Chambres Triples" />
 
               <figcaption>
                 <h3 id="intitule3">Chambre Triple</h3>
@@ -168,7 +168,7 @@ include './app/commum/header_client.php'
         <section class="col-md-6 col-lg-4">
           <a href="#">
             <figure id="vignette4">
-              <img id="photo4" src="<?= '/'. GESTION_HOTEL ?>/public/images/Chambres/Doubles/Doubles.jpg" alt="chambre doubles" />
+              <img id="photo4" src="<?= PATH_PROJECT ?>public/images/Chambres/Doubles/Doubles.jpg" alt="chambre doubles" />
 
               <figcaption>
                 <h3 id="intitule4">Chambre Double</h3>
@@ -205,7 +205,7 @@ include './app/commum/header_client.php'
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
 
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/testimonials/testimonials-1.jpg" class="testimonial-img" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/testimonials/testimonials-1.jpg" class="testimonial-img" alt="" />
 
             <h3>Saul Goodman</h3>
 
@@ -226,7 +226,7 @@ include './app/commum/header_client.php'
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
 
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/testimonials/testimonials-2.jpg" class="testimonial-img" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/testimonials/testimonials-2.jpg" class="testimonial-img" alt="" />
 
             <h3>Sara Wilsson</h3>
 
@@ -247,7 +247,7 @@ include './app/commum/header_client.php'
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
 
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/testimonials/testimonials-3.jpg" class="testimonial-img" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/testimonials/testimonials-3.jpg" class="testimonial-img" alt="" />
 
             <h3>Jena Karlis</h3>
 
@@ -268,7 +268,7 @@ include './app/commum/header_client.php'
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
 
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/testimonials/testimonials-4.jpg" class="testimonial-img" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/testimonials/testimonials-4.jpg" class="testimonial-img" alt="" />
 
             <h3>Matt Brandon</h3>
 
@@ -288,7 +288,7 @@ include './app/commum/header_client.php'
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
 
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/testimonials/testimonials-5.jpg" class="testimonial-img" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/testimonials/testimonials-5.jpg" class="testimonial-img" alt="" />
 
             <h3>John Larson</h3>
 

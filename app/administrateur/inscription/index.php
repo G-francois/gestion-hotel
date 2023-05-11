@@ -25,11 +25,11 @@ if (isset($_SESSION['donnees-utilisateur']) && !empty($_SESSION['donnees-utilisa
     <title>Sous les Cocotiers - Register</title>
 
     <!-- Custom fonts for this template-->
-    <link href="/soutenance/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/soutenancepublic/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="/soutenance/public/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/soutenancepublic/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -263,17 +263,17 @@ if (isset($_SESSION['donnees-utilisateur']) && !empty($_SESSION['donnees-utilisa
 
     <!-- Template Main JS File -->
 
-    <script src="/soutenance/public/js/main.js"></script>
+    <script src="/soutenancepublic/js/main.js"></script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/soutenance/public/vendor/jquery/jquery.min.js"></script>
-    <script src="/soutenance/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/soutenancepublic/vendor/jquery/jquery.min.js"></script>
+    <script src="/soutenancepublic/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/soutenance/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/soutenancepublic/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/soutenance/public/js/sb-admin-2.min.js"></script>
+    <script src="/soutenancepublic/js/sb-admin-2.min.js"></script>
 
 </body>
 

@@ -1,7 +1,17 @@
 <?php
 require "vendor/autoload.php";
 
-define('GESTION_HOTEL', 'soutenance');
+// PROJET VAR
+define('PATH_PROJECT', '/stage/gestion-hotel/');
+
+// DATABASE ACCES
+define('DATABASE_NAME', 'gestion-hotel:8889');
+define('DATABASE_USERNAME', 'root');
+define('DATABASE_PASSWORD', 'root');
+
+// MAIL ACCES
+define('MAIL_ADDRESS', '');
+define('MAIL_PASSWORD', '');
 
 $default_profile = "client";
 $default_profile_folder = "app/client/index.php";

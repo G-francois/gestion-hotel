@@ -12,11 +12,11 @@
     <title>SLC Admin - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../Public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="..public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../Public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="..public/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -141,7 +141,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="../Public/img/al_copyrighter.png" alt="...">
+                <img class="sidebar-card-illustration mb-2" src="..public/img/al_copyrighter.png" alt="...">
                 <a class="btn btn-success btn-sm" href="../../../HOTEL/home.html">SOUS LES COCOTIERS</a>
             </div>
 
@@ -254,7 +254,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../Public/img/profile.jpg">
+                                <img class="img-profile rounded-circle" src="..public/img/profile.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -320,21 +320,21 @@
                 </div>
 
                 <!-- Bootstrap core JavaScript-->
-                <script src="../Public/vendor/jquery/jquery.min.js"></script>
-                <script src="../Public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="..public/vendor/jquery/jquery.min.js"></script>
+                <script src="..public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
                 <!-- Core plugin JavaScript-->
-                <script src="../Public/vendor/jquery-easing/jquery.easing.min.js"></script>
+                <script src="..public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
                 <!-- Custom scripts for all pages-->
-                <script src="../Public/js/sb-admin-2.min.js"></script>
+                <script src="..public/js/sb-admin-2.min.js"></script>
 
                 <!-- Page level plugins -->
-                <script src="../Public/vendor/chart.js/Chart.min.js"></script>
+                <script src="..public/vendor/chart.js/Chart.min.js"></script>
 
                 <!-- Page level custom scripts -->
-                <script src="../Public/js/demo/chart-area-demo.js"></script>
-                <script src="../Public/demo/chart-pie-demo.js"></script>
+                <script src="..public/js/demo/chart-area-demo.js"></script>
+                <script src="..public/demo/chart-pie-demo.js"></script>
 
 
 

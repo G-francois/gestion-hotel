@@ -39,27 +39,27 @@
                     <ul>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/home">Home</a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/home">Home</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/chambres">Chambres</a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/restaurant">Restaurant</a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/galeries">Galeries</a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/contact">Contact</a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
                         </li>
 
                     </ul>
@@ -93,55 +93,55 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery/jquery.min.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/sb-admin-2.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
 
 
 <!-- Page level plugins -->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/chart.js/Chart.min.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/datatables/jquery.dataTables.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/chart-area-demo.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/chart-pie-demo.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/datatables-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
 
 
 
 <!-- outils JS Files -->
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/aos/aos.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/aos/aos.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/glightbox/js/glightbox.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/glightbox/js/glightbox.min.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/isotope-layout/isotope.pkgd.min.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/swiper/swiper-bundle.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/outils/php-email-form/validate.js"></script>
+<script src="<?= PATH_PROJECT ?>public/outils/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/main.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/jquery.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/jquery.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/bootstrap.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/bootstrap.min.js"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/plugins.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/plugins.js"></script>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/init.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/init.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -159,13 +159,13 @@
 
         jQuery("#headerwrap").backstretch(
             [
-                "<?= '/'. GESTION_HOTEL ?>/public/images/water-165219_1280.jpg",
+                "<?= PATH_PROJECT ?>public/images/water-165219_1280.jpg",
 
-                "<?= '/'. GESTION_HOTEL ?>/public/images/BG-1.jpg",
+                "<?= PATH_PROJECT ?>public/images/BG-1.jpg",
 
-                "<?= '/'. GESTION_HOTEL ?>/public/images/BG-2.jpg",
+                "<?= PATH_PROJECT ?>public/images/BG-2.jpg",
 
-                "<?= '/'. GESTION_HOTEL ?>/public/images/BG-2 (2).jpg",
+                "<?= PATH_PROJECT ?>public/images/BG-2 (2).jpg",
             ], {
                 duration: 4000,
 

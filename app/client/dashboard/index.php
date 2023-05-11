@@ -23,24 +23,24 @@ if (check_if_user_conneted()) {
         <title>SLC Client - Dashboard</title>
 
         <!-- outils CSS Files -->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+        <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
         <!-- Custom fonts for this template-->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this page -->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="<?= '/' . PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="<?= '/' . PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
 
         <!-- Custom styles client for this template-->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/css/style.css" rel="stylesheet" />
+        <link href="<?= '/' . PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
         <!-- outils CSS Files -->
-        <link href="<?= '/' . GESTION_HOTEL ?>/public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+        <link href="<?= '/' . PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
         <style>
             label {
@@ -54,7 +54,7 @@ if (check_if_user_conneted()) {
         <header id="header" class="fixed-top d-flex align-items-center">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
                 <h1 class="logo me-auto me-lg-0">
-                    <a href="<?= '/' . GESTION_HOTEL ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                    <a href="<?= '/' . PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                 </h1>
 
                 <!-- Uncomment below if you prefer to use an image logo -->
@@ -63,22 +63,22 @@ if (check_if_user_conneted()) {
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<?= '/' . GESTION_HOTEL ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+                        <li><a class="nav-link scrollto active" href="<?= '/' . PATH_PROJECT ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/' . GESTION_HOTEL ?>/client/site/chambres">Chambres</a>
+                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/chambres">Chambres</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/' . GESTION_HOTEL ?>/client/site/restaurant">Restaurant</a>
+                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/' . GESTION_HOTEL ?>/client/site/galeries">Galeries</a>
+                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/galeries">Galeries</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/' . GESTION_HOTEL ?>/client/site/contact">Contact</a>
+                            <a class="nav-link scrollto" href="<?= '/' . PATH_PROJECT ?>/client/site/contact">Contact</a>
                         </li>
 
 
@@ -137,7 +137,7 @@ if (check_if_user_conneted()) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? '/' . GESTION_HOTEL . '/public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 30px; margin-right: 12px;" alt="Profile" class="rounded-circle">
+                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? '/' . PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 30px; margin-right: 12px;" alt="Profile" class="rounded-circle">
                                 <h5 class="ml-2" style="color: white;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h5>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -147,16 +147,16 @@ if (check_if_user_conneted()) {
                                         <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
                                 </div>
                                 <hr style="margin-bottom: 12px; margin-top: -10px; border-top: 0px solid;">
-                                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . GESTION_HOTEL ?>/client/profil/profile">
+                                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . PATH_PROJECT ?>/client/profil/profile">
                                     <i class="bi bi-person" style="margin-right: 12px;"></i>
                                     <span>Mon Profile</span>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . GESTION_HOTEL ?>/client/dashboard/index">
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . PATH_PROJECT ?>/client/dashboard/index">
                                     <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                     <span>Tableau de bord</span>
                                 </a>
                                 <hr style="margin-bottom: 12px;">
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . GESTION_HOTEL ?>/client/deconnexion/index">
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= '/' . PATH_PROJECT ?>/client/deconnexion/index">
                                     <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
                                     <span>Déconnexion</span>
                                 </a>
@@ -188,7 +188,7 @@ if (check_if_user_conneted()) {
                 <h1 class="h3 mb-4">Réservations</h1>
 
                 <p class="mb-4" style="text-align: center;">
-                    <a href="<?= '/' . GESTION_HOTEL ?>/client/dashboard/ajout-reservation-client" style="justify-content: center; background-color: #cda45e; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Effectuer une réservation</a>
+                    <a href="<?= '/' . PATH_PROJECT ?>/client/dashboard/ajout-reservation-client" style="justify-content: center; background-color: #cda45e; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Effectuer une réservation</a>
                 </p>
 
                 <!-- DataTales Example -->
@@ -347,28 +347,28 @@ if (check_if_user_conneted()) {
         <!-- /.container-fluid -->
 
         <!-- Template Main JS File -->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/js/main.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/js/main.js"></script>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/jquery/jquery.min.js"></script>
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/js/sb-admin-2.min.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
 
 
         <!-- Page level plugins -->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/chart.js/Chart.min.js"></script>
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/datatables/jquery.dataTables.js"></script>
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/js/demo/chart-area-demo.js"></script>
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/js/demo/chart-pie-demo.js"></script>
-        <script src="<?= '/' . GESTION_HOTEL ?>/public/js/demo/datatables-demo.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
+        <script src="<?= '/' . PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
 
     </body>
 
@@ -376,6 +376,6 @@ if (check_if_user_conneted()) {
 
 <?php
 } else {
-    header('location: /' . GESTION_HOTEL . '/client/connexion/index');
+    header('location: /' . PATH_PROJECT . '/client/connexion/index');
 }
 ?>

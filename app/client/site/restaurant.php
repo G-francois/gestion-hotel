@@ -31,7 +31,7 @@ include './app/commum/header_client.php'
       <div class="row">
         <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
           <div class="about-img">
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/about.jpg" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/about.jpg" alt="" />
           </div>
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -135,7 +135,7 @@ include './app/commum/header_client.php'
 
       <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
         <div class="col-lg-6 menu-item filter-starters">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/L'attiéké.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/L'attiéké.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Attiéké</a><span>$5.95</span>
           </div>
@@ -148,7 +148,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-specialty">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/bread-barrel.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/bread-barrel.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Baril de pain</a><span>$6.95</span>
           </div>
@@ -158,7 +158,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-starters">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/cake.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/cake.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Gâtaeu au Crabe</a><span>$7.95</span>
           </div>
@@ -169,7 +169,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-salads">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/caesar.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/caesar.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Selection de caesar</a><span>$8.95</span>
           </div>
@@ -180,7 +180,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-specialty">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/tuscan-grilled.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/tuscan-grilled.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#"> Grillarde Toscanes</a><span>$9.95</span>
           </div>
@@ -191,7 +191,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-starters">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/mozzarella.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/mozzarella.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Baton de Mozzarella</a><span>$4.95</span>
           </div>
@@ -204,7 +204,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-salads">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/greek-salad.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/greek-salad.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Salade Grecque</a><span>$9.95</span>
           </div>
@@ -215,7 +215,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-salads">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/spinach-salad.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/spinach-salad.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Salade d'épinards</a><span>$9.95</span>
           </div>
@@ -226,7 +226,7 @@ include './app/commum/header_client.php'
         </div>
 
         <div class="col-lg-6 menu-item filter-specialty">
-          <img src="<?= '/'. GESTION_HOTEL ?>/public/images/menu/lobster-roll.jpg" class="menu-img" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/menu/lobster-roll.jpg" class="menu-img" alt="" />
           <div class="menu-content">
             <a href="#">Rouleau de homard</a><span>$12.95</span>
           </div>
@@ -282,7 +282,7 @@ include './app/commum/header_client.php'
                   </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/specials-1.png" alt="" class="img-fluid" />
+                  <img src="<?= PATH_PROJECT ?>public/images/specials-1.png" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -300,7 +300,7 @@ include './app/commum/header_client.php'
                   </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/specials-3.png" alt="" class="img-fluid" />
+                  <img src="<?= PATH_PROJECT ?>public/images/specials-3.png" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -319,7 +319,7 @@ include './app/commum/header_client.php'
                   </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/specials-4.png" alt="" class="img-fluid" />
+                  <img src="<?= PATH_PROJECT ?>public/images/specials-4.png" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -337,7 +337,7 @@ include './app/commum/header_client.php'
                   </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img src="<?= '/'. GESTION_HOTEL ?>/public/images/specials-5.png" alt="" class="img-fluid" />
+                  <img src="<?= PATH_PROJECT ?>public/images/specials-5.png" alt="" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -361,7 +361,7 @@ include './app/commum/header_client.php'
           <div class="swiper-slide">
             <div class="row event-item">
               <div class="col-lg-6">
-                <img src="<?= '/'. GESTION_HOTEL ?>/public/images/event-birthday.jpg" class="img-fluid" alt="" />
+                <img src="<?= PATH_PROJECT ?>public/images/event-birthday.jpg" class="img-fluid" alt="" />
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Fêtes d'anniversaire</h3>
@@ -388,7 +388,7 @@ include './app/commum/header_client.php'
           <div class="swiper-slide">
             <div class="row event-item">
               <div class="col-lg-6">
-                <img src="<?= '/'. GESTION_HOTEL ?>/public/images/event-private.jpg" class="img-fluid" alt="" />
+                <img src="<?= PATH_PROJECT ?>public/images/event-private.jpg" class="img-fluid" alt="" />
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Soirées privées</h3>
@@ -413,7 +413,7 @@ include './app/commum/header_client.php'
           <div class="swiper-slide">
             <div class="row event-item">
               <div class="col-lg-6">
-                <img src="<?= '/'. GESTION_HOTEL ?>/public/images/event-custom.jpg" class="img-fluid" alt="" />
+                <img src="<?= PATH_PROJECT ?>public/images/event-custom.jpg" class="img-fluid" alt="" />
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Fêtes personnalisées</h3>
@@ -452,7 +452,7 @@ include './app/commum/header_client.php'
       <div class="row">
         <div class="col-lg-4 col-md-6">
           <div class="member" data-aos="zoom-in" data-aos-delay="100">
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/chefs/chefs-1.jpg" class="img-fluid" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/chefs/chefs-1.jpg" class="img-fluid" alt="" />
             <div class="member-info">
               <div class="member-info-content">
                 <h4>Walter White</h4>
@@ -470,7 +470,7 @@ include './app/commum/header_client.php'
 
         <div class="col-lg-4 col-md-6">
           <div class="member" data-aos="zoom-in" data-aos-delay="200">
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/chefs/chefs-2.jpg" class="img-fluid" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/chefs/chefs-2.jpg" class="img-fluid" alt="" />
             <div class="member-info">
               <div class="member-info-content">
                 <h4>Sarah Jhonson</h4>
@@ -488,7 +488,7 @@ include './app/commum/header_client.php'
 
         <div class="col-lg-4 col-md-6">
           <div class="member" data-aos="zoom-in" data-aos-delay="300">
-            <img src="<?= '/'. GESTION_HOTEL ?>/public/images/chefs/chefs-3.jpg" class="img-fluid" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/chefs/chefs-3.jpg" class="img-fluid" alt="" />
             <div class="member-info">
               <div class="member-info-content">
                 <h4>William Anderson</h4>

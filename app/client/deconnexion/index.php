@@ -3,7 +3,7 @@ session_start();
 
 session_destroy();
 
-header('location: /'.GESTION_HOTEL .'/client/connexion/index');
+header('location: /'.PATH_PROJECT .'/client/connexion/index');
 exit;
 
 

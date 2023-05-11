@@ -35,15 +35,15 @@ if (!check_if_user_conneted()) {
         <title>Sous les Cocotiers - Login</title>
 
         <!-- Custom fonts for this template-->
-        <link href="<?= '/'. GESTION_HOTEL ?>/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="<?= '/'. GESTION_HOTEL ?>/public/css/sb-admin-2.css" rel="stylesheet">
+        <link href="<?= PATH_PROJECT ?>public/css/sb-admin-2.css" rel="stylesheet">
         <!-- Custom styles client for this template-->
-        <link href="<?= '/'. GESTION_HOTEL ?>/public/css/style.css" rel="stylesheet" />
+        <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
         <!-- outils CSS Files -->
-        <link href="<?= '/'. GESTION_HOTEL ?>/public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+        <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
     </head>
 
@@ -55,7 +55,7 @@ if (!check_if_user_conneted()) {
 
             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
                 <h1 class="logo me-auto me-lg-0">
-                    <a href="<?= '/'. GESTION_HOTEL ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                    <a href="<?= PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                 </h1>
 
                 <!-- Uncomment below if you prefer to use an image logo -->
@@ -64,30 +64,30 @@ if (!check_if_user_conneted()) {
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<?= '/'. GESTION_HOTEL ?>/client/site/home">Acceuil</a></li>
+                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home">Acceuil</a></li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/'. GESTION_HOTEL ?>/client/site/chambres">Chambres</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/'. GESTION_HOTEL ?>/client/site/restaurant">Restaurant</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/'. GESTION_HOTEL ?>/client/site/galeries">Galeries</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= '/'. GESTION_HOTEL ?>/client/site/contact">Contact</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
                         </li>
 
                         <li>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
+                            <a href="<?= PATH_PROJECT ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
                         </li>
 
                         <li>
-                            <a href="<?= '/'. GESTION_HOTEL ?>/client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
+                            <a href="<?= PATH_PROJECT ?>/client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                         </li>
                     </ul>
 
@@ -128,7 +128,7 @@ if (!check_if_user_conneted()) {
                                         </div>
 
 
-                                        <form action="<?= '/'. GESTION_HOTEL ?>/client/connexion/traitement" method="post" class="user">
+                                        <form action="<?= PATH_PROJECT ?>/client/connexion/traitement" method="post" class="user">
                                             <!-- Le champs email ou mot de passe-->
                                             <div class="form-group">
                                                 <label for="inscription-email">Email ou Nom d'utilisateur:
@@ -183,10 +183,10 @@ if (!check_if_user_conneted()) {
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="<?= '/'. GESTION_HOTEL ?>/client/mot_de_passe/index">Mot de passe oublié ?</a>
+                                            <a class="small" href="<?= PATH_PROJECT ?>/client/mot_de_passe/index">Mot de passe oublié ?</a>
                                         </div>
                                         <div class="text-center">
-                                            <a class="small" href="<?= '/'. GESTION_HOTEL ?>/client/inscription/index">Créez un compte !</a>
+                                            <a class="small" href="<?= PATH_PROJECT ?>/client/inscription/index">Créez un compte !</a>
                                         </div>
                                     </div>
                                 </div>
@@ -206,17 +206,17 @@ if (!check_if_user_conneted()) {
 
 
         <!-- Template Main JS File -->
-        <script src="<?= '/'. GESTION_HOTEL ?>/public/js/main.js"></script>
+        <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery/jquery.min.js"></script>
-        <script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+        <script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="<?= '/'. GESTION_HOTEL ?>/public/js/sb-admin-2.min.js"></script>
+        <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
 
     </body>
 
@@ -224,6 +224,6 @@ if (!check_if_user_conneted()) {
 
 <?php
 } else {
-    header('location: /'.GESTION_HOTEL .'/client/dashboard/index');
+    header('location: /'.PATH_PROJECT .'/client/dashboard/index');
 }
 ?>

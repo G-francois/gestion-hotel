@@ -39,24 +39,24 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery/jquery.min.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/sb-admin-2.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/chart.js/Chart.min.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/datatables/jquery.dataTables.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
+<script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/chart-area-demo.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/chart-pie-demo.js"></script>
-<script src="<?= '/'. GESTION_HOTEL ?>/public/js/demo/datatables-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
 
 
 </body>

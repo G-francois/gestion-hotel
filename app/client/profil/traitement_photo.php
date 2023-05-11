@@ -37,24 +37,24 @@ if (isset($_POST['change_photo'])) {
 
                     move_uploaded_file($_FILES['image']['tmp_name'], 'public/images/upload/' . basename($_FILES['image']['name']));
 
-                    $profiledonnees["image"] = '/'. GESTION_HOTEL . '/public/images/upload/' . basename($_FILES['image']['name']);
+                    $profiledonnees["image"] = PATH_PROJECT . 'public/images/upload/' . basename($_FILES['image']['name']);
 
                     if (maj_avatar($_SESSION['utilisateur_connecter'][0]['id'], $profiledonnees["image"])) {
 
                         if (recup_maj_nv_info_user($_SESSION['utilisateur_connecter'][0]['id'])) {
 
-                            header('location: /' . GESTION_HOTEL . '/client/profil/profile');
+                            header('location: /' . PATH_PROJECT . '/client/profil/profile');
                         }
                     }
                 } else {
 
                     $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
-                    header('location:/' . GESTION_HOTEL . '/client/profil/profile');
+                    header('location:/' . PATH_PROJECT . '/client/profil/profile');
                 }
             } else {
 
                 $_SESSION['photo-erreurs'] = "Image trop lourde. Poids maximum autorisé : 3mo";
-                header('location:/' . GESTION_HOTEL . '/client/profil/profile');
+                header('location:/' . PATH_PROJECT . '/client/profil/profile');
             }
         } else {
 
@@ -62,6 +62,6 @@ if (isset($_POST['change_photo'])) {
         }
     } else {
         $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
-        header('location:/' . GESTION_HOTEL . '/client/profil/profile');
+        header('location:/' . PATH_PROJECT . '/client/profil/profile');
     }
 }
