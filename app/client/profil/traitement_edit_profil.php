@@ -56,24 +56,24 @@ if (isset($_POST['sauvegarder'])) {
                 $donnees[0]['id']
             )) {
                 $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
-                header('location:/' . PATH_PROJECT . '/client/profil/profile');
+                header('location:' . PATH_PROJECT . 'client/profil/profile');
             } else {
                 $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Vérifier votre mot de passe et réessayez.";
 
-                header('location:/' . PATH_PROJECT . '/client/profil/profile');
+                header('location:' . PATH_PROJECT . 'client/profil/profile');
             }
         } else {
             $_SESSION['sauvegarder-erreurs'] = "La mise à jour à echouer. Veuiller réessayez.";
 
-            header('location:/' . PATH_PROJECT . '/client/profil/profile');
+            header('location:' . PATH_PROJECT . 'client/profil/profile');
         }
     } else {
         $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Vérifier votre mot de passe et réessayez.";
 
-        header('location:/' . PATH_PROJECT . '/client/profil/profile');
+        header('location:' . PATH_PROJECT . 'client/profil/profile');
     }
 } else {
     $_SESSION['sauvegarder-erreurs'] = "Veuiller appuyer sur le boutton sauvegarder.";
 
-    header('location:/' . PATH_PROJECT . '/client/profil/profile');
+    header('location:' . PATH_PROJECT . 'client/profil/profile');
 }

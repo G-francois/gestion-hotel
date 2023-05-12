@@ -23,7 +23,6 @@ function connect_db()
     return $db;
 }
 
-
 /**
  * Cette fonction permet de verifier si un utilisateur dans la base de donnée ne possède pas cette adresse mail.
  * @param string $email L'email a vérifié.

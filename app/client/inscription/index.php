@@ -49,7 +49,7 @@ if (!check_if_user_conneted()) {
         <header id="header" class="fixed-top d-flex align-items-cente">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
                 <h1 class="logo me-auto me-lg-0">
-                    <a href="<?= PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                    <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                 </h1>
 
                 <!-- Uncomment below if you prefer to use an image logo -->
@@ -58,30 +58,30 @@ if (!check_if_user_conneted()) {
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home">Acceuil</a></li>
+                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
                         </li>
 
                         <li>
-                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                         </li>
 
                         <li>
-                            <a href="<?= PATH_PROJECT ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
+                            <a href="<?= PATH_PROJECT ?>client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
                         </li>
 
                         <li>
-                            <a href="<?= PATH_PROJECT ?>/client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
+                            <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                         </li>
                     </ul>
 
@@ -131,7 +131,7 @@ if (!check_if_user_conneted()) {
                                     <h1 class="h4 text-gray-900 mb-4">Créez un compte Client!</h1>
                                 </div>
 
-                                <form action="<?= PATH_PROJECT ?>/client/inscription/traitement" method="post" class="user">
+                                <form action="<?= PATH_PROJECT ?>client/inscription/traitement" method="post" class="user">
                                     <!-- Le champs nom -->
                                     <div class="form-group">
                                         <label for="inscription-nom">Nom:
@@ -171,57 +171,9 @@ if (!check_if_user_conneted()) {
                                         </span>
                                     </div>
 
-
-
-                                    <!-- Le champs date de naissance -->
-                                    <div class="form-group">
-                                        <label for="inscription-date-naissance">Date de naissance:
-                                            <span class="text-danger">(*)</span>
-                                        </label>
-                                        <input type="date" name="date-naissance" id="inscription-date-naissance" class="form-control" value="<?php if (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) {
-                                                                                                                                                    echo $donnees["date-naissance"];
-                                                                                                                                                } else {
-                                                                                                                                                    echo '';
-                                                                                                                                                }  ?>">
-                                        <span class="text-danger">
-                                            <?php
-                                            if (isset($erreurs["date-naissance"]) && !empty($erreurs["date-naissance"])) {
-                                                echo $erreurs["date-naissance"];
-                                            }
-                                            ?>
-                                        </span>
-                                    </div>
-
-
-                                    <!-- Le champs sexe -->
-                                    <div>
-                                        <div class="form-group" style="margin-bottom: auto;">
-                                            <label for="inscription-sexe">Sexe:
-                                                <div class="form-group clearfix d-inline-flex pl-5">
-                                                    <div class="icheck-primary d-inline">
-                                                        <input type="radio" name="sexe" checked="" id="sexe-m" value="Masculin">
-                                                        <label for="sexe-m">Masculin</label>
-                                                    </div>
-
-                                                    <div class="icheck-primary d-inline pl-5">
-                                                        <input type="radio" name="sexe" checked="" id="sexe-f" value="Féminin">
-                                                        <label for="sexe-f">Féminin</label>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <span class="text-danger">
-                                            <?php
-                                            if (isset($erreurs["sexe"]) && !empty($erreurs["sexe"])) {
-                                                echo $erreurs["sexe"];
-                                            }
-                                            ?>
-                                        </span>
-                                    </div>
-
                                     <!-- Le champs contact -->
                                     <div class="form-group">
-                                        <label for="inscription-telephone">Contact:
+                                        <label for="inscription-telephone">Téléphone:
                                             <span class="text-danger">(*)</span>
                                         </label>
                                         <input type="tel" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre contact" value="<?php if (isset($donnees["telephone"]) && !empty($donnees["telephone"])) {
@@ -338,10 +290,10 @@ if (!check_if_user_conneted()) {
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>/client/mot_de_passe/index"> Mot de passe oublié ? </a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe/index"> Mot de passe oublié ? </a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>/client/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>client/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>
                                 </div>
                             </div>
                         </div>
@@ -375,6 +327,6 @@ if (!check_if_user_conneted()) {
     </html>
 <?php
 } else {
-    header('location: /' . PATH_PROJECT . '/client/dashboard/index');
+    header('location: ' . PATH_PROJECT . 'client/dashboard/index');
 }
 ?>

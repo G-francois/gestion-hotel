@@ -160,7 +160,7 @@ if (check_if_user_conneted()) {
     <header id="header" class="fixed-top d-flex align-items-center">
       <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
         <h1 class="logo me-auto me-lg-0">
-          <a href="<?= PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+          <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
         </h1>
 
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -169,22 +169,22 @@ if (check_if_user_conneted()) {
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
-            <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+            <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
             </li>
 
             <li>
-              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
+              <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
             </li>
 
 
@@ -254,16 +254,16 @@ if (check_if_user_conneted()) {
                     <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
                 </div>
                 <hr>
-                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/profil/profile">
+                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                   <i class="bi bi-person" style="margin-right: 12px;"></i>
                   <span>Mon Profile</span>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/dashboard/index">
+                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
                   <i class="bi bi-gear" style="margin-right: 12px;"></i>
                   <span>Tableau de bord</span>
                 </a>
                 <hr>
-                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/deconnexion/index">
+                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                   <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
                   <span>Déconnexion</span>
                 </a>
@@ -350,7 +350,7 @@ if (check_if_user_conneted()) {
                     <p class="font-size-sm" style="color: white;">SOUS LES COCOTIERS</p>
                   </div>
                 </div>
-                <form action="<?= PATH_PROJECT ?>/client/profil/traitement_photo" method="post" enctype="multipart/form-data">
+                <form action="<?= PATH_PROJECT ?>client/profil/traitement_photo" method="post" enctype="multipart/form-data">
                   <div class="row" style="text-align: center; display:flex;">
                     <div class="col-sm-9 text-secondary">
                       <label class="form-label" for="customFile" style="color: gray;">Changer ma photo de profil</label>
@@ -393,7 +393,7 @@ if (check_if_user_conneted()) {
               </div>
             </div>
             <!-- suppression_photo Form -->
-            <form action="<?= PATH_PROJECT ?>/client/profil/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
+            <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
               <div class="row">
                 <button type="reset" class="btn btn-secondary" data-toggle="modal" data-target="#modal5"><i class="fa fa-trash"></i> Supprimer</button>
                 <div class="col-md-8 col-lg-12">
@@ -469,7 +469,7 @@ if (check_if_user_conneted()) {
 
             <div>
               <!-- suppression Form -->
-              <form action="<?= PATH_PROJECT ?>/client/profil/traitement_suppression" method="post" enctype="multipart/form-data">
+              <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression" method="post" enctype="multipart/form-data">
                 <div class="row mb-3 text-center">
                   <div class="col-md-8 col-lg-12">
                     <button type="button" style="padding: 10px; background-color:#9f0808;" name="supprimer-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal2 "><i class="bi bi-trash"></i> Supprimer mon compte</button>
@@ -508,7 +508,7 @@ if (check_if_user_conneted()) {
                 </div>
               </form>
               <!-- desactivation Form -->
-              <form action="<?= PATH_PROJECT ?>/client/profil/traitement_desactivation" method="post" enctype="multipart/form-data">
+              <form action="<?= PATH_PROJECT ?>client/profil/traitement_desactivation" method="post" enctype="multipart/form-data">
                 <div class="row mb-3 text-center">
                   <div class="col-md-8 col-lg-12">
                     <button type="button" style="padding: 10px; background-color:#9f0808;" name="désactiver-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal3" style="margin-top: 8px;">Désactiver mon compte</button>
@@ -556,7 +556,7 @@ if (check_if_user_conneted()) {
             <h5 style="margin-bottom: 13px; margin-top: 80px; font-size: 32px; font-weight: 700; color: #cda45e;">Modifier des informations personnelles</h5>
             <div class="card">
               <div class="card-body">
-                <form action="<?= PATH_PROJECT ?>/client/profil/traitement_edit_profil" method="post" enctype="multipart/form-data">
+                <form action="<?= PATH_PROJECT ?>client/profil/traitement_edit_profil" method="post" enctype="multipart/form-data">
                   <?php
                   if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
                   ?>
@@ -691,7 +691,7 @@ if (check_if_user_conneted()) {
           <h5 style="margin-bottom: 13px; font-size: 32px; font-weight: 700; color: #cda45e;">Changement de mot de passe</h5>
           <div class="card">
             <div class="card-body">
-              <form action="<?= PATH_PROJECT ?>/client/profil/traitement_password" method="post" enctype="multipart/form-data">
+              <form action="<?= PATH_PROJECT ?>client/profil/traitement_password" method="post" enctype="multipart/form-data">
                 <h5 style="color: #cda45e; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
                 <br>
                 <div class="row mb-3">
@@ -820,6 +820,6 @@ if (check_if_user_conneted()) {
 
 <?php
 } else {
-  header('location: /' . PATH_PROJECT . '/client/dashboard/index');
+  header('location: ' . PATH_PROJECT . 'client/dashboard/index');
 }
 ?>

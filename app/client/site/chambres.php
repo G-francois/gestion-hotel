@@ -56,7 +56,7 @@ include './app/commum/header_client.php'
                         color: #78635a;
                         padding: 10px;
                         text-decoration: none;
-                      " href="<?= PATH_PROJECT ?>/client/site/reservation-solo" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 290 $</a>
+                      " href="<?= PATH_PROJECT ?>client/site/reservation-solo" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 290 $</a>
               </div>
 
               <div style="padding-top: 3em">
@@ -155,7 +155,7 @@ include './app/commum/header_client.php'
                         color: #78635a;
                         padding: 10px;
                         text-decoration: none;
-                      " href="<?= PATH_PROJECT ?>/client/site/reservation-double" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 350 $</a>
+                      " href="<?= PATH_PROJECT ?>client/site/reservation-double" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 350 $</a>
               </div>
 
               <div style="padding-top: 3em">
@@ -199,7 +199,7 @@ include './app/commum/header_client.php'
                         color: #78635a;
                         padding: 10px;
                         text-decoration: none;
-                      " href="<?= PATH_PROJECT ?>/client/site/reservation-triple" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 490 $</a>
+                      " href="<?= PATH_PROJECT ?>client/site/reservation-triple" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 490 $</a>
               </div>
 
               <div style="padding-top: 3em">
@@ -297,7 +297,7 @@ include './app/commum/header_client.php'
                         color: #78635a;
                         padding: 10px;
                         text-decoration: none;
-                      " href="<?= PATH_PROJECT ?>/client/site/reservation-suit" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 590 $</a>
+                      " href="<?= PATH_PROJECT ?>client/site/reservation-suit" class="nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_background_color_transparent_important nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2">Réserver maintenant pour 590 $</a>
               </div>
 
               <div style="padding-top: 3em">

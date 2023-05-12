@@ -39,27 +39,27 @@
                     <ul>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>/client/site/home">Home</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/home">Home</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
                         </li>
 
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                         </li>
 
                     </ul>

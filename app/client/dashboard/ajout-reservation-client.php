@@ -71,7 +71,7 @@ if (check_if_user_conneted()) {
                         <header id="header" class="fixed-top d-flex align-items-cente">
                             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
                                 <h1 class="logo me-auto me-lg-0">
-                                    <a href="<?= PATH_PROJECT ?>/client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                                    <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                                 </h1>
 
                                 <!-- Uncomment below if you prefer to use an image logo -->
@@ -80,22 +80,22 @@ if (check_if_user_conneted()) {
 
                                 <nav id="navbar" class="navbar order-last order-lg-0">
                                     <ul>
-                                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+                                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres" style="color: white;">Chambres</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres" style="color: white;">Chambres</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant" style="color: white;">Restaurant</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant" style="color: white;">Restaurant</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries" style="color: white;">Galeries</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries" style="color: white;">Galeries</a>
                                         </li>
 
                                         <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact" style="color: white;">Contact</a>
+                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact" style="color: white;">Contact</a>
                                         </li>
 
 
@@ -162,7 +162,7 @@ if (check_if_user_conneted()) {
                                                     <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 8rem; height: 8rem;"> <br>
                                                     <h4 class="mr-2" style="color: black;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h4>
                                                 </div>
-                                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>/administrateur/dashboard/profile" style="color: black;">
+                                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/profile" style="color: black;">
                                                     Gérer mon compte
                                                 </a>
                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" style="color: black;">
@@ -192,7 +192,7 @@ if (check_if_user_conneted()) {
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between h3 mb-2">
                         <h4 class="h3 mb-0"><a href="#" style="color: white;">Ajouter une réservation</a></h4>
-                        <h4 class="m-0 font-weight-bold "><a href="<?= PATH_PROJECT ?>/client/dashboard/index">Liste des réservations</a></h4>
+                        <h4 class="m-0 font-weight-bold "><a href="<?= PATH_PROJECT ?>client/dashboard/index">Liste des réservations</a></h4>
                     </div>
 
                     <form class="form-horizontal" action="?requette=ajout-auteur-traitement" method="POST">
@@ -284,6 +284,6 @@ if (check_if_user_conneted()) {
 
             <?php
         } else {
-            header('location:/' . PATH_PROJECT . '/client/connexion/index');
+            header('location:' . PATH_PROJECT . 'client/connexion/index');
         }
             ?>

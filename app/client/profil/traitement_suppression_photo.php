@@ -26,10 +26,10 @@ if (isset($_POST['supprimer_photo'])) {
         
     } else {
         $_SESSION['suppression-erreurs'] = "La suppression de la photo à echouer. Vérifier votre mot de passe et réessayez.";
-        header('location:/' . PATH_PROJECT . '/client/profil/profile');
+        header('location:' . PATH_PROJECT . 'client/profil/profile');
     }
 }
 
 
 
-header('location:/' . PATH_PROJECT . '/client/profil/profile');
+header('location:' . PATH_PROJECT . 'client/profil/profile');

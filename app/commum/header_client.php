@@ -69,34 +69,34 @@ include './app/commum/fonction.php';
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li>
-                        <a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>/client/site/home">Acceuil</a>
+                        <a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
                     </li>
 
                     <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/chambres">Chambres</a>
+                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
                     </li>
 
                     <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/restaurant">Restaurant</a>
+                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
                     </li>
 
                     <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/galeries">Galeries</a>
+                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
                     </li>
 
                     <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>/client/site/contact">Contact</a>
+                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                     </li>
 
                     <?php
                     if (!check_if_user_conneted()) {
                     ?>
                         <li>
-                            <a href="<?= PATH_PROJECT ?>/client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
+                            <a href="<?= PATH_PROJECT ?>client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
                         </li>
 
                         <li>
-                            <a href="<?= PATH_PROJECT ?>/client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
+                            <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                         </li>
                     <?php
                     }
@@ -167,16 +167,16 @@ include './app/commum/fonction.php';
                                         <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
                                 </div>
                                 <hr>
-                                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/profil/profile">
+                                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                                     <i class="bi bi-person" style="margin-right: 12px;"></i>
                                     <span>Mon Profile</span>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/dashboard/index">
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
                                     <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                     <span>Tableau de bord</span>
                                 </a>
                                 <hr>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>/client/deconnexion/index">
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                                     <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
                                     <span>Déconnexion</span>
                                 </a>

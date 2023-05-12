@@ -24,24 +24,12 @@ if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
     $erreurs["prenom"] = "Le champs prénom est requis. Veuillez le renseigné.";
 }
 
-if (isset($_POST["sexe"]) && !empty($_POST["sexe"])) {
-    $donnees["sexe"] = trim(htmlentities($_POST["sexe"]));
-} else {
-    $erreurs["sexe"] = "Le champs sexe est requis. Veuillez le renseigné.";
-}
-
 if (isset($_POST["telephone"]) && !empty($_POST["telephone"])) {
     $donnees["telephone"] = trim(htmlentities($_POST["telephone"]));
 } else {
     $erreurs["telephone"] = "Le champs contact est requis. Veuillez le renseigné.";
 }
 
-
-if (isset($_POST["date-naissance"]) && !empty($_POST["date-naissance"])) {
-    $donnees["date-naissance"] = trim(htmlentities($_POST["date-naissance"]));
-} else {
-    $erreurs["date-naissance"] = "Le champs date de naissance est requis. Veuillez le renseigné.";
-}
 
 if (!isset($_POST["email"]) || empty($_POST["email"])) {
     $erreurs["email"] = "Le champs email est vide. Veuillez le renseigné.";
@@ -116,7 +104,7 @@ if (empty($erreurs)) {
     $db = connect_db();
 
     // Ecriture de la requête
-    $requette = 'INSERT INTO utilisateur (nom, prenom, sexe, telephone, date_naissance, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :sexe, :telephone, :date_naissance, :email, :nom_utilisateur, :Client, :mot_passe)';
+    $requette = 'INSERT INTO utilisateur (nom, prenom, telephone, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :telephone, :email, :nom_utilisateur, :Client, :mot_passe)';
 
     // Préparation
     $inserer_utilisateur = $db->prepare($requette);
@@ -125,9 +113,7 @@ if (empty($erreurs)) {
     $resultat = $inserer_utilisateur->execute([
         'nom' => $donnees["nom"],
         'prenom' => $donnees["prenom"],
-        'sexe' => $donnees["sexe"],
         'telephone' => $donnees["telephone"],
-        'date_naissance' => $donnees["date-naissance"],
         'email' => $donnees["email"],
         'nom_utilisateur' => $donnees["nom-utilisateur"],
         'Client' => $donnees["Client"],
@@ -159,7 +145,7 @@ if (empty($erreurs)) {
         }
 
         $objet = 'Validation de votre inscription';
-        $message = buffer_html_file(PATH_PROJECT . 'app/client/inscription/message_mail.php');
+        $message = buffer_html_file('..' . PATH_PROJECT . 'app/client/inscription/message_mail.php');
         if (email($donnees["email"], $objet, $message)) {
             $_SESSION['validation'] = "Veuiller bien consulter votre adresse mail pour valider votre compte ";
             header('location: ' . PATH_PROJECT . 'client/inscription/index');
