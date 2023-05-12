@@ -172,13 +172,6 @@ if (!check_if_user_conneted()) {
                                                         ?>
                                                     </span>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox small">
-                                                        <input type="checkbox" name="souvenir" class="custom-control-input" id="customCheck">
-                                                        <label class="custom-control-label" for="customCheck" style="color: black;">Se souvenir de moi</label>
-                                                    </div>
-                                                </div>
                                                 <button type="submit" class="btn btn-primary btn-block">Connexion</button>
                                         </form>
                                         <hr>
@@ -224,6 +217,6 @@ if (!check_if_user_conneted()) {
 
 <?php
 } else {
-    header('location: '.PATH_PROJECT .'client/dashboard/index');
+    header('location: ' . PATH_PROJECT . 'client/dashboard/index');
 }
 ?>

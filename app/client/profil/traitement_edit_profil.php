@@ -52,13 +52,11 @@ if (isset($_POST['sauvegarder'])) {
             $new_data['nom_utilisateur']
         )) {
 
-            if (recup_maj_nv_info_user(
-                $donnees[0]['id']
-            )) {
+            if (recup_maj_nv_info_user($donnees[0]['id'])) { 
                 $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
                 header('location:' . PATH_PROJECT . 'client/profil/profile');
             } else {
-                $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Vérifier votre mot de passe et réessayez.";
+                $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Veuiller réessayez.";
 
                 header('location:' . PATH_PROJECT . 'client/profil/profile');
             }

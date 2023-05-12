@@ -419,7 +419,7 @@ function maj1(int $id_utilisateur): bool
  *
  * @return array $user Les informations de l'utilisateur.
  */
-function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif = 1, int $est_supprimer = 0): bool
+function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif, int $est_supprimer): bool
 {
     $user = false;
 
@@ -428,7 +428,7 @@ function check_if_user_exist(string $email_user_name, string $password, string $
 
     if (is_object($db)) {
 
-        $requette = "SELECT id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
+        $requette = "SELECT id, nom, prenom, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
 
         $verifier_nom_utilisateur = $db->prepare($requette);
 
@@ -615,7 +615,7 @@ function recup_maj_nv_info_user($id): bool
 
     if (is_object($db)) {
 
-        $request_recupere = $db->prepare('SELECT  id, nom, prenom, sexe, date_naissance, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
+        $request_recupere = $db->prepare('SELECT  id, nom, prenom, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
 
         $resultat = $request_recupere->execute(array(
             'id' => $id,

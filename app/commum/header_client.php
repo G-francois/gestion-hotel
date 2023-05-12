@@ -49,6 +49,35 @@ include './app/commum/fonction.php';
 
     <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
+    <style>
+        #hero {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/hero-bg.jpg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+
+        #hero2 {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/water-165219_1280.jpg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+
+        #hero3 {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/BG-5.jpeg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+    </style>
+
 
 
 </head>
@@ -105,75 +134,33 @@ include './app/commum/fonction.php';
                     <?php
                     if (check_if_user_conneted()) {
                     ?>
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1 ">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw" style="font-size: 21px;"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter" style="font-size: 15px;">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="color: black;">
-                                <h4 class="dropdown-header" style="background-color: white; border: none; font-size: large; text-align: center; color:black;">
-                                    Alerts Center
-                                </h4>
-                                <a class="dropdown-item d-flex align-items-center" href="#" style="color: black; justify-content:unset; ">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#" style="color: black; justify-content:unset;">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#" style="color: black;justify-content:unset;">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small" style="color: black;" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
 
-
+                        <!-- Nav Item - User Information -->
                         <li class="nav-item">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 30px; margin-right: 12px;" alt="Profile" class="rounded-circle">
-                                <h4 class="ml-2" style="color: WHITE;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h4>
+
+                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
+
+                                <h5 class="ml-2"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h5>
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in text-center" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
                                 <div class="dropdown">
                                     <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
                                         <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
                                 </div>
                                 <hr>
-                                <a class="dropdown-item d-flex align-items-center mb-4" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
+                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                                     <i class="bi bi-person" style="margin-right: 12px;"></i>
                                     <span>Mon Profile</span>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
+                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
                                     <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                     <span>Tableau de bord</span>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                                    <i class="bi bi-bell" style="margin-right: 12px;"></i>
+                                    <span>Notification(s)</span>
                                 </a>
                                 <hr>
                                 <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">

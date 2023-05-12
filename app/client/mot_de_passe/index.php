@@ -99,7 +99,7 @@ if (!check_if_user_conneted()) {
         <!-- End Header -->
 
 
-        <div class="container" style="margin-top: 120px;">
+        <div class="container" style="margin-top: 145px;">
 
             <!-- Outer Row -->
             <div class="row justify-content-center">

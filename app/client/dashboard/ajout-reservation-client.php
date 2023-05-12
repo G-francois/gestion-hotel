@@ -100,80 +100,43 @@ if (check_if_user_conneted()) {
 
 
 
-                                        <!-- Nav Item - Alerts -->
-                                        <li class="nav-item dropdown no-arrow mx-1">
-                                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-                                                <i class="fas fa-bell fa-fw" style="font-size: 21px;"></i>
-                                                <!-- Counter - Alerts -->
-                                                <span class="badge badge-danger badge-counter" style="font-size: 14px;">3+</span>
-                                            </a>
-                                            <!-- Dropdown - Alerts -->
-                                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                                <h6 class="dropdown-header">
-                                                    Alerts Center
-                                                </h6>
-                                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                                    <div class="mr-3">
-                                                        <div class="icon-circle bg-primary">
-                                                            <i class="fas fa-file-alt text-white"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div class="small text-gray-500">December 12, 2019</div>
-                                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                                    </div>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                                    <div class="mr-3">
-                                                        <div class="icon-circle bg-success">
-                                                            <i class="fas fa-donate text-white"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div class="small text-gray-500">December 7, 2019</div>
-                                                        $290.29 has been deposited into your account!
-                                                    </div>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                                    <div class="mr-3">
-                                                        <div class="icon-circle bg-warning">
-                                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div class="small text-gray-500">December 2, 2019</div>
-                                                        Spending Alert: We've noticed unusually high spending for your account.
-                                                    </div>
-                                                </a>
-                                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                            </div>
-                                        </li>
-
-
-                                        <div class="topbar-divider d-none d-sm-block"></div>
                                         <!-- Nav Item - User Information -->
                                         <li class="nav-item">
                                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <h3 class="mr-2" style="color: white;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h3>
+
+                                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
+
+                                                <h5 class="ml-2" style="color: white;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h5>
                                             </a>
                                             <!-- Dropdown - User Information -->
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                                <div class="dropdown-item">
-                                                    <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 8rem; height: 8rem;"> <br>
-                                                    <h4 class="mr-2" style="color: black;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h4>
+                                            <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
+                                                <div class="dropdown">
+                                                    <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
+                                                        <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
                                                 </div>
-                                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/profile" style="color: black;">
-                                                    Gérer mon compte
+                                                <hr>
+                                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
+                                                    <i class="bi bi-person" style="margin-right: 12px;"></i>
+                                                    <span>Mon Profile</span>
                                                 </a>
-                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" style="color: black;">
-                                                    Déconnexion
+                                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
+                                                    <i class="bi bi-gear" style="margin-right: 12px;"></i>
+                                                    <span>Tableau de bord</span>
+                                                </a>
+                                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                                                    <i class="bi bi-bell" style="margin-right: 12px;"></i>
+                                                    <span>Notification(s)</span>
+                                                </a>
+                                                <hr>
+                                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
+                                                    <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
+                                                    <span>Déconnexion</span>
                                                 </a>
                                             </div>
                                         </li>
-                                    </ul>
+                                        <!-- End Profile Nav -->
 
-
-                                    <i class="bi bi-list mobile-nav-toggle"></i>
+                                        <i class="bi bi-list mobile-nav-toggle"></i>
                                 </nav>
                                 <!-- .navbar -->
 

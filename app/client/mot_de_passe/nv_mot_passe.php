@@ -96,7 +96,7 @@ if (!check_if_user_conneted()) {
         </header>
         <!-- End Header -->
 
-        <div class="container" style="margin-top: 120px;">
+        <div class="container" style="margin-top: 145px;">
             <div class="row justify-content-center;" style="color:black; justify-content:center;">
 
                 <div class="col-xl-10 col-lg-12 col-md-9">

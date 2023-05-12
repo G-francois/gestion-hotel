@@ -120,7 +120,6 @@ if (empty($erreurs)) {
         'mot_passe' => sha1($donnees["mot-passe"])
     ]);
 
-
     //die(var_dump([
     //   'nom' => $donnees["nom"],
     // 'prenom' => $donnees["prenom"],

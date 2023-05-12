@@ -29,7 +29,7 @@ if (isset($_POST['change_photo'])) {
                 $allowed_ext = ["png", "jpg", "jpeg", "gif"];
 
                 if (in_array($file_ext, $allowed_ext)) {
-
+                
                     if (!is_dir("public/images/upload/")) {
 
                         mkdir("public/images/upload/");
@@ -45,15 +45,17 @@ if (isset($_POST['change_photo'])) {
 
                             header('location: ' . PATH_PROJECT . 'client/profil/profile');
                         }
+                    }else{
+                       
+                        $_SESSION['photo-erreurs'] = "La mise à jour de l'image à echouer.";
+                    header('location:' . PATH_PROJECT . 'client/profil/profile');
                     }
                 } else {
-
                     $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
                     header('location:' . PATH_PROJECT . 'client/profil/profile');
                 }
             } else {
-
-                $_SESSION['photo-erreurs'] = "Image trop lourde. Poids maximum autorisé : 3mo";
+                $_SESSION['photo-erreurs'] = "Fichier trop lourd. Poids maximum autorisé : 3mo";
                 header('location:' . PATH_PROJECT . 'client/profil/profile');
             }
         } else {
@@ -64,4 +66,5 @@ if (isset($_POST['change_photo'])) {
         $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
         header('location:' . PATH_PROJECT . 'client/profil/profile');
     }
+    
 }
