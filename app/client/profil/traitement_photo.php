@@ -28,7 +28,7 @@ if (isset($_POST['change_photo'])) {
 
                 $allowed_ext = ["png", "jpg", "jpeg", "gif"];
 
-                if (in_array($file_ext, $allowed_ext)) {
+                if (in_array(strtolower($file_ext), $allowed_ext)) {
                 
                     if (!is_dir("public/images/upload/")) {
 

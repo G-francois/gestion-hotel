@@ -169,7 +169,7 @@ if (check_if_user_conneted()) {
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
-            <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+            <li><a class="nav-link scrollto active " href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
 
             <li>
               <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
@@ -295,8 +295,9 @@ if (check_if_user_conneted()) {
 
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center" style="color: #cda45e;">
-                  <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle">
-
+                  <a href="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/blank_profile.png' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
+                    <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/blank_profile.png' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
+                  </a>
 
 
                   <div class="mt-3">
@@ -311,6 +312,8 @@ if (check_if_user_conneted()) {
                       <label class="form-label" for="customFile" style="color: gray;">Changer ma photo de profil</label>
                       <input type="file" class="form-control" id="image" name="image" />
                     </div>
+
+                    <!-- maj_photo Form -->
                     <div class="modal-footer text-center col-sm-3" style="justify-content: center; margin-top: 31px;">
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal0" style="font-size: revert; padding: 9px;">Mettre à jour</button>
                       <div class="col-md-8 col-lg-12">
@@ -320,7 +323,7 @@ if (check_if_user_conneted()) {
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Mot de passe</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Mettre à jour la photo de profil</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -347,6 +350,7 @@ if (check_if_user_conneted()) {
                 </form>
               </div>
             </div>
+
             <!-- suppression_photo Form -->
             <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
               <div class="row">
@@ -358,14 +362,14 @@ if (check_if_user_conneted()) {
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Mot de passe</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer la photo de profil</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="row mb-3">
-                              <label for="MP" class="col-12 col-form-label" style="color: #cda45e;">Veuiller entrer votre mot de passe pour supprimer la photo. </label>
+                              <label for="MP" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour supprimer la photo. </label>
                               <br>
                               <div class="col-md-8 col-lg-12">
                                 <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
@@ -424,14 +428,14 @@ if (check_if_user_conneted()) {
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Mot de passe</h5>
+                              <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer mon compte</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
                               <div class="row mb-3">
-                                <label for="MP" class="col-12 col-form-label" style="color: #070b3a;">Vous êtes sûre d'effectuer cette action ? Après cette action vous serez diriger sur la page de connexion.
+                                <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action votre compte sera supprimer de façon définitive.
                                   Si oui veuiller entrer votre mot de passe pour appliquer l'action. </label>
                                 <br>
                                 <div class="col-md-8 col-lg-12">
@@ -451,6 +455,7 @@ if (check_if_user_conneted()) {
                   </div>
                 </div>
               </form>
+
               <!-- desactivation Form -->
               <form action="<?= PATH_PROJECT ?>client/profil/traitement_desactivation" method="post" enctype="multipart/form-data">
                 <div class="row mb-3 text-center">
@@ -463,15 +468,15 @@ if (check_if_user_conneted()) {
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Mot de passe</h5>
+                              <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Désactiver mon compte</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
                               <div class="row mb-3">
-                                <label for="MP" class="col-12 col-form-label" style="color: #070b3a;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
-                                  Si oui veuiller entrer votre mot de passe pour appliquer l'action.</label>
+                                <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
+                                  Si oui veuiller entrer votre mot de passe pour appliquer l'action. Pour réactiver votre compte veuiller nous écrire par mail.</label>
                                 <br>
                                 <div class="col-md-8 col-lg-12">
                                   <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
@@ -602,7 +607,7 @@ if (check_if_user_conneted()) {
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Mot de passe</h5>
+                              <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Modifier les informations de mon compte</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>

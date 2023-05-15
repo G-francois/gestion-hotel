@@ -52,7 +52,7 @@ if (check_if_user_conneted()) {
 
     <body>
         <header id="header" class="fixed-top d-flex align-items-center">
-            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between" style="max-width: 1440px;">
                 <h1 class="logo me-auto me-lg-0">
                     <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                 </h1>
@@ -63,7 +63,7 @@ if (check_if_user_conneted()) {
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
+                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
 
                         <li>
                             <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
@@ -299,6 +299,15 @@ if (check_if_user_conneted()) {
             </div>
         </div>
         <!-- /.container-fluid -->
+        <!-- Footer -->
+        <footer class="sticky-footer" style="background-color: #0c0b09;">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; SOUS LES COCOTIERS 2023</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
 
         <!-- Template Main JS File -->
         <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>

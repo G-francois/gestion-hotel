@@ -1,1 +1,3 @@
-app\client\profil\notification.php
+<?php
+
+include './app/commum/header_client.php';

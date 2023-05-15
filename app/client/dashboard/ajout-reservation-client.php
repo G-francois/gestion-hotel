@@ -53,6 +53,86 @@ if (check_if_user_conneted()) {
     </head>
 
     <body id="page-top">
+        <header id="header" class="fixed-top d-flex align-items-center">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between" style="max-width: 1440px;">
+                <h1 class="logo me-auto me-lg-0">
+                    <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
+                </h1>
+
+                <!-- Uncomment below if you prefer to use an image logo -->
+
+                <!-- <a href="home.html" class="logo me-auto me-lg-0"><img src="publics/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                <nav id="navbar" class="navbar order-last order-lg-0">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
+                        </li>
+
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
+
+                                <h5 class="ml-2"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h5>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
+                                <div class="dropdown">
+                                    <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
+                                        <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
+                                </div>
+                                <hr>
+                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
+                                    <i class="bi bi-person" style="margin-right: 12px;"></i>
+                                    <span>Mon Profile</span>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
+                                    <i class="bi bi-gear" style="margin-right: 12px;"></i>
+                                    <span>Tableau de bord</span>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                                    <i class="bi bi-bell" style="margin-right: 12px;"></i>
+                                    <span>Notification(s)</span>
+                                </a>
+                                <hr>
+                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
+                                    <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
+                                    <span>Déconnexion</span>
+                                </a>
+                            </div>
+                        </li>
+                        <!-- End Profile Nav -->
+
+
+                    </ul>
+
+
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
+                <!-- .navbar -->
+
+
+
+            </div>
+        </header>
+        <!-- End Header -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -68,84 +148,6 @@ if (check_if_user_conneted()) {
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
 
-                        <header id="header" class="fixed-top d-flex align-items-cente">
-                            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-                                <h1 class="logo me-auto me-lg-0">
-                                    <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
-                                </h1>
-
-                                <!-- Uncomment below if you prefer to use an image logo -->
-
-                                <!-- <a href="home.html" class="logo me-auto me-lg-0"><img src="publics/img/logo.png" alt="" class="img-fluid"></a>-->
-
-                                <nav id="navbar" class="navbar order-last order-lg-0">
-                                    <ul>
-                                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home" style="color: rgb(217 186 133);">Acceuil</a></li>
-
-                                        <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres" style="color: white;">Chambres</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant" style="color: white;">Restaurant</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries" style="color: white;">Galeries</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact" style="color: white;">Contact</a>
-                                        </li>
-
-
-
-                                        <!-- Nav Item - User Information -->
-                                        <li class="nav-item">
-                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                                <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
-
-                                                <h5 class="ml-2" style="color: white;"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></h5>
-                                            </a>
-                                            <!-- Dropdown - User Information -->
-                                            <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
-                                                <div class="dropdown">
-                                                    <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
-                                                        <span><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['profil'] : 'Profil' ?></span>
-                                                </div>
-                                                <hr>
-                                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
-                                                    <i class="bi bi-person" style="margin-right: 12px;"></i>
-                                                    <span>Mon Profile</span>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
-                                                    <i class="bi bi-gear" style="margin-right: 12px;"></i>
-                                                    <span>Tableau de bord</span>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
-                                                    <i class="bi bi-bell" style="margin-right: 12px;"></i>
-                                                    <span>Notification(s)</span>
-                                                </a>
-                                                <hr>
-                                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
-                                                    <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
-                                                    <span>Déconnexion</span>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <!-- End Profile Nav -->
-
-                                        <i class="bi bi-list mobile-nav-toggle"></i>
-                                </nav>
-                                <!-- .navbar -->
-
-
-
-                            </div>
-                        </header>
-                        <!-- End Header -->
-
                     </ul>
 
                 </nav>
@@ -154,7 +156,7 @@ if (check_if_user_conneted()) {
                 <div class="container-fluid" style="padding-top: 26px;">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between h3 mb-2">
-                        <h4 class="h3 mb-0"><a href="#" style="color: white;">Ajouter une réservation</a></h4>
+                        <h4 class="h3 mb-0"><a href="#" style="color: white;">Faire une réservation</a></h4>
                         <h4 class="m-0 font-weight-bold "><a href="<?= PATH_PROJECT ?>client/dashboard/index">Liste des réservations</a></h4>
                     </div>
 
@@ -237,16 +239,50 @@ if (check_if_user_conneted()) {
 
                     </form>
                 </div>
+            </div><!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer" style="background-color: #0c0b09;">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; SOUS LES COCOTIERS 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
 
-                <?php
+            <!-- Template Main JS File -->
+            <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
 
-                include './app/commum/footer.php'
+            <!-- Bootstrap core JavaScript-->
+            <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+            <script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                ?>
+            <!-- Core plugin JavaScript-->
+            <script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <?php
-        } else {
-            header('location:' . PATH_PROJECT . 'client/connexion/index');
-        }
-            ?>
+            <!-- Custom scripts for all pages-->
+            <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
+
+
+            <!-- Page level plugins -->
+            <script src="<?= PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
+            <script src="<?= PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+            <!-- Page level custom scripts -->
+            <script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
+            <script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
+            <script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
+
+    </body>
+
+    </html>
+
+
+<?php
+} else {
+    header('location:' . PATH_PROJECT . 'client/connexion/index');
+}
+?>
