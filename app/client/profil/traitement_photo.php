@@ -11,6 +11,9 @@ $donnees = [];
 
 $erreurs = [];
 
+$idUtilisateur = $_SESSION['utilisateur_connecter'][0]['id'];
+
+$dossierUtilisateur = "public/images/upload/" . $idUtilisateur . "/";
 
 if (isset($_POST['change_photo'])) {
 
@@ -29,15 +32,15 @@ if (isset($_POST['change_photo'])) {
                 $allowed_ext = ["png", "jpg", "jpeg", "gif"];
 
                 if (in_array(strtolower($file_ext), $allowed_ext)) {
-                
-                    if (!is_dir("public/images/upload/")) {
 
-                        mkdir("public/images/upload/");
+                    if (!is_dir($dossierUtilisateur)) {
+                        //création du dossier image avec id de l'utilisateur
+                        mkdir($dossierUtilisateur);
                     }
 
-                    move_uploaded_file($_FILES['image']['tmp_name'], 'public/images/upload/' . basename($_FILES['image']['name']));
+                    move_uploaded_file($_FILES['image']['tmp_name'], $dossierUtilisateur . basename($_FILES['image']['name']));
 
-                    $profiledonnees["image"] = PATH_PROJECT . 'public/images/upload/' . basename($_FILES['image']['name']);
+                    $profiledonnees["image"] = PATH_PROJECT . $dossierUtilisateur . basename($_FILES['image']['name']);
 
                     if (maj_avatar($_SESSION['utilisateur_connecter'][0]['id'], $profiledonnees["image"])) {
 
@@ -45,10 +48,10 @@ if (isset($_POST['change_photo'])) {
 
                             header('location: ' . PATH_PROJECT . 'client/profil/profile');
                         }
-                    }else{
-                       
+                    } else {
+
                         $_SESSION['photo-erreurs'] = "La mise à jour de l'image à echouer.";
-                    header('location:' . PATH_PROJECT . 'client/profil/profile');
+                        header('location:' . PATH_PROJECT . 'client/profil/profile');
                     }
                 } else {
                     $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
@@ -66,5 +69,4 @@ if (isset($_POST['change_photo'])) {
         $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
         header('location:' . PATH_PROJECT . 'client/profil/profile');
     }
-    
 }
