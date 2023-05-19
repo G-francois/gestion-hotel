@@ -12,14 +12,11 @@ include './app/commum/header_client.php'
         <h2>
           Réservez directement avec nous pour les meilleurs tarifs garantis.
           <br />
-          À l'hôtel Sous les Cocotiers, vous trouverez des services
-          d'hébergement qui offrent un maximum de confort : de grandes
-          chambres, meublées et décorées dans un style minimaliste, qui
-          permettent une utilisation idéale de l'espace. Nous vous invitons
+          À l'hôtel Sous les Cocotiers, vous trouverez nos chambres qui offrent un maximum de confort : grandes, meublées et
+          décorées dans un style minimaliste, qui permet une utilisation optimal de l'espace. Nous vous invitons
           à profiter des services que nous vous proposons : 50 logements au
-          Sous les Cocotiers dans des chambres avec balcon ou terrasse, des
-          chambres avec de grands lits confortables, bureau, TV LCD,
-          internet Wi-Fi, minibar et climatisation.
+          Sous les Cocotiers, des chambres avec balcon ou terrasse, avec de grands lits confortables, bureau, TV LCD, internet Wi-Fi, 
+          minibar et climatisation.
         </h2>
       </div>
     </div>
@@ -40,7 +37,7 @@ include './app/commum/header_client.php'
                 Situé au premier étage de l'hôtel, la chambres solo allie
                 confort et fonctionnalité dans un esprit simple et
                 chaleureux. La taille de la chambre et la vue sur la petite
-                cour pavée rappellent Paris et ses ruelles d’antan. Devant
+                cour pavée vous donne une vue panoramique. Devant
                 le pupitre, le solitaire peut prendre la plume… Rien ne
                 viendra le perturber.
               </p>
@@ -60,13 +57,10 @@ include './app/commum/header_client.php'
               </div>
 
               <div style="padding-top: 3em">
-                <a title="Lits Twin" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Lits Twin" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12.png" /></a>
                 <a title="Cocktail De Bienvenue" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Cocktail De Bienvenue" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-13.png" /></a>
-                <a title="Petit Déjeuner" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Petit Déjeuner" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-17.png" /></a>
                 <a title="Salle de bains privée" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Salle de bains privée" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-10.png" /></a>
                 <a title="Non fumeur" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Non fumeur" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-14.png" /></a>
                 <a title="satellite-tv" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="satellite-tv" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-18.png" /></a>
-                <a title="Blanchisserie" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Blanchisserie" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-15.png" /></a>
                 <a title="Wifi" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Wifi" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12-1.png" /></a>
               </div>
             </div>
@@ -139,8 +133,8 @@ include './app/commum/header_client.php'
               <h3 class="card-title">Chambre Doubles</h3>
               <p class="card-text">
                 Situé au deuxième étage de l'hôtel, profitez du balcon et de
-                la vue sur la vallée. Ces chambres conçu pour héberger deux
-                personnes et est équipé d'un grand lit standard
+                la vue sur la vallée. Cette chambre est conçue pour héberger deux
+                personnes et est équipée d'un grand lit standard
                 (140-160*200) ou de deux lits simples (90*200)
               </p>
               <div>
@@ -161,11 +155,9 @@ include './app/commum/header_client.php'
               <div style="padding-top: 3em">
                 <a title="Lits Twin" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Lits Twin" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12.png" /></a>
                 <a title="Cocktail De Bienvenue" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Cocktail De Bienvenue" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-13.png" /></a>
-                <a title="Petit Déjeuner" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Petit Déjeuner" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-17.png" /></a>
                 <a title="Salle de bains privée" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Salle de bains privée" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-10.png" /></a>
                 <a title="Non fumeur" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Non fumeur" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-14.png" /></a>
                 <a title="satellite-tv" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="satellite-tv" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-18.png" /></a>
-                <a title="Blanchisserie" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Blanchisserie" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-15.png" /></a>
                 <a title="Wifi" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Wifi" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12-1.png" /></a>
               </div>
             </div>
@@ -181,8 +173,8 @@ include './app/commum/header_client.php'
             <div class="card-body px-0">
               <h3 class="card-title">Chambre Triples</h3>
               <p class="card-text">
-                Situé au troisième étage et idéal pour les excursion en
-                petits groupes. Elle est équipée de 3 couchages et pouvant
+                Situé au troisième étage et idéal pour les excursions en
+                petits groupes. Elle est équipée de 3 couchages et peuvent
                 donc accueillir 3 personnes. La configuration peut être 3
                 lits d'une personne ou bien 1 lit double de 2 personnes et 1
                 d'une personne avec un canapé.
@@ -282,8 +274,7 @@ include './app/commum/header_client.php'
               <h3 class="card-title">Suites</h3>
               <p class="card-text">
                 Situé au dernier étage de l'hôtel avec une vue imprenable,
-                il possède généralement une salle de bain attenante, un
-                salon et la plupart du temps, un coin repas.
+                il possède une salle de bain attenante, de petites dépendances et un coin repas.
               </p>
               <div>
                 <div style="display: flex">

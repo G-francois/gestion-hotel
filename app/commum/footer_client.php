@@ -15,7 +15,7 @@
 
                             <strong>Phone:</strong> +1 5589 55488 55<br />
 
-                            <strong>Email:</strong> <a href="#">info@example.com</a>
+                            <strong>Email:</strong> <a href="#">slescocotiers@gmail.com</a>
                             <br />
                         </p>
 
@@ -39,7 +39,7 @@
                     <ul>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="<?= PATH_PROJECT ?>client/site/home">Home</a>
+                            <a href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
                         </li>
 
                         <li>

@@ -295,8 +295,8 @@ if (check_if_user_conneted()) {
 
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center" style="color: #cda45e;">
-                  <a href="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/blank_profile.png' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
-                    <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/blank_profile.png' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
+                  <a href="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
+                    <img src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
                   </a>
 
 
@@ -502,7 +502,7 @@ if (check_if_user_conneted()) {
 
         <div class="col-xl-8">
           <div class="col-lg-12">
-            <h5 style="margin-bottom: 13px; margin-top: 80px; font-size: 32px; font-weight: 700; color: #cda45e;">Modifier des informations personnelles</h5>
+            <h5 style="margin-bottom: 13px; margin-top: 80px; font-size: 32px; font-weight: 700; color: #cda45e;">Modification(s) des informations usuelles</h5>
             <div class="card">
               <div class="card-body">
                 <form action="<?= PATH_PROJECT ?>client/profil/traitement_edit_profil" method="post" enctype="multipart/form-data">

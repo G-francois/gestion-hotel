@@ -75,8 +75,7 @@ include './app/commum/header_client.php'
           <h4>ACCEUIL & SERVICES</h4>
 
           <p>
-            Nous vous offrons un acceuil chaleureux tout en vous laissant
-            vous imprégner du lieu en dégustant notre cocktail de bienvenue.
+            Nous vous offrons un acceuil chaleureux tout en vous faisant déguster notre cocktail de bienvenue dans un cadre spontieux.
           </p>
         </div>
       </div>
@@ -85,11 +84,10 @@ include './app/commum/header_client.php'
         <div class="box" data-aos="zoom-in" data-aos-delay="200">
           <span>03</span>
 
-          <h4>HEBERGEMENT & REPAS</h4>
+          <h4>HEBERGEMENT & SECURITE</h4>
 
           <p>
-            Reservez une chambre pour rester dans un environnement agréable
-            et goûter aux plats de résistances mise à votre porter.
+            Reservez une chambre pour rester dans un environnement agréable et sécurisé.
           </p>
         </div>
       </div>
@@ -98,12 +96,10 @@ include './app/commum/header_client.php'
         <div class="box" data-aos="zoom-in" data-aos-delay="300">
           <span>04</span>
 
-          <h4>SECURITE & CONFORT</h4>
+          <h4>CONFORT & REPAS</h4>
 
           <p>
-            Nous vous offrons une sécurité absolut tout au long de votre
-            séjour; détendez vous autour de notre piscine intérieure et de
-            notre espace Wellness et Bibliothèque.
+            Nos repas peuvent être pris au bord de la piscine intérieure et vos détentes sur notre espace Wellness et Bibliothèque.
           </p>
         </div>
       </div>
@@ -122,11 +118,9 @@ include './app/commum/header_client.php'
 
         <p class="size-18 m-size-14">
           Nous vous proposons une large gamme de services pour rendre votre
-          séjour d'affaires ou de loisirs aussi insouciant et relaxant que
-          possible. Vous trouverez des services d'hébergement qui vous
-          offrent un maximum de confort : de grandes chambres, meublées et
-          décorée dans un styles minimaliste, qui permettent une utilisation
-          idéale de l'espaces.
+          séjour d'affaires ou de loisirs aussi insouciant et aussi relaxant que
+          possible. Vous trouverez nos chambres qui offrent un maximum de confort : grandes, meublées et
+          décorées dans un styles minimaliste, qui permet une utilisation optimal de l'espace.
         </p>
       </div>
 
@@ -219,8 +213,7 @@ include './app/commum/header_client.php'
             <p>
               <i class="bx bxs-quote-alt-left quote-icon-left"></i>
 
-              J'ai été affectée dans cette ville pour affaire avec un
-              collègue. Je dirais que c'est très bien comme lieu mais j'ai
+              J'ai été affectée dans cette ville pour affaire. Je dirais que c'est très bien comme lieu et aussi j'ai
               beaucoup apprécier les mets.
 
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>

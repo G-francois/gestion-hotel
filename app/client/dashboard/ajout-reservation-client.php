@@ -160,70 +160,49 @@ if (check_if_user_conneted()) {
                         <h4 class="m-0 font-weight-bold "><a href="<?= PATH_PROJECT ?>client/dashboard/index">Liste des réservations</a></h4>
                     </div>
 
-                    <form class="form-horizontal" action="?requette=ajout-auteur-traitement" method="POST">
+                    <form class="form-horizontal" action="<?= PATH_PROJECT ?>client/dashboard/ajout-reserv-traitement" method="POST">
                         <div class="card-body">
 
-                            <!-- Le champs nom & prénom -->
+                            <!-- Le champs nom du client & DATE DE DEBUT -->
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Nom du client</label>
+                                    <label for="inscription-nom" class="col-sm-4 col-form-label">Nom du client</label>
                                     <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer le nom du client" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="nom-auteur" class="col-sm-5 col-form-label">Nom de l'accompagnateur</label>
-                                    <input type="text" name="prenom" id="inscription-prenom" class="form-control" placeholder="Veuillez entrer le(s) nom(s) de l'accompagnateur par rapport au type de chambre" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>" required>
+                                    <label for="date_debut" class="col-sm-4 col-form-label">Date de début</label>
+                                    <input type="date" id="date_debut" name="date_debut" class="form-control"  value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
                                 </div>
                             </div>
 
                             <!-- Le champs date -->
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Date de début</label>
-                                    <input type="date" name="date-naissance" id="inscription-date-naissance" class="form-control" placeholder="Veuillez entrer votre date de naissance" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
+                                    <label for="date_fin" class="col-sm-4 col-form-label">Date de fin</label>
+                                    <input type="date" id="date_fin" name="date_fin" class="form-control"  value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
                                 </div>
-
-                                <div class="col-sm-6">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Date de fin</label>
-                                    <input type="date" name="date-naissance" id="inscription-date-naissance" class="form-control" placeholder="Veuillez entrer votre date de naissance" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Type de chambre</label>
+                                    <label for="typeChambre" class="col-sm-4 col-form-label">Type de chambre : </label>
                                     <div class="input-group">
-                                        <select class="form-control" name="type" id="type">
+                                        <select class="form-control" id="typeChambre" name="typeChambre" onchange="afficherChampsAccompagnateur()">
                                             <option value="" disabled selected>Sélectionnez le type de chambre</option>
-                                            <option value="admin">Solo</option>
-                                            <option value="user">Doubles</option>
-                                            <option value="admin">Triples</option>
-                                            <option value="user">Suites</option>
+                                            <option value="solo">Solo</option>
+                                            <option value="double">Doubles</option>
+                                            <option value="triple">Triples</option>
+                                            <option value="suite">Suites</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Numéros de chambre</label>
-                                    <div class="input-group">
-                                        <select class="form-control" name="type" id="type">
-                                            <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                                            <option value="">A-101</option>
-                                            <option value="">A-102</option>
-                                            <option value="">A-103</option>
-                                            <option value="">A-104</option>
-                                            <option value="">B-101</option>
-                                            <option value="">B-102</option>
-                                            <option value="">B-103</option>
-                                            <option value="">B-104</option>
-                                            <option value="">C-101</option>
-                                            <option value="">C-102</option>
-                                            <option value="">C-103</option>
-                                            <option value="">C-104</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
+
+
+                            <div class="form-group row" id="champsAccompagnateur">
+                                <!-- Les champs d'accompagnateur et numéro de chambre seront affichés ici -->
+
+                            </div>
+
+
                             <div class="col-lg-12">
                                 <h5 style="font-weight: bold">Total Days : <span id="staying_day">0</span> Days</h5>
                                 <h5 style="font-weight: bold">Price: /-</h4>
@@ -238,6 +217,90 @@ if (check_if_user_conneted()) {
                         </div>
 
                     </form>
+
+                    <script>
+                        function afficherChampsAccompagnateur() {
+                            var typeChambre = document.getElementById("typeChambre").value;
+                            var champsAccompagnateur = document.getElementById("champsAccompagnateur");
+
+                            // Réinitialiser les champs d'accompagnateur
+                            champsAccompagnateur.innerHTML = "";
+                            if (typeChambre === "solo") {
+                                champsAccompagnateur.innerHTML = `
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Numéro de chambre: </label> 
+                                        <select name = "numChambre" class = "form-control" >
+                                        <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
+                                            <option value = "1" > Chambre 1 </option> 
+                                            <option value = "2" > Chambre 2 </option> 
+                                            <option value = "3" > Chambre 3 </option> 
+                                        </select> 
+                                    </div> `;
+                                // Pas besoin d'afficher le champ accompagnateur pour la chambre solo
+                            } else if (typeChambre === "double") {
+                                champsAccompagnateur.innerHTML = `
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Numéro de chambre: </label> 
+                                        <select name = "numChambre"class = "form-control" >
+                                            <option value = ""disabled selected> Veuillez choisir le numéro de chambre </option> 
+                                            <option value = "4" > Chambre 4 </option>  
+                                            <option value = "5" > Chambre 5 </option>  
+                                            <option value = "6" > Chambre 6 </option>  
+                                        </select>  
+                                    </div>  
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur">
+                                    </div>`;
+                            } else if (typeChambre === "triple") {
+                                champsAccompagnateur.innerHTML = `
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Numéro de chambre: </label> 
+                                        <select name = "numChambre"class = "form-control" >
+                                            <option value = ""disabled selected> Veuillez choisir le numéro de chambre </option> 
+                                            <option value = "7" > Chambre 7 </option>  
+                                            <option value = "8" > Chambre 8 </option>  
+                                            <option value = "9" > Chambre 9 </option>  
+                                        </select>  
+                                    </div>
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 1">
+                                    </div>
+                                    <div class = "col-sm-6 mt-3 mt-sm-3" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2" >
+                                    </div>`;
+                            } else if (typeChambre === "suite") {
+                                champsAccompagnateur.innerHTML = `
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Numéro de chambre: </label> 
+                                        <select name = "numChambre"class = "form-control" >
+                                            <option value = ""disabled selected> Veuillez choisir le numéro de chambre </option> 
+                                            <option value = "10" > Chambre 10 </option>  
+                                            <option value = "11" > Chambre 11 </option>  
+                                            <option value = "12" > Chambre 12 </option>  
+                                        </select>  
+                                    </div>
+                                    <div class = "col-sm-6" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 1">
+                                    </div>
+                                    <div class = "col-sm-6 mt-3 mt-sm-3" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2">
+                                    </div>
+                                    <div class = "col-sm-6 mt-3 mt-sm-3" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 3">
+                                    </div>
+                                    <div class = "col-sm-6 mt-3 mt-sm-3" >
+                                        <label class = "col-form-label"> Champ d 'accompagnateur :</label>  
+                                        <input type = "text"name = "accompagnateur"class = "form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 4">
+                                    </div>`;
+                            }
+                        }
+                    </script>
                 </div>
             </div><!-- End of Main Content -->
 

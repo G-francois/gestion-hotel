@@ -124,7 +124,7 @@ if (!check_if_user_conneted()) {
                                         }
                                         ?>
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Bienvenue</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">Bienvenu(e)</h1>
                                         </div>
 
 

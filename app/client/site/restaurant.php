@@ -9,7 +9,7 @@ include './app/commum/header_client.php'
     <div class="row">
       <div class="col-lg-8">
         <h1>Bienvenue dans notre<span> Espace Restaurant</span></h1>
-        <h2>Livrer de la bonne nourriture depuis plus de 18 ans!</h2>
+        <h2>Doté d'une expérience de plus de 18 ans notre cuisine repond à tous les goûts.</h2>
 
         <div class="btns">
           <a href="#menu" class="btn-menu animated fadeInUp scrollto">Notre Carte</a>
@@ -56,7 +56,7 @@ include './app/commum/header_client.php'
             <li>
               <i class="bi bi-check-circle"></i> Nous mettons à l’honneur
               ces gens de l’ombre qui participent pleinement à vous faire
-              passer un excellent moment avec cette vue mer.
+              passer un excellent moment avec cette vue de mer.
             </li>
           </ul>
           <p>
@@ -80,10 +80,10 @@ include './app/commum/header_client.php'
         <div class="col-lg-4">
           <div class="box" data-aos="zoom-in" data-aos-delay="100">
             <span>01</span>
-            <h4>L'hygiène est au rendez-vous</h4>
+            <h4>L'hygiène et la propreté sont au rendez-vous</h4>
             <p>
-              La préoccupation première du restaurateur est de veiller à la
-              qualité des aliments, en minimisant les risques sanitaires.
+              Notre préoccupation est de veiller à la
+              qualité des aliments, en minimisant les risques d'intoxication.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ include './app/commum/header_client.php'
             <span>02</span>
             <h4>Un environnement calme et décontractant</h4>
             <p>
-              Sous les Cocotiers est née de la volonté de créer un lieu
+              Sous les Cocotiers est né de la volonté de créer un lieu
               convivial.
             </p>
           </div>
@@ -102,10 +102,9 @@ include './app/commum/header_client.php'
         <div class="col-lg-4 mt-4 mt-lg-0">
           <div class="box" data-aos="zoom-in" data-aos-delay="300">
             <span>03</span>
-            <h4>Un décors qui facilite la digestion</h4>
+            <h4>Un décors qui vous donne de l'appetit</h4>
             <p>
-              Notre cuisine se dit simple mais avec du goût élaboré avec
-              amour par notre cuisine.
+              Notre cuisine se dit simple mais avec du goût et des dessert qui vous facilitent la digestion.
             </p>
           </div>
         </div>
@@ -369,7 +368,7 @@ include './app/commum/header_client.php'
                   <p><span>$189</span></p>
                 </div>
                 <p class="fst-italic">
-                  Offrez-vous un escape game avec vos copains. <br />
+                  Offrez-vous un escape game avec des copains. <br />
                   C’est l’anniversaire de vos enfants, ou proches et vous
                   souhaitez leurs offrires un moment inoubliable avec ses
                   copains ? Amenez-les chez nous, on s’occupe de tout !
