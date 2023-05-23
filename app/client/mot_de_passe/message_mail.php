@@ -1,6 +1,6 @@
 <?php
 
-$url = 'localhost/'.PATH_PROJECT .'client/modification_mot_passe/index/{id_utilisateur}/{token}';
+$url = 'localhost/' . PATH_PROJECT . 'client/modification_mot_passe/index/{id_utilisateur}/{token}';
 
 if (isset($_SESSION['modification_mot_passe']) && !empty($_SESSION['modification_mot_passe'])) {
     $id_utilisateur = $_SESSION['modification_mot_passe']['id_utilisateur'];
@@ -10,7 +10,6 @@ if (isset($_SESSION['modification_mot_passe']) && !empty($_SESSION['modification
 $url = str_replace('{id_utilisateur}', $id_utilisateur, $url);
 
 $url = str_replace('{token}', $token, $url);
-
 
 ?>
 
@@ -57,12 +56,11 @@ $url = str_replace('{token}', $token, $url);
         }
 
         a {
-            display: flex; 
-            justify-content: center; 
-            background-color: #1a73e8; 
-            color: #fff; 
-            text-decoration: none; 
-            padding: 10px 20px; 
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 5px;
         }
 
@@ -87,19 +85,19 @@ $url = str_replace('{token}', $token, $url);
 
 <body>
     <div class="container" style="background-color: black; display: flex; justify-content: center; align-items: center;">
-        <div style="margin-right: 40px;">
+        <div style="margin-right: 40px; margin-left: 70px;">
             <img src="https://celebrason.com/media/1473737489_palmier-courbe-543556a76ac15.png" alt="">
         </div>
         <div>
-            <h1>Vérification de l'adresse email</h1>
+            <h1> SOUS LES COCOTIERS <br>Vérification de l'adresse email</h1>
         </div>
 
     </div>
-    <div class="container" style="text-align: center;">
+    <div class="container" style="text-align: center; align-items: center; flex-direction: column;">
         <p>Nous avons reçu votre demande de réinitialisation de mot de passe. Afin de pouvoir modifier le mot de passe de votre compte,
             veuillez cliquer sur le bouton ci-dessous pour modifier votre mot de passe:</p>
 
-        <a href="<?= $url ?>" target="_blank"  style="display: flex; justify-content: center; background-color: #1a73e8; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Modifier mot de passe</a>
+            <a href="<?= $url ?>" target="_blank" class="d-flex flex-wrap" style="display: list-item; justify-content: center; background-color: #1a73e8; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Modifier mot de passe</a>
 
         <p>Une fois que vous aurez cliqué sur le bouton, vous pourrez créer un nouveau mot de passe afin de pouvoir accéder à votre compte.</p>
         <p>Si vous rencontrez des difficultés pour modifier votre mot de passe ou si vous avez des questions, n'hésitez pas à nous écrire.</p>

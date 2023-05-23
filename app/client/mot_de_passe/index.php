@@ -116,7 +116,7 @@ if (!check_if_user_conneted()) {
                                         <?php
                                         if (isset($_SESSION['validation2']) && !empty($_SESSION['validation2'])) {
                                         ?>
-                                            <div class="alert alert-primary" style="color: white; text-align:center; background-color: #1cc88a; border-color: snow;">
+                                            <div class="alert alert-primary" style="color: white; text-align:center; background-color: #4e73df; border-color: snow;">
                                                 <?= $_SESSION['validation2'] ?>
                                             </div>
                                         <?php
@@ -168,7 +168,7 @@ if (!check_if_user_conneted()) {
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe/index">Mot de passe oublié ?</a>
+                                            <a class="small" href="<?= PATH_PROJECT ?>client/inscription/index">Créez un compte !</a>
                                         </div>
                                         <div class="text-center">
                                             <a class="small" href="<?= PATH_PROJECT ?>client/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>

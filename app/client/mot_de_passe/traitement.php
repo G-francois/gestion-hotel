@@ -24,10 +24,11 @@ if (isset($_POST["email"]) && !empty($_POST["email"]) && filter_var($_POST["emai
 
 $_SESSION['donnees-utilisateur'] = $donnees;
 
-
 $_SESSION['validation2'] = "";
 
 $_SESSION['verification'] = "";
+
+$_SESSION['email-utilisateur'] = $id_utilisateur;
 
 if ((!check_email_exist_in_db($_POST["email"]))) {
     $erreurs["email"] = "Vérifier l'adresse mail saisie";
@@ -46,7 +47,7 @@ if (empty($erreurs)) {
         }
 
         $objet = 'Modification de mot de passe';
-        $message = buffer_html_file(PATH_PROJECT . 'app/client/mot_de_passe/message_mail.php');
+        $message = buffer_html_file('..' . PATH_PROJECT . 'app/client/mot_de_passe/message_mail.php');
         if (email($donnees["email"], $objet, $message)) {
 
             $donnees = ($_POST["email"]);

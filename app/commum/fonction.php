@@ -295,6 +295,8 @@ function select_user_id(string $email)
 }
 
 
+
+
 /**
  * Cette fonction permet de verifier si le id_utilisateur existe dans la base de donnée .
  * @param string $nom_utilisateur Le nom d'utilisateur a vérifié.
@@ -335,9 +337,6 @@ function check_id_utilisateur_exist_in_db(int $user_id, string $token, string $t
     return $check;
 }
 
-
-
-
 // Exemple de fonction pour exécuter la requête UPDATE TOKEN
 
 function maj(int $id_utilisateur): bool
@@ -372,7 +371,6 @@ function maj(int $id_utilisateur): bool
 
     return $maj;
 }
-
 
 // Exemple de fonction pour exécuter la requête UPDATE est_actif UTILISATEUR
 

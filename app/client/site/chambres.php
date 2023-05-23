@@ -14,7 +14,7 @@ include './app/commum/header_client.php'
           <br />
           À l'hôtel Sous les Cocotiers, vous trouverez nos chambres qui offrent un maximum de confort : grandes, meublées et
           décorées dans un style minimaliste, qui permet une utilisation optimal de l'espace. Nous vous invitons
-          à profiter des services que nous vous proposons : 50 logements au
+          à profiter des services que nous vous proposons : 30 logements au
           Sous les Cocotiers, des chambres avec balcon ou terrasse, avec de grands lits confortables, bureau, TV LCD, internet Wi-Fi, 
           minibar et climatisation.
         </h2>

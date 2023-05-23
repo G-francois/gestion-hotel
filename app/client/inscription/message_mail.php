@@ -5,6 +5,7 @@ $url = 'localhost' . PATH_PROJECT . 'client/validation_de_compte/index/{id_utili
 if (isset($_SESSION['validation_compte']) && !empty($_SESSION['validation_compte'])) {
     $id_utilisateur = $_SESSION['validation_compte']['id_utilisateur'];
     $token = $_SESSION['validation_compte']['token'];
+    
 }
 
 $url = str_replace('{id_utilisateur}', $id_utilisateur, $url);
@@ -50,9 +51,18 @@ $url = str_replace('{token}', $token, $url);
 
         p {
             font-size: 16px;
-            margin-top: 10px;
+            margin-top: 17px;
             margin-bottom: 20px;
             line-height: 1.5;
+        }
+
+        a {
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
 
         .button {
@@ -75,21 +85,21 @@ $url = str_replace('{token}', $token, $url);
 </head>
 
 <body>
-    <div class="container" style="background-color: black; display: flex; justify-content: center; align-items: center;">
-        <div style="margin-right: 40px;">
+    <div class="container m" style="background-color: black; display: flex;">
+        <div style="margin-right: 40px; margin-left: 90px;">
             <img src="https://celebrason.com/media/1473737489_palmier-courbe-543556a76ac15.png" alt="">
         </div>
         <div>
-            <h1>Nouvelle inscription</h1>
+            <h1> SOUS LES COCOTIERS <br> Nouvelle inscription</h1>
         </div>
 
     </div>
-    <div class="container" style="text-align: center; display: flex; align-items: center; flex-direction: column;">
+    <div class="container" style="text-align: center; align-items: center; flex-direction: column;">
         <p>Bienvenue cher client,</p>
         <p>Nous avons bien reçu votre demande d'inscription à notre plateforme et nous vous remercions de votre intérêt pour nos services. Afin de pouvoir accéder à votre compte,
             veuillez cliquer sur le bouton ci-dessous pour valider votre compte:</p>
 
-        <a href="<?= $url ?>" target="_blank" class="d-flex flex-wrap" style="display: flex; justify-content: center; background-color: #1a73e8; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Valider mon compte</a>
+        <a href="<?= $url ?>" target="_blank" class="d-flex flex-wrap" style="display: list-item; justify-content: center; background-color: #1a73e8; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Valider mon compte</a>
 
         <p>Une fois que vous aurez cliqué sur le bouton, votre compte sera activé et vous pourrez vous connecter à votre compte en utilisant les informations que vous avez fournies lors de votre inscription.</p>
         <p>Si vous rencontrez des difficultés pour valider votre compte ou si vous avez des questions, n'hésitez pas à nous écrire.</p>

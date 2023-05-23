@@ -10,6 +10,7 @@ if (isset($_SESSION['enregistrer-erreurs']) && !empty($_SESSION['enregistrer-err
 if (isset($_SESSION['donnees-utilisateur']) && !empty($_SESSION['donnees-utilisateur'])) {
     $donnees = $_SESSION['donnees-utilisateur'];
 }
+
 ?>
 
 
@@ -161,7 +162,7 @@ if (!check_if_user_conneted()) {
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe/index">Mot de passe oublié ?</a>
+                                            <a class="small" href="<?= PATH_PROJECT ?>client/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>
                                         </div>
                                         <div class="text-center">
                                             <a class="small" href="<?= PATH_PROJECT ?>client/inscription/index">Créez un compte !</a>
@@ -178,8 +179,7 @@ if (!check_if_user_conneted()) {
         </div>
 
         <?php
-        session_destroy();
-
+        //session_destroy();
         ?>
 
 

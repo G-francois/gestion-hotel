@@ -157,8 +157,6 @@ $_SESSION['validation'] = "";
 
 $donnees["Client"] = "Client";
 
-//$donnees["no_image"] = "no_image";
-
 if (empty($erreurs)) {
 
     $db = connect_db();
@@ -193,6 +191,7 @@ if (empty($erreurs)) {
     //'mot_passe' => sha1($donnees["mot-passe"])
     //]));
 
+
     if ($resultat) {
         $_token = uniqid("");
         $id_utilisateur = select_user_id($donnees['email'])[0]['id'];
@@ -205,14 +204,15 @@ if (empty($erreurs)) {
 
         $objet = 'Validation de votre inscription';
         $message = buffer_html_file('..' . PATH_PROJECT . 'app/client/inscription/message_mail.php');
+
         if (email($donnees["email"], $objet, $message)) {
-            $_SESSION['validation'] = "Veuiller bien consulter votre adresse mail pour valider votre compte ";
+            $_SESSION['validation'] = "Veuillez consulter votre adresse mail pour valider votre compte.";
             header('location: ' . PATH_PROJECT . 'client/inscription/index');
         } else {
             header('location: ' . PATH_PROJECT . 'client/inscription/pages-error-404');
         }
     } else {
-        $_SESSION['inscription-erreurs-global'] = "Oupps ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
+        $_SESSION['inscription-erreurs-global'] = "Oups ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
 
         header('location: ' . PATH_PROJECT . 'client/inscription/index');
     }

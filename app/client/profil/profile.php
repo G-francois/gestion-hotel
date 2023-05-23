@@ -661,8 +661,7 @@ if (check_if_user_conneted()) {
                 <div class="row mb-3">
                   <label for="newPassword" class="col-md-5 col-lg-4 col-form-label">Nouveau Mot de passe</label>
                   <div class="col-md-7 col-lg-8">
-                    <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" title="Votre mot de passe doit contenir au moins 8 caractères
-                           avec au moins une lettre majuscule et une letttre miniscule." requi#9f0808>
+                    <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" requi#9f0808>
                     <span class="text-danger">
                       <?php
                       if (isset($erreurs["newpassword"]) && !empty($erreurs["newpassword"])) {
@@ -677,8 +676,7 @@ if (check_if_user_conneted()) {
                 <div class="row mb-3">
                   <label for="renewPassword" class="col-md-5 col-lg-4 col-form-label">Retaper Nouveau Mot de passe</label>
                   <div class="col-md-7 col-lg-8">
-                    <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" title="Votre mot de passe doit contenir au moins 8 caractères
-                           avec au moins une lettre majuscule et une letttre miniscule." requi#9f0808>
+                    <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" requi#9f0808>
                     <span class="text-danger">
                       <?php
                       if (isset($erreurs["renewpassword"]) && !empty($erreurs["renewpassword"])) {
