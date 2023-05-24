@@ -47,7 +47,7 @@ if (!check_if_user_conneted()) {
         <!-- ======= Header ======= -->
 
         <header id="header" class="fixed-top d-flex align-items-cente">
-            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between"  style="justify-content: space-between;">
                 <h1 class="logo me-auto me-lg-0">
                     <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
                 </h1>
@@ -86,7 +86,7 @@ if (!check_if_user_conneted()) {
                     </ul>
 
 
-                    <i class="bi bi-list mobile-nav-toggle"></i>
+                    <i class="bi bi-list mobile-nav-toggle" style="margin-left: 80px;"></i>
                 </nav>
                 <!-- .navbar -->
 
