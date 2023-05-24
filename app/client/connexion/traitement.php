@@ -32,7 +32,7 @@ if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"]) && isset($_POST["e
     }else {
 
         $_SESSION['connexion-erreurs'] = $erreurs;
-        $erreurs["mot-passe"] = "L'adresse email ou le mot de passe est incorrecte. Veuiller le reéssayer.";
+        $erreurs = "L'adresse email ou le mot de passe est incorrecte. Veuiller le reéssayer.";
     }
 }
 

@@ -128,6 +128,16 @@ if (!check_if_user_conneted()) {
                                         </div>
 
 
+                                        <?php
+                                            if (isset($_SESSION['connexion-erreurs']) && !empty($_SESSION['connexion-erreurs'])) {
+                                            ?>
+                                                <div class="alert alert-primary" style="color: white; background-color: #b91000; border-color: #b91000; text-align:center;">
+                                                    <?= $_SESSION['connexion-erreurs'] ?>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+
                                         <form action="<?= PATH_PROJECT ?>client/connexion/traitement" method="post" class="user">
                                             <!-- Le champs email ou mot de passe-->
                                             <div class="form-group">
