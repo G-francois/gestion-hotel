@@ -184,7 +184,7 @@ function send_email(string $destination, string $subject, string $body): bool
 }
 
 // Exemple de fonction pour récupérer du html dans le buffer
-function buffer_html_file($filename)
+function buffer_html_file($filename, $id_utilisateur, $token)
 {
 	ob_start(); // Démarre la temporisation de sortie
 
@@ -299,7 +299,7 @@ function recuperer_id_utilisateur_par_son_mail(string $email): int
  *
  * @return bool $check
  */
-function check_id_utilisateur_exist_in_db(int $user_id, string $token, string $type, int $est_actif, int $est_supprimer): bool
+function check_token_exist(int $user_id, string $token, string $type, int $est_actif = 1, int $est_supprimer = 0): bool
 {
 
 	$check = false;
@@ -334,10 +334,9 @@ function check_id_utilisateur_exist_in_db(int $user_id, string $token, string $t
 }
 
 // Exemple de fonction pour exécuter la requête UPDATE TOKEN
-function maj(int $id_utilisateur): bool
+function suppression_logique_token(int $id_utilisateur): bool
 {
-
-	$maj = false;
+	$suppression_logique_token = false;
 
 	$date = date("Y-m-d H:i:s");
 
@@ -358,20 +357,17 @@ function maj(int $id_utilisateur): bool
 			]
 		);
 
-		if ($request_execution) {
-
-			$maj = true;
-		}
+		$suppression_logique_token = $request_execution;
 	}
 
-	return $maj;
+	return $suppression_logique_token;
 }
 
 // Exemple de fonction pour exécuter la requête UPDATE est_actif UTILISATEUR
-function maj1(int $id_utilisateur): bool
+function activation_compte_utilisateur(int $id_utilisateur): bool
 {
 
-	$maj1 = false;
+	$activation_compte_utilisateur = false;
 
 	$date = date("Y-m-d H:i:s");
 
@@ -390,14 +386,10 @@ function maj1(int $id_utilisateur): bool
 				'maj_le' => $date
 			]
 		);
-
-		if ($request_execution) {
-
-			$maj1 = true;
-		}
+		$activation_compte_utilisateur = $request_execution;
 	}
 
-	return $maj1;
+	return $activation_compte_utilisateur;
 }
 
 

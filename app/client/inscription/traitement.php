@@ -143,7 +143,10 @@ if (empty($erreurs)) {
 			$message_erreur_global = "Votre inscription s'est effectué avec succès mais une erreur est survenue lors de la génération de la clè de validation de votre compte. Veuillez contacter un administrateur.";
 		} else {
 			$objet = 'Validation de votre inscription';
-			$template_mail = buffer_html_file('..' . PATH_PROJECT . 'app/client/inscription/message_mail.php');
+			ob_start(); // Démarre la temporisation de sortie
+			include 'app/client/inscription/message_mail.php'; // Inclut le fichier HTML dans le tampon
+			$template_mail = ob_get_contents(); // Récupère le contenu du tampon
+			ob_end_clean(); // Arrête et vide la temporisation de sortie
 
 			if (send_email($donnees["email"], $objet, $template_mail)) {
 				$message_success_global = "Votre inscription s'est effectué avec succès. Veuillez consulter votre adresse mail pour valider votre compte.";
