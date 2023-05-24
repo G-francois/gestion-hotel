@@ -21,7 +21,7 @@ if (!check_if_user_conneted()) {
 ?>
 
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="fr">
 
     <head>
 

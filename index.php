@@ -2,13 +2,13 @@
 require "vendor/autoload.php";
 
 // PROJET VAR
-define('PATH_PROJECT', '/soutenance/');
+define('PATH_PROJECT', '/stage/gestion-hotel/');
 
 // DATABASE ACCES
 define('DATABASE_HOST', 'localhost');
 define('DATABASE_NAME', 'gestion-hotel');
 define('DATABASE_USERNAME', 'root');
-define('DATABASE_PASSWORD', '');
+define('DATABASE_PASSWORD', 'root');
 
 // MAIL ACCES
 define('MAIL_ADDRESS', 'slescocotiers@gmail.com');

@@ -1,4 +1,7 @@
 <?php
+session_start();
+include './app/commum/fonction.php';
+
 $params = explode('/', $_GET['p']);
 $profile = "client";
 $default_ressource = "site";

@@ -38,7 +38,7 @@ if (empty($erreurs)) {
 
     if (check_email_exist_in_db($_POST["email"])) {
         $_token = uniqid("");
-        $id_utilisateur = select_user_id($donnees['email'])[0]['id'];
+        $id_utilisateur = recuperer_id_utilisateur_par_son_mail($donnees['email'])[0]['id'];
 
         if (insertion_token($id_utilisateur, 'NOUVEAU_MOT_DE_PASSE', $_token)) {
             $_SESSION['modification_mot_passe'] = [];
@@ -48,7 +48,7 @@ if (empty($erreurs)) {
 
         $objet = 'Modification de mot de passe';
         $message = buffer_html_file('..' . PATH_PROJECT . 'app/client/mot_de_passe/message_mail.php');
-        if (email($donnees["email"], $objet, $message)) {
+        if (send_email($donnees["email"], $objet, $message)) {
 
             $donnees = ($_POST["email"]);
             //Création du cookie

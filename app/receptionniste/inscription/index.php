@@ -12,7 +12,7 @@ if (isset($_SESSION['donnees-utilisateur']) && !empty($_SESSION['donnees-utilisa
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 

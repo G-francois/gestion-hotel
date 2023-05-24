@@ -6,7 +6,7 @@ include './app/commum/fonction.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
