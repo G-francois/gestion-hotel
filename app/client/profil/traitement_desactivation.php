@@ -1,8 +1,5 @@
 
 <?php
-session_start();
-
-include './app/commum/fonction.php';
 
 $_SESSION['desactivation-erreurs'] = "";
 

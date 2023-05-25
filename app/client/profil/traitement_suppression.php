@@ -1,8 +1,4 @@
 <?php
-session_start();
-
-include './app/commum/fonction.php';
-
 $_SESSION['suppression-erreurs'] = "";
 
 $_SESSION['donnees-utilisateur'] = [];

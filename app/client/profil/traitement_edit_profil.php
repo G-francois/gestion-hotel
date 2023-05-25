@@ -1,7 +1,4 @@
 <?php
-session_start();
-
-include './app/commum/fonction.php';
 
 $_SESSION['sauvegarder-erreurs'] = "";
 
@@ -19,10 +16,11 @@ if (isset($_POST['sauvegarder'])) {
     if (check_password_exist(($_POST['password']), $donnees[0]['id'])) {
 
         if (isset($_POST['nom']) && !empty($_POST['nom']) && $_POST['nom'] != $donnees[0]['nom']) {
-            $new_data['nom'] = trim(htmlentities($_POST['nom']));
+            $new_data['nom'] = strtoupper(trim(htmlentities($_POST['nom'])));
         } else {
             $new_data['nom'] = $donnees[0]['nom'];
         }
+        
 
         if (isset($_POST['prenom']) && !empty($_POST['prenom']) && $_POST['prenom'] != $donnees[0]['prenom']) {
             $new_data['prenom'] = trim(htmlentities($_POST['prenom']));

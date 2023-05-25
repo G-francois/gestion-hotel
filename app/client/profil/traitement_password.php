@@ -1,9 +1,4 @@
 <?php
-session_start();
-
-include './app/commum/fonction.php';
-
-$_SESSION['changement-erreurs'] = [];
 
 $donnees = [];
 

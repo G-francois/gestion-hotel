@@ -1,9 +1,4 @@
 <?php
-session_start();
-
-include './app/commum/fonction.php';
-
-//die (var_dump($_SESSION['utilisateur_connecter']));
 
 if (isset($_SESSION['utilisateur_connecter']['0']['id']) and !empty($_SESSION['utilisateur_connecter']['0']['id'])) {
 }
@@ -39,7 +34,7 @@ if (check_if_user_conneted()) {
 ?>
 
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="fr">
 
   <head>
 
@@ -531,15 +526,12 @@ if (check_if_user_conneted()) {
                       <label for="Name" class="col-md-4 col-lg-3 col-form-label">Nom</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="nom" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom']) ? 'is-invalid' : '' ?>" id="Name" value="<?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom'] : 'Nom' ?>">
-                        <?php
-                        if (isset($_SESSION['erreurs']['nom'])) {
-                        ?>
-                          <div class="invalid-feedback">
-                            <?= $_SESSION['erreurs']['nom'] ?>
-                          </div>
-                        <?php
-                        }
-                        ?>
+                        
+                        <?php if (isset($erreurs["nom"])) { ?>
+									<span class="text-danger">
+										<?php echo $erreurs["nom"]; ?>
+									</span>
+								<?php } ?>
                       </div>
                     </div>
 

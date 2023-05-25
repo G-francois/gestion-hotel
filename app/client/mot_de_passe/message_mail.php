@@ -1,11 +1,6 @@
 <?php
 
-$url = 'localhost/' . PATH_PROJECT . 'client/modification_mot_passe/index/{id_utilisateur}/{token}';
-
-if (isset($_SESSION['modification_mot_passe']) && !empty($_SESSION['modification_mot_passe'])) {
-    $id_utilisateur = $_SESSION['modification_mot_passe']['id_utilisateur'];
-    $token = $_SESSION['modification_mot_passe']['token'];
-}
+$url = $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["HTTP_HOST"] . PATH_PROJECT . 'client/modification_mot_passe/index/{id_utilisateur}/{token}';
 
 $url = str_replace('{id_utilisateur}', $id_utilisateur, $url);
 

@@ -1,17 +1,9 @@
 <?php
 
 use Random\Engine\Secure;
-
-session_start();
-
-include './app/commum/fonction.php';
-
-$_SESSION['verification-erreurs'] = [];
-
-$_SESSION['donnees-utilisateur'] = [];
-
 $donnees = [];
-
+$message_erreur_global = "";
+$message_success_global = "";
 $erreurs = [];
 
 
@@ -21,58 +13,52 @@ if (isset($_POST["email"]) && !empty($_POST["email"]) && filter_var($_POST["emai
     $erreurs["email"] = "Le champs email est requis. Veuillez le renseigné.";
 }
 
-
 $_SESSION['donnees-utilisateur'] = $donnees;
-
-$_SESSION['validation2'] = "";
-
-$_SESSION['verification'] = "";
+$_SESSION['verification-erreurs'] = $erreurs;
 
 $_SESSION['email-utilisateur'] = $id_utilisateur;
-
-if ((!check_email_exist_in_db($_POST["email"]))) {
-    $erreurs["email"] = "Vérifier l'adresse mail saisie";
-}
 
 if (empty($erreurs)) {
 
     if (check_email_exist_in_db($_POST["email"])) {
-        $_token = uniqid("");
-        $id_utilisateur = select_user_id($donnees['email'])[0]['id'];
+        $token = uniqid("");
+        $id_utilisateur = recuperer_id_utilisateur_par_son_mail($donnees['email']);
 
-        if (insertion_token($id_utilisateur, 'NOUVEAU_MOT_DE_PASSE', $_token)) {
-            $_SESSION['modification_mot_passe'] = [];
-            $_SESSION['modification_mot_passe']['id_utilisateur'] = $id_utilisateur;
-            $_SESSION['modification_mot_passe']['token'] = $_token;
-        }
-
-        $objet = 'Modification de mot de passe';
-        $message = buffer_html_file('..' . PATH_PROJECT . 'app/client/mot_de_passe/message_mail.php');
-        if (email($donnees["email"], $objet, $message)) {
-
-            $donnees = ($_POST["email"]);
-            //Création du cookie
-            setcookie(
-                "mot_passe",
-                json_encode($donnees['email']),
-                [
-                    'expires' => time() + 365 * 24 * 36000,
-                    'path' => '/',
-                    'secure' => 'true',
-                    'httponly' => 'true',
-                ]
-            );
-
-            $_SESSION['validation2'] = "Veuiller bien consulter votre adresse mail pour effectuer la modification ";
-            header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
+        if (!insertion_token($id_utilisateur, 'NOUVEAU_MOT_DE_PASSE', $token)) {
+            $message_erreur_global = "La vérification de l'adresse mail s'est effectué avec succès mais une erreur est survenue lors de la génération de la clé de modification de mot de passe. Veuillez contacter un administrateur.";
         } else {
-            $_SESSION['verification'] = "Oups une erreur s'est produite lors de la réinitialisation";
-            header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
+            $objet = 'Modification de mot de passe';
+            ob_start(); // Démarre la temporisation de sortie
+            include 'app/client/inscription/message_mail.php'; // Inclut le fichier HTML dans le tampon
+            $template_mail = ob_get_contents(); // Récupère le contenu du tampon
+            ob_end_clean(); // Arrête et vide la temporisation de sortie
+
+            if (send_email($donnees["email"], $objet, $template_mail)) {
+                $donnees = ($_POST["email"]);
+                //Création du cookie
+                setcookie(
+                    "mot_passe",
+                    json_encode($donnees['email']),
+                    [
+                        'expires' => time() + 365 * 24 * 36000,
+                        'path' => '/',
+                        'secure' => 'true',
+                        'httponly' => 'true',
+                    ]
+                );
+                $message_success_global = "La vérification de l'adresse mail s'est effectué avec succès. Veuillez consulter votre adresse mail pour mettre un nouveau mot de passe.";
+            } else {
+                $message_erreur_global = "La vérification de l'adresse mail s'est effectué avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";
+            }
         }
+    } else {
+        $message_erreur_global = "Oups ! Une erreur s'est produite lors de la vérification de l'adresse mail de l'utilisateur.";
     }
-} else {
-
-    $_SESSION['verification-erreurs'] = $erreurs;
-
-    header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
+} elseif (!isset($erreurs['email'])) {
+    $message_erreur_global = "Oups ! Une erreur s'est produite lors de la vérification de l'adresse mail de l'utilisateur.";
 }
+
+
+$_SESSION['inscription-message-erreur-global'] = $message_erreur_global;
+$_SESSION['inscription-message-success-global'] = $message_success_global;
+header('location: ' . PATH_PROJECT . 'client/mot_de_passe/index');
