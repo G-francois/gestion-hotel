@@ -50,7 +50,7 @@ $_SESSION['donnees-utilisateur'] = $donnees;
 
 if (empty($erreurs)) {
 
-    if (maj_mot_passe($_SESSION['id_user'], $donnees["mot-passe"])) {
+    if (mise_a_jour_mot_passe($_SESSION['id_user'], $donnees["mot-passe"])) {
         session_destroy();
         header('location:' . PATH_PROJECT . 'client/connexion/index');
     } else {

@@ -10,17 +10,16 @@ $new_data = [];
 
 $erreurs = [];
 
-
 if (isset($_POST['sauvegarder'])) {
 
     if (check_password_exist(($_POST['password']), $donnees[0]['id'])) {
 
         if (isset($_POST['nom']) && !empty($_POST['nom']) && $_POST['nom'] != $donnees[0]['nom']) {
             $new_data['nom'] = strtoupper(trim(htmlentities($_POST['nom'])));
+            $erreurs["nom"] = "Le champ nom ne doit pas être vide. Veuillez le modifier ou le laisser.";
         } else {
             $new_data['nom'] = $donnees[0]['nom'];
         }
-        
 
         if (isset($_POST['prenom']) && !empty($_POST['prenom']) && $_POST['prenom'] != $donnees[0]['prenom']) {
             $new_data['prenom'] = trim(htmlentities($_POST['prenom']));
@@ -40,9 +39,7 @@ if (isset($_POST['sauvegarder'])) {
             $new_data['nom_utilisateur'] = $donnees[0]['nom_utilisateur'];
         }
 
-
-
-        if (maj_nv_info_user(
+        if (mise_a_jour_new_info_user(
             $donnees[0]['id'],
             $new_data['nom'],
             $new_data['prenom'],
@@ -50,7 +47,7 @@ if (isset($_POST['sauvegarder'])) {
             $new_data['nom_utilisateur']
         )) {
 
-            if (recup_maj_nv_info_user($donnees[0]['id'])) { 
+            if (recup_mise_a_jour_new_info_user($donnees[0]['id'])) { 
                 $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
                 header('location:' . PATH_PROJECT . 'client/profil/profile');
             } else {

@@ -112,7 +112,7 @@
                     </li>
 
                     <?php
-                    if (!check_if_user_conneted()) {
+                    if (!check_if_user_connected()) {
                     ?>
                         <li>
                             <a href="<?= PATH_PROJECT ?>client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
@@ -126,7 +126,7 @@
                     ?>
 
                     <?php
-                    if (check_if_user_conneted()) {
+                    if (check_if_user_connected()) {
                     ?>
 
                         <!-- Nav Item - User Information -->

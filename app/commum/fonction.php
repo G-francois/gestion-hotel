@@ -23,13 +23,14 @@ function connect_db()
 	return $db;
 }
 
+
 /**
  * Cette fonction permet de verifier si un utilisateur dans la base de donnée ne possède pas cette adresse mail.
  * @param string $email L'email a vérifié.
  *
  * @return bool $check
  */
-function check_email_exist_in_db(string $email)
+function check_email_exist_in_db(string $email): bool
 {
 
 	$check = false;
@@ -65,7 +66,7 @@ function check_email_exist_in_db(string $email)
  *
  * @return bool $check
  */
-function check_user_name_exist_in_db(string $nom_utilisateur)
+function check_user_name_exist_in_db(string $nom_utilisateur): bool
 {
 
 	$check = false;
@@ -94,13 +95,14 @@ function check_user_name_exist_in_db(string $nom_utilisateur)
 	return $check;
 }
 
+
 /**
  * Cette fonction permet de verifier si un utilisateur dans la base de donnée ne possède pas cette contact.
- * @param string $telephone Le téléphone a vérifié.
+ * @param int $telephone Le téléphone a vérifié.
  *
  * @return bool $check
  */
-function check_telephone_exist_in_db(string $telephone)
+function check_telephone_exist_in_db(int $telephone): bool
 {
 
 	$check = false;
@@ -128,6 +130,7 @@ function check_telephone_exist_in_db(string $telephone)
 
 	return $check;
 }
+
 
 /**
  * Cette fonction permet d'envoyer un mail a un destinataire.
@@ -183,9 +186,15 @@ function send_email(string $destination, string $subject, string $body): bool
 	}
 }
 
-/** Exemple de fonction pour récupérer du html dans le buffer 
- * 
- * */ 
+
+/**
+ * Cette fonction permet de récupérer du html dans le buffer 
+ *
+ * @param  string $filename Le chemin ou le nom du fichier html à insérer
+ * @param  int $id_utilisateur L'id de l'utilisateur
+ * @param  string $token Le token générer
+ * @return void
+ */
 function buffer_html_file($filename, $id_utilisateur, $token)
 {
 	ob_start(); // Démarre la temporisation de sortie
@@ -198,7 +207,15 @@ function buffer_html_file($filename, $id_utilisateur, $token)
 	return $html; // Retourne le contenu du fichier HTML
 }
 
-//Exemple de fonction pour exécuter la requête INSERT INTO token
+
+/**
+ * Cette fonction permet d'inserer un token grâce à l'id de l'utilisateur dans la table token
+ *
+ * @param  int $user_id L'id de l'utilisateur
+ * @param  string $type Le type de token
+ * @param  string $token Le token générer
+ * @return bool 
+ */
 function insertion_token(int $user_id, string $type, string $token): bool
 {
 
@@ -229,8 +246,14 @@ function insertion_token(int $user_id, string $type, string $token): bool
 	return $insertion_token;
 }
 
-// Récupérer le token
-function recuperer_token(string $user_id)
+
+/**
+ *  Cette fonction permet de recupérer le token grâce à l'id de l'utilisateur dans la table token
+ *
+ * @param  int $user_id
+ * @return void
+ */
+function recuperer_token(int $user_id): array
 {
 
 	$token = [];
@@ -260,6 +283,7 @@ function recuperer_token(string $user_id)
 
 	return $token;
 }
+
 
 /**
  * Cette fonction permet de récupérer l'id de l'utilisateur grace a son adresse mail.
@@ -335,7 +359,13 @@ function check_token_exist(int $user_id, string $token, string $type, int $est_a
 	return $check;
 }
 
-// Exemple de fonction pour exécuter la requête UPDATE TOKEN
+
+/**
+ * Cette fonction permet de mettre à jour la table est_supprimer du token à 1
+ *
+ * @param  mixed $id_utilisateur L'id de l'utilisateur.
+ * @return bool
+ */
 function suppression_logique_token(int $id_utilisateur): bool
 {
 	$suppression_logique_token = false;
@@ -365,7 +395,13 @@ function suppression_logique_token(int $id_utilisateur): bool
 	return $suppression_logique_token;
 }
 
-// Exemple de fonction pour exécuter la requête UPDATE est_actif UTILISATEUR
+
+/**
+ * Cette fonction permet de mettre à jour la table est_actif de l'utilisateur à 1
+ *
+ * @param  mixed $id_utilisateur L'id de l'utilisateur.
+ * @return bool
+ */
 function activation_compte_utilisateur(int $id_utilisateur): bool
 {
 
@@ -396,25 +432,24 @@ function activation_compte_utilisateur(int $id_utilisateur): bool
 
 
 /**
- * Cette fonction permet de verifier si un utilisateur (email + mot de passe) existe dans la base de donnée.
- * Si oui elle retourne un tableau contenant les informations de l'utilisateur.
- * Sinon elle retourne un tableau vide.
+ * Cette fonction permet de verifier si un utilisateur (email ou nom utilisateur + mot de passe) existe dans la base de donnée.
  *
- * @param string $email L'email.
- * @param string $password Le mot de passe.
- *
+ * @param  string $email_user_name L'email ou nom utilisateur 
+ * @param  string $password Le mot de passe
+ * @param  string $profil Le profile de l'utilisateur qui se connecte
+ * @param  int $est_actif Le compte de l'utilisateur est actif 
  * @return array $user Les informations de l'utilisateur.
  */
-function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif, int $est_supprimer): bool
+function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif = 1): array
 {
-	$user = false;
+
+	$user = [];
 
 	$db = connect_db();
 
-
 	if (is_object($db)) {
 
-		$requette = "SELECT id, nom, prenom, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
+		$requette = "SELECT id, nom, prenom, sexe, email, nom_utilisateur, avatar, profil, telephone, adresse, date_naissance FROM utilisateur  (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif ";
 
 		$verifier_nom_utilisateur = $db->prepare($requette);
 
@@ -423,27 +458,25 @@ function check_if_user_exist(string $email_user_name, string $password, string $
 			'nom_utilisateur' => $email_user_name,
 			'mot_passe' => sha1($password),
 			'profil' => $profil,
-			'est_actif' => $est_actif,
-			'est_supprimer' => $est_supprimer,
+			'est_actif' => $est_actif
 		]);
 
 		if ($resultat) {
-
-			$utilisateur = $verifier_nom_utilisateur->fetchAll(PDO::FETCH_ASSOC);
-
-			$_SESSION['utilisateur_connecter'] = $utilisateur;
-
-			$user = (isset($utilisateur) && !empty($utilisateur) && is_array($utilisateur)) ? true : false;
+			$user = $verifier_nom_utilisateur->fetch(PDO::FETCH_ASSOC);
 		}
 	}
-
 	return $user;
 }
 
+
 /**
  * Cette fonction permet de verifier si le mot de passe de l'utilisateur existe dans la base de donnée.
+ *
+ * @param  int $id L'id de l'utilisateur.
+ * @param  string $password Le mot de passe
+ * @return bool
  */
-function check_password_exist(string $password, int $id)
+function check_password_exist(string $password, int $id): bool
 {
 	$users = false;
 
@@ -455,7 +488,7 @@ function check_password_exist(string $password, int $id)
 
 		$requette->execute(array(
 			'mot_passe' => sha1($password),
-			'id' => $id
+			'id' => $id,
 		));
 
 		$users = $requette->fetch();
@@ -469,23 +502,25 @@ function check_password_exist(string $password, int $id)
 }
 
 
-// Exemple de fonction pour un utilisateur déjà connecté
-function check_if_user_conneted()
+/**
+ * Cette fonction permet de savoir si un utilisateur déjà connecté ou pas
+ *
+ * @return bool
+ */
+function check_if_user_connected(): bool
 {
-
-	$check = false;
-
-
-	if (isset($_SESSION['utilisateur_connecter']) && !empty($_SESSION['utilisateur_connecter'])) {
-
-		$check = true;
-	}
-
-	return $check;
+	return !empty($_SESSION["utilisateur_connecter"]);
 }
 
-// Exemple de fonction pour exécuter la requête UPDATE mot de passe UTILISATEUR
-function maj_mot_passe(int $id, string $password): bool
+
+/**
+ * Cette fonction permet d'effectuer la mise à jour du mot de passe de l'utilisateur
+ *
+ * @param  int $id L'id de l'utilisateur.
+ * @param  string $password Le mot de passe
+ * @return bool
+ */
+function mise_a_jour_mot_passe(int $id, string $password): bool
 {
 
 	$maj3 = false;
@@ -516,11 +551,17 @@ function maj_mot_passe(int $id, string $password): bool
 }
 
 
-// Exemple de fonction pour exécuter la requête UPDATE avatar UTILISATEUR
-function maj_avatar(int $id, string $avatar): bool
+/**
+ * Cette fonction permet d'effectuer la mise à jour de l'avatar de l'utilisateur
+ *
+ * @param  int $id L'id de l'utilisateur
+ * @param  string $avatar La photo de profil
+ * @return bool
+ */
+function mise_a_jour_avatar(int $id, string $avatar): bool
 {
 
-	$maj_avatar = false;
+	$mise_a_jour_avatar = false;
 
 	$date = date("Y-m-d H:i:s");
 
@@ -542,16 +583,25 @@ function maj_avatar(int $id, string $avatar): bool
 
 		if ($request_execution) {
 
-			$maj_avatar = true;
+			$mise_a_jour_avatar = true;
 		}
 	}
 
-	return $maj_avatar;
+	return $mise_a_jour_avatar;
 }
 
 
-// Exemple de fonction pour exécuter la requête UPDATE des nouvelles infos UTILISATEUR
-function maj_nv_info_user(int $id, string $nom, string $prenom, string $telephone, string $nom_utilisateur): bool
+/**
+ * Cette fonction permet d'effectuer la mise à jour des nouvelles infos UTILISATEUR
+ *
+ * @param  int $id
+ * @param  string $nom
+ * @param  string $prenom
+ * @param  int $telephone
+ * @param  string $nom_utilisateur
+ * @return bool
+ */
+function mise_a_jour_new_info_user(int $id, string $nom, string $prenom, int $telephone, string $nom_utilisateur): bool
 {
 
 	$modifier_profil = false;
@@ -585,8 +635,13 @@ function maj_nv_info_user(int $id, string $nom, string $prenom, string $telephon
 }
 
 
-// Exemple de fonction pour recuperer les nouvelles infos UTILISATEUR
-function recup_maj_nv_info_user($id): bool
+/**
+ *  Cette fonction permet de recuperer les nouvelles infos UTILISATEUR
+ *
+ * @param  int $id
+ * @return bool
+ */
+function recup_mise_a_jour_new_info_user(int $id): bool
 {
 
 	$recup = false;
@@ -602,6 +657,7 @@ function recup_maj_nv_info_user($id): bool
 		));
 
 		if ($resultat) {
+
 			$donnees = [];
 
 			$donnees = $request_recupere->fetchAll(PDO::FETCH_ASSOC);
@@ -616,7 +672,12 @@ function recup_maj_nv_info_user($id): bool
 }
 
 
-// Exemple de fonction pour désactiver un UTILISATEUR
+/**
+ * Cette fonction permet de désactiver un UTILISATEUR
+ *
+ * @param  int $id
+ * @return bool
+ */
 function desactiver_utilisateur(int $id): bool
 {
 
@@ -647,7 +708,13 @@ function desactiver_utilisateur(int $id): bool
 	return $profile_active;
 }
 
-// Exemple de fonction pour supprimer un UTILISATEUR
+
+/**
+ *  Cette fonction permet de supprimer un UTILISATEUR
+ *
+ * @param  int $id
+ * @return bool
+ */
 function supprimer_utilisateur(int $id): bool
 {
 
@@ -679,11 +746,12 @@ function supprimer_utilisateur(int $id): bool
 	return $profile_supprimer;
 }
 
+
 /** Cette fonction permet d'inserer un utilisateur de profile CLIENT
  * @param int $id
  * @return bool
  */
-function enregistrer_utilisateur(string $nom, string $prenom, string $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
+function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
 {
 	$enregistrer_utilisateur = false;
 
@@ -709,9 +777,9 @@ function enregistrer_utilisateur(string $nom, string $prenom, string $telephone,
 		]);
 
 		$enregistrer_utilisateur = $resultat;
-
 	}
 
 	return $enregistrer_utilisateur;
-
 }
+
+

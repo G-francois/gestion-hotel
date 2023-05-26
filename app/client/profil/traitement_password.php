@@ -53,7 +53,7 @@ if (isset($_POST['change_password'])) {
 
 if (empty($erreurs)) {
 
-    if (maj_mot_passe($_SESSION['utilisateur_connecter'][0]['id'], $donnees["newpassword"])) {
+    if (mise_a_jour_mot_passe($_SESSION['utilisateur_connecter'][0]['id'], $donnees["newpassword"])) {
         session_destroy();
         header('location:' . PATH_PROJECT . 'client/connexion/index');
     } else {

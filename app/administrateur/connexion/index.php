@@ -17,7 +17,7 @@ if (isset($_COOKIE["donnees-utilisateur"]) && !empty($_COOKIE["donnees-utilisate
 ?>
 
 <?php
-if (!check_if_user_conneted()) {
+if (!check_if_user_connected()) {
 ?>
 
     <!DOCTYPE html>

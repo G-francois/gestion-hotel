@@ -14,9 +14,9 @@ if (isset($_POST['supprimer_photo'])) {
 
     if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter'][0]['id'])) {
 
-        if (maj_avatar($_SESSION['utilisateur_connecter'][0]['id'], 'no_image')) {
+        if (mise_a_jour_avatar($_SESSION['utilisateur_connecter'][0]['id'], 'no_image')) {
 
-            if (recup_maj_nv_info_user($_SESSION['utilisateur_connecter'][0]['id'])) {
+            if (recup_mise_a_jour_new_info_user($_SESSION['utilisateur_connecter'][0]['id'])) {
             }
         }
         

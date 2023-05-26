@@ -1,5 +1,5 @@
 <?php
-if (!check_if_user_conneted()) {
+if (!check_if_user_connected()) {
     header('location: ' . PATH_PROJECT . 'client/conexion/index');
     exit;
 }

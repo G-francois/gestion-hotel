@@ -24,7 +24,7 @@ if (isset($_SESSION['enregistrer-erreurs']) && !empty($_SESSION['enregistrer-err
     $erreurs = $_SESSION['enregistrer-erreurs'];
 }
 
-if (check_if_user_conneted()) {
+if (check_if_user_connected()) {
     header('location: ' . PATH_PROJECT . 'client/dashboard/index');
     exit;
 }

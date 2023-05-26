@@ -39,9 +39,9 @@ if (isset($_POST['change_photo'])) {
 
                     $profiledonnees["image"] = PATH_PROJECT . $dossierUtilisateur . basename($_FILES['image']['name']);
 
-                    if (maj_avatar($_SESSION['utilisateur_connecter'][0]['id'], $profiledonnees["image"])) {
+                    if (mise_a_jour_avatar($_SESSION['utilisateur_connecter'][0]['id'], $profiledonnees["image"])) {
 
-                        if (recup_maj_nv_info_user($_SESSION['utilisateur_connecter'][0]['id'])) {
+                        if (recup_mise_a_jour_new_info_user($_SESSION['utilisateur_connecter'][0]['id'])) {
 
                             header('location: ' . PATH_PROJECT . 'client/profil/profile');
                         }

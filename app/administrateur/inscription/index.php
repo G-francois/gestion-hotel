@@ -13,7 +13,7 @@ if (isset($_SESSION['donnees-utilisateur']) && !empty($_SESSION['donnees-utilisa
 ?>
 
 <?php
-if (!check_if_user_conneted()) {
+if (!check_if_user_connected()) {
 ?>
 
 
