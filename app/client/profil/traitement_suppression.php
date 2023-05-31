@@ -9,8 +9,8 @@ $erreurs = [];
 
 if (isset($_POST['suppression'])) {
 
-    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter'][0]['id'])) {
-        if (supprimer_utilisateur($_SESSION['utilisateur_connecter'][0]['id'])) {
+    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
+        if (supprimer_utilisateur($_SESSION['utilisateur_connecter_client']['id'])) {
             session_destroy();
             header('location:' . PATH_PROJECT . 'client/site/home');
         } else {

@@ -1,8 +1,8 @@
 <?php
-include './app/commum/header_icm.php'
+include './app/commum/header_client_icm.php'
 ?>
 
-<div class="container" style="margin-top: 120px;">
+<div class="container" style="margin-top: 70px;">
     <div class="row justify-content-center;" style="color:black; justify-content:center;">
 
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -98,5 +98,9 @@ include './app/commum/header_icm.php'
 </div>
 
 <?php
-include './app/commum/footer_icm.php'
+session_destroy();
+?>
+
+<?php
+include './app/commum/footer_client_icm.php'
 ?>

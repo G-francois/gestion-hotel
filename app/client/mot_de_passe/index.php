@@ -1,5 +1,5 @@
 <?php
-include './app/commum/header_icm.php'
+include './app/commum/header_client_icm.php'
 ?>
 
 <div class="container" style="margin-top: 145px;">
@@ -9,7 +9,7 @@ include './app/commum/header_icm.php'
 
         <div class="col-xl-10 col-lg-12 col-md-9">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg ">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
@@ -44,24 +44,18 @@ include './app/commum/header_icm.php'
 
 
                                 <form action="<?= PATH_PROJECT ?>client/mot_de_passe/traitement" method="post" class="user">
-                                    <!-- Le champs email -->
+                                    <!-- Le champ email -->
                                     <div class="form-group">
-                                        <label for="inscription-email" style="color:black;">Email:
+                                        <label for="inscription-email" style="color:black;">
+                                            Adresse mail:
                                             <span class="text-danger">(*)</span>
                                         </label>
-                                        <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse email" value="<?php if (isset($donnees["email"]) && !empty($donnees["email"])) {
-                                                                                                                                                                                    echo $donnees["email"];
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    echo '';
-                                                                                                                                                                                } ?>">
-                                        <span class="text-danger">
-                                            <?php
-                                            if (isset($erreurs["email"]) && !empty($erreurs["email"])) {
-                                                echo $erreurs["email"];
-                                            }
-                                            ?>
-                                        </span>
-
+                                        <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+                                        <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
+                                            <span class="text-danger">
+                                                <?php echo $erreurs["email"]; ?>
+                                            </span>
+                                        <?php } ?>
                                     </div>
 
 
@@ -89,5 +83,9 @@ include './app/commum/header_icm.php'
 </div>
 
 <?php
-include './app/commum/footer_icm.php';
+session_destroy();
+?>
+
+<?php
+include './app/commum/footer_client_icm.php';
 ?>

@@ -102,7 +102,7 @@ function check_user_name_exist_in_db(string $nom_utilisateur): bool
  *
  * @return bool $check
  */
-function check_telephone_exist_in_db(int $telephone): bool
+function check_telephone_exist_in_db(string $telephone): bool
 {
 
 	$check = false;
@@ -286,7 +286,7 @@ function recuperer_token(int $user_id): array
 
 
 /**
- * Cette fonction permet de récupérer l'id de l'utilisateur grace a son adresse mail.
+ * Cette fonction permet de récupérer l'id de l'utilisateur grâce a son adresse mail.
  *
  * @param string $email L'email de l'utilisateur.
  * @return int $user_id L'id de l'utilisateur.
@@ -431,39 +431,39 @@ function activation_compte_utilisateur(int $id_utilisateur): bool
 }
 
 
+
 /**
  * Cette fonction permet de verifier si un utilisateur (email ou nom utilisateur + mot de passe) existe dans la base de donnée.
  *
- * @param  string $email_user_name L'email ou nom utilisateur 
- * @param  string $password Le mot de passe
- * @param  string $profil Le profile de l'utilisateur qui se connecte
+ * @param  string $email_user_name L'email ou nom utilisateur
+ * @param  string $password Le mot de passe de l'utilisateur
+ * @param  string $profil Le profil de l'utilisateur.
  * @param  int $est_actif Le compte de l'utilisateur est actif 
- * @return array $user Les informations de l'utilisateur.
+ * @param  int $est_supprimer Le compte de l'utilisateur est supprimer
+ * @return array $user Les informations de l'utilisateur
  */
-function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif = 1): array
+function check_if_user_exist(string $email_user_name, string $password, string $profil, int $est_actif = 1, int $est_supprimer = 0)
 {
 
 	$user = [];
 
 	$db = connect_db();
 
-	if (is_object($db)) {
+	$requette = "SELECT id, nom, prenom, sexe, email, telephone, nom_utilisateur, avatar, profil, mot_passe FROM utilisateur WHERE (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif and est_supprimer= :est_supprimer";
 
-		$requette = "SELECT id, nom, prenom, sexe, email, nom_utilisateur, avatar, profil, telephone, adresse, date_naissance FROM utilisateur  (email =:email_user_name OR nom_utilisateur =:email_user_name) and profil = :profil and mot_passe = :mot_passe and est_actif= :est_actif ";
+	$verifier_nom_utilisateur = $db->prepare($requette);
 
-		$verifier_nom_utilisateur = $db->prepare($requette);
+	$resultat = $verifier_nom_utilisateur->execute([
+		'email_user_name' => $email_user_name,
+		'nom_utilisateur' => $email_user_name,
+		'mot_passe' => sha1($password),
+		'profil' => $profil,
+		'est_actif' => $est_actif,
+		'est_supprimer' => $est_supprimer
+	]);
 
-		$resultat = $verifier_nom_utilisateur->execute([
-			'email_user_name' => $email_user_name,
-			'nom_utilisateur' => $email_user_name,
-			'mot_passe' => sha1($password),
-			'profil' => $profil,
-			'est_actif' => $est_actif
-		]);
-
-		if ($resultat) {
-			$user = $verifier_nom_utilisateur->fetch(PDO::FETCH_ASSOC);
-		}
+	if ($resultat) {
+		$user = $verifier_nom_utilisateur->fetch(PDO::FETCH_ASSOC);
 	}
 	return $user;
 }
@@ -503,13 +503,23 @@ function check_password_exist(string $password, int $id): bool
 
 
 /**
- * Cette fonction permet de savoir si un utilisateur déjà connecté ou pas
+ * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
  *
  * @return bool
  */
-function check_if_user_connected(): bool
+function check_if_user_connected_admin(): bool
 {
-	return !empty($_SESSION["utilisateur_connecter"]);
+	return !empty($_SESSION['utilisateur_connecter_admin']);
+}
+
+/**
+ * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
+ *
+ * @return bool
+ */
+function check_if_user_connected_client(): bool
+{
+	return !empty($_SESSION['utilisateur_connecter_client']);
 }
 
 
@@ -639,32 +649,26 @@ function mise_a_jour_new_info_user(int $id, string $nom, string $prenom, int $te
  *  Cette fonction permet de recuperer les nouvelles infos UTILISATEUR
  *
  * @param  int $id
- * @return bool
+ * @return array
  */
-function recup_mise_a_jour_new_info_user(int $id): bool
+
+function recup_mise_a_jour_new_info_user($id): array
 {
 
-	$recup = false;
+	$recup = [];
 
 	$db = connect_db();
 
 	if (is_object($db)) {
 
-		$request_recupere = $db->prepare('SELECT  id, nom, prenom, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
+		$request_recupere = $db->prepare('SELECT  id, nom, prenom, sexe, email, telephone, nom_utilisateur, avatar, profil FROM utilisateur WHERE id= :id');
 
 		$resultat = $request_recupere->execute(array(
 			'id' => $id,
 		));
 
 		if ($resultat) {
-
-			$donnees = [];
-
-			$donnees = $request_recupere->fetchAll(PDO::FETCH_ASSOC);
-
-			$_SESSION['utilisateur_connecter'] = $donnees;
-
-			$recup = true;
+			$recup = $request_recupere->fetch(PDO::FETCH_ASSOC);
 		}
 	}
 
@@ -783,3 +787,38 @@ function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, st
 }
 
 
+/** Cette fonction permet d'inserer un utilisateur de profile ADMINISTRATEUR
+ * @param int $id
+ * @return bool
+ */
+function enregistrer_utilisateur_admin(string $nom, string $prenom, string $sexe, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "ADMINISTRATEUR"): bool
+{
+	$enregistrer_utilisateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		// Ecriture de la requête
+		$requette = 'INSERT INTO utilisateur (nom, prenom, sexe, telephone, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :sexe, :telephone, :email, :nom_utilisateur, :profil, :mot_passe)';
+
+		// Préparation
+		$inserer_utilisateur = $db->prepare($requette);
+
+		// Exécution ! La recette est maintenant en base de données
+		$resultat = $inserer_utilisateur->execute([
+			'nom' => $nom,
+			'prenom' => $prenom,
+			'sexe' => $sexe,
+			'telephone' => $telephone,
+			'email' => $email,
+			'nom_utilisateur' => $nom_utilisateur,
+			'profil' => $profil,
+			'mot_passe' => sha1($mot_passe)
+		]);
+
+		$enregistrer_utilisateur = $resultat;
+	}
+
+	return $enregistrer_utilisateur;
+}

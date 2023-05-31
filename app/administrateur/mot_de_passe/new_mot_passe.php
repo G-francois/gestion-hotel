@@ -1,5 +1,5 @@
 <?php
-include './app/commum/header_client_icm.php';
+include './app/commum/header_admin_icm.php'
 ?>
 
 <div class="container" style="margin-top: 145px;">
@@ -7,38 +7,29 @@ include './app/commum/header_client_icm.php';
 
         <div class="col-xl-10 col-lg-12 col-md-9">
 
-            <div class="card o-hidden border-0 shadow-lg ">
+            <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image1"></div>
                         <div class="col-lg-6">
-                            <?php
-                            if (isset($_SESSION['validation-compte-message-success']) && !empty($_SESSION['validation-compte-message-success'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-                                    <?= $_SESSION['validation-compte-message-success'] ?>
-                                </div>
-                            <?php
-                            }
-
-                            if (isset($_SESSION['validation-compte-message-erreur']) && !empty($_SESSION['validation-compte-message-erreur'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; text-align:center; background-color: red; border-color: snow;">
-                                    <?= $_SESSION['validation-compte-message-erreur'] ?>
-                                </div>
-                            <?php
-                            }
-                            ?>
-
                             <div class="p-5">
+                            <?php
+                                if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                                        <?= $_SESSION['inscription-message-success-global'] ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
 
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Nouveau mot de passe</h1>
                                 </div>
 
 
-                                <form action="<?= PATH_PROJECT ?>client/mot_de_passe/traitement_nv_mot_passe" method="post" class="user">
+                                <form action="<?= PATH_PROJECT ?>administrateur/mot_de_passe/traitement_new_mot_passe" method="post" class="user" novalidate>
 
                                     <!-- Le champ mot de passe -->
                                     <div class="form-group">
@@ -53,6 +44,7 @@ include './app/commum/header_client_icm.php';
                                             </span>
                                         <?php } ?>
                                     </div>
+
 
                                     <!-- Le champ retapez mot de passe -->
                                     <div class="form-group">
@@ -72,10 +64,10 @@ include './app/commum/header_client_icm.php';
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>client/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>administrateur/connexion/index">Vous avez déjà un compte ? Connectez-vous!</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>client/inscription/index">Créez un compte !</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>administrateur/inscription/index">Créez un compte !</a>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +80,8 @@ include './app/commum/header_client_icm.php';
     </div>
 </div>
 
-
 <?php
-include './app/commum/footer_icm.php';
+unset($_SESSION['inscription-message-success-global'], $_SESSION['enregistrer-erreurs']);
+
+include './app/commum/footer_client_icm.php'
 ?>

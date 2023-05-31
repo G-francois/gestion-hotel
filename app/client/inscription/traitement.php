@@ -5,7 +5,7 @@ $message_success_global = "";
 $erreurs = [];
 
 if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
-	$nom = trim(htmlentities($_POST["nom"]));
+	$nom = htmlentities($_POST["nom"]);
 	$pattern = '/^[A-Z]+$/';
 	/*Dans ce code, j'ai ajouté une nouvelle validation pour le champ "nom". J'ai défini le pattern /^[A-Z]+$/
 	 qui vérifie que la chaîne $nom contient uniquement des lettres majuscules. Ensuite, j'ai utilisé la fonction
@@ -22,30 +22,9 @@ if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
 }
 
 if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
-	$prenom = (htmlentities($_POST["prenom"]));
-	$pattern = '/^[A-Za-zÀ-ÿ\'\- ]+$/';
-
-	/* Dans ce code, j'ai ajouté une nouvelle validation pour le champ "Prénoms". J'ai défini le
-	pattern /^[A-Za-zÀ-ÿ\'\- ]+$/ qui vérifie que la chaîne $prenom respecte les
-	critères suivants :
-
-	[A-Za-zÀ-ÿ\'\- ] correspond à une classe de caractères qui accepte :
-	Les lettres de A à Z en majuscules (A-Z).
-	Les lettres de a à z en minuscules (a-z).
-	Les lettres accentuées (par exemple, À, É, etc.) et autres caractères spéciaux qui peuvent apparaître dans les prénoms (À-ÿ).
-	L'apostrophe (') et le tiret (-).
-	L'espace ( ).
-	Ensuite, j'ai utilisé la fonction preg_match() pour valider si le prenom correspond au pattern. Si c'est le cas, le prenom est ajouté 
-	aux données ($donnees["prenom"]). Sinon, un message d'erreur approprié est stocké dans le tableau $erreurs["prenom"].
-	*/
-
-	if (preg_match($pattern, $prenom)) {
-		$donnees["prenom"] = ucfirst($prenom);
-	} else {
-		$erreurs["prenom"] = "Le prénom n'est pas valide. Veuillez utiliser des lettres, des apostrophes, des tirets et des espaces.";
-	}
+    $donnees["prenom"] = $_POST["prenom"];
 } else {
-	$erreurs["prenom"] = "Le champ prénom est requis. Veuillez le renseigner.";
+    $erreurs["prenom"] = "Le champs prénom est requis. Veuillez le renseigné.";
 }
 
 if (isset($_POST["telephone"]) && !empty($_POST["telephone"])) {
@@ -77,20 +56,9 @@ if (isset($_POST["email"]) && !empty($_POST["email"])) {
 }
 
 if (isset($_POST["nom-utilisateur"]) && !empty($_POST["nom-utilisateur"])) {
-	$username = trim(htmlentities($_POST["nom-utilisateur"]));
-	$pattern = '/^[a-zA-Z0-9_-]+$/';
-	/*Dans ce code, j'ai ajouté une nouvelle validation pour le champ "nom d'utilisateur". J'ai défini le pattern /^[a-zA-Z0-9_-]+$/
-	qui vérifie que la chaîne $username ne contient que des lettres minuscules, des chiffres, des tirets et des soulignements. Ensuite,
-	j'ai utilisé la fonction preg_match() pour valider si le nom d'utilisateur correspond au pattern. Si c'est le cas, le nom d'utilisateur
-	est ajouté aux données ($donnees["username"]). Sinon, un message d'erreur approprié est stocké dans le tableau $erreurs["username"].
-	*/
-	if (preg_match($pattern, $username)) {
-		$donnees["nom-utilisateur"] = $username;
-	} else {
-		$erreurs["nom-utilisateur"] = "Le nom d'utilisateur ne peut contenir que des lettres minuscules, des chiffres, des tirets et des soulignements.";
-	}
+    $donnees["nom-utilisateur"] = $_POST["nom-utilisateur"];
 } else {
-	$erreurs["nom-utilisateur"] = "Le champ nom d'utilisateur est requis. Veuillez le renseigner.";
+    $erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigné.";
 }
 
 if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {

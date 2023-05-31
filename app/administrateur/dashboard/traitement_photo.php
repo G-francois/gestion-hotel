@@ -4,15 +4,11 @@ $_SESSION['photo-erreurs'] = "";
 
 $_SESSION['donnees-utilisateur'] = [];
 
-$donnees = $_SESSION['utilisateur_connecter_client'];
-
 $donnees = [];
 
 $erreurs = [];
 
-$new_data = [];
-
-$idUtilisateur = $_SESSION['utilisateur_connecter_client']['nom_utilisateur'];
+$idUtilisateur = $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'];
 
 $dossierImage = "public/images/";
 
@@ -28,11 +24,9 @@ if (!is_dir($dossierUtilisateur)) {
     mkdir($dossierUtilisateur); //Crée le dossier de l'utilisateur dans "upload"
 }
 
-$_SESSION['donnees-utilisateur'] = $new_data;
-
 if (isset($_POST['change_photo'])) {
 
-    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
+    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_admin']['id'])) {
 
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
 
@@ -48,39 +42,43 @@ if (isset($_POST['change_photo'])) {
 
                 if (in_array(strtolower($file_ext), $allowed_ext)) {
 
+                    if (!is_dir($dossierUtilisateur)) {
+                        //création du dossier image avec id de l'utilisateur
+                        mkdir($dossierUtilisateur);
+                    }
+
                     move_uploaded_file($_FILES['image']['tmp_name'], $dossierUtilisateur . basename($_FILES['image']['name']));
 
                     $profiledonnees["image"] = PATH_PROJECT . $dossierUtilisateur . basename($_FILES['image']['name']);
 
-                    if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_client']['id'], $profiledonnees["image"])) {
+                    if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_admin']['id'], $profiledonnees["image"])) {
 
-                        $new_user_data = recup_mise_a_jour_new_info_user( $_SESSION['utilisateur_connecter_client']['id']);
+                        $new_user_data = recup_mise_a_jour_new_info_user( $_SESSION['utilisateur_connecter_admin']['id']);
 
                         if (!empty($new_user_data)) {
 
-                            $_SESSION['utilisateur_connecter_client'] = $new_user_data;
-        
-                            header('location: ' . PATH_PROJECT . 'client/profil/profile');
+                            $_SESSION['utilisateur_connecter_admin'] = $new_user_data;
+
+                            header('location: ' . PATH_PROJECT . 'administrateur/dashboard/profil');
                         }
                     } else {
 
                         $_SESSION['photo-erreurs'] = "La mise à jour de l'image à echouer.";
-                        header('location:' . PATH_PROJECT . 'client/profil/profile');
                     }
                 } else {
                     $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
-                    header('location:' . PATH_PROJECT . 'client/profil/profile');
                 }
             } else {
                 $_SESSION['photo-erreurs'] = "Fichier trop lourd. Poids maximum autorisé : 3mo";
-                header('location:' . PATH_PROJECT . 'client/profil/profile');
             }
         } else {
 
-            $profiledonnees["image"] = $donnees["image_profil"];
+            $profiledonnees["image"] = $donnees[0]["image_profil"];
         }
     } else {
         $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
-        header('location:' . PATH_PROJECT . 'client/profil/profile');
+        
     }
 }
+
+header('location:' . PATH_PROJECT . 'administrateur/dashboard/profil');

@@ -4,12 +4,11 @@ $_SESSION['sauvegarder-erreurs'] = "";
 
 $_SESSION['donnees-utilisateur'] = [];
 
-$donnees = $_SESSION['utilisateur_connecter_client'];
+$donnees = $_SESSION['utilisateur_connecter_admin'];
 
 $new_data = [];
 
 $erreurs = [];
-
 
 if (isset($_POST['sauvegarder'])) {
 
@@ -35,6 +34,7 @@ if (isset($_POST['sauvegarder'])) {
             }
         }
 
+
         if (isset($_POST['telephone']) && !empty($_POST['telephone'])) {
             $telephone = trim(htmlentities($_POST['telephone']));
             if (strlen($telephone) == 8 && ctype_digit($telephone)) {
@@ -49,7 +49,7 @@ if (isset($_POST['sauvegarder'])) {
                 $erreurs["telephone"] = "Le champ téléphone doit contenir 8 chiffres.";
             }
         } else {
-            $erreurs["telephone"] = "Le champ téléphone ne doit pas être vide.";
+            $erreurs["telephone"] = "Le champ téléphone est vide.";
         }
 
         if (isset($_POST['nom_utilisateur']) && !empty($_POST['nom_utilisateur']) && $_POST['nom_utilisateur'] != $donnees['nom_utilisateur']) {
@@ -64,9 +64,7 @@ if (isset($_POST['sauvegarder'])) {
 
         $_SESSION['donnees-utilisateur'] = $new_data;
 
-
         if (empty($erreurs)) {
-
             if (mise_a_jour_new_info_user(
                 $donnees['id'],
                 $new_data['nom'],
@@ -77,9 +75,10 @@ if (isset($_POST['sauvegarder'])) {
                 $new_user_data = recup_mise_a_jour_new_info_user($donnees['id']);
 
                 if (!empty($new_user_data)) {
-                    $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
-                    $_SESSION['utilisateur_connecter_client'] = $new_user_data;
 
+                    $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
+
+                    $_SESSION['utilisateur_connecter_admin'] = $new_user_data;
                 } else {
                     $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Veuiller réessayez.";
                 }
@@ -97,4 +96,4 @@ if (isset($_POST['sauvegarder'])) {
     $_SESSION['sauvegarder-erreurs'] = "Veuiller appuyer sur le boutton sauvegarder.";
 }
 
-header('location:' . PATH_PROJECT . 'client/profil/profile');
+header('location:' . PATH_PROJECT . 'administrateur/dashboard/profil');

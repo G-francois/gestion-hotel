@@ -1,7 +1,4 @@
-<?php
-session_destroy();
 
-?>
 
 <!-- Template Main JS File -->
 <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>

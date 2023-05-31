@@ -1,4 +1,41 @@
+<?php
 
+if (!check_if_user_connected_admin()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
+    exit;
+  }
+
+if (isset($_SESSION['changement-erreurs']) && !empty($_SESSION['changement-erreurs'])) {
+    $erreurs = $_SESSION['changement-erreurs'];
+}
+
+if (isset($_SESSION['sauvegarder-erreurs']) && !empty($_SESSION['sauvegarder-erreurs'])) {
+    $erreurs = $_SESSION['sauvegarder-erreurs'];
+}
+
+if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
+    $erreurs = $_SESSION['suppression-erreurs'];
+}
+
+if (isset($_SESSION['suppression-photo-erreurs']) && !empty($_SESSION['suppression-photo-erreurs'])) {
+    $erreurs = $_SESSION['suppression-photo-erreurs'];
+}
+
+if (isset($_SESSION['desactivation-erreurs']) && !empty($_SESSION['desactivation-erreurs'])) {
+    $erreurs = $_SESSION['desactivation-erreurs'];
+}
+
+if (isset($_SESSION['photo-erreurs']) && !empty($_SESSION['photo-erreurs'])) {
+    $erreurs = $_SESSION['photo-erreurs'];
+}
+
+if (isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])) {
+    $erreurs = $_SESSION['erreurs'];
+}
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -270,12 +307,12 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= isset($_SESSION['utilisateur_connecter']) ?  $_SESSION['utilisateur_connecter'][0]['nom_utilisateur'] : 'Pseudo' ?></span>
-                                <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter'][0]['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter'][0]['avatar'] ?>">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Pseudo' ?></span>
+                                <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/profile">
+                                <a class="dropdown-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/profil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

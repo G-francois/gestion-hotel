@@ -44,23 +44,22 @@ if (isset($_POST['change_password'])) {
         $donnees["newpassword"] = $_POST['newpassword'];
     }
 
-    if (!check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
+    if (!check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_admin']['id'])) {
         $erreurs["password"] = "Mot de passe incorrecte. Veuillez réessayez";
     }
 }
 
-//die (var_dump($_SESSION['utilisateur_connecter_client'][0]['id']);
 
 if (empty($erreurs)) {
 
-    if (mise_a_jour_mot_passe($_SESSION['utilisateur_connecter_client']['id'], $donnees["newpassword"])) {
+    if (mise_a_jour_mot_passe($_SESSION['utilisateur_connecter_admin']['id'], $donnees["newpassword"])) {
         session_destroy();
-        header('location:' . PATH_PROJECT . 'client/connexion/index');
+        header('location:' . PATH_PROJECT . 'administrateur/connexion/index');
     } else {
         $_SESSION['changement-erreurs'] = $erreurs;
-        header('location:' . PATH_PROJECT . 'client/profil/profile');
     }
 } else {
     $_SESSION['changement-erreurs'] = $erreurs;
-    header('location:' . PATH_PROJECT . 'client/profil/profile');
 }
+
+header('location:' . PATH_PROJECT . 'administrateur/dashboard/profil');
