@@ -1,121 +1,80 @@
 <?php
-session_start();
+include './app/commum/header_admin_icm.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
+<div class="container" style="margin-top: 120px;">
+    <div class="row justify-content-center">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <div class="col-xl-10 col-lg-12 col-md-9">
 
-    <title>Sous les Cocotiers - Register</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="/soutenancepublic/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="/soutenancepublic/css/sb-admin-2.css" rel="stylesheet">
-</head>
-
-<body>
-
-    <div class="container" style="margin-top: 120px;">
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image2"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <?php
-                                    if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-                                    ?>
-                                        <div class="alert alert-primary" style="color: white; background-color: #1cc88a; border-color: snow;">
-                                            <?= $_SESSION['success'] ?>
-                                        </div>
-                                    <?php
-                                    }
-                                    ?>
-
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1]. " " .$_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image2"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <?php
+                                if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                                        <?= $_SESSION['inscription-message-success-global'] ?>
                                     </div>
+                                <?php
+                                }
+                                ?>
 
-
-
-                                    <form class="user">
-                                        <!-- Le champs nom utilisateur ou email -->
-                                        <div class="form-group">
-                                            <input type="text" name="email-nom-utilisateur" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre address email ou votre nom d'utilisateur" value="<?= (isset($donnees["Entrer votre adresse email ou nom-utilisateur"]) && !empty($donnees["email-nom-utilisateur"])) ? $donnees["email-nom-utilisateur"] : ""; ?>" required>
-                                        </div>
-                                        <span class="text-danger">
-
-                                        </span>
-
-
-                                        <!-- Le champs mot de passe -->
-                                        <div class="form-group">
-                                            <input type="password" name="mot-passe" id="inscription-mot-passe" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="<?= (isset($donnees["mot-passe"]) && !empty($donnees["mot-passe"])) ? $donnees["mot-passe"] : ""; ?>" required>
-                                        </div>
-                                        <span class="text-danger">
-
-                                        </span>
-
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-block">Connexion</button>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/soutenance/receptionniste/mot_de_passe">Mot de passe oublié ?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/soutenance/receptionniste/inscription">Créez un compte !</a>
-                                    </div>
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1] . " " . $_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
                                 </div>
+
+                                <form action="<?= PATH_PROJECT ?>receptionniste/connexion/traitement" method="post" class="user">
+                                    <!-- Le champs email ou nom utilisateur-->
+                                    <div class="form-group">
+                                        <label for="inscription-email">
+                                            Email ou Nom d'utilisateur:
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                        <input type="text" name="email-nom-utilisateur" id="inscription-email" class="form-control" placeholder="Entrer votre adresse mail ou nom d'utilisateur" value="<?= (isset($donnees["email-nom-utilisateur"]) && !empty($donnees["email-nom-utilisateur"])) ? $donnees["email-nom-utilisateur"] : ''; ?>" required>
+                                        <?php if (isset($erreurs["email-nom-utilisateur"]) && !empty($erreurs["email-nom-utilisateur"])) { ?>
+                                            <span class="text-danger">
+                                                <?php echo $erreurs["email-nom-utilisateur"]; ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+
+                                    <!-- Le champs mot de passe -->
+                                    <div class="form-group">
+                                        <label for="inscription-mot-passe">
+                                            Mot de passe:
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                        <input type="password" name="mot-passe" id="inscription-mot-passe" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="<?= (isset($donnees["mot-passe"]) && !empty($donnees["mot-passe"])) ? $donnees["mot-passe"] : ''; ?>" required>
+                                        <?php if (isset($erreurs["mot-passe"]) && !empty($erreurs["mot-passe"])) { ?>
+                                            <span class="text-danger">
+                                                <?php echo $erreurs["mot-passe"]; ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="<?= PATH_PROJECT ?>/receptionniste/mot_de_passe">Mot de passe oublié ?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="<?= PATH_PROJECT ?>/receptionniste/inscription">Créez un compte !</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
+
     </div>
-
-    <?php
-    session_destroy();
-
-    ?>
-
-
-    <!-- Template Main JS File -->
-    <script src="/soutenancepublic/js/main.js"></script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/soutenancepublic/vendor/jquery/jquery.min.js"></script>
-    <script src="/soutenancepublic/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/soutenancepublic/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/soutenancepublic/js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>
+</div>

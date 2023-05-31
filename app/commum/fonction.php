@@ -522,6 +522,16 @@ function check_if_user_connected_client(): bool
 	return !empty($_SESSION['utilisateur_connecter_client']);
 }
 
+/**
+ * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
+ *
+ * @return bool
+ */
+function check_if_user_connected_recept(): bool
+{
+	return !empty($_SESSION['utilisateur_connecter_recept']);
+}
+
 
 /**
  * Cette fonction permet d'effectuer la mise à jour du mot de passe de l'utilisateur
@@ -611,7 +621,7 @@ function mise_a_jour_avatar(int $id, string $avatar): bool
  * @param  string $nom_utilisateur
  * @return bool
  */
-function mise_a_jour_new_info_user(int $id, string $nom, string $prenom, int $telephone, string $nom_utilisateur): bool
+function mettre_a_jour_informations_utilisateur(int $id, string $nom, string $prenom, int $telephone, string $nom_utilisateur): bool
 {
 
 	$modifier_profil = false;
@@ -652,7 +662,7 @@ function mise_a_jour_new_info_user(int $id, string $nom, string $prenom, int $te
  * @return array
  */
 
-function recup_mise_a_jour_new_info_user($id): array
+function recuperer_mettre_a_jour_informations_utilisateur($id): array
 {
 
 	$recup = [];

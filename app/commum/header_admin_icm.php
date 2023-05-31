@@ -5,6 +5,11 @@ if (check_if_user_connected_admin()) {
     exit;
 }
 
+if (check_if_user_connected_recept()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
+    exit;
+}
+
 if (isset($_SESSION['inscription-erreurs']) && !empty($_SESSION['inscription-erreurs'])) {
     $erreurs = $_SESSION['inscription-erreurs'];
 }

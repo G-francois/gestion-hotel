@@ -65,14 +65,14 @@ if (isset($_POST['sauvegarder'])) {
         $_SESSION['donnees-utilisateur'] = $new_data;
 
         if (empty($erreurs)) {
-            if (mise_a_jour_new_info_user(
+            if (mettre_a_jour_informations_utilisateur(
                 $donnees['id'],
                 $new_data['nom'],
                 $new_data['prenom'],
                 $new_data['telephone'],
                 $new_data['nom_utilisateur']
             )) {
-                $new_user_data = recup_mise_a_jour_new_info_user($donnees['id']);
+                $new_user_data = recuperer_mettre_a_jour_informations_utilisateur($donnees['id']);
 
                 if (!empty($new_user_data)) {
 

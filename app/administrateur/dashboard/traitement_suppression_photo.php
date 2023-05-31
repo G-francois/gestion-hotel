@@ -16,7 +16,7 @@ if (isset($_POST['supprimer_photo'])) {
 
         if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_admin']['id'], 'no_image')) {
 
-            $new_user_data = recup_mise_a_jour_new_info_user($_SESSION['utilisateur_connecter_admin']['id']);
+            $new_user_data = recuperer_mettre_a_jour_informations_utilisateur($_SESSION['utilisateur_connecter_admin']['id']);
 
             if (!empty($new_user_data)) {
 
