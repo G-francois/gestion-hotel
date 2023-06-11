@@ -1141,7 +1141,7 @@ section {
 # About
 --------------------------------------------------------------*/
 .about {
-  background: url("../img/about-bg.jpg") center center;
+  background: url("/soutenance/public/images/about-bg.jpg") center center;
   background-size: cover;
   position: relative;
   padding: 80px 0;
@@ -1450,7 +1450,7 @@ section {
 # Events
 --------------------------------------------------------------*/
 .events {
-  background: url(../img/events-bg.jpg) center center no-repeat;
+  background: url(/soutenance/public/img/events-bg.jpg) center center no-repeat;
   background-size: cover;
   position: relative;
 }
@@ -1815,7 +1815,7 @@ section {
 
 /*partie chambre*/
 .cc-chambre {
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/page home/febrian-zakaria-sjvU0THccQA-unsplash.jpg') center center fixed no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/soutenance/public/img/page home/febrian-zakaria-sjvU0THccQA-unsplash.jpg') center center fixed no-repeat;
 	background-size: cover;
 }
 #bloc_activites {

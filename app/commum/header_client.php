@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -45,30 +43,23 @@
 
     <style>
         #hero {
-            width: 100%;
-            height: 100vh;
             background: url("<?= PATH_PROJECT ?>public/images/hero-bg.jpg") top center;
-            background-size: cover;
-            position: relative;
-            padding: 0;
         }
 
         #hero2 {
-            width: 100%;
-            height: 100vh;
             background: url("<?= PATH_PROJECT ?>public/images/water-165219_1280.jpg") top center;
-            background-size: cover;
-            position: relative;
-            padding: 0;
         }
 
         #hero3 {
-            width: 100%;
-            height: 100vh;
             background: url("<?= PATH_PROJECT ?>public/images/BG-5.jpeg") top center;
-            background-size: cover;
-            position: relative;
-            padding: 0;
+        }
+
+        .about {
+            background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center;
+        }
+
+        .events {
+            background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center no-repeat;
         }
     </style>
 
