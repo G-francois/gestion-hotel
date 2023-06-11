@@ -33,7 +33,7 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                 <th>Nom</th>
                                 <th>Prénom(s)</th>
                                 <th>Sexe</th>
-                                <th>Est actif</th>
+                                <th>Profil</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                     <td><?php echo $utilisateur['nom']; ?></td>
                                     <td><?php echo $utilisateur['prenom']; ?></td>
                                     <td><?php echo $utilisateur['sexe']; ?></td>
-                                    <td><?php echo $utilisateur['est_actif']; ?></td>
+                                    <td><?php echo $utilisateur['profil']; ?></td>
                                     <td>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -62,7 +62,9 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                         <p><strong>Téléphone : </strong><?php echo $utilisateur['telephone']; ?></p>
                                                         <p><strong>Email : </strong><?php echo $utilisateur['email']; ?></p>
                                                         <p><strong>Nom d'utilisateur : </strong><?php echo $utilisateur['nom_utilisateur']; ?></p>
-                                                        <p><strong>Type : </strong><?php echo $utilisateur['profil']; ?></p>
+                                                        <p><strong>Est Actif : </strong><?php echo $utilisateur['est_actif']; ?></p>
+                                                        <p><strong>Est Supprimer : </strong><?php echo $utilisateur['est_supprimer']; ?></p>
+                                                        <p><strong>Créer le : </strong><?php echo $utilisateur['creer_le']; ?></p>
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <a href="?requette=modifier-utilisateur&num-utilisateur=<?= $utilisateur["nom_utilisateur"]; ?>" class="btn btn-warning">Modifier</a>

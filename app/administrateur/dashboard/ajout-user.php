@@ -16,11 +16,31 @@ include './app/commum/aside.php';
         <h1 class="h3 mb-0 text-gray-800">Ajouter un utilisateur </h1>
     </div>
 
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user-traitement" method="post" class="user">
+    <?php
+    if (isset($_SESSION['ajout-message-success-global']) && !empty($_SESSION['ajout-message-success-global'])) {
+    ?>
+        <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+            <?= $_SESSION['ajout-message-success-global'] ?>
+        </div>
+    <?php
+    }
+    ?>
+
+    <?php
+    if (isset($_SESSION['ajout-message-erreur-global']) && !empty($_SESSION['ajout-message-erreur-global'])) {
+    ?>
+        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+            <?= $_SESSION['ajout-message-erreur-global'] ?>
+        </div>
+    <?php
+    }
+    ?>
+
+    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user-traitement" method="post" class="user" novalidate>
         <div class="form-group row">
             <!-- Le champ nom -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-nom" class="col-4 col-form-label">
+            <div class="col-sm-6  mb-2">
+                <label for="inscription-nom">
                     Nom:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -33,8 +53,8 @@ include './app/commum/aside.php';
             </div>
 
             <!-- Le champ prénom -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-prenom" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-prenom">
                     Prénoms:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -49,16 +69,16 @@ include './app/commum/aside.php';
 
         <div class="form-group row">
             <!-- Le champs sexe -->
-            <div class="col-sm-6  mb-4 d-flex">
-                <label for="sexe" class="col-4 col-form-label">
+            <div class="col-sm-6  mb-2">
+                <label for="sexe">
                     Sexe :
                     <span class="text-danger">(*)</span>
                 </label>
-                <div class="col-8" style="padding-left: 0px; padding-right: 0px;">
+                <div style="padding-left: 0px; padding-right: 0px;">
                     <select class="sexe form-control" id="sexe" name="sexe">
                         <option value="" disabled selected>Sélectionnez le sexe</option>
-                        <option value="1">Masculin</option>
-                        <option value="2">Féminin</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Féminin">Féminin</option>
                     </select>
                     <?php if (isset($erreurs["sexe"]) && !empty($erreurs["sexe"])) { ?>
                         <span class="text-danger">
@@ -68,32 +88,9 @@ include './app/commum/aside.php';
                 </div>
             </div>
 
-            <!-- Le champs type d'utilisateur -->
-            <div class="col-sm-6  mb-4 d-flex">
-                <label for="profile" class="col-4 col-form-label">
-                    Profile :
-                    <span class="text-danger">(*)</span>
-                </label>
-                <div class="col-8" style="padding-left: 0px; padding-right: 0px;">
-                    <select class="sexe form-control" id="profile" name="profil">
-                        <option value="" disabled selected>Sélectionnez le type d'utilisateur</option>
-                        <option value="1">ADMINISTRATEUR</option>
-                        <option value="2">RECEPTIONNISTE</option>
-                        <option value="3">CLIENT</option>
-                    </select>
-                    <?php if (isset($erreurs["profil"]) && !empty($erreurs["profil"])) { ?>
-                        <span class="text-danger">
-                            <?php echo $erreurs["profil"]; ?>
-                        </span>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row">
             <!-- Le champ téléphone -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-telephone" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-telephone">
                     Téléphone:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -104,10 +101,12 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
+        </div>
 
+        <div class="form-group row">
             <!-- Le champ email -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-email" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-email">
                     Adresse mail:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -118,12 +117,10 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
-        </div>
 
-        <div class="form-group row ">
             <!-- Le champ nom d'utilisateur -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-nom-utilisateur" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-nom-utilisateur">
                     Nom d'utilisateur:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -134,10 +131,33 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
+        </div>
+
+        <div class="form-group row ">
+            <!-- Le champs type d'utilisateur -->
+            <div class="col-sm-6  mb-2">
+                <label for="profile">
+                    Profile :
+                    <span class="text-danger">(*)</span>
+                </label>
+                <div style="padding-left: 0px; padding-right: 0px;">
+                    <select class="sexe form-control" id="profile" name="profil">
+                        <option value="" disabled selected>Sélectionnez le type d'utilisateur</option>
+                        <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
+                        <option value="RECEPTIONNISTE">RECEPTIONNISTE</option>
+                        <option value="CLIENT">CLIENT</option>
+                    </select>
+                    <?php if (isset($erreurs["profil"]) && !empty($erreurs["profil"])) { ?>
+                        <span class="text-danger">
+                            <?php echo $erreurs["profil"]; ?>
+                        </span>
+                    <?php } ?>
+                </div>
+            </div>
 
             <!-- Le champ mot de passe -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-mot-passe" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-mot-passe">
                     Mot de passe:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -152,8 +172,8 @@ include './app/commum/aside.php';
 
         <div class="form-group row ">
             <!-- Le champ retapez mot de passe -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <label for="inscription-retapez-mot-passe" class="col-4 col-form-label">
+            <div class="col-sm-6 mb-2">
+                <label for="inscription-retapez-mot-passe">
                     Retaper mot de passe:
                     <span class="text-danger">(*)</span>
                 </label>
@@ -165,9 +185,9 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
-            <!-- Le champ retapez mot de passe -->
-            <div class="col-sm-6 mb-4 d-flex">
-                <button type="submit" class="btn btn-primary btn-block">Inscription</button>
+            <!-- Le boutton ajouter -->
+            <div class="col-sm-6" style="margin-top: 31px;">
+                <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
             </div>
         </div>
     </form>
@@ -177,6 +197,7 @@ include './app/commum/aside.php';
 
 
 <?php
+unset($_SESSION['ajout-message-success-global'], $_SESSION['ajout-message-erreur-global'], $_SESSION['donnees-utilisateur'], $_SESSION['erreurs-utilisateur']);
 
 include './app/commum/footer.php'
 

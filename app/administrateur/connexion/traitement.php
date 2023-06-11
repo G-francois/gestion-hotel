@@ -4,7 +4,6 @@ $donnees = [];
 $message_erreur_global = "";
 $message_success_global = "";
 $erreurs = [];
-$_SESSION['donnees-utilisateur-admin']  = [];
 
 if (isset($_POST["email-nom-utilisateur"]) && !empty($_POST["email-nom-utilisateur"])) {
 

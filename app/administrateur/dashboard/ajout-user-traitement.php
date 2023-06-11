@@ -61,16 +61,16 @@ if (isset($_POST["email"]) && !empty($_POST["email"])) {
     if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         $donnees["email"] = trim(htmlentities($_POST["email"]));
     } else {
-        $erreurs["email"] = "Le champs email doit être une adresse mail valide. Veuillez le renseigné.";
+        $erreurs["email"] = "Le champs email doit être une adresse mail valide. Veuillez le renseigner.";
     }
 } else {
-    $erreurs["email"] = "Le champs email est vide. Veuillez le renseigné.";
+    $erreurs["email"] = "Le champs email est requis. Veuillez le renseigner.";
 }
 
 if (isset($_POST["nom-utilisateur"]) && !empty($_POST["nom-utilisateur"])) {
     $donnees["nom-utilisateur"] = $_POST["nom-utilisateur"];
 } else {
-    $erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigné.";
+    $erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigner.";
 }
 
 if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {
@@ -105,11 +105,6 @@ if ((isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"]) && $_POST["retape
     $donnees["mot-passe"] = trim(htmlentities($_POST['mot-passe']));
 }
 
-if (!isset($_POST["termes-conditions"]) || empty($_POST["termes-conditions"])) {
-    $erreurs["termes-conditions"] = "Veuillez termes-conditions cette case svp";
-}
-
-
 if (check_email_exist_in_db($_POST["email"])) {
     $erreurs["email"] = "Cette adresse mail est déjà utilisée. Veuillez le changez.";
 }
@@ -122,22 +117,25 @@ if (check_telephone_exist_in_db($_POST["telephone"])) {
     $erreurs["telephone"] = "Ce numéro de téléphone est déjà utilisé. Veuillez le changez.";
 }
 
-$_SESSION['donnees-utilisateur'] = $donnees;
 
-$_SESSION['inscription-erreurs'] = $erreurs;
 
 if (empty($erreurs)) {
 
-    $resultat = enregistrer_utilisateur_admin($donnees["nom"], $donnees["prenom"], $donnees["sexe"], $donnees["telephone"], $donnees["email"], $donnees["nom-utilisateur"], $donnees["mot-passe"], $donnees["profil"]);
+	$resultat = enregistrer_utilisateur_admin($donnees["nom"], $donnees["prenom"], $donnees["sexe"], $donnees["telephone"], $donnees["email"], $donnees["nom-utilisateur"], $donnees["mot-passe"], $donnees["profil"]);
 
-    die(var_dump(enregistrer_utilisateur_admin($donnees["nom"], $donnees["prenom"], $donnees["sexe"], $donnees["telephone"], $donnees["email"], $donnees["nom-utilisateur"], $donnees["mot-passe"], $donnees["profil"])));
+	if ($resultat) {
 
-    if ($resultat) {
+        $message_success_global = "Utilisateur ajouté éffectué avec succès.";
 
-        $message_success_global = "Inscription éffectuée avec succès. Veuiller contacter un administrateur pour valider votre compte.";
-        header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-user');
     } else {
+
         $message_erreur_global = "Oups ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
-        header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-user');
+
     }
 }
+
+$_SESSION['donnees-utilisateur'] = $donnees;
+$_SESSION['erreurs-utilisateur'] = $erreurs;
+$_SESSION['ajout-message-success-global'] = $message_success_global;
+$_SESSION['ajout-message-erreur-global'] = $message_erreur_global;
+header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-user');

@@ -109,20 +109,29 @@ if (isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])) {
 <?php
 // LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-REPAS DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnees-repas']) && !empty($_SESSION['donnees-repas'])) {
-    $erreurs = $_SESSION['donnees-repas'];
+    $donnees = $_SESSION['donnees-repas'];
 }
 
 if (isset($_SESSION['erreurs-repas']) && !empty($_SESSION['erreurs-repas'])) {
-    $donnees = $_SESSION['erreurs-repas'];
+    $erreurs = $_SESSION['erreurs-repas'];
 }
 
 // LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-CHAMBRE DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnees-chambre']) && !empty($_SESSION['donnees-chambre'])) {
-    $erreurs = $_SESSION['donnees-chambre'];
+    $donnees = $_SESSION['donnees-chambre'];
 }
 
 if (isset($_SESSION['erreurs-chambre']) && !empty($_SESSION['erreurs-chambre'])) {
-    $donnees = $_SESSION['erreurs-chambre'];
+    $erreurs = $_SESSION['erreurs-chambre'];
+}
+
+// LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-UTILISATEUR DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnee-utilisateur']) && !empty($_SESSION['donnee-utilisateur'])) {
+    $donnees = $_SESSION['donnee-utilisateur'];
+}
+
+if (isset($_SESSION['erreurs-utilisateur']) && !empty($_SESSION['erreurs-utilisateur'])) {
+    $erreurs = $_SESSION['erreurs-utilisateur'];
 }
 
 ?>
@@ -139,7 +148,7 @@ if (isset($_SESSION['erreurs-chambre']) && !empty($_SESSION['erreurs-chambre']))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SOUS LES COCOTIERS </title>
+    <title>HOTEL SOUS LES COCOTIERS MANAGEMENT SYSTEM</title>
     <!-- Favicons -->
 
     <link href="<?= PATH_PROJECT ?>public/images/al_copyrighter.png" rel="icon" />
