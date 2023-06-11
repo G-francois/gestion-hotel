@@ -18,11 +18,13 @@ include './app/commum/header_client.php'
 
 <!-- ======= Gallery Section Chambres ======= -->
 <section id="chambres" class="chambres">
-  <div class="container-fluid" data-aos="fade-up">
+  <div class="container" data-aos="fade-up">
     <div class="section-title">
       <h2>Galerie</h2>
       <p>Quelques photos de nos Chambres</p>
     </div>
+  </div>
+  <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
     <div class="row g-0 d-flex">
       <div class="col-lg-3 col-md-2">
@@ -289,55 +291,121 @@ include './app/commum/header_client.php'
 
     </div>
   </div>
+  </div>
 </section>
 <!-- ======= End Gallery Section Chambres ======= -->
 
-<!-- ======= Gallery Section Restaurant ======= -->
-<section id="gallery" class="gallery">
+<!-- ======= Gallery Section espaces ======= -->
+<section id="chambres" class="chambres">
   <div class="container" data-aos="fade-up">
     <div class="section-title">
       <h2>Galerie</h2>
-      <p>Quelques photos de notre Restaurant</p>
+      <p>Quelques photos de nos Espaces</p>
     </div>
   </div>
-
   <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-    <div class="row g-0">
-      <div class="col-lg-3 col-md-4">
-        <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (2).jpeg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (2).jpeg" alt="" class="img-fluid" />
-          </a>
+    <div class="row g-0 d-flex">
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/filles-au-spa.jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Piscine</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-4">
-        <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/wellness/reunion.jpeg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/wellness/reunion.jpeg" alt="" class="img-fluid" />
-          </a>
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="300">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Wellness</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-4">
-        <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" alt="" class="img-fluid" />
-          </a>
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/reunion.png" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Réunion</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-4">
-        <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (4).jpeg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (4).jpeg" alt="" class="img-fluid" />
-          </a>
+
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/belle-femme-africaine-au-repos-relaxante-dans-station-thermale-yeux-fermes.jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Wellness</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/jeune-femme-se-detendre-prenant-bain.jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Piscine</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/portrait-belle-femme-africaine-serviette-tete-souriant-au-repos-dans-salon-spa.jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Wellness</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
-<!-- End Gallery Section Restaurant-->
+<!-- ======= End Gallery Section espaces ======= -->
 
 <!-- ======= Gallery Section Restaurant ======= -->
 <section id="gallery" class="gallery">

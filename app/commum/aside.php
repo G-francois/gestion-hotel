@@ -235,11 +235,10 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="nav-link">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Pseudo' ?></span>
                                 <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>">
-                            </a>
-                        </li>
+                            </div>
 
 
 
