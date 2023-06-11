@@ -62,8 +62,20 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                         <p><strong>Téléphone : </strong><?php echo $utilisateur['telephone']; ?></p>
                                                         <p><strong>Email : </strong><?php echo $utilisateur['email']; ?></p>
                                                         <p><strong>Nom d'utilisateur : </strong><?php echo $utilisateur['nom_utilisateur']; ?></p>
-                                                        <p><strong>Est Actif : </strong><?php echo $utilisateur['est_actif']; ?></p>
-                                                        <p><strong>Est Supprimer : </strong><?php echo $utilisateur['est_supprimer']; ?></p>
+                                                        <p><strong>Est Actif : </strong>
+                                                            <button class="btn <?php echo ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) ? 'btn-success' : (($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) ? 'btn-danger' : 'btn-warning'); ?> ">
+                                                                <?php
+                                                                if ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) {
+                                                                    echo 'Compte actif';
+                                                                } elseif ($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) {
+                                                                    echo 'Compte supprimé';
+                                                                } else {
+                                                                    echo 'Compte désactivé';
+                                                                }
+                                                                ?>
+                                                            </button>
+                                                        </p>
+
                                                         <p><strong>Créer le : </strong><?php echo $utilisateur['creer_le']; ?></p>
                                                     </div>
                                                     <div class="modal-footer float-right">

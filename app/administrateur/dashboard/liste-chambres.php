@@ -37,6 +37,7 @@ $liste_chambre = recuperer_liste_chambres();
                                 <th>Actions</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
                             <?php
                             foreach ($liste_chambre as $chambre) {

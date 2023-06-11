@@ -32,6 +32,8 @@ $liste_repas = recuperer_liste_repas();
                             <th>Code type </th>
                             <th>Libellés</th>
                             <th>Prix</th>
+                            <th>Statut</th>
+                            
                         </tr>
                     </thead>
 
@@ -43,6 +45,17 @@ $liste_repas = recuperer_liste_repas();
                                 <td><?php echo $repas['cod_repas']; ?></td>
                                 <td><?php echo $repas['nom_repas']; ?></td>
                                 <td><?php echo $repas['pu_repas']; ?></td>
+                                <td>
+                                    <button class="btn <?php echo ($repas['est_actif'] == 1 && $repas['est_supprimer'] == 0) ? 'btn-success' : 'btn-danger'; ?> ">
+                                        <?php
+                                        if ($repas['est_actif'] == 1 && $repas['est_supprimer'] == 0) {
+                                            echo 'Disponibe';
+                                        } else {
+                                            echo 'Non disponible';
+                                        }
+                                        ?>
+                                    </button>
+                                </td>
                             <?php
                         }
 
