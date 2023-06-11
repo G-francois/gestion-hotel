@@ -4,7 +4,7 @@ include './app/commum/header_client_icm.php'
 
 <div class="container" style="color: black;">
 
-	<div class="card o-hidden border-0 shadow-lg" style="margin-top: 5rem; margin-bottom: 2rem;">
+	<div class="card o-hidden border-0 shadow-lg" style="margin-top: 5rem;">
 		<div class="card-body p-0">
 			<!-- Nested Row within Card Body -->
 			<div class="row">
@@ -14,21 +14,23 @@ include './app/commum/header_client_icm.php'
 
 						<?php
 						if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
-						?>
-							<div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+							?>
+							<div class="alert alert-primary"
+								 style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
 								<?= $_SESSION['inscription-message-success-global'] ?>
 							</div>
-						<?php
+							<?php
 						}
 						?>
 
 						<?php
 						if (isset($_SESSION['inscription-message-erreur-global']) && !empty($_SESSION['inscription-message-erreur-global'])) {
-						?>
-							<div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+							?>
+							<div class="alert alert-primary"
+								 style="color: white; background-color: red; border-color: snow;">
 								<?= $_SESSION['inscription-message-erreur-global'] ?>
 							</div>
-						<?php
+							<?php
 						}
 						?>
 
@@ -36,14 +38,18 @@ include './app/commum/header_client_icm.php'
 							<h1 class="h4 text-gray-900 mb-4">Créez un compte Client!</h1>
 						</div>
 
-						<form action="<?= PATH_PROJECT ?>client/inscription/traitement" method="post" class="user" novalidate>
+						<form action="<?= PATH_PROJECT ?>client/inscription/traitement" method="post" class="user"
+							  novalidate>
 							<!-- Le champ nom -->
 							<div class="form-group">
 								<label for="inscription-nom">
 									Nom:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ''; ?>" required>
+								<input type="text" name="nom" id="inscription-nom" class="form-control"
+									   placeholder="Veuillez entrer votre nom"
+									   value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["nom"]; ?>
@@ -57,7 +63,10 @@ include './app/commum/header_client_icm.php'
 									Prénoms:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="text" name="prenom" id="inscription-prenom" class="form-control" placeholder="Veuillez entrer vos prénoms" value="<?= (isset($donnees["prenom"]) && !empty($donnees["prenom"])) ? $donnees["prenom"] : ''; ?>" required>
+								<input type="text" name="prenom" id="inscription-prenom" class="form-control"
+									   placeholder="Veuillez entrer vos prénoms"
+									   value="<?= (isset($donnees["prenom"]) && !empty($donnees["prenom"])) ? $donnees["prenom"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["prenom"]; ?>
@@ -71,7 +80,10 @@ include './app/commum/header_client_icm.php'
 									Téléphone:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
+								<input type="text" name="telephone" id="inscription-telephone" class="form-control"
+									   placeholder="Veuillez entrer votre numéro de téléphone"
+									   value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["telephone"]; ?>
@@ -85,7 +97,10 @@ include './app/commum/header_client_icm.php'
 									Adresse mail:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+								<input type="email" name="email" id="inscription-email" class="form-control"
+									   placeholder="Veuillez entrer votre adresse mail"
+									   value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["email"]; ?>
@@ -99,7 +114,11 @@ include './app/commum/header_client_icm.php'
 									Nom d'utilisateur:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="text" name="nom-utilisateur" id="inscription-nom-utilisateur" class="form-control" placeholder="Veuillez entrer votre nom d'utilisateur" value="<?= (isset($donnees["nom-utilisateur"]) && !empty($donnees["nom-utilisateur"])) ? $donnees["nom-utilisateur"] : ''; ?>" required>
+								<input type="text" name="nom-utilisateur" id="inscription-nom-utilisateur"
+									   class="form-control"
+									   placeholder="Veuillez entrer votre nom d'utilisateur"
+									   value="<?= (isset($donnees["nom-utilisateur"]) && !empty($donnees["nom-utilisateur"])) ? $donnees["nom-utilisateur"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["nom-utilisateur"]) && !empty($erreurs["nom-utilisateur"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["nom-utilisateur"]; ?>
@@ -113,7 +132,10 @@ include './app/commum/header_client_icm.php'
 									Mot de passe:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="password" name="mot-passe" id="inscription-mot-passe" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="<?= (isset($donnees["mot-passe"]) && !empty($donnees["mot-passe"])) ? $donnees["mot-passe"] : ''; ?>" required>
+								<input type="password" name="mot-passe" id="inscription-mot-passe" class="form-control"
+									   placeholder="Veuillez entrer votre mot de passe"
+									   value="<?= (isset($donnees["mot-passe"]) && !empty($donnees["mot-passe"])) ? $donnees["mot-passe"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["mot-passe"]) && !empty($erreurs["mot-passe"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["mot-passe"]; ?>
@@ -127,7 +149,11 @@ include './app/commum/header_client_icm.php'
 									Retaper mot de passe:
 									<span class="text-danger">(*)</span>
 								</label>
-								<input type="password" name="retapez-mot-passe" id="inscription-retapez-mot-passe" class="form-control" placeholder="Veuillez retaper votre mot de passe" value="<?= (isset($donnees["retapez-mot-passe"]) && !empty($donnees["retapez-mot-passe"])) ? $donnees["retapez-mot-passe"] : ''; ?>" required>
+								<input type="password" name="retapez-mot-passe" id="inscription-retapez-mot-passe"
+									   class="form-control"
+									   placeholder="Veuillez retaper votre mot de passe"
+									   value="<?= (isset($donnees["retapez-mot-passe"]) && !empty($donnees["retapez-mot-passe"])) ? $donnees["retapez-mot-passe"] : ''; ?>"
+									   required>
 								<?php if (isset($erreurs["retapez-mot-passe"]) && !empty($erreurs["retapez-mot-passe"])) { ?>
 									<span class="text-danger">
 										<?php echo $erreurs["retapez-mot-passe"]; ?>
@@ -138,8 +164,11 @@ include './app/commum/header_client_icm.php'
 							<!-- Le champ terms et conditions -->
 							<div class="form-group">
 								<div class="custom-control custom-checkbox small">
-									<input type="checkbox" class="custom-control-input" name="termes-conditions" id="customCheck" required>
-									<label class="custom-control-label" for="customCheck" style="color: blue; font-size: large;">
+									<input type="checkbox" class="custom-control-input" name="termes-conditions"
+										   id="customCheck"
+										   required>
+									<label class="custom-control-label" for="customCheck"
+										   style="color: blue; font-size: large;">
 										J'accepte les termes et conditions
 										<span class="text-danger">(*)</span>
 									</label>
@@ -171,10 +200,6 @@ include './app/commum/header_client_icm.php'
 	</div>
 
 </div>
-
-<?php
-session_destroy();
-?>
 
 <?php
 include './app/commum/footer_client_icm.php';

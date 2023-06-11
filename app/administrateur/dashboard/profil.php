@@ -1,11 +1,18 @@
 <?php
-include './app/commum/header.php'
+if (!check_if_user_connected_admin()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
+    exit;
+}
+
+include './app/commum/header.php';
+
+include './app/commum/aside.php';
 ?>
 
 <main id="main" class="container-fluid" style="margin-bottom: 35px;">
 
     <section class="profile">
-        <style>
+        <!-- <style>
             .card-body h4 {
                 font-size: 24px;
                 font-weight: 700;
@@ -85,13 +92,13 @@ include './app/commum/header.php'
             .col-form-label {
                 color: white;
             }
-        </style>
-        <div class="pagetitle">
+        </style> -->
+        <div class="pagetitle ml-2 mr-2">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Home</a></li>
-                    <li class="breadcrumb-item">Users</li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                    <li class="breadcrumb-item"><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['profil'] : 'Profile' ?></li>
+                    <li class="breadcrumb-item active">Paramètres</li>
                 </ol>
             </nav>
         </div>
@@ -200,7 +207,7 @@ include './app/commum/header.php'
                 <!-- suppression_photo Form -->
                 <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
                     <div class="row">
-                        <button type="reset" class="btn btn-secondary" data-toggle="modal" data-target="#modal5"><i class="fa fa-trash"></i> Supprimer</button>
+                        <button type="reset" class="btn btn-secondary mt-4" data-toggle="modal" data-target="#modal5"><i class="fa fa-trash"></i> Supprimer</button>
                         <div class="col-md-8 col-lg-12">
                             <div class="text-center" style="color: #070b3a;">
                                 <!-- Modal -->
@@ -279,14 +286,17 @@ include './app/commum/header.php'
                                     <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                <!-- <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer mon compte</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                </div>
+                                                </div> -->
                                                 <div class="modal-body">
                                                     <div class="row mb-3">
+                                                        <div>
+                                                            <i class="fas fa-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
+                                                        </div>
                                                         <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action votre compte sera supprimer de façon définitive.
                                                             Si oui veuiller entrer votre mot de passe pour appliquer l'action. </label>
                                                         <br>
@@ -319,14 +329,17 @@ include './app/commum/header.php'
                                     <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                <!-- <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Désactiver mon compte</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                </div>
+                                                </div> -->
                                                 <div class="modal-body">
                                                     <div class="row mb-3">
+                                                        <div>
+                                                            <i class="fas fa-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
+                                                        </div>
                                                         <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
                                                             Si oui veuiller entrer votre mot de passe pour appliquer l'action. Pour réactiver votre compte veuiller nous écrire par mail.</label>
                                                         <br>
@@ -358,7 +371,7 @@ include './app/commum/header.php'
                 <div class="card">
                     <div class="card-body">
                         <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_edit_profil" method="post" enctype="multipart/form-data">
-                            <h5 style="color: #cda45e; text-align:center; ">
+                            <h5 style="color: #8bb9c6; text-align:center; ">
                                 Les champs ci-dessous ne doivent pas être soumis vide. Au cas contraire elles affichent anciennes informations.
                             </h5>
 
@@ -482,7 +495,7 @@ include './app/commum/header.php'
             <div class="card">
                 <div class="card-body">
                     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_password" method="post" enctype="multipart/form-data">
-                        <h5 style="color: #cda45e; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
+                        <h5 style="color: #8bb9c6; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
                         <br>
                         <div class="row mb-3">
                             <label for="currentPassword" class="col-md-5 col-lg-4 col-form-label" require>Mot de passe actuel</label>
@@ -547,8 +560,8 @@ include './app/commum/header.php'
 </div>
 
 <?php
-  unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
-  ?>
+unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
+?>
 
 <?php
 

@@ -16,7 +16,7 @@ include './app/commum/header_client.php'
 </section>
 <!-- End Hero -->
 
-<!-- ======= Gallery Section ======= -->
+<!-- ======= Gallery Section Chambres ======= -->
 <section id="chambres" class="chambres">
   <div class="container-fluid" data-aos="fade-up">
     <div class="section-title">
@@ -290,9 +290,56 @@ include './app/commum/header_client.php'
     </div>
   </div>
 </section>
-<!-- ======= End Gallery Section ======= -->
+<!-- ======= End Gallery Section Chambres ======= -->
 
-<!-- ======= Gallery Section ======= -->
+<!-- ======= Gallery Section Restaurant ======= -->
+<section id="gallery" class="gallery">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Galerie</h2>
+      <p>Quelques photos de notre Restaurant</p>
+    </div>
+  </div>
+
+  <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-0">
+      <div class="col-lg-3 col-md-4">
+        <div class="gallery-item">
+          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (2).jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (2).jpeg" alt="" class="img-fluid" />
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4">
+        <div class="gallery-item">
+          <a href="<?= PATH_PROJECT ?>public/images/wellness/reunion.jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/wellness/reunion.jpeg" alt="" class="img-fluid" />
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4">
+        <div class="gallery-item">
+          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" alt="" class="img-fluid" />
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4">
+        <div class="gallery-item">
+          <a href="<?= PATH_PROJECT ?>public/images/wellness/wellness (4).jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (4).jpeg" alt="" class="img-fluid" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Gallery Section Restaurant-->
+
+<!-- ======= Gallery Section Restaurant ======= -->
 <section id="gallery" class="gallery">
   <div class="container" data-aos="fade-up">
     <div class="section-title">
@@ -369,7 +416,9 @@ include './app/commum/header_client.php'
     </div>
   </div>
 </section>
-<!-- End Gallery Section -->
+<!-- End Gallery Section Restaurant-->
+
+
 <?php
 
 include './app/commum/footer_client.php'

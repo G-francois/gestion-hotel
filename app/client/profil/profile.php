@@ -426,14 +426,17 @@ if (!check_if_user_connected_client()) {
                     <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                          <div class="modal-header">
+                          <!-- <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer mon compte</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
-                          </div>
+                          </div> -->
                           <div class="modal-body">
                             <div class="row mb-3">
+                              <div>
+                                <i class="bi bi-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
+                              </div>
                               <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action votre compte sera supprimer de façon définitive.
                                 Si oui veuiller entrer votre mot de passe pour appliquer l'action. </label>
                               <br>
@@ -466,16 +469,19 @@ if (!check_if_user_connected_client()) {
                     <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                          <div class="modal-header">
+                          <!-- <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Désactiver mon compte</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
-                          </div>
+                          </div> -->
                           <div class="modal-body">
                             <div class="row mb-3">
+                              <div>
+                                <i class="bi bi-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
+                              </div>
                               <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
-                                Si oui veuiller entrer votre mot de passe pour appliquer l'action. Pour réactiver votre compte veuiller nous écrire par mail.</label>
+                                Si oui veuiller entrer votre mot de passe pour appliquer l'action. Pour réactiver votre compte veuiller contacter un administrateur.</label>
                               <br>
                               <div class="col-md-8 col-lg-12">
                                 <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
@@ -506,7 +512,7 @@ if (!check_if_user_connected_client()) {
             <div class="card-body">
               <form action="<?= PATH_PROJECT ?>client/profil/traitement_edit_profil" method="post" enctype="multipart/form-data">
                 <h5 style="color: #cda45e; text-align:center; ">
-                  Les champs ci-dessous ne doivent pas être soumis vide. Au cas contraire elles affichent les anciennes informations.
+                  <i class="bi bi-exclamation-triangle me-1"></i> Les champs ci-dessous ne doivent pas être soumis vide. Au cas contraire elles affichent les anciennes informations.
                 </h5>
 
                 <?php
@@ -629,7 +635,9 @@ if (!check_if_user_connected_client()) {
         <div class="card">
           <div class="card-body">
             <form action="<?= PATH_PROJECT ?>client/profil/traitement_password" method="post" enctype="multipart/form-data">
-              <h5 style="color: #cda45e; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
+              <h5 style="color: #cda45e; text-align:center; ">
+                <i class="bi bi-exclamation-triangle me-1"></i> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).
+              </h5>
               <br>
               <div class="row mb-3">
                 <label for="currentPassword" class="col-md-5 col-lg-4 col-form-label" require>Mot de passe actuel</label>

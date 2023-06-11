@@ -1,9 +1,14 @@
 <?php
-include './app/commum/header_admin_icm.php';
+if (check_if_user_connected_recept()) {
+    header('location: ' . PATH_PROJECT . 'receptionniste/dashboard/index');
+    exit;
+}
+
+include './app/commum/header.php';
 ?>
 
 <div class="container">
-    <div class="card o-hidden border-0 shadow-lg" style="margin-top: 5rem;">
+    <div class="card o-hidden border-0 shadow-lg" style="margin-top: 2rem;">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
@@ -189,20 +194,3 @@ session_destroy();
 
 ?>
 
-<!-- Template Main JS File -->
-
-<script src="/soutenancepublic/js/main.js"></script>
-
-<!-- Bootstrap core JavaScript-->
-<script src="/soutenancepublic/vendor/jquery/jquery.min.js"></script>
-<script src="/soutenancepublic/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="/soutenancepublic/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/soutenancepublic/js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>

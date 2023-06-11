@@ -1,22 +1,12 @@
 
 <?php
-session_start();
-
-include './app/commum/fonction.php';
-
-$_SESSION['inscription-erreurs'] = [];
-
-$_SESSION['donnees-chambre'] = [];
-
 $donnees = [];
-
+$message_erreur_global = "";
+$message_success_global = "";
 $erreurs = [];
 
-$message = array();
 
-$message_success = "";
-
-if (isset($_POST["code_typ"]) && !empty($_POST["code_typ"])) {
+if (isset($_POST["cod_typ"]) && !empty($_POST["cod_typ"])) {
     $donnees["cod_typ"] = $_POST["cod_typ"];
 } else {
     $erreurs["cod_typ"] = "Le champs code type est requis. Veuillez le renseigné.";
@@ -28,81 +18,35 @@ if (isset($_POST["lib_typ"]) && !empty($_POST["lib_typ"])) {
     $erreurs["lib_typ"] = "Le champs libelle type de chambre est requis. Veuillez le renseigné.";
 }
 
-if (isset($_POST["statuts"]) && !empty($_POST["statuts"])) {
-    $donnees["statuts"] = $_POST["pu"];
+if (isset($_POST["statut"]) && !empty($_POST["statut"])) {
+    $donnees["statut"] = $_POST["statut"];
 } else {
-    $erreurs["statuts"] = "Le champs statuts est requis. Veuillez le renseigné.";
+    $erreurs["statut"] = "Le champs statuts est requis. Veuillez le renseigné.";
 }
-
 
 if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
     $donnees["pu"] = $_POST["pu"];
 } else {
-    $erreurs["pu"] = "Le champs pris unitaire est requis. Veuillez le renseigné.";
+    $erreurs["pu"] = "Le champs prix unitaire est requis. Veuillez le renseigné.";
 }
 
 
 if (empty($erreurs)) {
 
-    $check_if_chambre_exist = check_if_chambre_exist($donnees["code_type"], $donnees["libelle_type"], $donnees["statuts"], $donnees["pu"]);
+    $resultat = enregistrer_chambre($donnees["cod_typ"], $donnees["lib_typ"], $donnees["statut"], $donnees["pu"]);
 
-    if (!$check_if_chambre_exist) {
+    if ($resultat) {
 
-        $ajout_chambre = ajouter_chambre($donnees["code_type"], $donnees["libelle_type"], $donnees["statuts"], $donnees["pu"]);
-
-        if ($ajout_chambre) {
-
-            $message["statut"] = 1;
-            $message["message"] = "Chambre ajouté avec succès.";
-
-        } else {
-
-            $message["statut"] = 0;
-            $message["message"] = "Oups! Une erreur s'est produite lors de l'ajout de la chambre. Veuillez réesayer.";
-
-        }
+        $message_success_global = "La chambre a été enrégistrer avec succès !";
 
     } else {
 
-        $message["statut"] = 0;
-        $message["message"] = "Oups! Le nom de cette chambre existe deja. Veuillez réesayer.";
-
+        $message_erreur_global = "Oups ! Une erreur s'est produite lors de l'enregistrement de la chambre.";
     }
-}
-
-
-
+} 
 
 $_SESSION['donnees-chambre'] = $donnees;
-
-
-
-$_SESSION['success'] = "";
-
-
-if (empty($erreurs)) {
-    $db = connect_db();
-
-    // Ecriture de la requête
-    $requette = 'INSERT INTO chambre (code_type, libelle_type, statuts, pu) VALUES (:cod_typ, :lib_typ, :statuts, :pu);';
-
-    // Préparation
-    $inserer_chambre = $db->prepare($requette);
-
-    // Exécution ! La recette est maintenant en base de données
-    $resultat = $inserer_chambre->execute([
-        'cod_typ' => $donnees["cod_typ"],
-        'lib_typ' => $donnees["lib_typ"],
-        'statuts' => $donnees["status"],
-        'pu' => $donnees["pu"]
-    ]);
-
-    if ($resultat) {
-        $_SESSION['success'] = "Ajout éffectué avec succès.";
-        header('location: /soutenance/administrateur/dashboard/ajout-chambre');
-    }
-} else {
-    $_SESSION['inscription-erreurs'] = $erreurs;
-
-    header('location: /soutenance/administrateur/dashboard/liste-chambre');
-}
+$_SESSION['erreurs-chambre'] = $erreurs;
+$_SESSION['message-erreur-global'] = $message_erreur_global;
+$_SESSION['message-success-global'] = $message_success_global;
+header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-chambre');

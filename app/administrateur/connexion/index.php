@@ -1,5 +1,10 @@
 <?php
-include './app/commum/header_admin_icm.php'
+if (check_if_user_connected_admin()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
+    exit;
+}
+
+include './app/commum/header.php'
 ?>
 
 
@@ -9,7 +14,7 @@ include './app/commum/header_admin_icm.php'
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card o-hidden border-0 shadow-lg">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
@@ -19,25 +24,23 @@ include './app/commum/header_admin_icm.php'
 
 
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1] . " " . $_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
                                     </div>
+                                    <?php
+                                    if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
+                                    ?>
+                                        <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                                            <?= $_SESSION['inscription-message-success-global'] ?>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
 
                                     <?php
                                     if (isset($_SESSION['connexion-message-erreur-global']) && !empty($_SESSION['connexion-message-erreur-global'])) {
                                     ?>
                                         <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
                                             <?= $_SESSION['connexion-message-erreur-global'] ?>
-                                        </div>
-                                    <?php
-                                    }
-                                    ?>
-
-
-                                    <?php
-                                    if (isset($_SESSION['suppression-message-success-global']) && !empty($_SESSION['suppression-message-success-global'])) {
-                                    ?>
-                                        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
-                                            <?= $_SESSION['suppression-message-success-global'] ?>
                                         </div>
                                     <?php
                                     }
@@ -94,9 +97,7 @@ include './app/commum/header_admin_icm.php'
     </div>
 
     <?php
-  unset($_SESSION['connexion-message-erreur-global'], $_SESSION['suppression-message-success-global'],  $_SESSION['connexion-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
-  ?>
+    unset($_SESSION['inscription-message-success-global'], $_SESSION['connexion-message-erreur-global'],  $_SESSION['connexion-erreurs-admin']);
 
-    <?php
-    include './app/commum/footer_client_icm.php'
+    include './app/commum/footer_client_icm.php';
     ?>

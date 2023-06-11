@@ -182,3 +182,106 @@ $address = "123 Main Street";
 </body>
 
 </html>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Réservation d'hôtel</title>
+</head>
+<body>
+    <h1>Réservation d'hôtel</h1>
+
+    <form action="traitement.php" method="post">
+        <label for="nom">Nom du client:</label>
+        <input type="text" name="nom" id="nom" required><br><br>
+
+        <label for="dateDebut">Date de début:</label>
+        <input type="date" name="dateDebut" id="dateDebut" required><br><br>
+
+        <label for="dateFin">Date de fin:</label>
+        <input type="date" name="dateFin" id="dateFin" required><br><br>
+
+        <label for="typeChambre">Type de chambre:</label>
+        <select name="typeChambre" id="typeChambre" required>
+            <option value="chambre_simple">Chambre simple</option>
+            <option value="chambre_double">Chambre double</option>
+            <option value="suite">Suite</option>
+        </select><br><br>
+
+        <label for="numeroChambre">Numéro de chambre:</label>
+        <input type="text" name="numeroChambre" id="numeroChambre" required><br><br>
+
+        <label for="accompagnateur">Accompagnateur:</label>
+        <input type="text" name="accompagnateur" id="accompagnateur"><br><br>
+
+        <input type="submit" value="Réserver">
+    </form>
+</body>
+</html>
+
+
+
+<?php
+require_once 'fonction.php';
+
+// Récupérer les données du formulaire
+$nomClient = $_POST['nom'];
+$dateDebut = $_POST['dateDebut'];
+$dateFin = $_POST['dateFin'];
+$typeChambre = $_POST['typeChambre'];
+$numeroChambre = $_POST['numeroChambre'];
+$accompagnateur = $_POST['accompagnateur'];
+
+// Effectuer la réservation
+$resultat = effectuerReservation($nomClient, $dateDebut, $dateFin, $typeChambre, $numeroChambre, $accompagnateur);
+
+// Afficher le résultat
+if ($resultat) {
+    echo "Réservation effectuée avec succès !";
+} else {
+    echo "Erreur lors de la réservation.";
+}
+?>
+
+
+<?php
+function effectuerReservation($nomClient, $dateDebut, $dateFin, $typeChambre, $numeroChambre, $accompagnateur)
+{
+    // Connexion à la base de données
+    $servername = "nom_du_serveur";
+    $username = "nom_d_utilisateur";
+    $password = "mot_de_passe";
+    $dbname = "nom_de_la_base_de_donnees";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Vérifier la connexion
+    if ($conn->connect_error) {
+        die("La connexion a échoué : " . $conn->connect_error);
+    }
+
+    // Insérer un nouveau client
+    $sqlInsertClient = "INSERT INTO client (nom_clt, est_actif, est_supprimer) VALUES ('$nomClient', 1, 0)";
+    if ($conn->query($sqlInsertClient) === FALSE) {
+        $conn->close();
+        return false;
+    }
+
+    // Récupérer l'ID du client
+    $clientId = $conn->insert_id;
+
+    // Insérer une nouvelle réservation
+    $sqlInsertReservation = "INSERT INTO reservation (id_client, date_debut, date_fin, type_chambre, numero_chambre, accompagnateur) VALUES ($clientId, '$dateDebut', '$dateFin', '$typeChambre', '$numeroChambre', '$accompagnateur')";
+    if ($conn->query($sqlInsertReservation) === TRUE) {
+        $conn->close();
+        return true;
+    } else {
+        $conn->close();
+        return false;
+    }
+}
+?>

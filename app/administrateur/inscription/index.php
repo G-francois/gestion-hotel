@@ -1,5 +1,10 @@
 <?php
-include './app/commum/header_admin_icm.php';
+if (check_if_user_connected_admin()) {
+	header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
+	exit;
+}
+
+include './app/commum/header.php';
 ?>
 
 <div class="container">
@@ -10,15 +15,7 @@ include './app/commum/header_admin_icm.php';
                 <div class="col-lg-6 d-none d-lg-block bg-register-image1"></div>
                 <div class="col-lg-6">
                     <div class="p-5">
-                        <?php
-                        if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
-                        ?>
-                            <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-                                <?= $_SESSION['inscription-message-success-global'] ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                        
 
                         <?php
                         if (isset($_SESSION['inscription-message-erreur-global']) && !empty($_SESSION['inscription-message-erreur-global'])) {
@@ -33,7 +30,7 @@ include './app/commum/header_admin_icm.php';
                             <h1 class="h4 text-gray-900 mb-4">Créez un compte Administrateur!</h1>
                         </div>
 
-                        <form action="<?= PATH_PROJECT ?>/administrateur/inscription/traitement" method="post" class="user">
+                        <form action="<?= PATH_PROJECT ?>administrateur/inscription/traitement" method="post" class="user">
                             <!-- Le champ nom -->
                             <div class="form-group">
                                 <label for="inscription-nom">

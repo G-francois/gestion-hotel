@@ -22,15 +22,15 @@ if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
 }
 
 if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
-    $donnees["prenom"] = $_POST["prenom"];
+	$donnees["prenom"] = $_POST["prenom"];
 } else {
-    $erreurs["prenom"] = "Le champs prénom est requis. Veuillez le renseigné.";
+	$erreurs["prenom"] = "Le champs prénom est requis. Veuillez le renseigné.";
 }
 
 if (isset($_POST["sexe"]) && !empty($_POST["sexe"])) {
-    $donnees["sexe"] = $_POST["sexe"];
+	$donnees["sexe"] = $_POST["sexe"];
 } else {
-    $erreurs["sexe"] = "Le champs sexe est requis. Veuillez le renseigné.";
+	$erreurs["sexe"] = "Le champs sexe est requis. Veuillez le renseigné.";
 }
 
 if (isset($_POST["telephone"]) && !empty($_POST["telephone"])) {
@@ -62,9 +62,9 @@ if (isset($_POST["email"]) && !empty($_POST["email"])) {
 }
 
 if (isset($_POST["nom-utilisateur"]) && !empty($_POST["nom-utilisateur"])) {
-    $donnees["nom-utilisateur"] = $_POST["nom-utilisateur"];
+	$donnees["nom-utilisateur"] = $_POST["nom-utilisateur"];
 } else {
-    $erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigné.";
+	$erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigné.";
 }
 
 if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {
@@ -116,8 +116,8 @@ if (check_telephone_exist_in_db($_POST["telephone"])) {
 	$erreurs["telephone"] = "Ce numéro de téléphone est déjà utilisé. Veuillez le changez.";
 }
 
-$_SESSION['donnees-utilisateur'] = $donnees;
-$_SESSION['inscription-erreurs'] = $erreurs;
+$_SESSION['donnees-utilisateur-admin'] = $donnees;
+$_SESSION['inscription-erreurs-admin'] = $erreurs;
 $donnees["profil"] = "ADMINISTRATEUR";
 
 if (empty($erreurs)) {
@@ -125,15 +125,22 @@ if (empty($erreurs)) {
 	$resultat = enregistrer_utilisateur_admin($donnees["nom"], $donnees["prenom"], $donnees["sexe"], $donnees["telephone"], $donnees["email"], $donnees["nom-utilisateur"], $donnees["mot-passe"], $donnees["profil"]);
 
 	if ($resultat) {
-        $message_success_global = "Inscription éffectuée avec succès. Veuiller contacter un administrateur pour valider votre compte.";
-		
+		if ($donnees["sexe"] == "Masculin") {
+			$genre = "Mr";
+		} elseif ($donnees["sexe"] == "Feminin") {
+			$genre = "Mlle";
+		}
+
+		$_SESSION['nom-utilisateur-inscrit'] = [$donnees["nom-utilisateur"], $genre];
+
+		$message_success_global = "Votre inscription s'est éffectuée avec succès. Pour pouvoir vous connectez, veuiller contacter un administrateur pour activer votre compte.";
+
+		header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
 	} else {
 		$message_erreur_global = "Oups ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
+		header('location: ' . PATH_PROJECT . 'administrateur/inscription/index');
 	}
 }
 
 $_SESSION['inscription-message-erreur-global'] = $message_erreur_global;
 $_SESSION['inscription-message-success-global'] = $message_success_global;
-header('location: ' . PATH_PROJECT . 'administrateur/inscription/index');
-
-

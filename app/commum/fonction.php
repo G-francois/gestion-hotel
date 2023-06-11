@@ -251,7 +251,7 @@ function insertion_token(int $user_id, string $type, string $token): bool
  *  Cette fonction permet de recupérer le token grâce à l'id de l'utilisateur dans la table token
  *
  * @param  int $user_id
- * @return void
+ * @return array
  */
 function recuperer_token(int $user_id): array
 {
@@ -309,8 +309,11 @@ function recuperer_id_utilisateur_par_son_mail(string $email): int
 		]);
 
 		if ($request_execution) {
+
 			$data = $request_prepare->fetch(PDO::FETCH_ASSOC);
+
 			if (isset($data) && !empty($data) && is_array($data)) {
+
 				$user_id = $data["id"];
 			}
 		}
@@ -503,7 +506,7 @@ function check_password_exist(string $password, int $id): bool
 
 
 /**
- * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
+ * Cette fonction permet de savoir si un utilisateur administrateur est déjà connecté ou pas
  *
  * @return bool
  */
@@ -513,7 +516,7 @@ function check_if_user_connected_admin(): bool
 }
 
 /**
- * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
+ * Cette fonction permet de savoir si un utilisateur client est déjà connecté ou pas
  *
  * @return bool
  */
@@ -523,7 +526,7 @@ function check_if_user_connected_client(): bool
 }
 
 /**
- * Cette fonction permet de savoir si un utilisateur admin est déjà connecté ou pas
+ * Cette fonction permet de savoir si un utilisateur receptionniste est déjà connecté ou pas
  *
  * @return bool
  */
@@ -801,7 +804,7 @@ function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, st
  * @param int $id
  * @return bool
  */
-function enregistrer_utilisateur_admin(string $nom, string $prenom, string $sexe, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "ADMINISTRATEUR"): bool
+function enregistrer_utilisateur_admin(string $nom, string $prenom, string $sexe, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil): bool
 {
 	$enregistrer_utilisateur = false;
 
@@ -832,3 +835,291 @@ function enregistrer_utilisateur_admin(string $nom, string $prenom, string $sexe
 
 	return $enregistrer_utilisateur;
 }
+
+/**
+ * Cette fonction permet de récupérer la liste des utilisateurs de la base de donnée.
+ *
+ * @return array $liste_utilisateurs La liste des utilisateurs.
+ */
+function recuperer_liste_utilisateurs(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM utilisateur';
+
+		$verifier_liste_utilisateurs = $db->prepare($requette);
+
+		$resultat = $verifier_liste_utilisateurs->execute();
+
+		if ($resultat) {
+
+			$liste_utilisateurs = $verifier_liste_utilisateurs->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_utilisateurs;
+}
+
+/**
+ * Cette fonction permet d'enregistrer un repas
+ *
+ * @param  string $nom_repas le nom du repas
+ * @param  int $pu_repas le prix unitaire du repas
+ * @param  int $est_actif le est actif ou pas
+ * @return bool
+ */
+function enregistrer_repas(string $nom_repas, int $pu_repas, int $est_actif = 1): bool
+{
+	$enregistrer_repas = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'INSERT INTO repas (nom_repas, pu_repas, est_actif) VALUES (:nom_repas, :pu_repas, :est_actif)';
+
+		$inserer_repas = $db->prepare($requette);
+
+		$resultat = $inserer_repas->execute([
+			'nom_repas' => $nom_repas,
+			'pu_repas' => $pu_repas,
+			'est_actif' => $est_actif
+		]);
+
+		$enregistrer_repas = $resultat;
+	}
+
+	return $enregistrer_repas;
+}
+
+
+/**
+ * Cette fonction permet de verifier si l'un repas dans la base de donnée ne possède pas ce nom.
+ * @param int $ nom_repas Le nom du repas a vérifié.
+ *
+ * @return bool $check
+ */
+function check_if_repas_exist_in_db(string $nom_repas): bool
+{
+
+	$check = false;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$requette = "SELECT count(*) as nbr_repas FROM repas WHERE nom_repas = :nom_repas and est_supprimer = :est_supprimer";
+
+		$verifier_nom_repas = $db->prepare($requette);
+
+		$resultat = $verifier_nom_repas->execute([
+			'nom_repas' => $nom_repas,
+			'est_supprimer' => 0
+		]);
+
+		if ($resultat) {
+
+			$nbr_utilisateur = $verifier_nom_repas->fetch(PDO::FETCH_ASSOC)["nbr_repas"];
+
+			$check = ($nbr_utilisateur > 0) ? true : false;
+		}
+	}
+
+	return $check;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des repas de la base de donnée.
+ *
+ * @return array $liste_repas La liste des repas.
+ */
+function recuperer_liste_repas(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM repas';
+
+		$verifier_liste_repas = $db->prepare($requette);
+
+		$resultat = $verifier_liste_repas->execute();
+
+		if ($resultat) {
+
+			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_repas;
+}
+
+/**
+ * Cette fonction permet de récupérer un repas via son code repas.
+ *
+ * @param int $cod_repas Le code du repas.
+ *
+ * @return array
+ */
+function recuperer_repas_par_son_code_repas(int $cod_repas): array
+{
+
+	$repas = array();
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas ';
+
+		$verifier_repas = $db->prepare($requette);
+
+		$resultat = $verifier_repas->execute([
+			"cod_repas" => $cod_repas
+		]);
+
+		if ($resultat) {
+
+			$repas = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $repas;
+}
+
+
+/**
+ * Cett fonction permet de modifier un repas exitant dans la base de données via son cod_repas.
+ *
+ * @param int $cod_repas Le code du repas.
+ * @param string $nom_repos Le nom du repas.
+ * @param  int $pu_repas le prix du repas
+ * @return bool
+ */
+function modifier_repas(int $cod_repas, string $nom_repas, int $pu_repas): bool
+{
+
+	$modifier_repas = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requette = 'UPDATE repas SET nom_repas = :nom_repas and pu_repas = :pu_repas WHERE cod_repas = :cod_repas;';
+
+		$modifier_repas = $db->prepare($requette);
+
+		$resultat = $modifier_repas->execute([
+			'nom_repas' => $nom_repas,
+			'pu_repas' => $pu_repas,
+		]);
+
+		if ($resultat) {
+
+			$modifier_repas = true;
+		}
+	}
+
+	return $modifier_repas;
+}
+
+/**
+ * Cette fonction permet de supprimer un repas de la base de données a partir de son code repas.
+ * 
+ * @param int $cod_repas Le code du repas.
+ * 
+ * @return bool $repas_est_supprimer
+ * 
+ */
+function supprimer_repas(int $cod_repas): bool
+{
+
+	$repas_est_supprimer = false;
+
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requette = 'DELETE FROM repas WHERE cod_repas = :cod_repas';
+
+		$supprimer_repas = $db->prepare($requette);
+
+		$resultat = $supprimer_repas->execute([
+			'cod_repas' => $cod_repas,
+		]);
+
+		if ($resultat) {
+
+			$repas_est_supprimer = true;
+		}
+	}
+
+	return $repas_est_supprimer;
+}
+
+
+/**
+ * enregistrer_chambre
+ *
+ * @param  int $cod_typ
+ * @param  string $lib_typ
+ * @param  string $statut
+ * @param  int $pu
+ * @param  int $est_actif
+ * @return bool
+ */
+function enregistrer_chambre(string $cod_typ, string $lib_typ,string $statut, int $pu,  int $est_actif = 1): bool
+{
+	$enregistrer_chambre = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, statut, pu, est_actif) VALUES (:cod_typ, :lib_typ, :statut, :pu, :est_actif)';
+
+		$inserer_chambre = $db->prepare($requette);
+
+		$resultat = $inserer_chambre->execute([
+			'cod_typ' => $cod_typ,
+			'lib_typ' => $lib_typ,
+			'statut' => $statut,
+			'pu' => $pu,
+			'est_actif' => $est_actif
+		]);
+
+		$enregistrer_chambre = $resultat;
+	}
+
+	return $enregistrer_chambre;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des chambres de la base de donnée.
+ *
+ * @return array $liste_chambre La liste des chambres.
+ */
+function recuperer_liste_chambres(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM chambre';
+
+		$verifier_liste_chambres = $db->prepare($requette);
+
+		$resultat = $verifier_liste_chambres->execute();
+
+		if ($resultat) {
+
+			$liste_chambre = $verifier_liste_chambres->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_chambre;
+}
+
+

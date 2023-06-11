@@ -1,7 +1,7 @@
 <?php
-$_SESSION['suppression-erreurs'] = "";
+$_SESSION['sauvegarder-erreurs-admin'] = "";
 
-$_SESSION['donnees-utilisateur'] = [];
+$_SESSION['donnees-utilisateur-admin'] = [];
 
 $donnees = [];
 
@@ -14,13 +14,13 @@ if (isset($_POST['suppression'])) {
             session_destroy();
             header('location:' . PATH_PROJECT . 'administrateur/connexion/index');
         } else {
-            $_SESSION['suppression-erreurs'] = "La suppression à echouer. Veuiller réessayez.";  
+            $_SESSION['sauvegarder-erreurs-admin'] = "La suppression à echouer. Veuiller réessayez.";  
         }
     } else {
-        $_SESSION['suppression-erreurs'] = "La suppression à echouer. Vérifier votre mot de passe et réessayez.";
+        $_SESSION['sauvegarder-erreurs-admin'] = "La suppression à echouer. Vérifier votre mot de passe et réessayez.";
     }
 } else {
-    $_SESSION['suppression-erreurs'] = "La suppresion à echouer. Veuiller réessayez.";
+    $_SESSION['sauvegarder-erreurs-admin'] = "La suppresion à echouer. Veuiller réessayez.";
 }
 
 $_SESSION['suppression-message-success-global'] = $message_success_global;

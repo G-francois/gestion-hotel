@@ -56,7 +56,7 @@ if (isset($_POST['sauvegarder'])) {
             $new_data['nom_utilisateur'] = htmlentities($_POST['nom_utilisateur']);
         } else {
             if (empty($_POST['nom_utilisateur'])) {
-                $erreurs["nom_utilisateur"] = "Le champ nom d'utilisateur ne doit pas être vide.";
+                $erreurs["nom_utilisateur"] = "Le champ nom_utilisateur ne doit pas être vide.";
             } else {
                 $new_data['nom_utilisateur'] = $donnees['nom_utilisateur'];
             }

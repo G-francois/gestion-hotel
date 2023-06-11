@@ -4,7 +4,7 @@ $donnees = [];
 $message_erreur_global = "";
 $message_success_global = "";
 $erreurs = [];
-$_SESSION['donnees-utilisateur']  = [];
+$_SESSION['donnees-utilisateur-admin']  = [];
 
 if (isset($_POST["email-nom-utilisateur"]) && !empty($_POST["email-nom-utilisateur"])) {
 
@@ -22,7 +22,7 @@ if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {
     $erreurs["mot-passe"] = "Le champs mot de passe est requis. Veuillez le renseigné.";
 }
 
-$_SESSION['donnees-utilisateur'] = $donnees;
+$_SESSION['donnees-utilisateur-admin'] = $donnees;
 
 if (empty($erreurs)) {
 
@@ -39,7 +39,7 @@ if (empty($erreurs)) {
         $message_erreur_global = "L'adresse email ou le mot de passe est incorrecte. Veuiller le reéssayer.";
     }
 } else {
-    $_SESSION['connexion-erreurs'] = $erreurs;
+    $_SESSION['connexion-erreurs-admin'] = $erreurs;
 }
 
 $_SESSION['connexion-message-erreur-global'] = $message_erreur_global;

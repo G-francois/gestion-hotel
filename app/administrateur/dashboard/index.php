@@ -1,5 +1,12 @@
 <?php
-include './app/commum/header.php'
+if (!check_if_user_connected_admin()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
+    exit;
+}
+
+include './app/commum/header.php';
+
+include './app/commum/aside.php';
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">

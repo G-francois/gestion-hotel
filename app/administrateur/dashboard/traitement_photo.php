@@ -1,8 +1,8 @@
 <?php
 
-$_SESSION['photo-erreurs'] = "";
+$_SESSION['photo-erreurs-admin'] = "";
 
-$_SESSION['donnees-utilisateur'] = [];
+$_SESSION['donnees-utilisateur-admin'] = [];
 
 $donnees = [];
 
@@ -63,20 +63,20 @@ if (isset($_POST['change_photo'])) {
                         }
                     } else {
 
-                        $_SESSION['photo-erreurs'] = "La mise à jour de l'image à echouer.";
+                        $_SESSION['photo-erreurs-admin'] = "La mise à jour de l'image à echouer.";
                     }
                 } else {
-                    $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
+                    $_SESSION['photo-erreurs-admin'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
                 }
             } else {
-                $_SESSION['photo-erreurs'] = "Fichier trop lourd. Poids maximum autorisé : 3mo";
+                $_SESSION['photo-erreurs-admin'] = "Fichier trop lourd. Poids maximum autorisé : 3mo";
             }
         } else {
 
             $profiledonnees["image"] = $donnees[0]["image_profil"];
         }
     } else {
-        $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
+        $_SESSION['photo-erreurs-admin'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
         
     }
 }

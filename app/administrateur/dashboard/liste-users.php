@@ -1,127 +1,130 @@
 <?php
-include './app/commum/header.php'
+if (!check_if_user_connected_admin()) {
+    header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
+    exit;
+}
+
+include './app/commum/header.php';
+
+include './app/commum/aside.php';
+
+$liste_utilisateur = recuperer_liste_utilisateurs();
 ?>
 
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Utilisateurs</h1>
-    <p class="mb-4">Imprimer la liste des utlisateurs<a target="_blank" href="#">Liste des utilisateurs</a>.</p>
-
+    <div class="pagetitle ">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Listes des utilisateurs</li>
+            </ol>
+        </nav>
+    </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Listes des utilisateurs</h6>
-        </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom(s)</th>
-                            <th>Sexe</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>KAMADO</td>
-                            <td>Tanjiro</td>
-                            <td>Masculin</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Détails
-                                </button>
+                <?php if (isset($liste_utilisateur) && !empty($liste_utilisateur)) {
+                ?>
+                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Prénom(s)</th>
+                                <th>Sexe</th>
+                                <th>Est actif</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Date de naissance : </strong>10/12/13</p>
-                                                <p><strong>Email : </strong>kamado.tanjiro@yahoo.com</p>
-                                                <p><strong>Nom d'utilisateur : </strong>Tanjiro</p>
-                                                <p><strong>Type : </strong>User</p>
-                                                <p><strong>Mot de passe : </strong>1234</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            foreach ($liste_utilisateur as $utilisateur) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $utilisateur['id']; ?></td>
+                                    <td><?php echo $utilisateur['nom']; ?></td>
+                                    <td><?php echo $utilisateur['prenom']; ?></td>
+                                    <td><?php echo $utilisateur['sexe']; ?></td>
+                                    <td><?php echo $utilisateur['est_actif']; ?></td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Détails
+                                        </button>
 
-                        <tr>
-                            <td>G</td>
-                            <td>François</td>
-                            <td>Masculin</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">
-                                    Détails
-                                </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <p><strong>Téléphone : </strong><?php echo $utilisateur['telephone']; ?></p>
+                                                        <p><strong>Email : </strong><?php echo $utilisateur['email']; ?></p>
+                                                        <p><strong>Nom d'utilisateur : </strong><?php echo $utilisateur['nom_utilisateur']; ?></p>
+                                                        <p><strong>Type : </strong><?php echo $utilisateur['profil']; ?></p>
+                                                    </div>
+                                                    <div class="modal-footer float-right">
+                                                        <a href="?requette=modifier-utilisateur&num-utilisateur=<?= $utilisateur["nom_utilisateur"]; ?>" class="btn btn-warning">Modifier</a>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Date de naissance : </strong>10/12/13
-                                                <p>
-                                                <p><strong>Email : </strong>francog@yahoo.com</p>
-                                                <p><strong>Nom d'utilisateur : </strong>FRANCO</p>
-                                                <p><strong>Type : </strong>Admin</p>
-                                                <p><strong>Mot de passe : </strong>234</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
+                                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?= $utilisateur["nom_utilisateur"]; ?>">Supprimer</a>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>UZUMAKI</td>
-                            <td>Naruto</td>
-                            <td>Masculin</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
-                                    Détails
-                                </button>
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Activer
+                                        </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Date de naissance : </strong>10/10/05
-                                                <p>
-                                                <p><strong>Email : </strong>uzumaki.naruto@gmail.com</p>
-                                                <p><strong>Nom d'utilisateur : </strong>Naruto</p>
-                                                <p><strong>Type : </strong>User</p>
-                                                <p><strong>Mot de passe : </strong>1234567890</p>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Désactiver
+                                        </button>
+                                    </td>
+
+                                    <div class="modal fade" id="supprimer-utilisateur-<?= $utilisateur["nom_utilisateur"]; ?>" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Supprimer
+                                                        l'utilisateur <?= $utilisateur["nom_utilisateur"]; ?></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Etes vous sur de vouloir supprimer
+                                                        l'utilisateur <?= $utilisateur["nom_utilisateur"]; ?> ?</p>
+                                                </div>
+                                                <div class="modal-footer ">
+
+                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/supprimer-utilisateur-traitement<?= $utilisateur["nom_utilisateur"]; ?>" class="btn btn-danger">Oui</a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Annuler
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
+                                            <!-- /.modal-content -->
                                         </div>
+                                        <!-- /.modal-dialog -->
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                <?php
+                            }
+
+                                ?>
+                                </tr>
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                <?php
+                } else {
+
+                    echo "Aucun utlisateur n'a été trouvés!!!";
+                }
+                ?>
+
             </div>
 
         </div>

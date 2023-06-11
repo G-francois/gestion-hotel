@@ -1,8 +1,8 @@
 <?php
 
-$_SESSION['photo-erreurs'] = "";
+$_SESSION['photo-erreurs-admin'] = "";
 
-$_SESSION['donnees-utilisateur'] = [];
+$_SESSION['donnees-utilisateur-admin'] = [];
 
 $donnees = [];
 
@@ -24,7 +24,7 @@ if (isset($_POST['supprimer_photo'])) {
             }
         }
     } else {
-        $_SESSION['suppression-erreurs'] = "La suppression de la photo à echouer. Vérifier votre mot de passe et réessayez.";
+        $_SESSION['suppression-erreurs-admin'] = "La suppression de la photo à echouer. Vérifier votre mot de passe et réessayez.";
     }
 }
 

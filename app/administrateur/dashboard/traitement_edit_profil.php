@@ -1,8 +1,8 @@
 <?php
 
-$_SESSION['sauvegarder-erreurs'] = "";
+$_SESSION['sauvegarder-erreurs-admin'] = "";
 
-$_SESSION['donnees-utilisateur'] = [];
+$_SESSION['donnees-utilisateur-admin'] = [];
 
 $donnees = $_SESSION['utilisateur_connecter_admin'];
 
@@ -80,20 +80,20 @@ if (isset($_POST['sauvegarder'])) {
 
                     $_SESSION['utilisateur_connecter_admin'] = $new_user_data;
                 } else {
-                    $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Veuiller réessayez.";
+                    $_SESSION['sauvegarder-erreurs-admin'] = "La modification à echouer. Veuiller réessayez.";
                 }
             } else {
-                $_SESSION['sauvegarder-erreurs'] = "La mise à jour à echouer. Veuiller réessayez.";
+                $_SESSION['sauvegarder-erreurs-admin'] = "La mise à jour à echouer. Veuiller réessayez.";
             }
         } else {
 
-            $_SESSION['erreurs'] = $erreurs;
+            $_SESSION['erreurs-admin'] = $erreurs;
         }
     } else {
-        $_SESSION['sauvegarder-erreurs'] = "La modification à echouer. Vérifier votre mot de passe et réessayez.";
+        $_SESSION['sauvegarder-erreurs-admin'] = "La modification à echouer. Vérifier votre mot de passe et réessayez.";
     }
 } else {
-    $_SESSION['sauvegarder-erreurs'] = "Veuiller appuyer sur le boutton sauvegarder.";
+    $_SESSION['sauvegarder-erreurs-admin'] = "Veuiller appuyer sur le boutton sauvegarder.";
 }
 
 header('location:' . PATH_PROJECT . 'administrateur/dashboard/profil');

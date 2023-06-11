@@ -1,7 +1,7 @@
 </div><!-- End of Main Content -->
 
 <!-- Footer -->
-<footer class="sticky-footer" style="background-color: #0c0b09;">
+<footer class="sticky-footer" style="background: var(--light); background-clip: border-box; border-top: 1px solid #e3e6f0;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; SOUS LES COCOTIERS 2023</span>
@@ -57,6 +57,7 @@
 <script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
 <script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
 <script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
+
 
 
 </body>

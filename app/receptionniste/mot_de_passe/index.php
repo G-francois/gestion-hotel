@@ -1,105 +1,87 @@
 <?php
-session_start();
+if (check_if_user_connected_recept()) {
+	header('location: ' . PATH_PROJECT . 'receptionniste/dashboard/index');
+	exit;
+}
+
+include './app/commum/header.php'
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
+<div class="container" style="margin-top: 120px; ">
 
-<head>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <div class="col-xl-10 col-lg-12 col-md-9">
 
-    <title>Sous les Cocotiers - Register</title>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-password-imag"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
 
-    <!-- Custom fonts for this template-->
-    <link href="/soutenancepublic/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+                                <?php
+                                if (isset($_SESSION['inscription-message-erreur-global']) && !empty($_SESSION['inscription-message-erreur-global'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                                        <?= $_SESSION['inscription-message-erreur-global'] ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
 
-    <!-- Custom styles for this template-->
-    <link href="/soutenancepublic/css/sb-admin-2.css" rel="stylesheet">
-</head>
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-2">Vous avez oublié votre mot de passe ?</h1>
+                                    <p class="mb-4">
+                                        Nous comprenons, des choses arrivent. Entrez simplement votre adresse mail pour une petite vérification.</p>
+                                </div>
 
-<body>
-    <div class="container" style="margin-top: 120px; ">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-imag"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Vous avez oublié votre mot de passe ?</h1>
-                                        <p class="mb-4">
-                                            Nous comprenons, des choses arrivent. Entrez simplement votre adresse e-mail
-                                            ci-dessous et nous vous enverrons un lien pour réinitialiser votre mot de passe!</p>
+                                <form action="<?= PATH_PROJECT ?>receptionniste/mot_de_passe/traitement" method="post" class="user" novalidate>
+                                    <!-- Le champ email -->
+                                    <div class="form-group">
+                                        <label for="inscription-email">
+                                            Adresse mail:
+                                            <span class="text-danger">(*)</span>
+                                        </label>
+                                        <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+                                        <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
+                                            <span class="text-danger">
+                                                <?php echo $erreurs["email"]; ?>
+                                            </span>
+                                        <?php } ?>
                                     </div>
 
 
+                                    <button type="submit" class="btn btn-primary btn-block">Réinitialiser le mot de passe</button>
 
-                                    <form class="user">
-                                        <!-- Le champs email -->
-                                        <div class="form-group">
-                                            <input type="text" name="email-nom-utilisateur" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre address email" value="<?= (isset($donnees["Entrer votre adresse email ou nom-utilisateur"]) && !empty($donnees["email-nom-utilisateur"])) ? $donnees["email-nom-utilisateur"] : ""; ?>" required>
-                                        </div>
-
-                                        <span class="text-danger">
-
-                                        </span>
-
-                                        <button type="submit" class="btn btn-primary btn-block">Réinitialiser le mot de passe</button>
-
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="/soutenance/receptionniste/mot_de_passe">Mot de passe oublié ?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="/soutenance/receptionniste/connexion">Vous avez déjà un compte ? Connectez-vous!</a>
-                                    </div>
+                                    </a>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="<?= PATH_PROJECT ?>receptionniste/mot_de_passe">Mot de passe oublié ?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="<?= PATH_PROJECT ?>receptionniste/connexion">Vous avez déjà un compte ? Connectez-vous!</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
     </div>
 
+</div>
 
-    <?php
-    session_destroy();
+<?php
+session_destroy();
+?>
 
-    ?>
-
-
-    <!-- Template Main JS File -->
-    <script src="/soutenancepublic/js/main.js"></script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/soutenancepublic/vendor/jquery/jquery.min.js"></script>
-    <script src="/soutenancepublic/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/soutenancepublic/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/soutenancepublic/js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>
+<?php
+include './app/commum/footer_client_icm.php'
+?>

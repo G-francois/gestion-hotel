@@ -1,46 +1,44 @@
 <?php
+$donnees = [];
+$message_erreur_global = "";
+$message_success_global = "";
+$erreurs = [];
 
-$donnees = array();
 
-$erreurs = array();
-
-$message = array();
-
-$message_success = "";
-
-if (isset($_POST["nom-auteur"]) && !empty($_POST["nom-auteur"])) {
-    $donnees["nom-auteur"] = $_POST["nom-auteur"];
+if (isset($_POST["nom_repas"]) && !empty($_POST["nom_repas"])) {
+	$donnees["nom_repas"] = $_POST["nom_repas"];
 } else {
-    $erreurs["nom-auteur"] = "Le champs nom de l'auteur est requis. Veuillez le renseigné.";
+	$erreurs["nom_repas"] = "Le champs nom du repas est requis. Veuillez le renseigné.";
 }
+
+if (isset($_POST["pu_repas"]) && !empty($_POST["pu_repas"])) {
+	$donnees["pu_repas"] = $_POST["pu_repas"];
+} else {
+	$erreurs["pu_repas"] = "Le champs prix unitaire est requis. Veuillez le renseigné.";
+}
+
 
 if (empty($erreurs)) {
 
-    $check_if_auteur_exist = check_if_auteur_exist($donnees["nom-auteur"]);
+	if (!check_if_repas_exist_in_db($_POST["nom_repas"])) {
 
-    if (!$check_if_auteur_exist) {
+		$resultat = enregistrer_repas($donnees["nom_repas"], $donnees["pu_repas"]);
 
-        $ajout_auteur = ajout_auteur($donnees["nom-auteur"]);
+		if ($resultat) {
 
-        if ($ajout_auteur) {
+			$message_success_global = "Le repas a été enrégistrer avec succès !";
+		} else {
 
-            $message["statut"] = 1;
-            $message["message"] = "Auteur ajouté avec succès.";
+			$message_erreur_global = "Oups ! Une erreur s'est produite lors de l'enregistrement du repas.";
+		}
+	} else {
 
-        } else {
-
-            $message["statut"] = 0;
-            $message["message"] = "Oups! Une erreur s'est produite lors de l'ajout de l'auteur. Veuillez réesayer.";
-
-        }
-
-    } else {
-
-        $message["statut"] = 0;
-        $message["message"] = "Oups! Le nom de ce auteur existe deja. Veuillez réesayer.";
-
-    }
-
+		$erreurs["nom_repas"] = "Oups! Le nom du repas existe deja. Veuillez réesayer.";
+	}
 }
 
-include("auteurs/ajout-auteur.php");
+$_SESSION['donnees-repas'] = $donnees;
+$_SESSION['erreurs-repas'] = $erreurs;
+$_SESSION['message-erreur-global'] = $message_erreur_global;
+$_SESSION['message-success-global'] = $message_success_global;
+header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-repas');

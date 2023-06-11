@@ -14,8 +14,8 @@ if (isset($_POST["email"]) && !empty($_POST["email"]) && filter_var($_POST["emai
     $erreurs["email"] = "Le champs email est requis. Veuillez le renseigné.";
 }
 
-$_SESSION['donnees-utilisateur'] = $donnees;
-$_SESSION['verification-erreurs'] = $erreurs;
+$_SESSION['donnees-utilisateur-admin'] = $donnees;
+$_SESSION['verification-erreurs-admin'] = $erreurs;
 
 
 if (empty($erreurs)) {

@@ -1,5 +1,11 @@
 <?php
-include './app/commum/header_admin_icm.php';
+
+if (check_if_user_connected_recept()) {
+    header('location: ' . PATH_PROJECT . 'receptionniste/dashboard/index');
+    exit;
+}
+
+include './app/commum/header.php';
 ?>
 
 
@@ -8,13 +14,19 @@ include './app/commum/header_admin_icm.php';
 
         <div class="col-xl-10 col-lg-12 col-md-9">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-login-image2"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
+
+
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1] . " " . $_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
+                                </div>
+
                                 <?php
                                 if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
                                 ?>
@@ -25,10 +37,15 @@ include './app/commum/header_admin_icm.php';
                                 }
                                 ?>
 
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1] . " " . $_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
-                                </div>
-
+                                <?php
+                                if (isset($_SESSION['connexion-message-erreur-global']) && !empty($_SESSION['connexion-message-erreur-global'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                                        <?= $_SESSION['connexion-message-erreur-global'] ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                                 <form action="<?= PATH_PROJECT ?>receptionniste/connexion/traitement" method="post" class="user">
                                     <!-- Le champs email ou nom utilisateur-->
                                     <div class="form-group">
@@ -62,10 +79,10 @@ include './app/commum/header_admin_icm.php';
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>/receptionniste/mot_de_passe">Mot de passe oublié ?</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>receptionniste/mot_de_passe">Mot de passe oublié ?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>/receptionniste/inscription">Créez un compte !</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>receptionniste/inscription">Créez un compte !</a>
                                 </div>
 
                             </div>
@@ -78,3 +95,9 @@ include './app/commum/header_admin_icm.php';
 
     </div>
 </div>
+
+<?php
+unset($_SESSION['inscription-message-success-global'], $_SESSION['connexion-message-erreur-global'],  $_SESSION['connexion-erreurs']);
+
+include './app/commum/footer_client_icm.php';
+?>

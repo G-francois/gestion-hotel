@@ -1,5 +1,10 @@
 <?php
-include './app/commum/header_admin_icm.php'
+if (check_if_user_connected_admin()) {
+	header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
+	exit;
+}
+
+include './app/commum/header.php'
 ?>
 
 <div class="container" style="margin-top: 145px;">

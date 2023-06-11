@@ -1,7 +1,7 @@
 
 
 <!-- Template Main JS File -->
-<script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
+<!-- <script src="<?= PATH_PROJECT ?>public/js/main.js"></script> -->
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
