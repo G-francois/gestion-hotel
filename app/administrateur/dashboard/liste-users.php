@@ -111,39 +111,41 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                             <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
                                                             <button type="submit" class="btn btn-warning">Désactiver</button>
                                                         </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?php echo $utilisateur['id']; ?>">
-                                            Supprimer
-                                        </button>
-
-                                        <!-- Modal de suppression -->
-                                        <div class="modal fade" id="supprimer-utilisateur-<?php echo $utilisateur['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?></h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?php echo $utilisateur['id']; ?>">
+                                                            Supprimer
                                                         </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Etes-vous sûr de vouloir supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?> ?</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/supprimer-utilisateur-traitement" method="POST">
-                                                            <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
-                                                            <button type="submit" class="btn btn-danger">Oui</button>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                                        </form>
+
+                                                        <!-- Modal de suppression -->
+                                                        <div class="modal fade" id="supprimer-utilisateur-<?php echo $utilisateur['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?></h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Etes-vous sûr de vouloir supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?> ?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression_compte_users" method="POST">
+                                                                            <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
+                                                                            <button type="submit" class="btn btn-danger">Oui</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </td>
                                 </tr>
                             <?php
