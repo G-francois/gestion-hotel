@@ -727,6 +727,38 @@ function desactiver_utilisateur(int $id): bool
 
 
 /**
+ * Cette fonction permet d'activer_utilisateur
+ *
+ * @param  int $id
+ * @return bool
+ */
+function activer_utilisateur(int $id): bool
+{
+    $profile_active = false;
+
+    $date = date("Y-m-d H:i:s");
+
+    $db = connect_db();
+
+    if (is_object($db)) {
+        $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id = :id";
+        $request_prepare = $db->prepare($request);
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'est_actif' => 1,
+            'maj_le' => $date
+        ));
+
+        if ($request_execution) {
+            $profile_active = true;
+        }
+    }
+
+    return $profile_active;
+}
+
+
+/**
  *  Cette fonction permet de supprimer un UTILISATEUR
  *
  * @param  int $id
@@ -861,6 +893,7 @@ function recuperer_liste_utilisateurs(): array
 	}
 	return $liste_utilisateurs;
 }
+
 
 /**
  * Cette fonction permet d'enregistrer un repas

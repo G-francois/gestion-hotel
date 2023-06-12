@@ -20,6 +20,27 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
             </ol>
         </nav>
     </div>
+
+    <?php
+    if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+    ?>
+        <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+            <?= $_SESSION['message-success-global'] ?>
+        </div>
+    <?php
+    }
+    ?>
+
+    <?php
+    if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+    ?>
+        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+            <?= $_SESSION['message-erreur-global'] ?>
+        </div>
+    <?php
+    }
+    ?>
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -50,12 +71,12 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                     <td><?php echo $utilisateur['profil']; ?></td>
                                     <td>
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details-utilisateur-<?php echo $utilisateur['id']; ?>">
                                             Détails
                                         </button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <!-- Modal de détails -->
+                                        <div class="modal fade" id="details-utilisateur-<?php echo $utilisateur['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
@@ -79,63 +100,61 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                         <p><strong>Créer le : </strong><?php echo $utilisateur['creer_le']; ?></p>
                                                     </div>
                                                     <div class="modal-footer float-right">
-                                                        <a href="?requette=modifier-utilisateur&num-utilisateur=<?= $utilisateur["nom_utilisateur"]; ?>" class="btn btn-warning">Modifier</a>
+                                                        <!-- Formulaire d'activation -->
+                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_activer_compte_user" method="POST">
+                                                            <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
+                                                            <button type="submit" class="btn btn-success">Activer</button>
+                                                        </form>
 
-                                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?= $utilisateur["nom_utilisateur"]; ?>">Supprimer</a>
-
+                                                        <!-- Formulaire désactivation -->
+                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_desactiver_compte_user" method="POST">
+                                                            <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
+                                                            <button type="submit" class="btn btn-warning">Désactiver</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-                                            Activer
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?php echo $utilisateur['id']; ?>">
+                                            Supprimer
                                         </button>
 
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                                            Désactiver
-                                        </button>
-                                    </td>
-
-                                    <div class="modal fade" id="supprimer-utilisateur-<?= $utilisateur["nom_utilisateur"]; ?>" style="display: none;" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Supprimer
-                                                        l'utilisateur <?= $utilisateur["nom_utilisateur"]; ?></h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Etes vous sur de vouloir supprimer
-                                                        l'utilisateur <?= $utilisateur["nom_utilisateur"]; ?> ?</p>
-                                                </div>
-                                                <div class="modal-footer ">
-
-                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/supprimer-utilisateur-traitement<?= $utilisateur["nom_utilisateur"]; ?>" class="btn btn-danger">Oui</a>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                        Annuler
-                                                    </button>
+                                        <!-- Modal de suppression -->
+                                        <div class="modal fade" id="supprimer-utilisateur-<?php echo $utilisateur['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?></h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Etes-vous sûr de vouloir supprimer l'utilisateur <?php echo $utilisateur['nom_utilisateur']; ?> ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/supprimer-utilisateur-traitement" method="POST">
+                                                            <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
+                                                            <button type="submit" class="btn btn-danger">Oui</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <!-- /.modal-content -->
                                         </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                <?php
+                                    </td>
+                                </tr>
+                            <?php
                             }
 
-                                ?>
-                                </tr>
-
-
+                            ?>
                         </tbody>
                     </table>
                 <?php
                 } else {
-
-                    echo "Aucun utlisateur n'a été trouvés!!!";
+                    echo "Aucun utilisateur n'a été trouvé !!!";
                 }
                 ?>
 
@@ -143,12 +162,12 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
 
         </div>
     </div>
-
 </div>
 
 
 <?php
 
-include './app/commum/footer.php'
+unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
+include './app/commum/footer.php'
 ?>
