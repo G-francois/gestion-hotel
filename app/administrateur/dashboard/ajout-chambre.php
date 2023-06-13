@@ -13,8 +13,13 @@ include './app/commum/aside.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Ajouter une chambre </h1>
+    <div class="pagetitle ">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Ajouter une chambre</li>
+            </ol>
+        </nav>
     </div>
 
     <?php
@@ -38,7 +43,7 @@ include './app/commum/aside.php';
     ?>
 
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user">
-        <!-- Le champs nom & prénom -->
+        <!-- Le champs Code du type & Libellé du type -->
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="code_type">
@@ -54,33 +59,44 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
-
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="libelle_type">
-                    Libellé du type de chambre :
+                Libellé du type de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="text" name="lib_typ" id="libelle_type" class="form-control" placeholder="Veuillez entrer le libelle du type de chambre" value="<?= (isset($donnees["lib_typ"]) && !empty($donnees["lib_typ"])) ? $donnees["lib_typ"] : ''; ?>" required>
-
-                <?php if (isset($erreurs["lib_typ"]) && !empty($erreurs["lib_typ"])) { ?>
-                    <span class="text-danger">
-                        <?php echo $erreurs["lib_typ"]; ?>
-                    </span>
-                <?php } ?>
+                <div style="padding-left: 0px; padding-right: 0px;">
+                    <select class="lib_typ form-control" id="libelle_type" name="lib_typ">
+                        <option value="" disabled selected>Sélectionnez le libellé du type de chambre</option>
+                        <option value="Solo">Solo</option>
+                        <option value="Doubles">Doubles</option>
+                        <option value="Triples">Triples</option>
+                        <option value="Suite">Suite</option>
+                    </select>
+                    <?php if (isset($erreurs["lib_typ"]) && !empty($erreurs["lib_typ"])) { ?>
+                        <span class="text-danger">
+                            <?php echo $erreurs["lib_typ"]; ?>
+                        </span>
+                    <?php } ?>
+                </div>
             </div>
 
             <div class="col-sm-6 mt-3">
                 <label for="statut">
-                    Statut de la chambre :
+                Statut de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="text" name="statut" id="statut" class="form-control" placeholder="Veuillez entrer le statuts de la chambre" value="<?= (isset($donnees["statut"]) && !empty($donnees["statut"])) ? $donnees["statut"] : ''; ?>" required>
-
-                <?php if (isset($erreurs["statut"]) && !empty($erreurs["statut"])) { ?>
-                    <span class="text-danger">
-                        <?php echo $erreurs["statut"]; ?>
-                    </span>
-                <?php } ?>
+                <div style="padding-left: 0px; padding-right: 0px;">
+                    <select class="statut form-control" id="statut" name="statut">
+                        <option value="" disabled selected>Sélectionnez le statut de la chambre</option>
+                        <option value="Réserver">Réserver</option>
+                        <option value="Libre">Libre</option>
+                    </select>
+                    <?php if (isset($erreurs["statut"]) && !empty($erreurs["statut"])) { ?>
+                        <span class="text-danger">
+                            <?php echo $erreurs["statut"]; ?>
+                        </span>
+                    <?php } ?>
+                </div>
             </div>
 
             <div class="col-sm-6 mt-3">
@@ -102,7 +118,7 @@ include './app/commum/aside.php';
 
 <div class="card-footer float-right">
     <button type="reset" class="btn btn-danger">Annuler</button>
-    <button type="submit" class="btn btn-success ">Enregistrer</button>
+    <button type="submit" class="btn btn-success ">Ajouter</button>
 </div>
 </form>
 

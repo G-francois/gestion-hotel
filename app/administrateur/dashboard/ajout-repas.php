@@ -12,10 +12,14 @@ include './app/commum/aside.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Ajouter un repas </h1>
+    <div class="pagetitle ">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Ajouter un repas</li>
+            </ol>
+        </nav>
     </div>
-
     <?php
     if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
     ?>

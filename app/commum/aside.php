@@ -23,7 +23,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fa fa-calendar"></i>
+                    <i class="fas fa-calendar"></i>
                     <span>Réservations</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -110,7 +110,7 @@
 
                 <li class="nav-item" class="logout">
                     <a class="nav-link collapsed" href="<?= PATH_PROJECT ?>administrateur/deconnexion/index">
-                        <i class='fas fa-log-out-circle'></i>
+                        <i class="fas fa-power-off" style="color:red;"></i>
                         <span>Déconnexion</span>
                     </a>
                 </li>

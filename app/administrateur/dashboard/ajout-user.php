@@ -12,8 +12,14 @@ include './app/commum/aside.php';
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Ajouter un utilisateur </h1>
+    
+    <div class="pagetitle ">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Ajouter un utilisateur</li>
+            </ol>
+        </nav>
     </div>
 
     <?php
