@@ -23,6 +23,41 @@ function connect_db()
 	return $db;
 }
 
+/** Cette fonction permet d'inserer un utilisateur de profile CLIENT
+ * @param int $id
+ * @return bool
+ */
+function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
+{
+	$enregistrer_utilisateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		// Ecriture de la requête
+		$requette = 'INSERT INTO utilisateur (nom, prenom, telephone, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :telephone, :email, :nom_utilisateur, :profil, :mot_passe)';
+
+		// Préparation
+		$inserer_utilisateur = $db->prepare($requette);
+
+		// Exécution ! La recette est maintenant en base de données
+		$resultat = $inserer_utilisateur->execute([
+			'nom' => $nom,
+			'prenom' => $prenom,
+			'telephone' => $telephone,
+			'email' => $email,
+			'nom_utilisateur' => $nom_utilisateur,
+			'profil' => $profil,
+			'mot_passe' => sha1($mot_passe)
+		]);
+
+		$enregistrer_utilisateur = $resultat;
+	}
+
+	return $enregistrer_utilisateur;
+}
+
 
 /**
  * Cette fonction permet de verifier si un utilisateur dans la base de donnée ne possède pas cette adresse mail.
@@ -434,7 +469,6 @@ function activation_compte_utilisateur(int $id_utilisateur): bool
 }
 
 
-
 /**
  * Cette fonction permet de verifier si un utilisateur (email ou nom utilisateur + mot de passe) existe dans la base de donnée.
  *
@@ -727,38 +761,6 @@ function desactiver_utilisateur(int $id): bool
 
 
 /**
- * Cette fonction permet d'activer_utilisateur
- *
- * @param  int $id
- * @return bool
- */
-function activer_utilisateur(int $id): bool
-{
-    $profile_active = false;
-
-    $date = date("Y-m-d H:i:s");
-
-    $db = connect_db();
-
-    if (is_object($db)) {
-        $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id = :id";
-        $request_prepare = $db->prepare($request);
-        $request_execution = $request_prepare->execute(array(
-            'id' => $id,
-            'est_actif' => 1,
-            'maj_le' => $date
-        ));
-
-        if ($request_execution) {
-            $profile_active = true;
-        }
-    }
-
-    return $profile_active;
-}
-
-
-/**
  *  Cette fonction permet de supprimer un UTILISATEUR
  *
  * @param  int $id
@@ -793,42 +795,6 @@ function supprimer_utilisateur(int $id): bool
 	}
 
 	return $profile_supprimer;
-}
-
-
-/** Cette fonction permet d'inserer un utilisateur de profile CLIENT
- * @param int $id
- * @return bool
- */
-function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
-{
-	$enregistrer_utilisateur = false;
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-
-		// Ecriture de la requête
-		$requette = 'INSERT INTO utilisateur (nom, prenom, telephone, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :telephone, :email, :nom_utilisateur, :profil, :mot_passe)';
-
-		// Préparation
-		$inserer_utilisateur = $db->prepare($requette);
-
-		// Exécution ! La recette est maintenant en base de données
-		$resultat = $inserer_utilisateur->execute([
-			'nom' => $nom,
-			'prenom' => $prenom,
-			'telephone' => $telephone,
-			'email' => $email,
-			'nom_utilisateur' => $nom_utilisateur,
-			'profil' => $profil,
-			'mot_passe' => sha1($mot_passe)
-		]);
-
-		$enregistrer_utilisateur = $resultat;
-	}
-
-	return $enregistrer_utilisateur;
 }
 
 
@@ -892,6 +858,38 @@ function recuperer_liste_utilisateurs(): array
 		}
 	}
 	return $liste_utilisateurs;
+}
+
+
+/**
+ * Cette fonction permet d'activer_utilisateur
+ *
+ * @param  int $id
+ * @return bool
+ */
+function activer_utilisateur(int $id): bool
+{
+    $profile_active = false;
+
+    $date = date("Y-m-d H:i:s");
+
+    $db = connect_db();
+
+    if (is_object($db)) {
+        $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id = :id";
+        $request_prepare = $db->prepare($request);
+        $request_execution = $request_prepare->execute(array(
+            'id' => $id,
+            'est_actif' => 1,
+            'maj_le' => $date
+        ));
+
+        if ($request_execution) {
+            $profile_active = true;
+        }
+    }
+
+    return $profile_active;
 }
 
 
