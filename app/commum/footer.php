@@ -2,7 +2,7 @@
 
 <!-- Footer -->
 <footer class="sticky-footer" style="background: var(--light); background-clip: border-box; border-top: 1px solid #e3e6f0;">
-    <div class="container my-auto">
+    <div class="container my-auto" style="color: firebrick; font-weight: bold;">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; SOUS LES COCOTIERS 2023</span>
         </div>

@@ -43,7 +43,7 @@ include './app/commum/aside.php';
     ?>
 
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user-traitement" method="post" class="user" novalidate>
-        <div class="form-group row">
+        <div class="form-group row pt-3">
             <!-- Le champ nom -->
             <div class="col-sm-6  mb-2">
                 <label for="inscription-nom">

@@ -95,7 +95,7 @@
 
                 <li class="nav-item" class="logout">
                     <a class="nav-link collapsed" href="<?= PATH_PROJECT ?>receptionniste/deconnexion/index">
-                        <i class='fas fa-log-out-circle'></i>
+                        <i class="fas fa-power-off" style="color:red;"></i>
                         <span>Déconnexion</span>
                     </a>
                 </li>

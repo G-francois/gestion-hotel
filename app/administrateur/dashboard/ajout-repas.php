@@ -41,7 +41,7 @@ include './app/commum/aside.php';
     ?>
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-repas-traitement" method="post" class="user">
         <!-- Le champs nom & prénom -->
-        <div class="form-group row">
+        <div class="form-group row pt-5">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="inscription-nom" class="col-sm-4 col-form-label">
                     Nom du repas :

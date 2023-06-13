@@ -8,6 +8,7 @@ include './app/commum/header.php';
 
 include './app/commum/aside.php';
 
+
 $liste_chambre = recuperer_liste_chambres();
 ?>
 
@@ -37,7 +38,7 @@ $liste_chambre = recuperer_liste_chambres();
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
                             <?php
                             foreach ($liste_chambre as $chambre) {
@@ -97,3 +98,9 @@ $liste_chambre = recuperer_liste_chambres();
         </div>
     </div>
     <!-- /.container-fluid -->
+
+    <?php
+
+    include './app/commum/footer.php'
+
+    ?>

@@ -44,7 +44,7 @@ include './app/commum/aside.php';
 
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user">
         <!-- Le champs Code du type & Libellé du type -->
-        <div class="form-group row">
+        <div class="form-group row pt-5">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="code_type">
                     Code du type de chambre :
@@ -61,7 +61,7 @@ include './app/commum/aside.php';
 
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="libelle_type">
-                Libellé du type de chambre :
+                    Libellé du type de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
                 <div style="padding-left: 0px; padding-right: 0px;">
@@ -82,7 +82,7 @@ include './app/commum/aside.php';
 
             <div class="col-sm-6 mt-3">
                 <label for="statut">
-                Statut de chambre :
+                    Statut de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
                 <div style="padding-left: 0px; padding-right: 0px;">
@@ -114,17 +114,10 @@ include './app/commum/aside.php';
             </div>
         </div>
 
-</div>
-
-<div class="card-footer float-right">
-    <button type="reset" class="btn btn-danger">Annuler</button>
-    <button type="submit" class="btn btn-success ">Ajouter</button>
-</div>
-</form>
-
-</div>
-<!-- End of Content Wrapper -->
-</div>
+        <div class="col-md-12" style="padding-top: 30px;">
+            <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+        </div>
+    </form>
 
 </div>
 
