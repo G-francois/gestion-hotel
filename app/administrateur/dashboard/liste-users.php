@@ -83,13 +83,16 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                         <p><strong>Téléphone : </strong><?php echo $utilisateur['telephone']; ?></p>
                                                         <p><strong>Email : </strong><?php echo $utilisateur['email']; ?></p>
                                                         <p><strong>Nom d'utilisateur : </strong><?php echo $utilisateur['nom_utilisateur']; ?></p>
-                                                        <p><strong>Est Actif : </strong>
+                                                        <p><strong>Créer le : </strong><?php echo $utilisateur['creer_le']; ?></p>
+                                                        <p>
                                                             <button class="btn <?php echo ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) ? 'btn-success' : (($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) ? 'btn-danger' : 'btn-warning'); ?> ">
                                                                 <?php
-                                                                if ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) {
-                                                                    echo 'Compte actif';
+                                                                if ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 1) {
+                                                                    echo 'Compte actif mais supprimé';
                                                                 } elseif ($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) {
                                                                     echo 'Compte supprimé';
+                                                                } elseif ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) {
+                                                                    echo 'Compte actif';
                                                                 } else {
                                                                     echo 'Compte désactivé';
                                                                 }
@@ -97,7 +100,6 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                             </button>
                                                         </p>
 
-                                                        <p><strong>Créer le : </strong><?php echo $utilisateur['creer_le']; ?></p>
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <!-- Formulaire d'activation -->

@@ -116,6 +116,15 @@ if (isset($_SESSION['erreurs-repas']) && !empty($_SESSION['erreurs-repas'])) {
     $erreurs = $_SESSION['erreurs-repas'];
 }
 
+// LES SESSIONS UTILISEE LORS DE LA PAGE MODIFIER-REPAS DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnees-repas-modifier']) && !empty($_SESSION['donnees-repas-modifier'])) {
+    $donnees = $_SESSION['donnees-repas-modifier'];
+}
+
+if (isset($_SESSION['erreurs-repas-modifier']) && !empty($_SESSION['erreurs-repas-modifier'])) {
+    $erreurs = $_SESSION['erreurs-repas-modifier'];
+}
+
 // LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-CHAMBRE DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnees-chambre']) && !empty($_SESSION['donnees-chambre'])) {
     $donnees = $_SESSION['donnees-chambre'];

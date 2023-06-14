@@ -7,11 +7,34 @@ if (!check_if_user_connected_admin()) {
 include './app/commum/header.php';
 
 include './app/commum/aside.php';
+
+$cod_repas = "";
+
+$repas = array();
+
+if (!empty($params[3])) {
+
+    $repas = recuperer_repas_par_son_code_repas($params[3]);
+}
+
 ?>
 
-<!-- Begin Page Content -->
 <div class="container-fluid">
-
+    <div class="pagetitle">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Modifier repas</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <!-- <div class="col-sm-6">
+            <h1>Modifier le repas <?= (isset($repas[0]["nom_repas"]) && !empty($repas[0]["nom_repas"])) ? $repas[0]["nom_repas"] : ""; ?></h1>
+        </div> -->
+        </div>
+    </div>
 
     <?php
     if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
@@ -33,96 +56,64 @@ include './app/commum/aside.php';
     }
     ?>
 
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h4>Modifer
-                        le repas <?= (isset($repas[0]["nom_repas"]) && !empty($repas[0]["nom_repas"])) ? $repas[0]["nom_repas"] : ""; ?> </h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="content">
+        <?php if (empty($repas)) { ?>
+            <div class="alert alert-danger" role="alert">
+                Le repas que vous souhaitez modifier n'existe pas.
+                <a class="btn btn-default" href="?requete=liste-repas">Retour vers la liste des repas</a>
+            </div>
+        <?php } else { ?>
 
-        <div class="container-fluid">
+            <form action="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-repas-traitement" method="post" class="user">
+                <div class="form-group row pt-5">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="inscription-nom" class="col-sm-4 col-form-label">
+                            Nom du repas :
+                            <span class="text-danger">(*)</span>
+                        </label>
 
-            <?php
+                        <input type="text" class="form-control" name="nom_repas" id="inscription-nom" placeholder="Veuillez entrer le nom du repas" value="<?= (isset($_POST["nom_repas"]) && !empty($_POST["nom_repas"])) ? $_POST["nom_repas"] : $repas[0]["nom_repas"]; ?>" required>
+                        <input type="hidden" name="cod_repas" value="<?= $repas[0]["cod_repas"]; ?>">
 
-            if ((!isset($cod_repas) || empty($cod_repas)) || (!isset($repas) || empty($repas))) {
+                        <?php
+                        if (isset($erreurs["nom_repas"]) && !empty($erreurs["nom_repas"])) { ?>
+                            <span class="text-danger">
+                                <?php echo $erreurs["nom_repas"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
 
-            ?>
-                <div class="alert alert-danger" role="alert">
-                    Le repas que vous souhaitez modifier n'existe pas.
+                    <div class="col-sm-6">
+                        <label for="inscription-prix" class="col-sm-4 col-form-label">
+                            Prix unitaire :
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <input type="number" class="form-control" name="pu_repas" id="inscription-prix" placeholder="Veuillez entrer le prix du repas" value="<?= (isset($_POST["pu_repas"]) && !empty($_POST["pu_repas"])) ? $_POST["pu_repas"] : $repas[0]["pu_repas"]; ?>" required>
+                        <input type="hidden" name="pu_repas" value="<?= $repas[0]["pu_repas"]; ?>">
 
-                    <a class="btn btn-default" href="?requette=liste-repas">Retour vers la liste des repas</a>
+                        <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
+                            <span class="text-danger">
+                                <?php echo $erreurs["pu_repas"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </div>
-                <?php
 
-            } else {
-
-                if (isset($message["statut"]) && 0 == $message["statut"]) {
-
-                ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= $message["message"]; ?>
-                    </div>
-                <?php
-
-                } else if (isset($message["statut"]) && 1 == $message["statut"]) {
-
-                ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= $message["message"]; ?>
-                    </div>
-                <?php
-
-                }
-
-                ?>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Ajout d'un repas</h3>
-                    </div>
-
-
-                    <form class="form-horizontal" action="?requette=modifier-repas-traitement" method="POST">
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label for="nom-repas" class="col-sm-2 col-form-label">Nom de l'repas: </label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="nom-repas" id="nom-repas" placeholder="Veuillez entrer le nom de l'repas" value="<?= (isset($donnees["nom-repas"]) && !empty($donnees["nom-repas"])) ? $donnees["nom-repas"] : $repas[0]["nom_repas"]; ?>">
-
-                                    <input type="hidden" name="numero-repas" value="<?= $repas[0]["num_aut"]; ?>">
-
-
-                                    <span class="text-danger">
-
-                                        <?php
-                                        if (isset($erreurs["nom-repas"]) && !empty($erreurs["nom-repas"])) {
-                                            echo $erreurs["nom-repas"];
-                                        }
-
-                                        ?>
-
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <button type="reset" class="btn btn-danger">Annuler</button>
-                            <button type="submit" class="btn btn-success  float-right">Modifier l'repas</button>
-                        </div>
-
-                    </form>
+                <div class="card-footer">
+                    <button type="reset" class="btn btn-danger">Annuler</button>
+                    <button type="submit" class="btn btn-success float-right">Modifier le repas</button>
                 </div>
-            <?php } ?>
+            </form>
 
-        </div>
 
+        <?php } ?>
     </section>
 </div>
-<!-- End of Page Wrapper -->
+
+<?php
+
+unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global'], $_SESSION['erreurs-repas-modifier'], $_SESSION['donnees-repas-modifier']);
+
+include './app/commum/footer.php'
+
+?>

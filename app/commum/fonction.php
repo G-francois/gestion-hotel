@@ -995,99 +995,100 @@ function recuperer_liste_repas(): array
  *
  * @return array
  */
+/**
+ * Cette fonction permet de récupérer les informations d'un repas à partir de son code repas.
+ *
+ * @param int $cod_repas Le code du repas.
+ * @return array Les informations du repas.
+ */
 function recuperer_repas_par_son_code_repas(int $cod_repas): array
 {
+    $repas = array();
 
-	$repas = array();
+    $db = connect_db();
 
-	$db = connect_db();
+    $requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas ';
 
-	if (!is_null($db)) {
+    $verifier_repas = $db->prepare($requette);
 
-		$requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas ';
+    $resultat = $verifier_repas->execute([
+        "cod_repas" => $cod_repas
+    ]);
 
-		$verifier_repas = $db->prepare($requette);
+    if ($resultat) {
+		
+        $repas = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-		$resultat = $verifier_repas->execute([
-			"cod_repas" => $cod_repas
-		]);
-
-		if ($resultat) {
-
-			$repas = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
-		}
-	}
-	return $repas;
+    return $repas;
 }
 
 
 /**
- * Cett fonction permet de modifier un repas exitant dans la base de données via son cod_repas.
+ * Cette fonction permet de modifier un repas existant dans la base de données via son code repas.
  *
  * @param int $cod_repas Le code du repas.
- * @param string $nom_repos Le nom du repas.
- * @param  int $pu_repas le prix du repas
- * @return bool
+ * @param string $nom_repas Le nom du repas.
+ * @param int $pu_repas Le prix du repas.
+ * @return bool Indique si la modification a réussi ou non.
  */
 function modifier_repas(int $cod_repas, string $nom_repas, int $pu_repas): bool
 {
-
-	$modifier_repas = false;
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		$requette = 'UPDATE repas SET nom_repas = :nom_repas and pu_repas = :pu_repas WHERE cod_repas = :cod_repas;';
-
-		$modifier_repas = $db->prepare($requette);
-
-		$resultat = $modifier_repas->execute([
-			'nom_repas' => $nom_repas,
-			'pu_repas' => $pu_repas,
-		]);
-
-		if ($resultat) {
-
-			$modifier_repas = true;
-		}
-	}
-
-	return $modifier_repas;
+    $modifier_repas = false;
+    
+    $date = date("Y-m-d H:i:s");
+    
+    $db = connect_db();
+    
+    if (!is_null($db)) {
+        $requete = 'UPDATE repas SET nom_repas = :nom_repas, pu_repas = :pu_repas, maj_le = :maj_le  WHERE cod_repas = :cod_repas';
+        
+        $modifier_repas = $db->prepare($requete);
+        
+        $resultat = $modifier_repas->execute([
+            'cod_repas' => $cod_repas,
+            'nom_repas' => $nom_repas,
+            'pu_repas' => $pu_repas,
+            'maj_le' => $date
+        ]);
+        
+        if ($resultat) {
+            $modifier_repas = true;
+        }
+    }
+    
+    return $modifier_repas;
 }
 
 /**
- * Cette fonction permet de supprimer un repas de la base de données a partir de son code repas.
- * 
+ * Cette fonction permet de supprimer un repas de la base de données à partir de son code repas.
+ *
  * @param int $cod_repas Le code du repas.
- * 
- * @return bool $repas_est_supprimer
- * 
+ * @return bool Indique si la suppression a réussi ou non.
  */
 function supprimer_repas(int $cod_repas): bool
 {
-
-	$repas_est_supprimer = false;
-
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		$requette = 'DELETE FROM repas WHERE cod_repas = :cod_repas';
-
-		$supprimer_repas = $db->prepare($requette);
-
-		$resultat = $supprimer_repas->execute([
-			'cod_repas' => $cod_repas,
-		]);
-
-		if ($resultat) {
-
-			$repas_est_supprimer = true;
-		}
-	}
-
-	return $repas_est_supprimer;
+    $repas_est_supprime = false;
+    
+    $db = connect_db();
+    
+    if (!is_null($db)) {
+        $requete = 'DELETE FROM repas WHERE cod_repas = :cod_repas';
+        
+        $supprimer_repas = $db->prepare($requete);
+        
+        $resultat = $supprimer_repas->execute([
+            'cod_repas' => $cod_repas,
+        ]);
+        
+        if ($resultat) {
+            $repas_est_supprime = true;
+        }
+    }
+    
+    return $repas_est_supprime;
 }
+
 
 
 /**
