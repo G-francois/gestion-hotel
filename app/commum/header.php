@@ -134,6 +134,15 @@ if (isset($_SESSION['erreurs-chambre']) && !empty($_SESSION['erreurs-chambre']))
     $erreurs = $_SESSION['erreurs-chambre'];
 }
 
+// LES SESSIONS UTILISEE LORS DE LA PAGE MODIFIER-CHAMBRE DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnees-chambre-modifier']) && !empty($_SESSION['donnees-chambre-modifier'])) {
+    $donnees = $_SESSION['donnees-chambre-modifier'];
+}
+
+if (isset($_SESSION['erreurs-chambre-modifier']) && !empty($_SESSION['erreurs-chambre-modifier'])) {
+    $erreurs = $_SESSION['erreurs-chambre-modifier'];
+}
+
 // LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-UTILISATEUR DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnee-utilisateur']) && !empty($_SESSION['donnee-utilisateur'])) {
     $donnees = $_SESSION['donnee-utilisateur'];

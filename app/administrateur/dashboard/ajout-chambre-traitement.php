@@ -18,12 +18,6 @@ if (isset($_POST["lib_typ"]) && !empty($_POST["lib_typ"])) {
     $erreurs["lib_typ"] = "Le champs libelle type de chambre est requis. Veuillez le renseigné.";
 }
 
-if (isset($_POST["statut"]) && !empty($_POST["statut"])) {
-    $donnees["statut"] = $_POST["statut"];
-} else {
-    $erreurs["statut"] = "Le champs statuts est requis. Veuillez le renseigné.";
-}
-
 if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
     $donnees["pu"] = $_POST["pu"];
 } else {
@@ -33,7 +27,7 @@ if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
 
 if (empty($erreurs)) {
 
-    $resultat = enregistrer_chambre($donnees["cod_typ"], $donnees["lib_typ"], $donnees["statut"], $donnees["pu"]);
+    $resultat = enregistrer_chambre($donnees["cod_typ"], $donnees["lib_typ"], $donnees["pu"]);
 
     if ($resultat) {
 

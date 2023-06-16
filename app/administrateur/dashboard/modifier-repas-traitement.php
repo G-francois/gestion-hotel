@@ -47,4 +47,4 @@ $_SESSION['donnees-repas-modifier'] = $donnees;
 $_SESSION['erreurs-repas-modifier'] = $erreurs;
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/modifier-repas/' . $params[3]);
+header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/modifier-repas/' . $cod_repas);

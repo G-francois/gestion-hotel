@@ -892,6 +892,35 @@ function activer_utilisateur(int $id): bool
     return $profile_active;
 }
 
+/**
+ * Cette fonction permet de supprimer un utilisateur de façon définitive de la base de données à partir de son id.
+ *
+ * @param int $id L'id de l'utilisateur'.
+ * @return bool Indique si la suppression a réussi ou non.
+ */
+function suppression_compte_utilisateur(int $id): bool
+{
+    $utilisateur_est_supprimer = false;
+    
+    $db = connect_db();
+    
+    if (!is_null($db)) {
+        $requete = 'DELETE FROM utilisateur WHERE id = :id';
+        
+        $supprimer_chambre = $db->prepare($requete);
+        
+        $resultat = $supprimer_chambre->execute([
+            'id' => $id,
+        ]);
+        
+        if ($resultat) {
+            $utilisateur_est_supprimer = true;
+        }
+    }
+    
+    return $utilisateur_est_supprimer;
+}
+
 
 /**
  * Cette fonction permet d'enregistrer un repas
@@ -989,17 +1018,10 @@ function recuperer_liste_repas(): array
 }
 
 /**
- * Cette fonction permet de récupérer un repas via son code repas.
- *
- * @param int $cod_repas Le code du repas.
- *
- * @return array
- */
-/**
  * Cette fonction permet de récupérer les informations d'un repas à partir de son code repas.
  *
  * @param int $cod_repas Le code du repas.
- * @return array Les informations du repas.
+ * @return array 
  */
 function recuperer_repas_par_son_code_repas(int $cod_repas): array
 {
@@ -1090,9 +1112,8 @@ function supprimer_repas(int $cod_repas): bool
 }
 
 
-
 /**
- * enregistrer_chambre
+ * Cette fonction permet d'enregistrer une chambre
  *
  * @param  int $cod_typ
  * @param  string $lib_typ
@@ -1101,7 +1122,7 @@ function supprimer_repas(int $cod_repas): bool
  * @param  int $est_actif
  * @return bool
  */
-function enregistrer_chambre(string $cod_typ, string $lib_typ,string $statut, int $pu,  int $est_actif = 1): bool
+function enregistrer_chambre(int $cod_typ, string $lib_typ, int $pu,  int $est_actif = 1): bool
 {
 	$enregistrer_chambre = false;
 
@@ -1109,14 +1130,13 @@ function enregistrer_chambre(string $cod_typ, string $lib_typ,string $statut, in
 
 	if (!is_null($db)) {
 
-		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, statut, pu, est_actif) VALUES (:cod_typ, :lib_typ, :statut, :pu, :est_actif)';
+		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, pu, est_actif) VALUES (:cod_typ, :lib_typ, :pu, :est_actif)';
 
 		$inserer_chambre = $db->prepare($requette);
 
 		$resultat = $inserer_chambre->execute([
 			'cod_typ' => $cod_typ,
 			'lib_typ' => $lib_typ,
-			'statut' => $statut,
 			'pu' => $pu,
 			'est_actif' => $est_actif
 		]);
@@ -1154,4 +1174,99 @@ function recuperer_liste_chambres(): array
 	return $liste_chambre;
 }
 
+/**
+ * Cette fonction permet de récupérer les informations d'un repas à partir de son code repas.
+ *
+ * @param int $num_chambre Le numéro de chambre
+ * @return array 
+ */
+function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
+{
+    $chambre = array();
 
+    $db = connect_db();
+
+    $requette = 'SELECT * FROM chambre WHERE num_chambre = :num_chambre ';
+
+    $verifier_repas = $db->prepare($requette);
+
+    $resultat = $verifier_repas->execute([
+        "num_chambre" => $num_chambre
+    ]);
+
+    if ($resultat) {
+		
+        $chambre = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    return $chambre;
+}
+
+
+/**
+ * Cette fonction permet de modifier une chambre existant dans la base de données via son numéro de chambre.
+ *
+ * @param int $num_chambre Le numéro de chambre
+ * @param int $cod_typ Le code type de chambre
+ * @param string $lib_typ Le libellé du type  de chambre
+ * @param int $pu Le prix unitaire  de la chambre
+ * @return bool Indique si la modification a réussi ou non.
+ */
+function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $pu): bool
+{
+    $modifier_chambre = false;
+    
+    $date = date("Y-m-d H:i:s");
+    
+    $db = connect_db();
+    
+    if (!is_null($db)) {
+        $requete = 'UPDATE chambre SET cod_typ = :cod_typ, lib_typ = :lib_typ, pu = :pu, maj_le = :maj_le  WHERE num_chambre = :num_chambre';
+        
+        $modifier_chambre = $db->prepare($requete);
+        
+        $resultat = $modifier_chambre->execute([
+			'num_chambre' => $num_chambre,
+            'cod_typ' => $cod_typ,
+            'lib_typ' => $lib_typ,
+			'pu' => $pu,
+            'maj_le' => $date
+        ]);
+        
+        if ($resultat) {
+			
+            $modifier_chambre = true;
+        }
+    }
+    
+    return $modifier_chambre;
+}
+
+/**
+ * Cette fonction permet de supprimer une chambre de la base de données à partir de son numero de chambre.
+ *
+ * @param int $num_chambre Le numero de chambre.
+ * @return bool Indique si la suppression a réussi ou non.
+ */
+function supprimer_chambre(int $num_chambre): bool
+{
+    $chambre_est_supprimer = false;
+    
+    $db = connect_db();
+    
+    if (!is_null($db)) {
+        $requete = 'DELETE FROM chambre WHERE num_chambre = :num_chambre';
+        
+        $supprimer_chambre = $db->prepare($requete);
+        
+        $resultat = $supprimer_chambre->execute([
+            'num_chambre' => $num_chambre,
+        ]);
+        
+        if ($resultat) {
+            $chambre_est_supprimer = true;
+        }
+    }
+    
+    return $chambre_est_supprimer;
+}

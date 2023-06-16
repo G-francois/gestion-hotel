@@ -23,6 +23,25 @@ $liste_chambre = recuperer_liste_chambres();
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        <?php
+        if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+        ?>
+            <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-success-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+        ?>
+            <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-erreur-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
         <div class="card-body">
             <div class="table-responsive">
                 <?php if (isset($liste_chambre) && !empty($liste_chambre)) {
@@ -50,7 +69,7 @@ $liste_chambre = recuperer_liste_chambres();
                                     <td><?php echo $chambre['statut']; ?></td>
                                     <td><?php echo $chambre['pu']; ?></td>
                                     <td>
-                                        <a href="?requette=modifier-chambre&num-chambre=<?= $chambre["cod_typ"]; ?>" class="btn btn-warning">Modifier</a>
+                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre/<?= $chambre['num_chambre'] ?>" class="btn btn-warning">Modifier</a>
                                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["cod_typ"]; ?>">Supprimer</a>
                                     </td>
 
@@ -58,19 +77,17 @@ $liste_chambre = recuperer_liste_chambres();
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">Supprimer
-                                                        le chambre <?= $chambre["lib_typ"]; ?></h4>
+
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">×</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Etes vous sur de vouloir supprimer
-                                                        la chambre <?= $chambre["lib_typ"]; ?> ?</p>
+                                                    <p style="font-size: larger;">Etes vous sur de vouloir supprimer la chambre <?= $chambre["lib_typ"]; ?> ?</p>
                                                 </div>
                                                 <div class="modal-footer ">
 
-                                                    <a href="<?= PATH_PROJECT ?>receptionniste/dashboard/supprimer-chambre-traitement<?= $chambre["cod_typ"]; ?>" class="btn btn-danger">Oui</a>
+                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["cod_typ"]; ?>" class="btn btn-danger">Oui</a>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                                         Annuler
                                                     </button>
@@ -100,6 +117,8 @@ $liste_chambre = recuperer_liste_chambres();
     <!-- /.container-fluid -->
 
     <?php
+
+    unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
     include './app/commum/footer.php'
 

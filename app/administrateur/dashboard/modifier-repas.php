@@ -24,6 +24,7 @@ if (!empty($params[3])) {
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-repas">Liste des repas</a></li>
                 <li class="breadcrumb-item active">Modifier repas</li>
             </ol>
         </nav>
@@ -97,11 +98,11 @@ if (!empty($params[3])) {
                             </span>
                         <?php } ?>
                     </div>
-                </div>
 
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-danger">Annuler</button>
-                    <button type="submit" class="btn btn-success float-right">Modifier le repas</button>
+                    <div class="col-sm-12 mb-3" style="margin-top: 35px;">
+                        <input type="hidden" name="num_chambre" value="<?= $params[3] ?>">
+                        <input type="submit" value="Modifier" class="btn btn-primary btn-block">
+                    </div>
                 </div>
             </form>
 

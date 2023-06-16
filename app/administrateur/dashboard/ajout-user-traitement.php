@@ -125,7 +125,7 @@ if (empty($erreurs)) {
 
 	if ($resultat) {
 
-        $message_success_global = "Utilisateur ajouté éffectué avec succès.";
+        $message_success_global = "Utilisateur ajouté avec succès.";
 
     } else {
 

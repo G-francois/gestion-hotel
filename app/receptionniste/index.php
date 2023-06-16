@@ -3,7 +3,6 @@ session_start();
 
 include './app/commum/fonction.php';
 
-
 $params = explode('/', $_GET['p']);
 $profile = "receptionniste";
 $default_ressource = "connexion";

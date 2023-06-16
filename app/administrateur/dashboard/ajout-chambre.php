@@ -81,25 +81,6 @@ include './app/commum/aside.php';
             </div>
 
             <div class="col-sm-6 mt-3">
-                <label for="statut">
-                    Statut de chambre :
-                    <span class="text-danger">(*)</span>
-                </label>
-                <div style="padding-left: 0px; padding-right: 0px;">
-                    <select class="statut form-control" id="statut" name="statut">
-                        <option value="" disabled selected>Sélectionnez le statut de la chambre</option>
-                        <option value="Réserver">Réserver</option>
-                        <option value="Libre">Libre</option>
-                    </select>
-                    <?php if (isset($erreurs["statut"]) && !empty($erreurs["statut"])) { ?>
-                        <span class="text-danger">
-                            <?php echo $erreurs["statut"]; ?>
-                        </span>
-                    <?php } ?>
-                </div>
-            </div>
-
-            <div class="col-sm-6 mt-3">
                 <label for="prix_unitaire">
                     Prix unitaire :
                     <span class="text-danger">(*)</span>
@@ -112,11 +93,13 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
+
+            <div class="col-md-6" style="padding-top: 47px;">
+                <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+            </div>
         </div>
 
-        <div class="col-md-12" style="padding-top: 30px;">
-            <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
-        </div>
+
     </form>
 
 </div>

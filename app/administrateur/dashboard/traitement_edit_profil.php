@@ -76,7 +76,7 @@ if (isset($_POST['sauvegarder'])) {
 
                 if (!empty($new_user_data)) {
 
-                    $_SESSION['success'] = "Modification(s) effectuée(s) avec succès";
+                    $_SESSION['sauvegarder-success-admin'] = "Modification(s) effectuée(s) avec succès";
 
                     $_SESSION['utilisateur_connecter_admin'] = $new_user_data;
                 } else {

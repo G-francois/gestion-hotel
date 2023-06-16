@@ -103,48 +103,48 @@ include './app/commum/aside.php';
             </nav>
         </div>
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-5"><?php
+                                    if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
+                                    ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
+                        <?= $_SESSION['suppression-erreurs'] ?>
+                    </div>
+                <?php
+                                    }
+                ?>
+
+                <?php
+                if (isset($_SESSION['desactivation-erreurs']) && !empty($_SESSION['desactivation-erreurs'])) {
+                ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
+                        <?= $_SESSION['desactivation-erreurs'] ?>
+                    </div>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION['photo-erreurs-admin']) && !empty($_SESSION['photo-erreurs-admin'])) {
+                ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
+                        <?= $_SESSION['photo-erreurs-admin'] ?>
+                    </div>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION['suppression-photo-erreurs']) && !empty($_SESSION['suppression-photo-erreurs'])) {
+                ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
+                        <?= $_SESSION['suppression-photo-erreurs'] ?>
+                    </div>
+                <?php
+                }
+                ?>
 
                 <div class="card">
-                    <?php
-                    if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
-                    ?>
-                        <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
-                            <?= $_SESSION['suppression-erreurs'] ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
 
-                    <?php
-                    if (isset($_SESSION['desactivation-erreurs']) && !empty($_SESSION['desactivation-erreurs'])) {
-                    ?>
-                        <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
-                            <?= $_SESSION['desactivation-erreurs'] ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
-
-                    <?php
-                    if (isset($_SESSION['photo-erreurs']) && !empty($_SESSION['photo-erreurs'])) {
-                    ?>
-                        <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
-                            <?= $_SESSION['photo-erreurs'] ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
-
-                    <?php
-                    if (isset($_SESSION['suppression-photo-erreurs']) && !empty($_SESSION['suppression-photo-erreurs'])) {
-                    ?>
-                        <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
-                            <?= $_SESSION['suppression-photo-erreurs'] ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
 
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
@@ -367,6 +367,25 @@ include './app/commum/aside.php';
 
         <div class="col-xl-7">
             <div class="col-lg-12">
+                <?php
+                if (isset($_SESSION['sauvegarder-success-admin']) && !empty($_SESSION['sauvegarder-success-admin'])) {
+                ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                        <?= $_SESSION['sauvegarder-success-admin'] ?>
+                    </div>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (isset($_SESSION['sauvegarder-erreurs-admin']) && !empty($_SESSION['sauvegarder-erreurs-admin'])) {
+                ?>
+                    <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                        <?= $_SESSION['sauvegarder-erreurs-admin'] ?>
+                    </div>
+                <?php
+                }
+                ?>
                 <h5 style="font-weight: 700;">Modification(s) des informations usuelles</h5>
                 <div class="card">
                     <div class="card-body">
@@ -375,25 +394,7 @@ include './app/commum/aside.php';
                                 Les champs ci-dessous ne doivent pas être soumis vide. Au cas contraire elles affichent anciennes informations.
                             </h5>
 
-                            <?php
-                            if (isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; background-color: #1cc88a; text-align:center; border-color: snow;">
-                                    <?= $_SESSION['success'] ?>
-                                </div>
-                            <?php
-                            }
-                            ?>
 
-                            <?php
-                            if (isset($_SESSION['sauvegarder-erreurs']) && !empty($_SESSION['sauvegarder-erreurs'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
-                                    <?= $_SESSION['sauvegarder-erreurs'] ?>
-                                </div>
-                            <?php
-                            }
-                            ?>
 
                             <div>
                                 <div class="row mb-3">
@@ -560,7 +561,7 @@ include './app/commum/aside.php';
 </div>
 
 <?php
-unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
+unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['sauvegarder-success-admin'], $_SESSION['sauvegarder-erreurs-admin'], $_SESSION['photo-erreurs-admin'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
 ?>
 
 <?php

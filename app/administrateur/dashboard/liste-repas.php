@@ -22,6 +22,27 @@ $liste_repas = recuperer_liste_repas();
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+
+        <?php
+        if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+        ?>
+            <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-success-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
+
+        <?php
+        if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+        ?>
+            <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-erreur-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
+
         <div class="card-body">
             <div class="table-responsive">
                 <?php if (isset($liste_repas) && !empty($liste_repas)) {
@@ -100,5 +121,7 @@ $liste_repas = recuperer_liste_repas();
 </div>
 
 <?php
+unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
+
 include './app/commum/footer.php';
 ?>

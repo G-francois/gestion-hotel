@@ -8,13 +8,12 @@ include './app/commum/header.php';
 
 include './app/commum/aside.php';
 
-$cod_repas = "";
+$num_chambre = "";
 
-$repas = array();
+$chambre = array();
 
 if (!empty($params[3])) {
-
-    $repas = recuperer_repas_par_son_code_repas($params[3]);
+    $chambre = recuperer_chambre_par_son_num_chambre($params[3]);
 }
 
 ?>
@@ -24,14 +23,15 @@ if (!empty($params[3])) {
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Modifier repas</li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-chambres">Liste des chambres</a></li>
+                <li class="breadcrumb-item active">Modifier chambre</li>
             </ol>
         </nav>
     </div>
     <div class="container-fluid">
         <div class="row mb-2">
             <!-- <div class="col-sm-6">
-            <h1>Modifier le repas <?= (isset($repas[0]["nom_repas"]) && !empty($repas[0]["nom_repas"])) ? $repas[0]["nom_repas"] : ""; ?></h1>
+            <h1>Modifier le chambre <?= (isset($chambre[0]["num_chambre"]) && !empty($chambre[0]["num_chambre"])) ? $chambre[0]["num_chambre"] : ""; ?></h1>
         </div> -->
         </div>
     </div>
@@ -49,7 +49,7 @@ if (!empty($params[3])) {
     <?php
     if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
     ?>
-        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+        <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
             <?= $_SESSION['message-erreur-global'] ?>
         </div>
     <?php
@@ -57,63 +57,66 @@ if (!empty($params[3])) {
     ?>
 
     <section class="content">
-        <?php if (empty($repas)) { ?>
+        <?php if (empty($chambre)) { ?>
             <div class="alert alert-danger" role="alert">
-                Le repas que vous souhaitez modifier n'existe pas.
-                <a class="btn btn-default" href="?requete=liste-repas">Retour vers la liste des repas</a>
+                La chambre que vous souhaitez modifier n'existe pas.
+                <a class="btn btn-default" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-chambres">Retour vers la liste des chambres</a>
             </div>
         <?php } else { ?>
-
-            <form action="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-repas-traitement" method="post" class="user">
+            <form action="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre-traitement" method="post" class="user">
                 <div class="form-group row pt-5">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="inscription-nom" class="col-sm-4 col-form-label">
-                            Nom du repas :
+                        <label for="inscription-code" class="col-sm-4 col-form-label">
+                            Code du type:
                             <span class="text-danger">(*)</span>
                         </label>
-
-                        <input type="text" class="form-control" name="nom_repas" id="inscription-nom" placeholder="Veuillez entrer le nom du repas" value="<?= (isset($_POST["nom_repas"]) && !empty($_POST["nom_repas"])) ? $_POST["nom_repas"] : $repas[0]["nom_repas"]; ?>" required>
-                        <input type="hidden" name="cod_repas" value="<?= $repas[0]["cod_repas"]; ?>">
-
-                        <?php
-                        if (isset($erreurs["nom_repas"]) && !empty($erreurs["nom_repas"])) { ?>
+                        <input type="number" class="form-control" name="cod_typ" id="inscription-code" placeholder="Veuillez entrer le code type de chambre" value="<?= (!empty($donnees_chambre_modifier["cod_typ"])) ? $donnees_chambre_modifier["cod_typ"] : $chambre[0]["cod_typ"]; ?>" required>
+                        <?php if (isset($erreurs_chambre_modifier["cod_typ"]) && !empty($erreurs_chambre_modifier["cod_typ"])) { ?>
                             <span class="text-danger">
-                                <?php echo $erreurs["nom_repas"]; ?>
+                                <?= $erreurs_chambre_modifier["cod_typ"]; ?>
                             </span>
                         <?php } ?>
                     </div>
-
+                    <div class="col-sm-6">
+                        <label for="inscription-libelle" class="col-sm-4 col-form-label">
+                            Libellé:
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <input type="text" class="form-control" name="lib_typ" id="inscription-libelle" placeholder="Veuillez entrer le libellé de chambre" value="<?= (!empty($donnees_chambre_modifier["lib_typ"])) ? $donnees_chambre_modifier["lib_typ"] : $chambre[0]["lib_typ"]; ?>" required>
+                        <?php if (isset($erreurs_chambre_modifier["lib_typ"]) && !empty($erreurs_chambre_modifier["lib_typ"])) { ?>
+                            <span class="text-danger">
+                                <?= $erreurs_chambre_modifier["lib_typ"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="inscription-prix" class="col-sm-4 col-form-label">
-                            Prix unitaire :
+                            Prix unitaire:
                             <span class="text-danger">(*)</span>
                         </label>
-                        <input type="number" class="form-control" name="pu_repas" id="inscription-prix" placeholder="Veuillez entrer le prix du repas" value="<?= (isset($_POST["pu_repas"]) && !empty($_POST["pu_repas"])) ? $_POST["pu_repas"] : $repas[0]["pu_repas"]; ?>" required>
-                        <input type="hidden" name="pu_repas" value="<?= $repas[0]["pu_repas"]; ?>">
-
-                        <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
+                        <input type="number" class="form-control" name="pu" id="inscription-prix" placeholder="Veuillez entrer le prix unitaire de chambre" value="<?= (!empty($donnees_chambre_modifier["pu"])) ? $donnees_chambre_modifier["pu"] : $chambre[0]["pu"]; ?>" required>
+                        <?php if (isset($erreurs_chambre_modifier["pu"]) && !empty($erreurs_chambre_modifier["pu"])) { ?>
                             <span class="text-danger">
-                                <?php echo $erreurs["pu_repas"]; ?>
+                                <?= $erreurs_chambre_modifier["pu"]; ?>
                             </span>
                         <?php } ?>
                     </div>
+
+                    <div class="col-sm-6 mb-3" style="margin-top: 35px;">
+                        <input type="hidden" name="num_chambre" value="<?= $params[3] ?>">
+                        <input type="submit" value="Modifier" class="btn btn-primary btn-block">
+                    </div>
                 </div>
 
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-danger">Annuler</button>
-                    <button type="submit" class="btn btn-success float-right">Modifier le repas</button>
-                </div>
             </form>
-
-
         <?php } ?>
     </section>
 </div>
 
 <?php
+unset($_SESSION['donnees-chambre-modifier'], $_SESSION['erreurs-chambre-modifier'], $_SESSION['message-success-global']);
 
-unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global'], $_SESSION['erreurs-repas-modifier'], $_SESSION['donnees-repas-modifier']);
-
-include './app/commum/footer.php'
-
+include './app/commum/footer.php';
 ?>
