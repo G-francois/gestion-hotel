@@ -1,9 +1,10 @@
 <?php
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (check_if_user_connected_admin()) {
-    header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
-    exit;
+    // Redirige l'utilisateur vers la page dashboard de l'administrateur s'il est connecté en tant qu'administrateur
+	header('location: ' . PATH_PROJECT . 'administrateur/dashboard/index');
+	exit;
 }
-
 include './app/commum/header.php'
 ?>
 
@@ -16,17 +17,18 @@ include './app/commum/header.php'
 
                 <div class="card o-hidden border-0 shadow-lg">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
+                        <!-- Contenu imbriqué à l'intérieur du corps de la carte -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login-image1"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
 
-
+                                    <!-- Titre -->
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenue <?= isset($_SESSION['nom-utilisateur-inscrit']) ?  $_SESSION['nom-utilisateur-inscrit'][1] . " " . $_SESSION['nom-utilisateur-inscrit'][0] : '' ?></h1>
                                     </div>
                                     <?php
+                                    // Vérifier s'il y a un message de succès d'inscription et s'il n'est pas vide
                                     if (isset($_SESSION['inscription-message-success-global']) && !empty($_SESSION['inscription-message-success-global'])) {
                                     ?>
                                         <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
@@ -37,6 +39,7 @@ include './app/commum/header.php'
                                     ?>
 
                                     <?php
+                                    // Vérifier s'il y a un message d'erreur de connexion et s'il n'est pas vide
                                     if (isset($_SESSION['connexion-message-erreur-global']) && !empty($_SESSION['connexion-message-erreur-global'])) {
                                     ?>
                                         <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
@@ -47,7 +50,7 @@ include './app/commum/header.php'
                                     ?>
 
                                     <form action="<?= PATH_PROJECT ?>administrateur/connexion/traitement" method="post" class="user">
-                                        <!-- Le champs email ou nom utilisateur-->
+                                        <!-- Champ pour l'email ou le nom d'utilisateur -->
                                         <div class="form-group">
                                             <label for="inscription-email">
                                                 Email ou Nom d'utilisateur:
@@ -61,7 +64,7 @@ include './app/commum/header.php'
                                             <?php } ?>
                                         </div>
 
-                                        <!-- Le champs mot de passe -->
+                                        <!-- Champ pour le mot de passe -->
                                         <div class="form-group">
                                             <label for="inscription-mot-passe">
                                                 Mot de passe:
@@ -97,6 +100,7 @@ include './app/commum/header.php'
     </div>
 
     <?php
+    // Supprimer les variables de session inutiles
     unset($_SESSION['inscription-message-success-global'], $_SESSION['connexion-message-erreur-global'],  $_SESSION['connexion-erreurs-admin']);
 
     include './app/commum/footer_client_icm.php';

@@ -1,9 +1,10 @@
 <?php
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (!check_if_user_connected_admin()) {
+    // Redirige l'utilisateur vers la page de connexion de l'administrateur s'il n'est pas connecté en tant qu'administrateur
     header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
     exit;
 }
-
 include './app/commum/header.php';
 
 include './app/commum/aside.php';
@@ -11,7 +12,9 @@ include './app/commum/aside.php';
 $liste_utilisateur = recuperer_liste_utilisateurs();
 ?>
 
+<!-- Commencement du contenu de la page -->
 <div class="container-fluid">
+    <!-- Titre de la page -->
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
@@ -21,7 +24,9 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
         </nav>
     </div>
 
+    <!-- Tableau de données liste utilisateurs -->
     <?php
+    // Affichage du message de succès global s'il existe
     if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
     ?>
         <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
@@ -32,9 +37,10 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
     ?>
 
     <?php
+    // Affichage du message d'erreur global s'il existe
     if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
     ?>
-        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+        <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
             <?= $_SESSION['message-erreur-global'] ?>
         </div>
     <?php
@@ -45,7 +51,9 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <?php if (isset($liste_utilisateur) && !empty($liste_utilisateur)) {
+                <?php
+                // Vérifie si la liste des utilisateurs existe et n'est pas vide
+                if (isset($liste_utilisateur) && !empty($liste_utilisateur)) {
                 ?>
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -60,7 +68,7 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                         </thead>
                         <tbody>
                             <?php
-
+                            // Parcours de la liste des utilisateurs
                             foreach ($liste_utilisateur as $utilisateur) {
                             ?>
                                 <tr>
@@ -70,7 +78,7 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                     <td><?php echo $utilisateur['sexe']; ?></td>
                                     <td><?php echo $utilisateur['profil']; ?></td>
                                     <td>
-                                        <!-- Button trigger modal -->
+                                        <!-- Button de détails modal -->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details-utilisateur-<?php echo $utilisateur['id']; ?>">
                                             Détails
                                         </button>
@@ -87,6 +95,7 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                         <p>
                                                             <button class="btn <?php echo ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 0) ? 'btn-success' : (($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) ? 'btn-danger' : 'btn-warning'); ?> ">
                                                                 <?php
+                                                                // Affichage de l'état du compte de l'utilisateur
                                                                 if ($utilisateur['est_actif'] == 1 && $utilisateur['est_supprimer'] == 1) {
                                                                     echo 'Compte actif mais supprimé';
                                                                 } elseif ($utilisateur['est_actif'] == 0 && $utilisateur['est_supprimer'] == 1) {
@@ -99,7 +108,6 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                                 ?>
                                                             </button>
                                                         </p>
-
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <!-- Formulaire d'activation -->
@@ -108,13 +116,13 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                             <button type="submit" class="btn btn-success">Activer</button>
                                                         </form>
 
-                                                        <!-- Formulaire désactivation -->
+                                                        <!-- Formulaire de désactivation -->
                                                         <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_desactiver_compte_user" method="POST">
                                                             <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
                                                             <button type="submit" class="btn btn-warning">Désactiver</button>
                                                         </form>
 
-                                                        <!-- Button trigger modal -->
+                                                        <!-- Button de suppression modal -->
                                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?php echo $utilisateur['id']; ?>">
                                                             Supprimer
                                                         </button>
@@ -146,13 +154,10 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </td>
                                 </tr>
                             <?php
                             }
-
                             ?>
                         </tbody>
                     </table>
@@ -161,16 +166,13 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                     echo "Aucun utilisateur n'a été trouvé !!!";
                 }
                 ?>
-
             </div>
-
         </div>
     </div>
 </div>
 
-
 <?php
-
+// Suppression des messages de succès et d'erreur global de la session
 unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
 include './app/commum/footer.php'

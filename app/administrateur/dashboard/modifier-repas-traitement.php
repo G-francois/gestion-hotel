@@ -21,13 +21,11 @@ if (empty($erreurs)) {
 
     $check_if_auteur_exist = check_if_repas_exist_in_db($donnees["nom_repas"]);
 
+    if (isset($_POST["cod_repas"]) && !empty($_POST["cod_repas"])) {
+        $cod_repas = $_POST["cod_repas"];
+    }
+
     if (!$check_if_auteur_exist) {
-
-        $cod_repas = -1;
-
-        if (isset($_POST["cod_repas"]) && !empty($_POST["cod_repas"])) {
-            $cod_repas = $_POST["cod_repas"];
-        }
 
         $resultat = modifier_repas($cod_repas, $donnees["nom_repas"], $donnees["pu_repas"]);
 
@@ -39,7 +37,7 @@ if (empty($erreurs)) {
             $message_erreur_global = "Oups ! Une erreur s'est produite lors de la modification du repas.";
         }
     } else {
-        $message_erreur_global = "Oups! Le nom de ce auteur existe deja. Veuillez réesayer.";
+        $message_erreur_global = "Oups! Le nom de ce repas existe deja. Veuillez réesayer.";
     }
 }
 

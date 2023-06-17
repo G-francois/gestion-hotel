@@ -1,5 +1,7 @@
 <?php
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (!check_if_user_connected_admin()) {
+    // Redirige l'utilisateur vers la page de connexion de l'administrateur s'il n'est pas connecté en tant qu'administrateur
     header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
     exit;
 }
@@ -10,9 +12,9 @@ include './app/commum/aside.php';
 
 ?>
 
-<!-- Begin Page Content -->
+<!-- Commencement du contenu de la page -->
 <div class="container-fluid">
-    <!-- Page Heading -->
+    <!-- Titre de la page -->
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
@@ -23,6 +25,7 @@ include './app/commum/aside.php';
     </div>
 
     <?php
+    // Vérifier s'il y a un message de succès et s'il n'est pas vide
     if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
     ?>
         <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
@@ -33,18 +36,20 @@ include './app/commum/aside.php';
     ?>
 
     <?php
+    // Vérifier s'il y a un message d'erreur et s'il n'est pas vide
     if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
     ?>
-        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+        <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
             <?= $_SESSION['message-erreur-global'] ?>
         </div>
     <?php
     }
     ?>
 
+    <!-- Formulaire d'ajout de chambre-->
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user">
-        <!-- Le champs Code du type & Libellé du type -->
         <div class="form-group row pt-5">
+            <!-- Le champ Code du type de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="code_type">
                     Code du type de chambre :
@@ -59,6 +64,7 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
+            <!-- Le champ Libellé du type de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="libelle_type">
                     Libellé du type de chambre :
@@ -80,6 +86,7 @@ include './app/commum/aside.php';
                 </div>
             </div>
 
+            <!-- Le champ Prix unitaire -->
             <div class="col-sm-6 mt-3">
                 <label for="prix_unitaire">
                     Prix unitaire :
@@ -94,21 +101,18 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
+            <!-- Le bouton d'ajout -->
             <div class="col-md-6" style="padding-top: 47px;">
                 <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
             </div>
         </div>
-
-
     </form>
-
 </div>
-
+<!-- Fin du contenu de la page -->
 
 <?php
-
+// Supprimer les variables de session
 unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global'], $_SESSION['erreurs-chambre'], $_SESSION['donnees-chambre']);
 
-include './app/commum/footer.php'
-
+include './app/commum/footer.php';
 ?>

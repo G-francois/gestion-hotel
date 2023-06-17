@@ -103,16 +103,20 @@ include './app/commum/aside.php';
             </nav>
         </div>
         <div class="row">
-            <div class="col-lg-5"><?php
-                                    if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
-                                    ?>
+            <div class="col-lg-5">
+
+                <!-- Affichage des messages d'erreur de suppression -->
+                <?php
+                if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
+                ?>
                     <div class="alert alert-primary" style="color: white; background-color: #9f0808; border-color: snow; text-align:center">
                         <?= $_SESSION['suppression-erreurs'] ?>
                     </div>
                 <?php
-                                    }
+                }
                 ?>
 
+                <!-- Affichage des messages d'erreur de désactivation -->
                 <?php
                 if (isset($_SESSION['desactivation-erreurs']) && !empty($_SESSION['desactivation-erreurs'])) {
                 ?>
@@ -123,6 +127,7 @@ include './app/commum/aside.php';
                 }
                 ?>
 
+                <!-- Affichage des messages d'erreur de photo -->
                 <?php
                 if (isset($_SESSION['photo-erreurs-admin']) && !empty($_SESSION['photo-erreurs-admin'])) {
                 ?>
@@ -133,6 +138,7 @@ include './app/commum/aside.php';
                 }
                 ?>
 
+                <!-- Affichage des messages d'erreur de suppression de photo -->
                 <?php
                 if (isset($_SESSION['suppression-photo-erreurs']) && !empty($_SESSION['suppression-photo-erreurs'])) {
                 ?>
@@ -145,20 +151,24 @@ include './app/commum/aside.php';
 
                 <div class="card">
 
-
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
+
+                            <!-- Affichage de l'image de profil -->
                             <a href="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
                                 <img src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
                             </a>
 
 
                             <div class="mt-3">
+                                <!-- Affichage de quelques informations de l'utilisateur -->
                                 <h4><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Pseudo' ?></h4>
                                 <p class="mb-1"><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['profil'] : 'Profil' ?></p>
                                 <p class="font-size-sm">SOUS LES COCOTIERS</p>
                             </div>
                         </div>
+
+                        <!-- Formulaire de la mise à jour photo -->
                         <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_photo" method="post" enctype="multipart/form-data">
                             <div class="row" style="text-align: center; display:flex;">
                                 <div class="col-sm-9 text-secondary">
@@ -166,12 +176,13 @@ include './app/commum/aside.php';
                                     <input type="file" class="form-control" id="image" name="image" />
                                 </div>
 
-                                <!-- maj_photo Form -->
                                 <div class="text-center col-sm-3" style="justify-content: center; margin-top: 31px;">
+                                    <!-- Bouton du Modal mettre à jour -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal0" style="font-size: revert; padding: 9px;">Mettre à jour</button>
+
                                     <div class="col-md-8 col-lg-12">
                                         <div class="text-center" style="color: #070b3a;">
-                                            <!-- Modal -->
+                                            <!-- Modal du bouton mettre à jour -->
                                             <div class="modal fade" id="modal0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -198,19 +209,20 @@ include './app/commum/aside.php';
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                         </form>
                     </div>
                 </div>
 
-                <!-- suppression_photo Form -->
+                <!-- Formulaire de la suppression photo -->
                 <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
                     <div class="row">
+                        <!-- Bouton du Modal supprimer -->
                         <button type="reset" class="btn btn-secondary mt-4" data-toggle="modal" data-target="#modal5"><i class="fa fa-trash"></i> Supprimer</button>
+
                         <div class="col-md-8 col-lg-12">
                             <div class="text-center" style="color: #070b3a;">
-                                <!-- Modal -->
+                                <!-- Modal du bouton supprimer -->
                                 <div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -240,11 +252,10 @@ include './app/commum/aside.php';
 
                         </div>
                     </div>
-
                 </form>
 
                 <hr>
-
+                <!-- Affichage des informations de l'utilisateur -->
                 <div class="profile">
                     <div class="row">
                         <div class="col-lg-5 col-md-4 label ">Nom et Prénom(s):</div>
@@ -279,10 +290,11 @@ include './app/commum/aside.php';
                     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression" method="post" enctype="multipart/form-data">
                         <div class="row mb-3 text-center">
                             <div class="col-md-8 col-lg-12">
+                                <!-- Bouton du Modal supprimer compte -->
                                 <button type="button" style="padding: 10px; background-color:#9f0808;" name="supprimer-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal2 "><i class="bi bi-trash"></i> Supprimer mon compte</button>
 
                                 <div class="text-center" style="color: #070b3a;">
-                                    <!-- Modal -->
+                                    <!-- Modal du bouton supprimer compte-->
                                     <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -322,10 +334,11 @@ include './app/commum/aside.php';
                     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_desactivation" method="post" enctype="multipart/form-data">
                         <div class="row mb-3 text-center">
                             <div class="col-md-8 col-lg-12">
+                                <!-- Bouton du Modal désactiver compte -->
                                 <button type="button" style="padding: 10px; background-color:#9f0808;" name="désactiver-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal3" style="margin-top: 8px;">Désactiver mon compte</button>
 
                                 <div class="text-center" style="color: #070b3a;">
-                                    <!-- Modal -->
+                                    <!-- Modal du bouton désactiver compte-->
                                     <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -386,22 +399,22 @@ include './app/commum/aside.php';
                 <?php
                 }
                 ?>
+                <!-- Titre de la section de modification des informations usuelles -->
                 <h5 style="font-weight: 700;">Modification(s) des informations usuelles</h5>
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_edit_profil" method="post" enctype="multipart/form-data">
+                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_edit_profil" method="post" enctype="multipart/form-data"> <!-- Début du formulaire de modification du profil -->
+                            <!-- Message d'avertissement pour informer l'utilisateur -->
                             <h5 style="color: #8bb9c6; text-align:center; ">
                                 Les champs ci-dessous ne doivent pas être soumis vide. Au cas contraire elles affichent anciennes informations.
                             </h5>
 
-
-
                             <div>
+                                <!-- Champ pour le nom -->
                                 <div class="row mb-3">
                                     <label for="Name" class="col-md-4 col-lg-3 col-form-label">Nom :</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="nom" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom']) ? 'is-invalid' : '' ?>" id="Name" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom'] : 'Nom' ?>">
-
+                                        <input name="nom" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom']) ? 'is-invalid' : '' ?>" id="Name" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom'] : 'Nom' ?>" required>
                                         <?php if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) { ?>
                                             <span class="text-danger">
                                                 <?php echo $erreurs["nom"]; ?>
@@ -410,11 +423,11 @@ include './app/commum/aside.php';
                                     </div>
                                 </div>
 
+                                <!-- Champ pour le prénom -->
                                 <div class="row mb-3">
                                     <label for="Name1" class="col-md-4 col-lg-3 col-form-label">Prénom(s) :</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="prenom" type="text" class="form-control <?= isset($_SESSION['erreurs']['prenom']) ? 'is-invalid' : '' ?>" id="Name1" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['prenom'] : 'Prenom' ?>">
-
+                                        <input name="prenom" type="text" class="form-control <?= isset($_SESSION['erreurs']['prenom']) ? 'is-invalid' : '' ?>" id="Name1" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['prenom'] : 'Prenom' ?>" required>
                                         <?php if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) { ?>
                                             <span class="text-danger">
                                                 <?php echo $erreurs["prenom"]; ?>
@@ -424,11 +437,11 @@ include './app/commum/aside.php';
                                 </div>
                             </div>
 
+                            <!-- Champ pour le nom d'utilisateur -->
                             <div class="row mb-3">
                                 <label for="user" class="col-md-4 col-lg-3 col-form-label">Nom utilisateur :</label>
                                 <div class="col-md-8 col-lg-9">
-                                    <input name="nom_utilisateur" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom_utilisateur']) ? 'is-invalid' : '' ?>" id="user" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Nom utilisateur' ?>">
-
+                                    <input name="nom_utilisateur" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom_utilisateur']) ? 'is-invalid' : '' ?>" id="user" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Nom utilisateur' ?>" required>
                                     <?php if (isset($erreurs["nom_utilisateur"]) && !empty($erreurs["nom_utilisateur"])) { ?>
                                         <span class="text-danger">
                                             <?php echo $erreurs["nom_utilisateur"]; ?>
@@ -437,11 +450,11 @@ include './app/commum/aside.php';
                                 </div>
                             </div>
 
+                            <!-- Champ pour le numéro de contact -->
                             <div class="row mb-3">
                                 <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact : </label>
                                 <div class="col-md-8 col-lg-9">
-                                    <input name="telephone" type="text" class="form-control <?= isset($_SESSION['erreurs']['telephone']) ? 'is-invalid' : '' ?>" id="Phone" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['telephone'] : 'Téléphone' ?>">
-
+                                    <input name="telephone" type="text" class="form-control <?= isset($_SESSION['erreurs']['telephone']) ? 'is-invalid' : '' ?>" id="Phone" value="<?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['telephone'] : 'Téléphone' ?>" required>
                                     <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
                                         <span class="text-danger">
                                             <?php echo $erreurs["telephone"]; ?>
@@ -451,13 +464,13 @@ include './app/commum/aside.php';
                             </div>
 
                             <div class="text-center" style="color: #070b3a;">
-                                <!-- Button trigger modal -->
+                                <!-- Bouton sauvegarder pour ouvrir la fenêtre modale -->
                                 <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#modal1">
                                     Sauvegarder
                                 </button>
 
                                 <div class="text-center" style="color: #070b3a;">
-                                    <!-- Modal -->
+                                    <!-- Fenêtre modale sauvegarder-->
                                     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -469,87 +482,88 @@ include './app/commum/aside.php';
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour appliquer les modifications.</label>
+                                                        <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour appliquer les modifications.</label>
                                                         <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
-
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="sauvegarder" class="btn btn-primary">Valider</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Fin du formulaire de modification du profil -->
+                    </div>
+                </div>
+            </div>
 
+            <!-- Formulaire de changement de mot de passe -->
+            <div class="col-lg-12 mt-5">
+                <h5 style="font-weight: 700; ">Changement de mot de passe</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_password" method="post" enctype="multipart/form-data">
+                            <!-- Message d'avertissement pour informer l'utilisateur -->
+                            <h5 style="color: #8bb9c6; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
+                            <br>
+
+                            <!-- Champ pour le mot de passe actuel -->
+                            <div class="row mb-3">
+                                <label for="currentPassword" class="col-md-5 col-lg-4 col-form-label" require>Mot de passe actuel</label>
+                                <div class="col-md-7 col-lg-8">
+                                    <input name="password" type="password" class="form-control" placeholder="Veuillez entrer votre mot de passe actuel" id="currentPassword">
+                                    <span class="text-danger">
+                                        <?php
+                                        if (isset($erreurs["password"]) && !empty($erreurs["password"])) {
+                                            echo $erreurs["password"];
+                                        }
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Champ pour le nouveau mot de passe -->
+                            <div class="row mb-3">
+                                <label for="newPassword" class="col-md-5 col-lg-4 col-form-label">Nouveau Mot de passe</label>
+                                <div class="col-md-7 col-lg-8">
+                                    <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" required>
+                                    <span class="text-danger">
+                                        <?php
+                                        if (isset($erreurs["newpassword"]) && !empty($erreurs["newpassword"])) {
+                                            echo $erreurs["newpassword"];
+                                        }
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Champ pour retapez le nouveau mot de passe-->
+                            <div class="row mb-3">
+                                <label for="renewPassword" class="col-md-5 col-lg-4 col-form-label">Retaper Nouveau Mot de passe</label>
+                                <div class="col-md-7 col-lg-8">
+                                    <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" required>
+                                    <span class="text-danger">
+                                        <?php
+                                        if (isset($erreurs["renewpassword"]) && !empty($erreurs["renewpassword"])) {
+                                            echo $erreurs["renewpassword"];
+                                        }
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div style="text-align: center;">
+                                <button type="submit" name="change_password" class="btn btn-primary text-center"> Changer mot de passe</button>
+                            </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" name="sauvegarder" class="btn btn-primary">Valider</button>
-                    </div>
                 </div>
             </div>
-        </div>
-        </div>
-        </div>
-        </form><!-- End Profile Edit Form -->
-        </div>
-        </div>
-        </div>
 
-        <!-- Changed password Form -->
-        <div class="col-lg-12 mt-5">
-
-            <h5 style="font-weight: 700; ">Changement de mot de passe</h5>
-            <div class="card">
-                <div class="card-body">
-                    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_password" method="post" enctype="multipart/form-data">
-                        <h5 style="color: #8bb9c6; text-align:center; "> Sachez qu'après le changement de votre mot de passe vous serez déconnecté(e).</h5>
-                        <br>
-                        <div class="row mb-3">
-                            <label for="currentPassword" class="col-md-5 col-lg-4 col-form-label" require>Mot de passe actuel</label>
-                            <div class="col-md-7 col-lg-8">
-                                <input name="password" type="password" class="form-control" placeholder="Veuillez entrer votre mot de passe actuel" id="currentPassword">
-                                <span class="text-danger">
-                                    <?php
-                                    if (isset($erreurs["password"]) && !empty($erreurs["password"])) {
-                                        echo $erreurs["password"];
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="newPassword" class="col-md-5 col-lg-4 col-form-label">Nouveau Mot de passe</label>
-                            <div class="col-md-7 col-lg-8">
-                                <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" requi#9f0808>
-                                <span class="text-danger">
-                                    <?php
-                                    if (isset($erreurs["newpassword"]) && !empty($erreurs["newpassword"])) {
-                                        echo $erreurs["newpassword"];
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="renewPassword" class="col-md-5 col-lg-4 col-form-label">Retaper Nouveau Mot de passe</label>
-                            <div class="col-md-7 col-lg-8">
-                                <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" requi#9f0808>
-                                <span class="text-danger">
-                                    <?php
-                                    if (isset($erreurs["renewpassword"]) && !empty($erreurs["renewpassword"])) {
-                                        echo $erreurs["renewpassword"];
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-
-                        </div>
-
-                        <div style="text-align: center;">
-                            <button type="submit" name="change_password" class="btn btn-primary text-center"> Changer mot de passe</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         </div>
 
         </div>

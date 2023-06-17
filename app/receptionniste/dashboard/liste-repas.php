@@ -19,14 +19,14 @@ $liste_repas = recuperer_liste_repas();
         </ol>
     </nav>
 </div>
-<!-- DataTales Example -->
+<!-- Tableau de la liste des repas -->
 <div class="card shadow mb-4  ml-2 mr-2">
 
     <div class="card-body">
         <div class="table-responsive">
             <?php if (isset($liste_repas) && !empty($liste_repas)) {
             ?>
-                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                <table class="table table-striped" id="" width="100%" cellspacing="0" style="text-align: center;">
                     <thead>
                         <tr>
                             <th>Code type </th>

@@ -1,18 +1,18 @@
 <?php
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (!check_if_user_connected_admin()) {
+    // Redirige l'utilisateur vers la page de connexion de l'administrateur s'il n'est pas connecté en tant qu'administrateur
     header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
     exit;
 }
-
 include './app/commum/header.php';
 
 include './app/commum/aside.php';
 ?>
 
-<!-- Begin Page Content -->
+<!-- Commencement du contenu de la page -->
 <div class="container-fluid">
-    <!-- Page Heading -->
-    
+    <!-- Titre de la page -->
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
@@ -23,25 +23,28 @@ include './app/commum/aside.php';
     </div>
 
     <?php
-    if (isset($_SESSION['ajout-message-success-global']) && !empty($_SESSION['ajout-message-success-global'])) {
+    // Vérifier s'il y a un message de succès et s'il n'est pas vide
+    if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
     ?>
         <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-            <?= $_SESSION['ajout-message-success-global'] ?>
+            <?= $_SESSION['message-success-global'] ?>
         </div>
     <?php
     }
     ?>
 
     <?php
-    if (isset($_SESSION['ajout-message-erreur-global']) && !empty($_SESSION['ajout-message-erreur-global'])) {
+    // Vérifier s'il y a un message d'erreur et s'il n'est pas vide
+    if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
     ?>
-        <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
-            <?= $_SESSION['ajout-message-erreur-global'] ?>
+        <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+            <?= $_SESSION['message-erreur-global'] ?>
         </div>
     <?php
     }
     ?>
 
+    <!-- Formulaire d'ajout d'utilisateur -->
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user-traitement" method="post" class="user" novalidate>
         <div class="form-group row pt-3">
             <!-- Le champ nom -->
@@ -199,10 +202,10 @@ include './app/commum/aside.php';
     </form>
 
 </div>
-<!-- End of Content Wrapper -->
-
+<!-- Fin du contenu de la page -->
 
 <?php
+// Supprimer les variables de session
 unset($_SESSION['ajout-message-success-global'], $_SESSION['ajout-message-erreur-global'], $_SESSION['donnees-utilisateur'], $_SESSION['erreurs-utilisateur']);
 
 include './app/commum/footer.php'

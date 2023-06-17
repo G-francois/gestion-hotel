@@ -1,6 +1,9 @@
 <?php
 
-include './app/commum/header_client.php'
+include './app/commum/header_client.php';
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 ?>
 
@@ -102,7 +105,7 @@ include './app/commum/header_client.php'
                     <span class="text-danger">(*)</span>
                   </label>
                   <div class="input-group mb-3">
-                    <input type="date" name="date-reservation" id="inscription-reservation" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
+                    <input type="date" name="date-reservation" id="inscription-date-reservation" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
                   </div>
 
                   <span class="text-danger">
@@ -116,12 +119,12 @@ include './app/commum/header_client.php'
 
                 <!-- Le champs date de  fin occupation -->
                 <div class="col-sm-12 mb-3">
-                  <label for="inscription-date-reservation">
+                  <label for="inscription-date-reservation-s">
                     Date de fin occupation:
                     <span class="text-danger">(*)</span>
                   </label>
                   <div class="input-group mb-3">
-                    <input type="date" name="date-reservation" id="inscription-reservation" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
+                    <input type="date" name="date-reservation" id="inscription-date-reservation-s" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["date-naissance"]) && !empty($donnees["date-naissance"])) ? $donnees["date-naissance"] : ""; ?>" required>
                   </div>
 
                   <span class="text-danger">
@@ -134,54 +137,36 @@ include './app/commum/header_client.php'
                 </div>
 
                 <div class="col-sm-12 mb-3">
-                  <label for="nom-auteur" class="col-sm-4 col-form-label">Numéros de chambre
+                  <label for="type" class="col-sm-4 col-form-label">Numéros de chambre
                     <span class="text-danger">(*)</span>
                   </label>
                   <div class="input-group">
-                    <select class="form-control" name="type" id="type">
+                    <select class="form-control" name="lib_typ" id="type">
                       <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                      <option value="">A-101</option>
-                      <option value="">A-102</option>
-                      <option value="">A-103</option>
-                      <option value="">A-104</option>
-                      <option value="">B-101</option>
-                      <option value="">B-102</option>
-                      <option value="">B-103</option>
-                      <option value="">B-104</option>
-                      <option value="">C-101</option>
-                      <option value="">C-102</option>
-                      <option value="">C-103</option>
-                      <option value="">C-104</option>
+                      <?php
+                      $chambres = recuperer_liste_chambres();
+                      foreach ($chambres as $chambre) {
+                        if ($chambre['lib_typ'] === 'Solo') {
+                          echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
+                        }
+                      }
+                      ?>
                     </select>
                   </div>
-                </div>
 
-                <div class="col-sm-12 mb-3">
-                  <label for="nom-auteur" class="col-sm-4 col-form-label">Mode de paiement</label>
-                  <div class="input-group">
-                    <select class="form-control" name="type" id="type">
-                      <option value="" disabled selected>Veuillez choisir le mode de paiement</option>
-                      <option value="">Carte de crédit</option>
-                      <option value="">Monnaies virtuelles</option>
-                      <option value="">Mobile</option>
-                    </select>
+                  <div class="col-lg-12 mt-4">
+                    <h5 style="font-weight: bold">Total Days : <span id="staying_day">0</span> Days</h5>
+                    <h5 style="font-weight: bold">Price: /-</h4>
+                      <h5 style="font-weight: bold">Total Amount : <span id="total_price">0</span> /-</h5>
                   </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <h5 style="font-weight: bold">Total Days : <span id="staying_day">0</span> Days</h5>
-                  <h5 style="font-weight: bold">Price: /-</h4>
-                    <h5 style="font-weight: bold">Total Amount : <span id="total_price">0</span> /-</h5>
                 </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </section>
 <?php
 
-include './app/commum/footer_client.php'
+include './app/commum/footer_client.php';
 
 ?>

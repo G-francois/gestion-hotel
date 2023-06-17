@@ -24,17 +24,16 @@ if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
     $erreurs["pu"] = "Le champs prix unitaire est requis. Veuillez le renseigné.";
 }
 
+if (isset($_POST["num_chambre"]) && !empty($_POST["num_chambre"])) {
+    $num_chambre = $_POST["num_chambre"];
+}
+
 $_SESSION['donnees-chambre-modifier'] = $donnees;
 $_SESSION['erreurs-chambre-modifier'] = $erreurs;
 
-// die (var_dump($_SESSION['donnees-chambre-modifier']));
 if (empty($erreurs)) {
 
-    $num_chambre = -1;
 
-    if (isset($_POST["num_chambre"]) && !empty($_POST["num_chambre"])) {
-        $num_chambre = $_POST["num_chambre"];
-    }
 
     $resultat = modifier_chambre($num_chambre, $donnees["cod_typ"], $donnees["lib_typ"], $donnees["pu"]);
 

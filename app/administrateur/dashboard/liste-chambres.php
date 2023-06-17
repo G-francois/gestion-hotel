@@ -1,5 +1,7 @@
 <?php
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
 if (!check_if_user_connected_admin()) {
+    // Redirige l'utilisateur vers la page de connexion de l'administrateur s'il n'est pas connecté en tant qu'administrateur
     header('location: ' . PATH_PROJECT . 'administrateur/connexion/index');
     exit;
 }
@@ -8,22 +10,25 @@ include './app/commum/header.php';
 
 include './app/commum/aside.php';
 
-
 $liste_chambre = recuperer_liste_chambres();
 ?>
 
+<!-- Commencement du contenu de la page -->
 <div class="container-fluid">
+    <!-- Titre de la page -->
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Listes des chambres</li>
+                <li class="breadcrumb-item active">Liste des chambres</li>
             </ol>
         </nav>
     </div>
-    <!-- DataTales Example -->
+
+    <!-- Tableau de données liste chambre(s)-->
     <div class="card shadow mb-4">
         <?php
+        // Affiche un message de succès s'il existe et n'est pas vide
         if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
         ?>
             <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
@@ -34,9 +39,10 @@ $liste_chambre = recuperer_liste_chambres();
         ?>
 
         <?php
+        // Affiche un message d'erreur s'il existe et n'est pas vide
         if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
         ?>
-            <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+            <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
                 <?= $_SESSION['message-erreur-global'] ?>
             </div>
         <?php
@@ -44,7 +50,9 @@ $liste_chambre = recuperer_liste_chambres();
         ?>
         <div class="card-body">
             <div class="table-responsive">
-                <?php if (isset($liste_chambre) && !empty($liste_chambre)) {
+                <?php 
+                // Vérifie si la liste des chambres existe et n'est pas vide
+                if (isset($liste_chambre) && !empty($liste_chambre)) {
                 ?>
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align:center;">
                         <thead>
@@ -60,6 +68,7 @@ $liste_chambre = recuperer_liste_chambres();
 
                         <tbody>
                             <?php
+                            // Parcours de la liste des chambres
                             foreach ($liste_chambre as $chambre) {
                             ?>
                                 <tr>
@@ -69,46 +78,42 @@ $liste_chambre = recuperer_liste_chambres();
                                     <td><?php echo $chambre['statut']; ?></td>
                                     <td><?php echo $chambre['pu']; ?></td>
                                     <td>
+                                        <!-- lien bouton pour modifier et supprimer -->
                                         <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre/<?= $chambre['num_chambre'] ?>" class="btn btn-warning">Modifier</a>
-                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["cod_typ"]; ?>">Supprimer</a>
+                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["num_chambre"]; ?>">Supprimer</a>
                                     </td>
 
-                                    <div class="modal fade" id="supprimer-chambre-<?= $chambre["cod_typ"]; ?>" style="display: none;" aria-hidden="true">
+                                    <!-- Modal supprimer -->
+                                    <div class="modal fade" id="supprimer-chambre-<?= $chambre["num_chambre"]; ?>" style="display: none;" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-
+                                                    <h4 class="modal-title">Supprimer la chambre <?= $chambre["num_chambre"]; ?></h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
+                                                        <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p style="font-size: larger;">Etes vous sur de vouloir supprimer la chambre <?= $chambre["lib_typ"]; ?> ?</p>
+                                                    <p style="font-size: larger;">Etes-vous sûr de vouloir supprimer la chambre <?= $chambre["lib_typ"]; ?> ?</p>
                                                 </div>
                                                 <div class="modal-footer ">
-
-                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["cod_typ"]; ?>" class="btn btn-danger">Oui</a>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                        Annuler
-                                                    </button>
+                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" class="btn btn-danger">Oui</a>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>
-                                            <!-- /.modal-content -->
                                         </div>
-                                        <!-- /.modal-dialog -->
                                     </div>
-
-                                <?php
-                            }
-
-                                ?>
+                                    <!-- Fin Modal supprimer -->
                                 </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 <?php
                 } else {
-
-                    echo "Aucune chambre n'a été trouvés!!!";
+                    // Affiche un message s'il n'y a aucune chambre trouvée
+                    echo "Aucune chambre n'a été trouvée !!!";
                 }
                 ?>
             </div>
@@ -117,9 +122,8 @@ $liste_chambre = recuperer_liste_chambres();
     <!-- /.container-fluid -->
 
     <?php
-
+    // Supprime les messages de succès et d'erreur globaux de la session
     unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
-    include './app/commum/footer.php'
-
+    include './app/commum/footer.php';
     ?>

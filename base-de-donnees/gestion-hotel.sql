@@ -2,17 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
-<<<<<<< HEAD
 -- Hôte : 127.0.0.1:3306
 -- Généré le : sam. 27 mai 2023 à 08:25
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
-=======
--- Hôte : localhost:8889
--- Généré le : mer. 24 mai 2023 à 15:08
--- Version du serveur : 5.7.39
--- Version de PHP : 8.2.0
->>>>>>> 54216fe7f9f9bd600eaf7c9cb0feefc28ba101dc
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;

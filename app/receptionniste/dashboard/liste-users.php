@@ -17,7 +17,8 @@ include './app/commum/aside_recept.php';
         </ol>
     </nav>
 </div>
-<!-- DataTales Example -->
+
+<!-- Tableau de la liste des utilisateurs -->
 <div class="card shadow mb-4  ml-2 mr-2">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Listes des utilisateurs</h6>
@@ -102,12 +103,12 @@ include './app/commum/aside_recept.php';
                         <td>Naruto</td>
                         <td>Masculin</td>
                         <td>
-                            <!-- Button trigger modal -->
+                            <!-- Button Détails modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
                                 Détails
                             </button>
 
-                            <!-- Modal -->
+                            <!-- Modal Détails -->
                             <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -128,8 +129,6 @@ include './app/commum/aside_recept.php';
                             </div>
                         </td>
                     </tr>
-
-
                 </tbody>
             </table>
         </div>

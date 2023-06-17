@@ -94,7 +94,6 @@ function check_email_exist_in_db(string $email): bool
 	return $check;
 }
 
-
 /**
  * Cette fonction permet de verifier si un utilisateur dans la base de donnée ne possède pas ce nom d'utilisateur.
  * @param string $nom_utilisateur Le nom d'utilisateur a vérifié.
@@ -164,6 +163,39 @@ function check_telephone_exist_in_db(string $telephone): bool
 	}
 
 	return $check;
+}
+
+/**
+ * Cette fonction permet de verifier le profil administrateur
+ *
+ * @param  int $id
+ * @return $verifier_profil
+ */
+function verifier_profil_administrateur(int $id) {
+	
+	$verifier_profil = false;
+    
+	$db = connect_db();
+
+    if (is_object($db)) {
+        // Requête pour vérifier si l'utilisateur a le profil d'administrateur
+        $requete = "SELECT profil FROM utilisateur WHERE id = :id";
+        $requete_preparee = $db->prepare($requete);
+        $requete_preparee->execute([
+            ':id' => $id
+        ]);
+
+        if ($requete_preparee) {
+            $resultat = $requete_preparee->fetch(PDO::FETCH_ASSOC);
+
+            // Vérifiez si l'utilisateur a le profil d'administrateur.
+            if ($resultat && $resultat['profil'] === 'administrateur') {
+                return true; // L'utilisateur a le profil d'administrateur.
+            }
+        }
+    }
+
+    return $verifier_profil; // L'utilisateur n'a pas le profil d'administrateur.
 }
 
 
