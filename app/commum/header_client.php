@@ -1,3 +1,15 @@
+<?php
+// LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-REPAS DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnees-reservation']) && !empty($_SESSION['donnees-reservation'])) {
+    $donnees = $_SESSION['donnees-reservation'];
+}
+
+if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reservation'])) {
+    $erreurs = $_SESSION['erreurs-reservation'];
+}
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -132,6 +144,56 @@
                         <li>
                             <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                         </li>
+
+                        <div id="notification-container" class="notification-container">
+                            <div class="notification-content d-flex">
+                                <img id="offre" src="<?= PATH_PROJECT ?>public/images/remise.jpg" alt="Remise" />
+                                <span class="notification-message">Profitez d'un rabais de 5% sur toutes vos <br> réservations lorsque vous vous inscrivez <br> sur notre platforme dès maintnant.</span>
+
+                            </div>
+                        </div>
+
+                        <style>
+                            .notification-container {
+                                display: none;
+                                position: fixed;
+                                top: 70px;
+                                right: 20px;
+                                z-index: 9999;
+                            }
+
+                            .notification-content {
+                                background-color: #f8f9fa;
+                                border: 1px solid #ced4da;
+                                padding: 10px;
+                                border-radius: 4px;
+                                display: flex;
+                                align-items: center;
+                                animation: zoomDownNotification 2.5s ease;
+                            }
+
+                            .notification-content img {
+                                width: 46px;
+                                height: 36px;
+                            }
+
+                            .notification-message {
+                                margin-right: 10px;
+                                color: black;
+                            }
+
+                            @keyframes zoomDownNotification {
+                                0% {
+                                    opacity: 0;
+                                    transform: translateY(-50px);
+                                }
+
+                                100% {
+                                    opacity: 1;
+                                    transform: translateY(0);
+                                }
+                            }
+                        </style>
                     <?php
                     }
                     ?>

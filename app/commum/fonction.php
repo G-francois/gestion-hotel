@@ -171,31 +171,32 @@ function check_telephone_exist_in_db(string $telephone): bool
  * @param  int $id
  * @return $verifier_profil
  */
-function verifier_profil_administrateur(int $id) {
-	
+function verifier_profil_administrateur(int $id)
+{
+
 	$verifier_profil = false;
-    
+
 	$db = connect_db();
 
-    if (is_object($db)) {
-        // Requête pour vérifier si l'utilisateur a le profil d'administrateur
-        $requete = "SELECT profil FROM utilisateur WHERE id = :id";
-        $requete_preparee = $db->prepare($requete);
-        $requete_preparee->execute([
-            ':id' => $id
-        ]);
+	if (is_object($db)) {
+		// Requête pour vérifier si l'utilisateur a le profil d'administrateur
+		$requete = "SELECT profil FROM utilisateur WHERE id = :id";
+		$requete_preparee = $db->prepare($requete);
+		$requete_preparee->execute([
+			':id' => $id
+		]);
 
-        if ($requete_preparee) {
-            $resultat = $requete_preparee->fetch(PDO::FETCH_ASSOC);
+		if ($requete_preparee) {
+			$resultat = $requete_preparee->fetch(PDO::FETCH_ASSOC);
 
-            // Vérifiez si l'utilisateur a le profil d'administrateur.
-            if ($resultat && $resultat['profil'] === 'administrateur') {
-                return true; // L'utilisateur a le profil d'administrateur.
-            }
-        }
-    }
+			// Vérifiez si l'utilisateur a le profil d'administrateur.
+			if ($resultat && $resultat['profil'] === 'administrateur') {
+				return true; // L'utilisateur a le profil d'administrateur.
+			}
+		}
+	}
 
-    return $verifier_profil; // L'utilisateur n'a pas le profil d'administrateur.
+	return $verifier_profil; // L'utilisateur n'a pas le profil d'administrateur.
 }
 
 
@@ -901,27 +902,27 @@ function recuperer_liste_utilisateurs(): array
  */
 function activer_utilisateur(int $id): bool
 {
-    $profile_active = false;
+	$profile_active = false;
 
-    $date = date("Y-m-d H:i:s");
+	$date = date("Y-m-d H:i:s");
 
-    $db = connect_db();
+	$db = connect_db();
 
-    if (is_object($db)) {
-        $request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id = :id";
-        $request_prepare = $db->prepare($request);
-        $request_execution = $request_prepare->execute(array(
-            'id' => $id,
-            'est_actif' => 1,
-            'maj_le' => $date
-        ));
+	if (is_object($db)) {
+		$request = "UPDATE utilisateur SET est_actif = :est_actif, maj_le = :maj_le WHERE id = :id";
+		$request_prepare = $db->prepare($request);
+		$request_execution = $request_prepare->execute(array(
+			'id' => $id,
+			'est_actif' => 1,
+			'maj_le' => $date
+		));
 
-        if ($request_execution) {
-            $profile_active = true;
-        }
-    }
+		if ($request_execution) {
+			$profile_active = true;
+		}
+	}
 
-    return $profile_active;
+	return $profile_active;
 }
 
 /**
@@ -932,25 +933,25 @@ function activer_utilisateur(int $id): bool
  */
 function suppression_compte_utilisateur(int $id): bool
 {
-    $utilisateur_est_supprimer = false;
-    
-    $db = connect_db();
-    
-    if (!is_null($db)) {
-        $requete = 'DELETE FROM utilisateur WHERE id = :id';
-        
-        $supprimer_chambre = $db->prepare($requete);
-        
-        $resultat = $supprimer_chambre->execute([
-            'id' => $id,
-        ]);
-        
-        if ($resultat) {
-            $utilisateur_est_supprimer = true;
-        }
-    }
-    
-    return $utilisateur_est_supprimer;
+	$utilisateur_est_supprimer = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM utilisateur WHERE id = :id';
+
+		$supprimer_chambre = $db->prepare($requete);
+
+		$resultat = $supprimer_chambre->execute([
+			'id' => $id,
+		]);
+
+		if ($resultat) {
+			$utilisateur_est_supprimer = true;
+		}
+	}
+
+	return $utilisateur_est_supprimer;
 }
 
 
@@ -1057,24 +1058,24 @@ function recuperer_liste_repas(): array
  */
 function recuperer_repas_par_son_code_repas(int $cod_repas): array
 {
-    $repas = array();
+	$repas = array();
 
-    $db = connect_db();
+	$db = connect_db();
 
-    $requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas ';
+	$requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas ';
 
-    $verifier_repas = $db->prepare($requette);
+	$verifier_repas = $db->prepare($requette);
 
-    $resultat = $verifier_repas->execute([
-        "cod_repas" => $cod_repas
-    ]);
+	$resultat = $verifier_repas->execute([
+		"cod_repas" => $cod_repas
+	]);
 
-    if ($resultat) {
-		
-        $repas = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
-    }
+	if ($resultat) {
 
-    return $repas;
+		$repas = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	return $repas;
 }
 
 
@@ -1088,30 +1089,30 @@ function recuperer_repas_par_son_code_repas(int $cod_repas): array
  */
 function modifier_repas(int $cod_repas, string $nom_repas, int $pu_repas): bool
 {
-    $modifier_repas = false;
-    
-    $date = date("Y-m-d H:i:s");
-    
-    $db = connect_db();
-    
-    if (!is_null($db)) {
-        $requete = 'UPDATE repas SET nom_repas = :nom_repas, pu_repas = :pu_repas, maj_le = :maj_le  WHERE cod_repas = :cod_repas';
-        
-        $modifier_repas = $db->prepare($requete);
-        
-        $resultat = $modifier_repas->execute([
-            'cod_repas' => $cod_repas,
-            'nom_repas' => $nom_repas,
-            'pu_repas' => $pu_repas,
-            'maj_le' => $date
-        ]);
-        
-        if ($resultat) {
-            $modifier_repas = true;
-        }
-    }
-    
-    return $modifier_repas;
+	$modifier_repas = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'UPDATE repas SET nom_repas = :nom_repas, pu_repas = :pu_repas, maj_le = :maj_le  WHERE cod_repas = :cod_repas';
+
+		$modifier_repas = $db->prepare($requete);
+
+		$resultat = $modifier_repas->execute([
+			'cod_repas' => $cod_repas,
+			'nom_repas' => $nom_repas,
+			'pu_repas' => $pu_repas,
+			'maj_le' => $date
+		]);
+
+		if ($resultat) {
+			$modifier_repas = true;
+		}
+	}
+
+	return $modifier_repas;
 }
 
 /**
@@ -1122,25 +1123,25 @@ function modifier_repas(int $cod_repas, string $nom_repas, int $pu_repas): bool
  */
 function supprimer_repas(int $cod_repas): bool
 {
-    $repas_est_supprime = false;
-    
-    $db = connect_db();
-    
-    if (!is_null($db)) {
-        $requete = 'DELETE FROM repas WHERE cod_repas = :cod_repas';
-        
-        $supprimer_repas = $db->prepare($requete);
-        
-        $resultat = $supprimer_repas->execute([
-            'cod_repas' => $cod_repas,
-        ]);
-        
-        if ($resultat) {
-            $repas_est_supprime = true;
-        }
-    }
-    
-    return $repas_est_supprime;
+	$repas_est_supprime = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM repas WHERE cod_repas = :cod_repas';
+
+		$supprimer_repas = $db->prepare($requete);
+
+		$resultat = $supprimer_repas->execute([
+			'cod_repas' => $cod_repas,
+		]);
+
+		if ($resultat) {
+			$repas_est_supprime = true;
+		}
+	}
+
+	return $repas_est_supprime;
 }
 
 
@@ -1154,7 +1155,7 @@ function supprimer_repas(int $cod_repas): bool
  * @param  int $est_actif
  * @return bool
  */
-function enregistrer_chambre(int $cod_typ, string $lib_typ, int $pu,  int $est_actif = 1): bool
+function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ, int $pu,  int $est_actif = 1): bool
 {
 	$enregistrer_chambre = false;
 
@@ -1162,11 +1163,12 @@ function enregistrer_chambre(int $cod_typ, string $lib_typ, int $pu,  int $est_a
 
 	if (!is_null($db)) {
 
-		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, pu, est_actif) VALUES (:cod_typ, :lib_typ, :pu, :est_actif)';
+		$requette = 'INSERT INTO chambre (num_chambre, cod_typ, lib_typ, pu, est_actif) VALUES (:num_chambre, :cod_typ, :lib_typ, :pu, :est_actif)';
 
 		$inserer_chambre = $db->prepare($requette);
 
 		$resultat = $inserer_chambre->execute([
+			'num_chambre' => $num_chambre,
 			'cod_typ' => $cod_typ,
 			'lib_typ' => $lib_typ,
 			'pu' => $pu,
@@ -1179,7 +1181,40 @@ function enregistrer_chambre(int $cod_typ, string $lib_typ, int $pu,  int $est_a
 	return $enregistrer_chambre;
 }
 
+/**
+ * Cette fonction permet de verifier si l'une chambres dans la base de donnée ne possède pas ce numeros.
+ * @param string $num_chambre Le numéro de chambre a vérifié.
+ *
+ * @return bool $check
+ */
+function check_if_chambre_exist_in_db(int $num_chambre): bool
+{
 
+	$check = false;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$requette = "SELECT count(*) as nbr_chambre FROM chambre WHERE num_chambre = :num_chambre and est_supprimer = :est_supprimer";
+
+		$verifier_num_chambre = $db->prepare($requette);
+
+		$resultat = $verifier_num_chambre->execute([
+			'num_chambre' => $num_chambre,
+			'est_supprimer' => 0
+		]);
+
+		if ($resultat) {
+
+			$nbr_utilisateur = $verifier_num_chambre->fetch(PDO::FETCH_ASSOC)["nbr_chambre"];
+
+			$check = ($nbr_utilisateur > 0) ? true : false;
+		}
+	}
+
+	return $check;
+}
 /**
  * Cette fonction permet de récupérer la liste des chambres de la base de donnée.
  *
@@ -1214,24 +1249,24 @@ function recuperer_liste_chambres(): array
  */
 function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
 {
-    $chambre = array();
+	$chambre = array();
 
-    $db = connect_db();
+	$db = connect_db();
 
-    $requette = 'SELECT * FROM chambre WHERE num_chambre = :num_chambre ';
+	$requette = 'SELECT * FROM chambre WHERE num_chambre = :num_chambre ';
 
-    $verifier_repas = $db->prepare($requette);
+	$verifier_repas = $db->prepare($requette);
 
-    $resultat = $verifier_repas->execute([
-        "num_chambre" => $num_chambre
-    ]);
+	$resultat = $verifier_repas->execute([
+		"num_chambre" => $num_chambre
+	]);
 
-    if ($resultat) {
-		
-        $chambre = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
-    }
+	if ($resultat) {
 
-    return $chambre;
+		$chambre = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	return $chambre;
 }
 
 
@@ -1246,32 +1281,32 @@ function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
  */
 function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $pu): bool
 {
-    $modifier_chambre = false;
-    
-    $date = date("Y-m-d H:i:s");
-    
-    $db = connect_db();
-    
-    if (!is_null($db)) {
-        $requete = 'UPDATE chambre SET cod_typ = :cod_typ, lib_typ = :lib_typ, pu = :pu, maj_le = :maj_le  WHERE num_chambre = :num_chambre';
-        
-        $modifier_chambre = $db->prepare($requete);
-        
-        $resultat = $modifier_chambre->execute([
+	$modifier_chambre = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'UPDATE chambre SET cod_typ = :cod_typ, lib_typ = :lib_typ, pu = :pu, maj_le = :maj_le  WHERE num_chambre = :num_chambre';
+
+		$modifier_chambre = $db->prepare($requete);
+
+		$resultat = $modifier_chambre->execute([
 			'num_chambre' => $num_chambre,
-            'cod_typ' => $cod_typ,
-            'lib_typ' => $lib_typ,
+			'cod_typ' => $cod_typ,
+			'lib_typ' => $lib_typ,
 			'pu' => $pu,
-            'maj_le' => $date
-        ]);
-        
-        if ($resultat) {
-			
-            $modifier_chambre = true;
-        }
-    }
-    
-    return $modifier_chambre;
+			'maj_le' => $date
+		]);
+
+		if ($resultat) {
+
+			$modifier_chambre = true;
+		}
+	}
+
+	return $modifier_chambre;
 }
 
 /**
@@ -1282,23 +1317,54 @@ function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $
  */
 function supprimer_chambre(int $num_chambre): bool
 {
-    $chambre_est_supprimer = false;
-    
-    $db = connect_db();
-    
-    if (!is_null($db)) {
-        $requete = 'DELETE FROM chambre WHERE num_chambre = :num_chambre';
-        
-        $supprimer_chambre = $db->prepare($requete);
-        
-        $resultat = $supprimer_chambre->execute([
-            'num_chambre' => $num_chambre,
-        ]);
-        
-        if ($resultat) {
-            $chambre_est_supprimer = true;
-        }
-    }
-    
-    return $chambre_est_supprimer;
+	$chambre_est_supprimer = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM chambre WHERE num_chambre = :num_chambre';
+
+		$supprimer_chambre = $db->prepare($requete);
+
+		$resultat = $supprimer_chambre->execute([
+			'num_chambre' => $num_chambre,
+		]);
+
+		if ($resultat) {
+			$chambre_est_supprimer = true;
+		}
+	}
+
+	return $chambre_est_supprimer;
+}
+
+// Fonction pour effectuer la réservation d'une chambre
+function enregistrer_reservation(int $num_res, int $num_chambre, string $date_debut, string $date_fin, int $statut): bool
+{
+	$enregistrer_reservation = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'INSERT INTO reservation (num_res, num_chambre, date_debut, date_fin, statut, maj_le) VALUES (:num_res, :num_chambre, :date_debut, :date_fin, :statut, :maj_le)';
+
+		$enregistrer_reservation = $db->prepare($requete);
+
+		$resultat = $enregistrer_reservation->execute([
+			'num_res' => $num_res,
+			'num_chambre' => $num_chambre,
+			'date_debut' => $date_debut,
+			'date_fin' => $date_fin,
+			'statut' => $statut,
+			'maj_le' => $date
+		]);
+
+		if ($resultat) {
+			$enregistrer_reservation = true;
+		}
+	}
+
+	return $enregistrer_reservation;
 }

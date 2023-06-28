@@ -322,11 +322,11 @@ include './app/commum/header_client.php'
       </div>
 
       <div class="col-lg-3 col-md-2">
-        <div class="member" data-aos="zoom-in" data-aos-delay="300">
-          <img src="<?= PATH_PROJECT ?>public/images/wellness/wellness (3).jpeg" class="img-fluid" alt="" />
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/salle_de_jeu (1).jpg" class="img-fluid" alt="" />
           <div class="member-info">
             <div class="member-info-content">
-              <h4>Espace Wellness</h4>
+              <h4>Espace Jeu</h4>
               <span>
                 <i class="bi bi-star"></i>
                 <i class="bi bi-star"></i>
@@ -339,7 +339,7 @@ include './app/commum/header_client.php'
 
       <div class="col-lg-3 col-md-2">
         <div class="member" data-aos="zoom-in" data-aos-delay="200">
-          <img src="<?= PATH_PROJECT ?>public/images/wellness/reunion.png" class="img-fluid" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/salle_de_reunion 2.jpg" class="img-fluid" alt="" />
           <div class="member-info">
             <div class="member-info-content">
               <h4>Espace Réunion</h4>
@@ -353,13 +353,12 @@ include './app/commum/header_client.php'
         </div>
       </div>
 
-
       <div class="col-lg-3 col-md-2">
         <div class="member" data-aos="zoom-in" data-aos-delay="200">
           <img src="<?= PATH_PROJECT ?>public/images/wellness/belle-femme-africaine-au-repos-relaxante-dans-station-thermale-yeux-fermes.jpg" class="img-fluid" alt="" />
           <div class="member-info">
             <div class="member-info-content">
-              <h4>Espace Wellness</h4>
+              <h4>Espace Bien-être</h4>
               <span>
                 <i class="bi bi-star"></i>
                 <i class="bi bi-star"></i>
@@ -372,7 +371,23 @@ include './app/commum/header_client.php'
 
       <div class="col-lg-3 col-md-2">
         <div class="member" data-aos="zoom-in" data-aos-delay="200">
-          <img src="<?= PATH_PROJECT ?>public/images/wellness/jeune-femme-se-detendre-prenant-bain.jpg" class="img-fluid" alt="" />
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/salle_de_jeu (3).jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Jeu</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/piscine.jpg" class="img-fluid" alt="" />
           <div class="member-info">
             <div class="member-info-content">
               <h4>Espace Piscine</h4>
@@ -387,11 +402,11 @@ include './app/commum/header_client.php'
       </div>
 
       <div class="col-lg-3 col-md-2">
-        <div class="member" data-aos="zoom-in" data-aos-delay="200">
-          <img src="<?= PATH_PROJECT ?>public/images/wellness/portrait-belle-femme-africaine-serviette-tete-souriant-au-repos-dans-salon-spa.jpg" class="img-fluid" alt="" />
+        <div class="member" data-aos="zoom-in" data-aos-delay="300">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/femme-relaxante-dans-station-balneaire-ayant-massage-sain-spa2.jpg" class="img-fluid" alt="" />
           <div class="member-info">
             <div class="member-info-content">
-              <h4>Espace Wellness</h4>
+              <h4>Espace Bien-être</h4>
               <span>
                 <i class="bi bi-star"></i>
                 <i class="bi bi-star"></i>
@@ -401,6 +416,23 @@ include './app/commum/header_client.php'
           </div>
         </div>
       </div>
+
+      <div class="col-lg-3 col-md-2">
+        <div class="member" data-aos="zoom-in" data-aos-delay="200">
+          <img src="<?= PATH_PROJECT ?>public/images/wellness/salle_de_reunion.jpg" class="img-fluid" alt="" />
+          <div class="member-info">
+            <div class="member-info-content">
+              <h4>Espace Réunion</h4>
+              <span>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+                <i class="bi bi-star"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   </div>

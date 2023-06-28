@@ -85,7 +85,7 @@ include './app/commum/aside.php';
         </div>
 
         <!-- Le bouton d'ajout -->
-        <div class="col-md-12" style="padding-top: 37px;">
+        <div class="col-md-6 offset-md-6" style="padding-top: 37px;">
             <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
         </div>
     </form>

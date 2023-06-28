@@ -174,6 +174,28 @@
         );
     });
 </script>
+
+
+<script>
+    // Code JavaScript pour afficher la notification après le chargement de la page
+    document.addEventListener("DOMContentLoaded", function() {
+        var notificationContainer = document.getElementById("notification-container");
+        var notificationTimeout;
+
+        function showNotification() {
+            notificationContainer.style.display = "block";
+            setTimeout(hideNotification, 20000); // Disparaît après 20 secondes
+        }
+
+        function hideNotification() {
+            notificationContainer.style.display = "none";
+            clearTimeout(notificationTimeout);
+            notificationTimeout = setTimeout(showNotification, 90000); // Réapparaît après 90 secondes
+        }
+
+        showNotification();
+    });
+</script>
 </body>
 
 </html>

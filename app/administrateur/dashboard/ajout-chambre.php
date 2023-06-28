@@ -49,6 +49,21 @@ include './app/commum/aside.php';
     <!-- Formulaire d'ajout de chambre-->
     <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user">
         <div class="form-group row pt-5">
+            <!-- Le champ Code du numéros de chambre -->
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <label for="num_chambre">
+                    Numéros de chambre :
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="number" name="num_chambre" id="num_chambre" class="form-control" placeholder="Veuillez entrer le code type de chambre" value="<?= (isset($donnees["num_chambre"]) && !empty($donnees["num_chambre"])) ? $donnees["num_chambre"] : ''; ?>" required>
+
+                <?php if (isset($erreurs["num_chambre"]) && !empty($erreurs["num_chambre"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["num_chambre"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
             <!-- Le champ Code du type de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="code_type">
@@ -65,7 +80,7 @@ include './app/commum/aside.php';
             </div>
 
             <!-- Le champ Libellé du type de chambre -->
-            <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="col-sm-6 mt-3">
                 <label for="libelle_type">
                     Libellé du type de chambre :
                     <span class="text-danger">(*)</span>
@@ -102,7 +117,7 @@ include './app/commum/aside.php';
             </div>
 
             <!-- Le bouton d'ajout -->
-            <div class="col-md-6" style="padding-top: 47px;">
+            <div class="col-md-6 offset-md-6" style="padding-top: 47px;">
                 <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
             </div>
         </div>
