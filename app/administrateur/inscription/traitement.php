@@ -140,7 +140,11 @@ if (empty($erreurs)) {
 		$message_erreur_global = "Oups ! Une erreur s'est produite lors de l'enregistrement de l'utilisateur.";
 		header('location: ' . PATH_PROJECT . 'administrateur/inscription/index');
 	}
+} else {
+	$_SESSION['inscription-erreurs-admin'] = $erreurs;
+	header('location: ' . PATH_PROJECT . 'administrateur/inscription/index');
 }
+
 
 $_SESSION['inscription-message-erreur-global'] = $message_erreur_global;
 $_SESSION['inscription-message-success-global'] = $message_success_global;

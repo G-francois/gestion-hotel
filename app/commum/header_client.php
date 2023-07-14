@@ -115,7 +115,7 @@ if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reserva
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li>
-                        <a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
+                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
                     </li>
 
                     <li>

@@ -484,32 +484,32 @@ include './app/commum/header_client.php'
 
       <div class="col-lg-3 col-md-4">
         <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-5.jpg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-5.jpg" alt="" class="img-fluid" />
+          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-10.jpg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-10.jpg" alt="" class="img-fluid" />
           </a>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-4">
         <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-6.jpg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-6.jpg" alt="" class="img-fluid" />
+          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-13.jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-13.jpeg" alt="" class="img-fluid" />
           </a>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-4">
         <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-7.jpg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-7.jpg" alt="" class="img-fluid" />
+          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-12.jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-12.jpeg" alt="" class="img-fluid" />
           </a>
         </div>
       </div>
 
       <div class="col-lg-3 col-md-4">
         <div class="gallery-item">
-          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-8.jpg" class="gallery-lightbox" data-gall="gallery-item">
-            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-8.jpg" alt="" class="img-fluid" />
+          <a href="<?= PATH_PROJECT ?>public/images/gallery/gallery-9.jpeg" class="gallery-lightbox" data-gall="gallery-item">
+            <img src="<?= PATH_PROJECT ?>public/images/gallery/gallery-9.jpeg" alt="" class="img-fluid" />
           </a>
         </div>
       </div>

@@ -45,6 +45,60 @@ if (!check_if_user_connected_client()) {
         }
     </style>
 
+    <style>
+        .card-header .container {
+            position: relative;
+            display: flex;
+            width: auto;
+        }
+
+        .card-header .btn {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-header .btn:hover {
+            background-color: #cda45e;
+        }
+
+        .card-header .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 160px;
+            background-color: black;
+            padding: 5px 0;
+            z-index: 1;
+            display: none;
+        }
+
+        .card-header .dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card-header .container:hover .dropdown {
+            display: contents;
+        }
+
+        @media screen and (max-width: 600px) {
+            .card-header .container {
+                display: block;
+            }
+
+            .card-header.dropdown {
+                position: static;
+                display: none;
+            }
+
+        }
+    </style>
+
 </head>
 
 <body>
@@ -136,16 +190,23 @@ if (!check_if_user_connected_client()) {
         <div class="container-fluid" style="padding-top: 126px;">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-4">Réservations</h1>
+            <h1 class="h3 mb-4">Liste des réservations éffectuée(s)</h1>
 
-            <p class="mb-4" style="text-align: center;">
-                <a href="<?= PATH_PROJECT ?>client/dashboard/ajout-reservation-client" style="justify-content: center; background-color: #cda45e; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Effectuer une réservation</a>
-            </p>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h4 class="m-0 font-weight-bold "><a href="#">Liste des réservations</a></h4>
+                <div class="card-header py-3" style="display: flex; align-items: center;">
+
+                    <div class="container">
+                        <h1 class="h3 mb-4">Liste des réservations éffectuée(s)</h1>
+                        <button class="btn">Effectuer une réservation de :</button>
+                        <div class="dropdown">
+                            <a href="#">chambre SOLO</a>
+                            <a href="#">chambre DOUBLES</a>
+                            <a href="#">chambre TRIPLES</a>
+                            <a href="#">chambre SUITE</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

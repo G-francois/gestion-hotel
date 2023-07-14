@@ -90,5 +90,5 @@ include './app/commum/header_client_icm.php';
 
 
 <?php
-include './app/commum/footer_icm.php';
+include './app/commum/footer_client_icm.php';
 ?>
