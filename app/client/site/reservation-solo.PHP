@@ -104,9 +104,26 @@ include './app/commum/header_client.php';
                     <span class="text-danger">(*)</span>
                   </label>
 
-                  <div class="input-group">
-                    <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>" required>
-                  </div>
+                  <?php
+                  if (!check_if_user_connected_client()) {
+                  ?>
+                    <div class="input-group">
+                      <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>" required>
+                    </div>
+                  <?php
+                  }
+                  ?>
+
+                  <?php
+                  if (check_if_user_connected_client()) {
+                  ?>
+                    <div class="input-group">
+                      <input name="nom" type="text" class="form-control <?= isset($_SESSION['erreurs']['nom']) ? 'is-invalid' : '' ?>" id="Name" value="<?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom'] : 'Nom'?> <?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['prenom'] : 'Prenom' ?>">
+                    </div>
+                  <?php
+                  }
+                  ?>
+
 
                   <span class="text-danger">
                     <?php
@@ -155,6 +172,7 @@ include './app/commum/header_client.php';
                   </span>
                 </div>
 
+                <!-- Le champs numeros de chambre -->
                 <div class="col-sm-12 mb-3">
                   <label for="type" class="col-sm-4 col-form-label">Numéros de chambre
                     <span class="text-danger">(*)</span>
@@ -238,6 +256,6 @@ include './app/commum/header_client.php';
 
 <?php
 
-include './app/commum/footer_client_icm.php';
+include './app/commum/footer_client.php';
 
 ?>
