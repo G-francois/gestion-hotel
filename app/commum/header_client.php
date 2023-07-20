@@ -225,10 +225,10 @@ if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reserva
                                     <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                     <span>Tableau de bord</span>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                                <!-- <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
                                     <i class="bi bi-bell" style="margin-right: 12px;"></i>
                                     <span>Notification(s)</span>
-                                </a>
+                                </a> -->
                                 <hr>
                                 <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                                     <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>

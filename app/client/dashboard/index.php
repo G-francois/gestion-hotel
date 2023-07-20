@@ -156,10 +156,10 @@ if (!check_if_user_connected_client()) {
                                 <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                 <span>Tableau de bord</span>
                             </a>
-                            <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                            <!-- <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
                                 <i class="bi bi-bell" style="margin-right: 12px;"></i>
                                 <span>Notification(s)</span>
-                            </a>
+                            </a> -->
                             <hr>
                             <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                                 <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
@@ -198,13 +198,12 @@ if (!check_if_user_connected_client()) {
                 <div class="card-header py-3" style="display: flex; align-items: center;">
 
                     <div class="container">
-                        <h1 class="h3 mb-4">Liste des réservations éffectuée(s)</h1>
                         <button class="btn">Effectuer une réservation de :</button>
                         <div class="dropdown">
-                            <a href="#">chambre SOLO</a>
-                            <a href="#">chambre DOUBLES</a>
-                            <a href="#">chambre TRIPLES</a>
-                            <a href="#">chambre SUITE</a>
+                            <a style="color:#cda45e;" href="<?= PATH_PROJECT ?>client/site/reservation-solo">chambre solo</a>
+                            <a style="color:#cda45e;" href="<?= PATH_PROJECT ?>client/site/reservation-double">chambre doubles</a>
+                            <a style="color:#cda45e;" href="<?= PATH_PROJECT ?>client/site/reservation-triple">chambre triples</a>
+                            <a style="color:#cda45e;" href="<?= PATH_PROJECT ?>client/site/reservation-suit">chambre suite</a>
                         </div>
                     </div>
                 </div>
