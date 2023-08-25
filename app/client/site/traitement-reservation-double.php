@@ -104,7 +104,7 @@ if (isset($_POST['enregistrer'])) {
 
     if (empty($erreurs)) {
 
-        // Appeler la fonction pour obtenir un numéro de chambre disponible de type "Solo"
+        // Appeler la fonction pour obtenir un numéro de chambre disponible de type "double"
         $numChambreDisponible = obtenir_numero_chambre_disponible('Doubles');
 
         // Vérifier si un numéro de chambre est disponible
@@ -173,7 +173,7 @@ if (isset($_POST['enregistrer'])) {
                 $message_erreur_global = "Désolé, une erreur s'est produite lors de l'enregistrement de vos informations.";
             }
         } else {
-            // Aucune chambre disponible de type "Solo"
+            // Aucune chambre disponible de type "double"
             $message_erreur_global = "Désolé, il n'y a pas de chambre disponible pour le moment.";
         }
     }
@@ -181,6 +181,6 @@ if (isset($_POST['enregistrer'])) {
 
 
 $_SESSION['erreurs-reservation'] = $erreurs;
-$_SESSION['reservation-solo-message-erreur-global'] = $message_erreur_global;
-$_SESSION['reservation-solo-message-success-global'] = $message_success_global;
+$_SESSION['reservation-double-message-erreur-global'] = $message_erreur_global;
+$_SESSION['reservation-double-message-success-global'] = $message_success_global;
 header('location: ' . PATH_PROJECT . 'client/site/reservation-double');

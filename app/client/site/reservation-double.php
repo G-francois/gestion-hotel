@@ -99,141 +99,176 @@ include './app/commum/header_client.php'
                                     }
                                     ?>
 
+                                    <form action="<?= PATH_PROJECT ?>client/site/traitement-reservation-double" method="post" class="user" novalidate>
 
-                                    <div class="row">
-                                        <!-- Le champ téléphone -->
-                                        <div class="col-md-6 mb-3">
-                                            <label for="inscription-telephone">
-                                                Téléphone :
-                                                <span class="text-danger">(*)</span>
-                                            </label>
-                                            <input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
-                                            <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
-                                                <span class="text-danger">
-                                                    <?php echo $erreurs["telephone"]; ?>
-                                                </span>
-                                            <?php } ?>
-                                        </div>
-
-                                        <!-- Le champs email -->
-                                        <div class="col-md-6 mb-3">
-                                            <label for="inscription-email">
-                                                Adresse mail :
-                                                <span class="text-danger">(*)</span>
-                                            </label>
-                                            <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
-                                            <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
-                                                <span class="text-danger">
-                                                    <?php echo $erreurs["email"]; ?>
-                                                </span>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-
-                                <div class="row">
-                                    <!-- Le champs nom accompagnateur -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="inscription-nom_acc">Accompagnateur :</label>
-                                        <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" required>
-                                        <?php if (isset($erreurs["nom_acc"]) && !empty($erreurs["nom_acc"])) { ?>
-                                            <span class="text-danger">
-                                                <?php echo $erreurs["nom_acc"]; ?>
-                                            </span>
-                                        <?php } ?>
-                                    </div>
-                                    <!-- Le champs contact accompagnateur-->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="inscription-contact-acc">Contact de l'accompagnateur :</label>
-                                        <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" required>
-                                        <?php if (isset($erreurs["contact_acc"]) && !empty($erreurs["contact_acc"])) { ?>
-                                            <span class="text-danger">
-                                                <?php echo $erreurs["contact_acc"]; ?>
-                                            </span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-
-
-                                <!-- Le champs date de  début occupation -->
-                                <div class="col-sm-12 mb-3">
-                                    <label for="inscription-date-debut">
-                                        Date de départ occupation:
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <div class="input-group mb-3">
-                                        <input type="date" name="date-debut" id="inscription-date-debut" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["date-debut"]) && !empty($donnees["date-debut"])) ? $donnees["date-debut"] : ""; ?>" required>
-                                    </div>
-
-                                    <span class="text-danger">
                                         <?php
-                                        if (isset($erreurs["date-debut"]) && !empty($erreurs["date-debut"])) {
-                                            echo $erreurs["date-debut"];
+                                        if (!check_if_user_connected_client()) {
+                                        ?>
+                                            <div class="row">
+                                                <!-- Le champ nom -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inscription-nom">
+                                                        Nom :
+                                                        <span class="text-danger">(*)</span>
+                                                    </label>
+                                                    <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ''; ?>" required>
+                                                    <?php if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) { ?>
+                                                        <span class="text-danger">
+                                                            <?php echo $erreurs["nom"]; ?>
+                                                        </span>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <!-- Le champ prénom -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inscription-prenom">
+                                                        Prénom(s):
+                                                        <span class="text-danger">(*)</span>
+                                                    </label>
+                                                    <input type="text" name="prenom" id="inscription-prenom" class="form-control" placeholder="Veuillez entrer vos prénoms" value="<?= (isset($donnees["prenom"]) && !empty($donnees["prenom"])) ? $donnees["prenom"] : ''; ?>" required>
+                                                    <?php if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) { ?>
+                                                        <span class="text-danger">
+                                                            <?php echo $erreurs["prenom"]; ?>
+                                                        </span>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <!-- Le champ téléphone -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inscription-telephone">
+                                                        Téléphone :
+                                                        <span class="text-danger">(*)</span>
+                                                    </label>
+                                                    <input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
+                                                    <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
+                                                        <span class="text-danger">
+                                                            <?php echo $erreurs["telephone"]; ?>
+                                                        </span>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <!-- Le champs email -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inscription-email">
+                                                        Adresse mail :
+                                                        <span class="text-danger">(*)</span>
+                                                    </label>
+                                                    <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+                                                    <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
+                                                        <span class="text-danger">
+                                                            <?php echo $erreurs["email"]; ?>
+                                                        </span>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php
                                         }
                                         ?>
-                                    </span>
-                                </div>
 
-                                <!-- Le champs date de  fin occupation -->
-                                <div class="col-sm-12 mb-3">
-                                    <label for="inscription-date-fin">
-                                        Date de fin occupation:
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <div class="input-group mb-3">
-                                        <input type="date" name="date-fin" id="inscription-date-fin" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["date-fin"]) && !empty($donnees["date-fin"])) ? $donnees["date-fin"] : ""; ?>" required>
-                                    </div>
+                                        <div class="row">
+                                            <!-- Le champs nom accompagnateur -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="inscription-nom_acc">Accompagnateur :</label>
+                                                <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" required>
+                                                <?php if (isset($erreurs["nom_acc"]) && !empty($erreurs["nom_acc"])) { ?>
+                                                    <span class="text-danger">
+                                                        <?php echo $erreurs["nom_acc"]; ?>
+                                                    </span>
+                                                <?php } ?>
+                                            </div>
+                                            <!-- Le champs contact accompagnateur-->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="inscription-contact-acc">Contact de l'accompagnateur :</label>
+                                                <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" required>
+                                                <?php if (isset($erreurs["contact_acc"]) && !empty($erreurs["contact_acc"])) { ?>
+                                                    <span class="text-danger">
+                                                        <?php echo $erreurs["contact_acc"]; ?>
+                                                    </span>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
 
-                                    <span class="text-danger">
-                                        <?php
-                                        if (isset($erreurs["date-fin"]) && !empty($erreurs["date-fin"])) {
-                                            echo $erreurs["date-fin"];
-                                        }
-                                        ?>
-                                    </span>
-                                </div>
 
-                                <!-- Le champs numeros de chambre -->
-                                <div class="col-sm-12 mb-3">
-                                    <label for="nom-auteur" class="col-sm-4 col-form-label">Numéros de chambre
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <select class="form-control" name="lib_typ" id="type">
-                                            <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                                            <?php
-                                            $chambres = recuperer_liste_chambres();
-                                            foreach ($chambres as $chambre) {
-                                                if ($chambre['lib_typ'] === 'Doubles') {
-                                                    echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
+                                        <!-- Le champs date de  début occupation -->
+                                        <div class="col-sm-12 mb-3">
+                                            <label for="inscription-date-debut">
+                                                Date de départ occupation:
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            <div class="input-group mb-3">
+                                                <input type="date" name="date-debut" id="inscription-date-debut" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["date-debut"]) && !empty($donnees["date-debut"])) ? $donnees["date-debut"] : ""; ?>" required>
+                                            </div>
+
+                                            <span class="text-danger">
+                                                <?php
+                                                if (isset($erreurs["date-debut"]) && !empty($erreurs["date-debut"])) {
+                                                    echo $erreurs["date-debut"];
                                                 }
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                                ?>
+                                            </span>
+                                        </div>
 
-                                <div class="col-lg-12">
-                                    <h5 style="font-weight: bold">Nombre total de jours : <span id="staying_day">0</span></h5>
-                                    <h5 style="font-weight: bold">Montant total : <span id="total_price">0</span> F</h5>
-                                </div>
+                                        <!-- Le champs date de  fin occupation -->
+                                        <div class="col-sm-12 mb-3">
+                                            <label for="inscription-date-fin">
+                                                Date de fin occupation:
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            <div class="input-group mb-3">
+                                                <input type="date" name="date-fin" id="inscription-date-fin" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["date-fin"]) && !empty($donnees["date-fin"])) ? $donnees["date-fin"] : ""; ?>" required>
+                                            </div>
 
-                                <div class="float-right" style="text-align: right;">
-                                    <button type="reset" class="btn btn-danger">Annuler</button>
-                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                            <span class="text-danger">
+                                                <?php
+                                                if (isset($erreurs["date-fin"]) && !empty($erreurs["date-fin"])) {
+                                                    echo $erreurs["date-fin"];
+                                                }
+                                                ?>
+                                            </span>
+                                        </div>
+
+                                        <!-- Le champs numeros de chambre -->
+                                        <div class="col-sm-12 mb-3">
+                                            <label for="nom-auteur" class="col-sm-4 col-form-label">Numéros de chambre
+                                                <span class="text-danger">(*)</span>
+                                            </label>
+                                            <div class="input-group">
+                                                <select class="form-control" name="lib_typ" id="type">
+                                                    <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
+                                                    <?php
+                                                    $chambres = recuperer_liste_chambres();
+                                                    foreach ($chambres as $chambre) {
+                                                        if ($chambre['lib_typ'] === 'Doubles') {
+                                                            echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <h5 style="font-weight: bold">Nombre total de jours : <span id="staying_day">0</span></h5>
+                                            <h5 style="font-weight: bold">Montant total : <span id="total_price">0</span> F</h5>
+                                        </div>
+
+                                        <div class="float-right" style="text-align: right;">
+                                            <button type="reset" class="btn btn-danger">Annuler</button>
+                                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                                        </div>
                                 </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 </section>
 
 
 <?php
-unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESSION['reservation-solo-message-success-global'], $_SESSION['reservation-solo-message-erreur-global']);
+unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESSION['reservation-double-message-success-global'], $_SESSION['reservation-double-message-erreur-global']);
 ?>
 </div>
 </div>
@@ -270,7 +305,7 @@ unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESS
     }
 
     function updateTotalPrice(nbJours) {
-        var prixParNuit = 25000; // Prix par nuit pour la chambre Solo
+        var prixParNuit = 25000; // Prix par nuit pour la chambre double
         var total = prixParNuit * nbJours;
 
         // Ajouter un point après chaque groupe de 3 chiffres

@@ -11,8 +11,6 @@ include './app/commum/header_client.php'
                 <div class="row" style="background-color: #0c0b09">
                     <h1 class="h3 mt-3 mb-3">Réservation d'une chambre SUITES</h1>
 
-                    <h1 class="h3 mt-3 mb-3">Réservation d'une chambre SUITES</h1>
-
                     <div class="col-md-6">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">

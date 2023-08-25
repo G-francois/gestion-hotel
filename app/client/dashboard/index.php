@@ -10,7 +10,7 @@ include './app/commum/header_client.php';
     <div class="pagetitle" style="padding-top: 126px;">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>client/dashboard/index">Dashboard</a></li>
                 <li class="breadcrumb-item active">Liste des reservations</li>
             </ol>
         </nav>

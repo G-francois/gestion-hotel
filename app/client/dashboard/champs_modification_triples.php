@@ -40,7 +40,7 @@
         <label for="modification-nom_acc">
             Nom de l'accompagnateur 1:
         </label>
-        <input type="text" name="nom_acc" id="modification-nom_acc" class="form-control" value="<?= $accompagnateurs_res['nom_acc'] ?>">
+        <input type="text" name="nom_acc" id="modification-nom_acc" class="form-control" value="">
     </div>
 
     <!-- Le champs contact_acc -->
@@ -48,7 +48,7 @@
         <label for="modification-contact_acc">
             Contact de l'accompagnateur 1:
         </label>
-        <input type="text" name="contact_acc" id="modification-contact_acc" class="form-control" value="<?= $accompagnateurs_res['contact_acc'] ?>">
+        <input type="text" name="contact_acc" id="modification-contact_acc" class="form-control" value="">
     </div>
 
 </div>
@@ -59,7 +59,7 @@
         <label for="modification-nom_acc2">
             Nom de l'accompagnateur 2:
         </label>
-        <input type="text" name="nom_acc2" id="modification-nom_acc2" class="form-control" value="<?= $accompagnateurs_res[0]['nom_acc'] ?>">
+        <input type="text" name="nom_acc2" id="modification-nom_acc2" class="form-control" value="">
     </div>
 
     <!-- Le champs contact_acc2 -->
@@ -67,6 +67,6 @@
         <label for="modification-contact_acc2">
             Contact de l'accompagnateur 2:
         </label>
-        <input type="text" name="contact_acc2" id="modification-contact_acc2" class="form-control" value="<?= $accompagnateurs_res[0]['contact_acc'] ?>">
+        <input type="text" name="contact_acc2" id="modification-contact_acc2" class="form-control" value="">
     </div>
 </div>
