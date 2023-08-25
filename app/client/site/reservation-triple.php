@@ -9,7 +9,6 @@ include './app/commum/header_client.php'
             <div class="card my-5 border-0 rounded-0">
                 <div class="row" style="background-color: #0c0b09">
                     <h1 class="h3 mt-3 mb-3">Réservation d'une chambre TRIPLES</h1>
-
                     <div class="col-md-6">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -115,6 +114,7 @@ include './app/commum/header_client.php'
                             <?php
                             }
                             ?>
+                            
                             <form action="<?= PATH_PROJECT ?>client/site/traitement-reservation-triple" method="post" class="user" novalidate>
 
                                 <?php

@@ -348,7 +348,5 @@ unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESS
 
 
 <?php
-
 include './app/commum/footer_client_icm.php';
-
 ?>
