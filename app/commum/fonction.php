@@ -1882,6 +1882,7 @@ function recuperer_liste_accompagnateurs($num_res): array
 }
 
 
+
 /**
  * Cette fonction permet de récupérer le nom des accompagnateurs par le numero des accompagnateurs de la base de donnée.
  *
