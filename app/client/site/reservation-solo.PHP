@@ -40,12 +40,9 @@ include './app/commum/header_client.php';
 
             <h3 class="card-title">Chambre Solo</h3>
             <p class="card-text">
-              Situé au premier étage de l'hôtel, la chambres solo allie
-              confort et fonctionnalité dans un esprit simple et
-              chaleureux. La taille de la chambre et la vue sur la petite
-              cour pavée rappellent Paris et ses ruelles d’antan. Devant
-              le pupitre, le solitaire peut prendre la plume… Rien ne
-              viendra le perturber.
+              La chambres solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et
+              la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant
+              le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber.
             </p>
             <div>
               <div style="display: flex">
@@ -59,11 +56,8 @@ include './app/commum/header_client.php';
               </div>
             </div>
             <div>
-              <a title="Lits Twin" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Lits Twin" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12.png" /></a>
               <a title="Cocktail De Bienvenue" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Cocktail De Bienvenue" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-13.png" /></a>
-              <a title="Petit Déjeuner" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Petit Déjeuner" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-17.png" /></a>
               <a title="Salle de bains privée" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Salle de bains privée" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-10.png" /></a>
-              <a title="Non fumeur" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Non fumeur" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-14.png" /></a>
               <a title="satellite-tv" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="satellite-tv" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-18.png" /></a>
               <a title="Blanchisserie" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Blanchisserie" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-15.png" /></a>
               <a title="Wifi" class="nd_booking_tooltip_jquery nd_booking_float_left"><img alt="Wifi" class="nd_booking_margin_right_15 nd_booking_float_left" width="23" height="23" src="<?= PATH_PROJECT ?>public/images/Icons/icon-12-1.png" /></a>
@@ -74,12 +68,13 @@ include './app/commum/header_client.php';
 
           <div class="col-md-6">
             <div class="card-body px-0">
+
               <?php
               // Vérifie s'il y a un message de succès global à afficher
-              if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+              if (isset($_SESSION['reservation-solo-message-success-global']) && !empty($_SESSION['reservation-solo-message-success-global'])) {
               ?>
                 <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-                  <?= $_SESSION['message-success-global'] ?>
+                  <?= $_SESSION['reservation-solo-message-success-global'] ?>
                 </div>
               <?php
               }
@@ -87,154 +82,270 @@ include './app/commum/header_client.php';
 
               <?php
               // Vérifie s'il y a un message d'erreur global à afficher
-              if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+              if (isset($_SESSION['reservation-solo-message-erreur-global']) && !empty($_SESSION['reservation-solo-message-erreur-global'])) {
               ?>
-                <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
-                  <?= $_SESSION['message-erreur-global'] ?>
+                <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                  <?= $_SESSION['reservation-solo-message-erreur-global'] ?>
                 </div>
               <?php
               }
               ?>
-              <h3>INFORMATIONS</h3>
+
+              <?php
+              if (!check_if_user_connected_client()) {
+              ?>
+                <h5 style="color: #cda45e; text-align:center; margin-bottom: 20px;">
+                  <i class="bi bi-exclamation-triangle me-1"></i>
+                  Veuiller retenir le numéro de chambre que vous réservez après une réservation.
+                </h5>
+              <?php
+              }
+              ?>
+
+              <?php
+              if (check_if_user_connected_client()) {
+              ?>
+                <h5 style="color: #cda45e; text-align:center; margin-bottom: 20px;">
+                  <i class="bi bi-exclamation-triangle me-1"></i>
+                  Vous pouvez consulter la liste de vos réservations dans le tableau de bord après une réservation.
+                </h5>
+              <?php
+              }
+              ?>
 
               <form action="<?= PATH_PROJECT ?>client/site/traitement-reservation-solo" method="post" class="user" novalidate>
-                <!-- Le champs nom client -->
-                <div class="col-sm-12 mb-3">
-                  <label for="inscription-nom"> Nom client:
-                    <span class="text-danger">(*)</span>
-                  </label>
 
-                  <div class="input-group">
-                    <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ""; ?>" required>
+                <?php
+                if (!check_if_user_connected_client()) {
+                ?>
+                  <div class="row">
+                    <!-- Le champ nom -->
+                    <div class="col-md-6 mb-3">
+                      <label for="inscription-nom">
+                        Nom :
+                        <span class="text-danger">(*)</span>
+                      </label>
+                      <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ''; ?>" required>
+                      <?php if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) { ?>
+                        <span class="text-danger">
+                          <?php echo $erreurs["nom"]; ?>
+                        </span>
+                      <?php } ?>
+                    </div>
+
+                    <!-- Le champ prénom -->
+                    <div class="col-md-6 mb-3">
+                      <label for="inscription-prenom">
+                        Prénom(s):
+                        <span class="text-danger">(*)</span>
+                      </label>
+                      <input type="text" name="prenom" id="inscription-prenom" class="form-control" placeholder="Veuillez entrer vos prénoms" value="<?= (isset($donnees["prenom"]) && !empty($donnees["prenom"])) ? $donnees["prenom"] : ''; ?>" required>
+                      <?php if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) { ?>
+                        <span class="text-danger">
+                          <?php echo $erreurs["prenom"]; ?>
+                        </span>
+                      <?php } ?>
+                    </div>
                   </div>
 
-                  <span class="text-danger">
-                    <?php
-                    if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) {
-                      echo $erreurs["nom"];
-                    }
-                    ?>
-                  </span>
+
+                  <div class="row">
+                    <!-- Le champ téléphone -->
+                    <div class="col-md-6 mb-3">
+                      <label for="inscription-telephone">
+                        Téléphone :
+                        <span class="text-danger">(*)</span>
+                      </label>
+                      <input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
+                      <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
+                        <span class="text-danger">
+                          <?php echo $erreurs["telephone"]; ?>
+                        </span>
+                      <?php } ?>
+                    </div>
+
+                    <!-- Le champs email -->
+                    <div class="col-md-6 mb-3">
+                      <label for="inscription-email">
+                        Adresse mail :
+                        <span class="text-danger">(*)</span>
+                      </label>
+                      <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+                      <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
+                        <span class="text-danger">
+                          <?php echo $erreurs["email"]; ?>
+                        </span>
+                      <?php } ?>
+                    </div>
+                  </div>
+                <?php
+                }
+                ?>
+
+                <div class="row">
+                  <!-- Le champs date de début occupation -->
+                  <div class="col-md-6 mb-3">
+                    <label for="inscription-deb_occ">
+                      Début de séjour:
+                      <span class="text-danger">(*)</span>
+                    </label>
+                    <div class="input-group mb-3">
+                      <input type="date" name="deb_occ" id="inscription-deb_occ" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["deb_occ"]) && !empty($donnees["deb_occ"])) ? $donnees["deb_occ"] : ""; ?>" required>
+                    </div>
+                    <?php if (isset($erreurs["deb_occ"]) && !empty($erreurs["deb_occ"])) { ?>
+                      <span class="text-danger">
+                        <?php echo $erreurs["deb_occ"]; ?>
+                      </span>
+                    <?php } ?>
+
+                  </div>
+
+                  <!-- Le champs date de fin occupation -->
+                  <div class="col-md-6 mb-3">
+                    <label for="inscription-fin_occ">
+                      Fin de séjour:
+                      <span class="text-danger">(*)</span>
+                    </label>
+                    <div class="input-group mb-3">
+                      <input type="date" name="fin_occ" id="inscription-fin_occ" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["fin_occ"]) && !empty($donnees["fin_occ"])) ? $donnees["fin_occ"] : ""; ?>" required>
+                    </div>
+
+                    <?php if (isset($erreurs["fin_occ"]) && !empty($erreurs["fin_occ"])) { ?>
+                      <span class="text-danger">
+                        <?php echo $erreurs["fin_occ"]; ?>
+                      </span>
+                    <?php } ?>
+                  </div>
                 </div>
 
-                <!-- Le champs date de  début occupation -->
-                <div class="col-sm-12 mb-3">
-                  <label for="inscription-date-debut">
-                    Date de départ occupation:
-                    <span class="text-danger">(*)</span>
-                  </label>
-                  <div class="input-group mb-3">
-                    <input type="date" name="date-debut" id="inscription-date-debut" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["date-debut"]) && !empty($donnees["date-debut"])) ? $donnees["date-debut"] : ""; ?>" required>
-                  </div>
-
-                  <span class="text-danger">
-                    <?php
-                    if (isset($erreurs["date-debut"]) && !empty($erreurs["date-debut"])) {
-                      echo $erreurs["date-debut"];
-                    }
-                    ?>
-                  </span>
+                <div class="col-lg-12 mt-4">
+                  <h5 style="font-weight: bold">Nombre total de jours : <span id="nombre_jour">0</span></h5>
+                  <h5 style="font-weight: bold">Montant total : <span id="prix_total">0</span> </h5>
                 </div>
 
-                <!-- Le champs date de  fin occupation -->
-                <div class="col-sm-12 mb-3">
-                  <label for="inscription-date-fin">
-                    Date de fin occupation:
-                    <span class="text-danger">(*)</span>
-                  </label>
-                  <div class="input-group mb-3">
-                    <input type="date" name="date-fin" id="inscription-date-fin" class="form-control" placeholder="Veuillez entrer votre date de fin occupation" value="<?= (isset($donnees["date-fin"]) && !empty($donnees["date-fin"])) ? $donnees["date-fin"] : ""; ?>" required>
-                  </div>
-
-                  <span class="text-danger">
-                    <?php
-                    if (isset($erreurs["date-fin"]) && !empty($erreurs["date-fin"])) {
-                      echo $erreurs["date-fin"];
-                    }
-                    ?>
-                  </span>
+                <div class="float-right" style="text-align: right;">
+                  <button type="reset" class="btn btn-danger">Annuler</button>
+                  <button type="submit" name="enregistrer" class="btn btn-success">Enregistrer</button>
                 </div>
 
-                <div class="col-sm-12 mb-3">
-                  <label for="type" class="col-sm-4 col-form-label">Numéros de chambre
-                    <span class="text-danger">(*)</span>
-                  </label>
-                  <div class="input-group">
-                    <select class="form-control" name="lib_typ" id="type">
-                      <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                      <?php
-                      $chambres = recuperer_liste_chambres();
-                      foreach ($chambres as $chambre) {
-                        if ($chambre['lib_typ'] === 'Solo') {
-                          echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-
-                  <div class="col-lg-12 mt-4">
-                    <h5 style="font-weight: bold">Nombre total de jours : <span id="staying_day">0</span></h5>
-                    <h5 style="font-weight: bold">Montant total : <span id="total_price">0</span> F</h5>
-                  </div>
-
-                  <div class="float-right" style="text-align: right;">
-                    <button type="reset" class="btn btn-danger">Annuler</button>
-                    <button type="submit" class="btn btn-success">Enregistrer</button>
-                  </div>
-                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
 </section>
 
+
+<?php
+unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESSION['reservation-solo-message-success-global'], $_SESSION['reservation-solo-message-erreur-global']);
+?>
+
 <script>
-  function calculateStayDuration() {
-    var dateDebut = document.getElementById('inscription-date-debut').value;
-    var dateFin = document.getElementById('inscription-date-fin').value;
+  // Fonction pour calculer le nombre de jours entre deux dates
+  function calculerDifferenceJours(debut, fin) {
+    const diffTime = Math.abs(fin - debut);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // Ajouter 1 jour
+    return diffDays;
+  }
 
-    // Vérifier si les champs de date de début et de date de fin sont remplis
-    if (dateDebut && dateFin) {
-      var startDate = new Date(dateDebut);
-      var endDate = new Date(dateFin);
+  // Fonction pour mettre à jour le nombre de jours et le prix total
+  function mettreAJourPrix() {
+    const dateDebut = new Date(document.getElementById('inscription-deb_occ').value);
+    const dateFin = new Date(document.getElementById('inscription-fin_occ').value);
 
-      // Calculer la différence en millisecondes
-      var diff = Math.abs(endDate - startDate);
+    // Vérification que la date de fin est supérieure à la date de début
+    if (dateFin <= dateDebut) {
+      document.getElementById('nombre_jour').innerText = 'Date de fin doit être après la date de début';
+      document.getElementById('prix_total').innerText = '0 F';
+      return;
+    }
 
-      // Convertir la différence en jours
-      var nbJours = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const jours = calculerDifferenceJours(dateDebut, dateFin);
 
-      // Afficher le nombre de jours dans l'élément avec l'ID "staying_day"
-      document.getElementById('staying_day').textContent = nbJours;
+    const prixParJour = 15000; // Remplacez ceci par le prix réel de la chambre par jour
 
-      // Mettre à jour le prix total en fonction du nombre de jours
-      updateTotalPrice(nbJours);
-    } else {
-      // Les champs de date de début et de date de fin ne sont pas remplis, réinitialiser les valeurs affichées
-      document.getElementById('staying_day').textContent = '0';
-      updateTotalPrice(0);
+    const montantTotal = prixParJour * jours;
+
+    document.getElementById('nombre_jour').innerText = `${jours} jour(s)`;
+    document.getElementById('prix_total').innerText = montantTotal + ' F';
+  }
+
+  // Écouteurs d'événements pour mettre à jour les calculs lorsqu'une date est changée
+  document.getElementById('inscription-deb_occ').addEventListener('change', mettreAJourPrix);
+  document.getElementById('inscription-fin_occ').addEventListener('change', mettreAJourPrix);
+</script>
+
+
+
+<!-- <script>
+  // Fonction pour calculer le nombre de jours et d'heures entre deux dates avec heures
+  function calculerNombreJoursHeures(debut, fin) {
+    const dateDebut = new Date(debut);
+    const dateFin = new Date(fin);
+    const diffTime = Math.abs(dateFin - dateDebut);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    return {
+      jours: diffDays,
+      heures: diffHours
+    };
+  }
+
+  // Fonction pour mettre à jour le nombre de jours et le prix total
+  function mettreAJourPrix() {
+    const dateDebut = new Date(document.getElementById('inscription-deb_occ').value);
+    const dateFin = new Date(document.getElementById('inscription-fin_occ').value);
+    const heureDebut = dateDebut.getHours();
+    const heureFin = dateFin.getHours();
+
+    // Cas 1: Si les dates de début et de fin sont identiques et que les heures sont différentes
+    if (dateDebut.toDateString() === dateFin.toDateString() && heureDebut !== heureFin) {
+      const {
+        heures
+      } = calculerNombreJoursHeures(dateDebut, dateFin);
+      const prixParHeure = 625; // Remplacez ceci par le prix réel de la chambre par heure
+      const montantTotalHeures = heures * prixParHeure;
+      document.getElementById('nombre_jour').innerText = `0 jour(s) et ${heures} heure(s)`;
+      document.getElementById('prix_total').innerText = montantTotalHeures + ' F';
+    }
+    // Cas 2: Si les dates de début et de fin sont différentes et que les heures sont identiques
+    else if (dateDebut.toDateString() !== dateFin.toDateString() && heureDebut === heureFin) {
+      const {
+        jours
+      } = calculerNombreJoursHeures(dateDebut, dateFin);
+      const prixParNuit = 15000; // Remplacez ceci par le prix réel de la chambre par nuit
+      const montantTotalNuits = jours * prixParNuit;
+      document.getElementById('nombre_jour').innerText = `${jours} jour(s) et 0 heure(s)`;
+      document.getElementById('prix_total').innerText = montantTotalNuits + ' F';
+    }
+    // Cas 3: Si les dates de début et de fin ainsi que les heures sont identiques
+    else if (dateDebut.toISOString() === dateFin.toISOString()) {
+      document.getElementById('nombre_jour').innerText = `0 jour(s) et 0 heure(s)`;
+      document.getElementById('prix_total').innerText = '0 F';
+    }
+    // Cas 4: Si les dates de début et de fin sont différentes et que les heures sont différentes
+    else {
+      const {
+        jours,
+        heures
+      } = calculerNombreJoursHeures(dateDebut, dateFin);
+      const prixParNuit = 15000; // Remplacez ceci par le prix réel de la chambre par nuit
+      const prixParHeure = 625; // Remplacez ceci par le prix réel de la chambre par heure
+      const montantTotalNuits = jours * prixParNuit;
+      const montantTotalHeures = heures * prixParHeure;
+      const montantTotal = montantTotalNuits + montantTotalHeures;
+      document.getElementById('nombre_jour').innerText = `${jours} jour(s) et ${heures} heure(s)`;
+      document.getElementById('prix_total').innerText = montantTotal + ' F';
     }
   }
 
-  function updateTotalPrice(nbJours) {
-    var prixParNuit = 15000; // Prix par nuit pour la chambre Solo
-    var total = prixParNuit * nbJours;
+  // Écouteurs d'événements pour mettre à jour les calculs lorsqu'une date est changée
+  document.getElementById('inscription-deb_occ').addEventListener('change', mettreAJourPrix);
+  document.getElementById('inscription-fin_occ').addEventListener('change', mettreAJourPrix);
+</script> -->
 
-    // Ajouter un point après chaque groupe de 3 chiffres
-    var formattedTotal = total.toLocaleString();
 
-    // Afficher le prix total dans l'élément avec l'ID "total_price"
-    document.getElementById('total_price').textContent = formattedTotal + " /-";
-  }
-
-  // Écouter les événements de changement de date de début et de date de fin
-  document.getElementById('inscription-date-debut').addEventListener('change', calculateStayDuration);
-  document.getElementById('inscription-date-fin').addEventListener('change', calculateStayDuration);
-
-  // Calculer la durée du séjour au chargement initial de la page
-  calculateStayDuration();
-</script>
 
 <?php
 

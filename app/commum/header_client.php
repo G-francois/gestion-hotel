@@ -1,5 +1,5 @@
 <?php
-// LES SESSIONS UTILISEE LORS DE LA PAGE AJOUT-REPAS DE L'ADMINISTRATEUR 
+// LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION-SOLO DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnees-reservation']) && !empty($_SESSION['donnees-reservation'])) {
     $donnees = $_SESSION['donnees-reservation'];
 }
@@ -7,6 +7,11 @@ if (isset($_SESSION['donnees-reservation']) && !empty($_SESSION['donnees-reserva
 if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reservation'])) {
     $erreurs = $_SESSION['erreurs-reservation'];
 }
+
+
+// Appeler la fonction pour mettre à jour les états
+mettre_a_jour_etat_reservations_accompagnateurs();
+
 
 ?>
 
@@ -137,21 +142,37 @@ if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reserva
                     <?php
                     if (!check_if_user_connected_client()) {
                     ?>
-                        <li>
-                            <a href="<?= PATH_PROJECT ?>client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
-                        </li>
 
                         <li>
                             <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                         </li>
 
-                        <div id="notification-container" class="notification-container">
+                        <!-- <div id="notification-container" class="notification-container">
                             <div class="notification-content d-flex">
                                 <img id="offre" src="<?= PATH_PROJECT ?>public/images/remise.jpg" alt="Remise" />
                                 <span class="notification-message">Profitez d'un rabais de 5% sur toutes vos <br> réservations lorsque vous vous inscrivez <br> sur notre platforme dès maintnant.</span>
 
                             </div>
+                        </div> -->
+
+                        <div id="notification-container" class="notification-container">
+                            <div class="notification-content d-flex">
+                                <span class="notification-message">Profitez d'un un cocktail de bienvenue pour vous <br>
+                                    laissez imprégner du lieu. <br>
+                                    Après votre réservation vous avez accès à notre: <br>
+                                    - Wifi haut débit disponible gratuitement dans tout l'hotel. <br>
+                                    - Piscine intérieure équipée d'un jacuzzi et sauna. <br>
+                                    - Espace Wellness en découvrant notre sauna et <br>
+                                    nos prestations de massage. <br>
+                                    - Services + qui vous oriente vers nos partenaires de location de vélos, <br>
+                                    skis, heliski, et bien plus. <br>
+                                </span>
+
+                            </div>
                         </div>
+
+
+
 
                         <style>
                             .notification-container {
@@ -225,10 +246,10 @@ if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reserva
                                     <i class="bi bi-gear" style="margin-right: 12px;"></i>
                                     <span>Tableau de bord</span>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
+                                <!-- <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
                                     <i class="bi bi-bell" style="margin-right: 12px;"></i>
                                     <span>Notification(s)</span>
-                                </a>
+                                </a> -->
                                 <hr>
                                 <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                                     <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>

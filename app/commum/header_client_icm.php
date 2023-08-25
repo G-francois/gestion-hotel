@@ -97,10 +97,6 @@ if (check_if_user_connected_client()) {
                     </li>
 
                     <li>
-                        <a href="<?= PATH_PROJECT ?>client/site/chambres" class="nav-link scrollto " style="color: #d9ba85;"><strong>RESERVER MAINTENANT</strong></a>
-                    </li>
-
-                    <li>
                         <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
                     </li>
                 </ul>

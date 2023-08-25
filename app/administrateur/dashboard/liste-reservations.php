@@ -22,149 +22,89 @@ include './app/commum/aside.php';
             <h6 class="m-0 font-weight-bold text-primary">Listes des réservations</h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Date de réservation</th>
-                            <th>Client</th>
-                            <th>Début occupation</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01/12/22</td>
-                            <td>Tiger Nixon</td>
-                            <td>10/12/22</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                    Détails
-                                </button>
+                <div class="table-responsive">
+                    <?php
+                    // Récupérer la liste des réservations avec les informations du client et des accompagnateurs
+                    $liste_reservations = recuperer_liste_des_reservations();
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                <p><strong>Accompagnateur : </strong>Durand, Victor</p>
-                                                <p><strong>Type de chambre : </strong>Solo</p>
-                                                <p><strong>Nombre de nuit : </strong>01</p>
-                                                <p><strong>Montant dû : </strong>3500 €</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    //die(var_dump($liste_reservations));
 
-                        <tr>
-                            <td>01/12/22</td>
-                            <td>Aristide BOGNON</td>
-                            <td>10/12/22</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
-                                    Détails
-                                </button>
+                    $liste_client = recuperer_liste_client();
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                <p><strong>Accompagnateur : </strong>B.Durand, G.Victor</p>
-                                                <p><strong>Type de chambre : </strong>Solo, Doubles</p>
-                                                <p><strong>Nombre de nuit : </strong>01</p>
-                                                <p><strong>Montant dû : </strong>3500 €</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tr>
+                    $liste_accompagnateur = [];
 
-                        <tr>
-                            <td>01/12/22</td>
-                            <td>SODJATINMIN BIGNON</td>
-                            <td>10/12/22</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter3">
-                                    Détails
-                                </button>
+                    if (!empty($liste_reservations)) {
+                        foreach ($liste_reservations as $reservation) {
+                            $liste_accompagnateur[] = recuperer_liste_accompagnateurs($reservation['num_res']);
+                        }
+                    }
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                <p><strong>Accompagnateur : </strong>B.Durand, G.Victor</p>
-                                                <p><strong>Numéros de chambre : </strong>A-101, B-101</p>
-                                                <p><strong>Type de chambre : </strong>Solo, Doubles</p>
-                                                <p><strong>Nombre de nuit : </strong>01</p>
-                                                <p><strong>Montant dû : </strong>3500 €</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tr>
+                    if (!empty($liste_reservations)) {
+                    ?>
+                        <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date de Réservation</th>
+                                    <th scope="col">Nom du Client</th>
+                                    <th scope="col">Date de Début</th>
+                                    <th scope="col">Date de Fin</th>
+                                    <th scope="col">Accompagnateurs</th>
+                                    <th scope="col">Type de chambre</th>
+                                    <th scope="col">Prix Total</th>
+                                </tr>
+                            </thead>
 
-                        <tr>
-                            <td>01/12/22</td>
-                            <td>JACK SPAKER</td>
-                            <td>06/02/23</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter4">
-                                    Détails
-                                </button>
+                            <tbody>
+                                <?php
+                                // Parcours de la liste des chambres
+                                foreach ($liste_reservations as $reservation) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $reservation['creer_le']; ?></td>
+                                        <td><?php echo $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?></td>
+                                        <td>
+                                            <?= $reservation['deb_occ'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $reservation['fin_occ'] ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $accompagnateurs = recuperer_liste_accompagnateurs($reservation['num_res']);
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                <p><strong>Accompagnateur : </strong>B.Durand, G.Victor, KOKOYE TALA</p>
-                                                <p><strong>Numéros de chambre : </strong>D-101</p>
-                                                <p><strong>Type de chambre : </strong>Suites</p>
-                                                <p><strong>Nombre de nuit : </strong>01</p>
-                                                <p><strong>Montant dû : </strong>100 €</p>
-                                            </div>
-                                            <div class="modal-footer float-right">
-                                                <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                <button type="submit" class="btn btn-success">Modifier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                            if (empty($accompagnateurs)) {
+                                                echo '---';
+                                            } else {
+                                                foreach ($accompagnateurs as $accompagnateurs) {
+                                                    echo recuperer_nom_accompagnateur($accompagnateurs['num_acc'])['nom_acc'] . '<br>';
+                                                }
+                                            }
 
+                                            ?>
+                                        </td>
+
+                                        <td>
+                                            <?= $reservation['type_chambre'] ?>
+                                        </td>
+
+                                        <td>
+                                            <?= $reservation['prix_total'] ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php
+                    } else {
+                        // Affiche un message s'il n'y a aucune réservation trouvée
+                        echo "Aucune réservation n'a été trouvée!";
+                    }
+                    ?>
+                </div>
             </div>
-        </div>
+
     </div>
 
 </div>

@@ -66,15 +66,15 @@ include './app/commum/aside.php';
 
             <!-- Le champ Code du type de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <label for="code_type">
+                <label for="cod_typ">
                     Code du type de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="number" name="cod_typ" id="code_type" class="form-control" placeholder="Veuillez entrer le code type de chambre" value="<?= (isset($donnees["code_type"]) && !empty($donnees["code_type"])) ? $donnees["code_type"] : ''; ?>" required>
+                <input type="text" name="cod_typ" id="cod_typ" class="form-control" placeholder="Le code du type de chambre sera automatiquement rempli" value="<?= (isset($donnees["cod_typ"]) && !empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : ''; ?>" readonly>
 
-                <?php if (isset($erreurs["code_type"]) && !empty($erreurs["code_type"])) { ?>
+                <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["code_type"])) { ?>
                     <span class="text-danger">
-                        <?php echo $erreurs["code_type"]; ?>
+                        <?php echo $erreurs["code_typ"]; ?>
                     </span>
                 <?php } ?>
             </div>
@@ -107,7 +107,7 @@ include './app/commum/aside.php';
                     Prix unitaire :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="number" name="pu" id="prix_unitaire" class="form-control" placeholder="Veuillez entrer le prix de la chambre" value="<?= (isset($donnees["pu"]) && !empty($donnees["pu"])) ? $donnees["pu"] : ''; ?>" required>
+                <input type="text" name="pu" id="prix_unitaire" class="form-control" placeholder="Le prix unitaire sera automatiquement rempli" readonly>
 
                 <?php if (isset($erreurs["pu"]) && !empty($erreurs["pu"])) { ?>
                     <span class="text-danger">
@@ -115,6 +115,7 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
+
 
             <!-- Le bouton d'ajout -->
             <div class="col-md-6 offset-md-6" style="padding-top: 47px;">
@@ -131,3 +132,36 @@ unset($_SESSION['message-success-global'], $_SESSION['message-erreur-global'], $
 
 include './app/commum/footer.php';
 ?>
+
+<script>
+    // Fonction pour mettre à jour le champ Code du type de chambre et Prix unitaire
+    function updateFields() {
+        var libelleType = document.getElementById("libelle_type").value;
+        var codTypField = document.getElementById("cod_typ");
+        var puField = document.getElementById("prix_unitaire");
+
+        if (libelleType === "Solo") {
+            codTypField.value = "01";
+            puField.value = "15000";
+        } else if (libelleType === "Doubles") {
+            codTypField.value = "02";
+            puField.value = "25000";
+        } else if (libelleType === "Triples") {
+            codTypField.value = "03";
+            puField.value = "35000";
+        } else if (libelleType === "Suite") {
+            codTypField.value = "04";
+            puField.value = "50000";
+        } else {
+            codTypField.value = "";
+            puField.value = "";
+        }
+    }
+
+    // Appeler la fonction lorsque le libellé du type de chambre change
+    var libelleTypeField = document.getElementById("libelle_type");
+    libelleTypeField.addEventListener("change", updateFields);
+
+    // Appeler la fonction au chargement de la page
+    updateFields();
+</script>

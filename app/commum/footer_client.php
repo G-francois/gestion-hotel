@@ -11,9 +11,9 @@
                         <p>
                             A108 Adam Street <br />
 
-                            NY 535022, USA<br /><br />
+                            NY 535022, BENIN<br /><br />
 
-                            <strong>Phone:</strong> +1 5589 55488 55<br />
+                            <strong>Phone:</strong> +229 62929439<br />
 
                             <strong>Email:</strong> <a href="#">slescocotiers@gmail.com</a>
                             <br />

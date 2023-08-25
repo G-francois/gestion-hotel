@@ -1,396 +1,255 @@
 <?php
-if (!check_if_user_connected_client()) {
-    header('location: ' . PATH_PROJECT . 'client/conexion/index');
-    exit;
-}
+
+include './app/commum/header_client.php';
+
 ?>
 
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SLC Client - Dashboard</title>
-
-    <!-- outils CSS Files -->
-    <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-
-    <!-- Custom fonts for this template-->
-    <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= PATH_PROJECT ?>public/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="<?= PATH_PROJECT ?>public/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles client for this template-->
-    <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
-    <!-- outils CSS Files -->
-    <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-
-    <style>
-        label {
-            color: black;
-        }
-    </style>
-
-    <style>
-        .card-header .container {
-            position: relative;
-            display: flex;
-            width: auto;
-        }
-
-        .card-header .btn {
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .card-header .btn:hover {
-            background-color: #cda45e;
-        }
-
-        .card-header .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            min-width: 160px;
-            background-color: black;
-            padding: 5px 0;
-            z-index: 1;
-            display: none;
-        }
-
-        .card-header .dropdown a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .card-header .container:hover .dropdown {
-            display: contents;
-        }
-
-        @media screen and (max-width: 600px) {
-            .card-header .container {
-                display: block;
-            }
-
-            .card-header.dropdown {
-                position: static;
-                display: none;
-            }
-
-        }
-    </style>
-
-</head>
-
-<body>
-    <header id="header" class="fixed-top d-flex align-items-center">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between" style="max-width: 1440px;">
-            <h1 class="logo me-auto me-lg-0">
-                <a href="<?= PATH_PROJECT ?>client/site/home" style="font-size: 26px;">Sous les Cocotiers</a>
-            </h1>
-
-            <!-- Uncomment below if you prefer to use an image logo -->
-
-            <!-- <a href="home.html" class="logo me-auto me-lg-0"><img src="publics/img/logo.png" alt="" class="img-fluid"></a>-->
-
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
-
-                    <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
-                    </li>
-
-                    <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
-                    </li>
-
-                    <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
-                    </li>
-
-                    <li>
-                        <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
-                    </li>
-
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
-
-                            <h5 class="ml-2"><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></h5>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
-                            <div class="dropdown">
-                                <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
-                                    <span><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['profil'] : 'Profil' ?></span>
-                            </div>
-                            <hr>
-                            <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
-                                <i class="bi bi-person" style="margin-right: 12px;"></i>
-                                <span>Mon Profile</span>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
-                                <i class="bi bi-gear" style="margin-right: 12px;"></i>
-                                <span>Tableau de bord</span>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
-                                <i class="bi bi-bell" style="margin-right: 12px;"></i>
-                                <span>Notification(s)</span>
-                            </a>
-                            <hr>
-                            <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
-                                <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
-                                <span>Déconnexion</span>
-                            </a>
-                        </div>
-                    </li>
-                    <!-- End Profile Nav -->
-
-
-                </ul>
-
-
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
-            <!-- .navbar -->
-
-
-
-        </div>
-    </header>
-    <!-- End Header -->
-
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Begin Page Content -->
-        <div class="container-fluid" style="padding-top: 126px;">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4">Liste des réservations éffectuée(s)</h1>
-
-
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3" style="display: flex; align-items: center;">
-
-                    <div class="container">
-                        <h1 class="h3 mb-4">Liste des réservations éffectuée(s)</h1>
-                        <button class="btn">Effectuer une réservation de :</button>
-                        <div class="dropdown">
-                            <a href="#">chambre SOLO</a>
-                            <a href="#">chambre DOUBLES</a>
-                            <a href="#">chambre TRIPLES</a>
-                            <a href="#">chambre SUITE</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Date de réservation</th>
-                                    <th>Client</th>
-                                    <th>Début occupation</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01/12/22</td>
-                                    <td>Tiger Nixon</td>
-                                    <td>10/12/22</td>
-                                    <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                            Détails
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                        <p><strong>Accompagnateur : </strong>Durand, Victor</p>
-                                                        <p><strong>Type de chambre : </strong>Solo</p>
-                                                        <p><strong>Nombre de nuit : </strong>01</p>
-                                                        <p><strong>Montant dû : </strong>3500 €</p>
-                                                    </div>
-                                                    <div class="modal-footer float-right">
-                                                        <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                        <button type="submit" class="btn btn-success">Modifier</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>02/12/22</td>
-                                    <td>Aristide BOGNON</td>
-                                    <td>10/12/22</td>
-                                    <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
-                                            Détails
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                        <p><strong>Accompagnateur : </strong>B.Durand, G.Victor</p>
-                                                        <p><strong>Type de chambre : </strong>Solo, Doubles</p>
-                                                        <p><strong>Nombre de nuit : </strong>01</p>
-                                                        <p><strong>Montant dû : </strong>3500 €</p>
-                                                    </div>
-                                                    <div class="modal-footer float-right">
-                                                        <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                        <button type="submit" class="btn btn-success">Modifier</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tr>
-
-                                <tr>
-                                    <td>01/12/22</td>
-                                    <td>SODJATINMIN BIGNON</td>
-                                    <td>10/12/22</td>
-                                    <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter3">
-                                            Détails
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                        <p><strong>Accompagnateur : </strong>B.Durand, G.Victor</p>
-                                                        <p><strong>Numéros de chambre : </strong>A-101, B-101</p>
-                                                        <p><strong>Type de chambre : </strong>Solo, Doubles</p>
-                                                        <p><strong>Nombre de nuit : </strong>01</p>
-                                                        <p><strong>Montant dû : </strong>3500 €</p>
-                                                    </div>
-                                                    <div class="modal-footer float-right">
-                                                        <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                        <button type="submit" class="btn btn-success">Modifier</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tr>
-
-                                <tr>
-                                    <td>01/12/22</td>
-                                    <td>JACK SPAKER</td>
-                                    <td>06/02/23</td>
-                                    <td>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter4">
-                                            Détails
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <p><strong>Fin occupation : </strong>07/02/23</p>
-                                                        <p><strong>Accompagnateur : </strong>B.Durand, G.Victor, KOKOYE TALA</p>
-                                                        <p><strong>Numéros de chambre : </strong>D-101</p>
-                                                        <p><strong>Type de chambre : </strong>Suites</p>
-                                                        <p><strong>Nombre de nuit : </strong>01</p>
-                                                        <p><strong>Montant dû : </strong>100 €</p>
-                                                    </div>
-                                                    <div class="modal-footer float-right">
-                                                        <button type="reset" class="btn btn-danger">Supprimer</button>
-                                                        <button type="submit" class="btn btn-success">Modifier</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<!-- Commencement du contenu de la page -->
+<div class="container-fluid">
+    <!-- Titre de la page -->
+    <div class="pagetitle" style="padding-top: 126px;">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Liste des reservations</li>
+            </ol>
+        </nav>
     </div>
-    <!-- /.container-fluid -->
-    <!-- Footer -->
-    <footer class="sticky-footer" style="background-color: #0c0b09;">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; SOUS LES COCOTIERS 2023</span>
+
+    <!-- Tableau de données liste reservations -->
+    <div class="card shadow mb-4">
+
+        <?php
+        // Affiche un message de succès s'il existe et n'est pas vide
+        if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+        ?>
+            <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-success-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
+
+        <?php
+        // Affiche un message d'erreur s'il existe et n'est pas vide
+        if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+        ?>
+            <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+                <?= $_SESSION['message-erreur-global'] ?>
+            </div>
+        <?php
+        }
+        ?>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <?php
+                // Récupérer la liste des réservations avec les informations du client et des accompagnateurs
+                $liste_reservations = recuperer_liste_reservations($_SESSION['utilisateur_connecter_client']['id']);
+
+                //die(var_dump($liste_reservations));
+
+                // $liste_client = recuperer_liste_client();
+
+                $liste_accompagnateur = [];
+
+                if (!empty($liste_reservations)) {
+                    foreach ($liste_reservations as $reservation) {
+                        $liste_accompagnateur[] = recuperer_liste_accompagnateurs($reservation['num_res']);
+                    }
+                }
+
+                if (!empty($liste_reservations)) {
+                ?>
+                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date & Heure</th>
+                                <th scope="col">Nom du Client</th>
+                                <th scope="col">Date de Début</th>
+                                <th scope="col">Date de Fin</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            // Parcours de la liste des chambres
+                            foreach ($liste_reservations as $reservation) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $reservation['creer_le']; ?></td>
+                                    <td><?php echo $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?></td>
+                                    <td>
+                                        <?= $reservation['deb_occ'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $reservation['fin_occ'] ?>
+                                    </td>
+
+
+                                    <td>
+                                        <!-- Button de détails modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details-reservation-<?php echo $reservation['num_res']; ?>">
+                                            Détails
+                                        </button>
+
+                                        <!-- Modal de détails -->
+                                        <div class="modal fade" id="details-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <p><strong>Accompagnateur(s) : </strong> <br>
+                                                            <?php
+                                                            // Récupérer la liste des accompagnateurs pour cette réservation
+                                                            $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);
+
+                                                            if (empty($accompagnateurs_res)) {
+                                                                echo '---';
+                                                            } else {
+                                                                foreach ($accompagnateurs_res as $accompagnateur) {
+                                                                    echo recuperer_nom_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '<br>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </p>
+
+                                                        <p><strong>N° de Chambre : </strong>
+                                                            <?= $reservation['num_chambre'] ?>
+                                                        </p>
+
+                                                        <p><strong>Type de chambre: </strong>
+                                                            <?php
+                                                            // Récupérer le type de chambre pour cette réservation
+                                                            $type_chambre = recuperer_type_chambre_pour_affichage($reservation['num_chambre']);
+
+                                                            if ($type_chambre) {
+                                                                echo $type_chambre;
+                                                            } else {
+                                                                echo 'Type de chambre inconnu';
+                                                            }
+                                                            ?>
+                                                        </p>
+
+                                                        <p><strong>Prix Total: </strong>
+                                                            <?= $reservation['prix_total'] ?>
+                                                        </p>
+
+                                                    </div>
+                                                    <div class="modal-footer float-right">
+                                                        <!-- Formulaire de désactivation -->
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>">
+                                                            Modifier
+                                                        </button>
+
+                                                        <!-- Modal de modification -->
+                                                        <div class="modal fade" id="modal-modifier-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Modifier la réservation</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="traitement_modifier_reservation.php" method="POST">
+                                                                            <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
+                                                                            <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
+                                                                            <?php include 'modifier-reservations.php'; ?>
+                                                                            <!-- ... Vos champs de formulaire ... -->
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Button de suppression modal -->
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-reservation-<?php echo $reservation['num_res']; ?>">
+                                                            Supprimer
+                                                        </button>
+
+                                                        <!-- Modal de suppression -->
+                                                        <div class="modal fade" id="supprimer-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Supprimer l'reservation <?php echo $reservation['nom_reservation']; ?></h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Etes-vous sûr de vouloir supprimer l'reservation <?php echo $reservation['nom_reservation']; ?> ?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression_compte_users" method="POST">
+                                                                            <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
+                                                                            <button type="submit" class="btn btn-danger">Oui</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php
+                } else {
+                    // Affiche un message s'il n'y a aucune réservation trouvée
+                    echo "Aucune réservation n'a été trouvée!";
+                }
+                ?>
             </div>
         </div>
-    </footer>
-    <!-- End of Footer -->
 
-    <!-- Template Main JS File -->
-    <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
+    </div>
+</div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
-    <script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- FIN -->
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.btn-modifier').click(function() {
+            var reservationId = $(this).data('reservation-id');
+            var typeChambre = "<?php echo $type_chambre; ?>"; // Récupérez le type de chambre de la réservation
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
+            // Réinitialisez les champs du modal
+            // ...
 
+            // Afficher le modal de modification
+            $('#modal-modifier-' + reservationId).modal('show');
 
-    <!-- Page level plugins -->
-    <script src="<?= PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
-    <script src="<?= PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
+            // Manipulez les champs en fonction du type de chambre
+            if (typeChambre === 'Solo') {
+                // Affichez et pré-remplissez les champs pour le type Solo
+            } else if (typeChambre === 'Doubles') {
+                // Affichez et pré-remplissez les champs pour le type Doubles
+            } else if (typeChambre === 'Triples') {
+                // Affichez et pré-remplissez les champs pour le type Triples
+            } else if (typeChambre === 'Suite') {
+                // Affichez et pré-remplissez les champs pour le type Suite
+            }
+        });
+    });
+</script>
 
-    <!-- Page level custom scripts -->
-    <script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
-    <script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
-    <script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
+<?php
 
-</body>
+include './app/commum/footer_client_icm.php';
 
-</html>
+?>

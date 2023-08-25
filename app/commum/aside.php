@@ -28,9 +28,12 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Personnaliser:</h6>
-                        </a>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-reservation">Ajouter une réservation</a>
+                        <h6 class="collapse-header">Ajouter une réservation:</h6>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-solo">Chambre Solo</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-double">Chambre Doubles</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-triple">Chambre triples</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-suit">Chambre Suite</a>
+
                         <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-reservations">Liste des réservations</a>
                     </div>
                 </div>
@@ -45,7 +48,6 @@
                 <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Personnaliser:</h6>
-                        </a>
                         <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-commande">Ajouter une commande</a>
                         <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-commandes">Liste des Commandes</a>
                     </div>
@@ -136,7 +138,12 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+            <!-- <style>
+                #content-wrapper {
+                    background: url("<?= PATH_PROJECT ?>public/images/LOGO.png") center;
+                    background-size: cover;
+                }
+            </style> -->
             <!-- Main Content -->
             <div id="content">
 

@@ -17,7 +17,7 @@ include './app/commum/header_client.php'
           un séjour d'affaire/loisir relaxant, un confort remarquable, des
           salles de conférence, un espace Restaurant.</span>
       </div>
-
+<!-- 
       <div class="dropdown">
         <button class="btn btn-primary btn-white mt30 page-scroll dropdown-toggle" style="background-color: black; border-color: black;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           NOS MEILLEURS OFFRES
@@ -37,7 +37,7 @@ include './app/commum/header_client.php'
             de vélos, skis, heliski, et bien plus.
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </header>

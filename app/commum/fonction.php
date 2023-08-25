@@ -1181,6 +1181,7 @@ function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ,
 	return $enregistrer_chambre;
 }
 
+
 /**
  * Cette fonction permet de verifier si l'une chambres dans la base de donnée ne possède pas ce numeros.
  * @param string $num_chambre Le numéro de chambre a vérifié.
@@ -1215,6 +1216,8 @@ function check_if_chambre_exist_in_db(int $num_chambre): bool
 
 	return $check;
 }
+
+
 /**
  * Cette fonction permet de récupérer la liste des chambres de la base de donnée.
  *
@@ -1309,6 +1312,7 @@ function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $
 	return $modifier_chambre;
 }
 
+
 /**
  * Cette fonction permet de supprimer une chambre de la base de données à partir de son numero de chambre.
  *
@@ -1338,33 +1342,750 @@ function supprimer_chambre(int $num_chambre): bool
 	return $chambre_est_supprimer;
 }
 
-// Fonction pour effectuer la réservation d'une chambre
-function enregistrer_reservation(int $num_res, int $num_chambre, string $date_debut, string $date_fin, int $statut): bool
+
+/**
+ * Cette fonction permet d'obtenir un numéro de chambre selon le type.
+ * @param string $type Le type de chambre.
+ *
+ * @return bool $num
+ */
+function obtenir_numero_chambre_disponible(string $type): ?int
+{
+	$num = null;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+		$requette = "SELECT num_chambre FROM chambre WHERE est_actif = :est_actif and lib_typ = :lib_typ";
+
+		$verifier_liste_chambres = $db->prepare($requette);
+
+		$resultat = $verifier_liste_chambres->execute([
+			'est_actif' => 1,
+			'lib_typ' => $type
+		]);
+
+		if ($resultat) {
+			$chambre = $verifier_liste_chambres->fetch(PDO::FETCH_ASSOC);
+			if ($chambre) {
+				$num = $chambre['num_chambre'];
+			}
+		}
+	}
+
+	return $num;
+}
+
+
+/**
+ * Cette fonction permet d'enregistrer un client lors d'une reservation 
+ *
+ * @param  string $nom_clt
+ * @param  int $contact
+ * @param  string $email
+ * @return bool
+ */
+function enregistrer_client(string $nom_clt, string $contact, string $email): bool
+{
+	$enregistrer_client = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'INSERT INTO clt (nom_clt, contact, email) VALUES (:nom_clt, :contact, :email)';
+
+		$inserer_client = $db->prepare($requette);
+
+		$resultat = $inserer_client->execute([
+			'nom_clt' => $nom_clt,
+			'contact' => $contact,
+			'email' => $email
+		]);
+
+		$enregistrer_client = $resultat;
+	}
+
+	return $enregistrer_client;
+}
+
+
+/**
+ * Cette fonction permet de verifier si un client dans la base de donnée ne possède pas cette adresse mail.
+ * @param string $email L'email a vérifié.
+ *
+ * @return bool $check
+ */
+function vérifier_email_client_exist_in_db(string $email): bool
+{
+
+	$check = false;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$requette = "SELECT count(*) as nbr_utilisateur FROM clt WHERE email = :email and est_supprimer = :est_supprimer";
+
+		$verifier_email = $db->prepare($requette);
+
+		$resultat = $verifier_email->execute([
+			'email' => $email,
+			'est_supprimer' => 0
+		]);
+
+		if ($resultat) {
+
+			$nbr_utilisateur = $verifier_email->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+			$check = ($nbr_utilisateur > 0) ? true : false;
+		}
+	}
+
+	return $check;
+}
+
+
+
+/**
+ * Cette fonction permet de récupérer l'id du client grâce a son mail.
+ *
+ * @param string $nom_clt Le nom du client.
+ * @return int $user_id L'id du client.
+ */
+function recuperer_id_client_par_son_mail(string $email): int
+{
+
+	$client_id = 0;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "SELECT id FROM clt WHERE email=:email";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute([
+			'email' => $email
+		]);
+
+		if ($request_execution) {
+
+			$data = $request_prepare->fetch(PDO::FETCH_ASSOC);
+
+			if (isset($data) && !empty($data) && is_array($data)) {
+
+				$client_id = $data["id"];
+			}
+		}
+	}
+	return $client_id;
+}
+
+
+/**
+ * Cette fonction permet de récupérer les informations d'un client à partir de son num.
+ *
+ * @param int $id Le numéro de client
+ * @return array 
+ */
+function recuperer_client_par_son_num_clt(int $id): array
+{
+	$client = array();
+
+	$db = connect_db();
+
+	$requette = 'SELECT * FROM clt WHERE id = :id ';
+
+	$verifier_client = $db->prepare($requette);
+
+	$resultat = $verifier_client->execute([
+		"id" => $id
+	]);
+
+	if ($resultat) {
+
+		$client = $verifier_client->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	return $client;
+}
+
+
+/**
+ * Cette fonction permet d'enregistrer une reservation 
+ * 
+ * @param  int $numClient
+ * @param  string $debOcc
+ * @param  string $finOcc
+ * @param  int $numChambreDisponible
+ * @return bool
+ */
+function enregistrer_reservation($numClient, $debOcc, $finOcc, $numChambreDisponible): bool
 {
 	$enregistrer_reservation = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Calculer le montant total en fonction des dates saisies et du type de chambre
+		$typeChambre = recuperer_type_chambre($numChambreDisponible);
+
+		if ($typeChambre) {
+			switch ($typeChambre['lib_typ']) {
+				case 'Solo':
+					$prixParNuit = 15000;
+					break;
+				case 'Doubles':
+					$prixParNuit = 25000;
+					break;
+				case 'Triples':
+					$prixParNuit = 35000;
+					break;
+				case 'Suite':
+					$prixParNuit = 50000;
+					break;
+				default:
+					$prixParNuit = 0; // Prix par défaut en cas de type de chambre inconnu
+					break;
+			}
+
+			$dateDebut = new DateTime($debOcc);
+			$dateFin = new DateTime($finOcc);
+
+			// Calculer la différence en jours, y compris le jour de fin
+			$diff = $dateDebut->diff($dateFin);
+			$jours = $diff->days + 1;
+			$montantTotal = $jours * $prixParNuit;
+
+			// Requête SQL pour insérer les informations de réservation dans la table "reservation"
+			$requete = 'INSERT INTO reservations (num_clt, num_chambre, deb_occ, fin_occ, prix_total) VALUES (:num_clt, :num_chambre, :deb_occ, :fin_occ, :prix_total)';
+
+			// Préparation de la requête SQL pour éviter les injections SQL
+			$inserer_reservation = $db->prepare($requete);
+
+			// Exécution de la requête préparée pour insérer les informations de réservation
+			$resultat = $inserer_reservation->execute([
+				'num_clt' => $numClient,
+				'num_chambre' => $numChambreDisponible,
+				'deb_occ' => $debOcc,
+				'fin_occ' => $finOcc,
+				'prix_total' => $montantTotal
+			]);
+			// Mettre à jour le booléen en fonction du résultat de l'insertion
+			$enregistrer_reservation = $resultat;
+		}
+	}
+
+	return $enregistrer_reservation;
+}
+
+
+
+/**
+ *  Cette fonction permet de mettre à jour le statut de chambre
+ *
+ * @param  int $numChambreDisponible
+ * @return bool
+ */
+function mettre_a_jour_statut_chambre_reserver(int $num_chambre): bool
+{
+
+	$statut = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE chambre SET est_actif = :est_actif, maj_le = :maj_le WHERE num_chambre= :num_chambre";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_chambre' => $num_chambre,
+			'est_actif' => 0,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$statut = true;
+		}
+	}
+
+	return $statut;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le numero de res grâce num chambre .
+ *
+ * @param string $numChambreDisponible numero de chambre disponible.
+ * @return int 
+ */
+function recuperer_num_res_par_num_chambre($numChambre): ?int
+{
+	$numReservation = null;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete = 'SELECT num_res FROM reservations WHERE num_chambre = :num_chambre ORDER BY num_res DESC LIMIT 1';
+
+		$request_prepare = $db->prepare($requete);
+
+		if ($request_prepare->execute(['num_chambre' => $numChambre])) {
+
+			$resultat = $request_prepare->fetch(PDO::FETCH_ASSOC);
+
+			if ($resultat && isset($resultat['num_res'])) {
+
+				$numReservation = $resultat['num_res'];
+			}
+		}
+	}
+
+	return $numReservation;
+}
+
+
+/**
+ * Cette fonction permet d'enregistrer un client lors d'une reservation 
+ *
+ * @param  string $nom_acc
+ * @param  int $contact
+ * @return bool
+ */
+function enregistrer_accompagnateur($nom_acc, $contact_acc): bool
+{
+	$enregistrer_accompagnateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'INSERT INTO accompagnateur (nom_acc, contact) VALUES (:nom_acc, :contact)';
+
+		$inserer_client = $db->prepare($requette);
+
+		$resultat = $inserer_client->execute([
+			'nom_acc' => $nom_acc,
+			'contact' => $contact_acc
+		]);
+
+		$enregistrer_accompagnateur = $resultat;
+	}
+
+	return $enregistrer_accompagnateur;
+}
+
+
+/**
+ * Cette fonction permet de verifier si un accompagnateur dans la base de donnée ne possède pas ce contact.
+ * @param string $email L'email a vérifié.
+ *
+ * @return bool $check
+ */
+function vérifier_contact_accompagnateur_exist_in_db(string $contact_acc): bool
+{
+
+	$check = false;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$requette = "SELECT count(*) as nbr_utilisateur FROM accompagnateur WHERE contact = :contact and est_supprimer = :est_supprimer";
+
+		$verifier_contact = $db->prepare($requette);
+
+		$resultat = $verifier_contact->execute([
+			'contact' => $contact_acc,
+			'est_supprimer' => 0
+		]);
+
+		if ($resultat) {
+
+			$nbr_utilisateur = $verifier_contact->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+			$check = ($nbr_utilisateur > 0) ? true : false;
+		}
+	}
+
+	return $check;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le num_acc grâce a son contact.
+ *
+ * @param string $num_acc Le numero de l'accompagnateur.
+ * @return int $accompagnateur_id 
+ */
+function recuperer_num_acc_par_son_contact(string $contact_acc): int
+{
+
+	$accompagnateur_id = 0;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "SELECT num_acc FROM accompagnateur WHERE contact=:contact";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute([
+			'contact' => $contact_acc
+		]);
+
+		if ($request_execution) {
+
+			$data = $request_prepare->fetch(PDO::FETCH_ASSOC);
+
+			if (isset($data["num_acc"])) {
+
+				$accompagnateur_id = $data["num_acc"];
+			}
+		}
+	}
+	return $accompagnateur_id;
+}
+
+
+/**
+ * Cette fonction permet d'enregistrer un client lors d'une reservation 
+ *
+ * @param  string $nom_acc
+ * @param  int $contact
+ * @return bool
+ */
+function enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur): bool
+{
+	$enregistrer_accompagnateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc ) VALUES (:num_res, :num_acc)';
+
+		$inserer_accompagnateur = $db->prepare($requette);
+
+		$resultat = $inserer_accompagnateur->execute([
+			'num_res' => $numReservation,
+			'num_acc' => $numAccompagnateur
+		]);
+
+		$enregistrer_accompagnateur = $resultat;
+	}
+
+	return $enregistrer_accompagnateur;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des clients de la base de donnée.
+ *
+ * @return array $liste_client La liste des clients.
+ */
+function recuperer_liste_client(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM clt';
+
+		$verifier_liste_client = $db->prepare($requette);
+
+		$resultat = $verifier_liste_client->execute();
+
+		if ($resultat) {
+
+			$liste_client = $verifier_liste_client->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_client;
+}
+
+
+
+/**
+ * Cette fonction permet de récupérer la liste des réservations de la base de donnée en fonction du client connecter.
+ *
+ * @return array $liste_reservation La liste des reservations.
+ */
+function recuperer_liste_reservations($num_clt = null): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		if (is_null($num_clt)) {
+			$requette = 'SELECT * FROM reservations WHERE est_supprimer=0';
+
+			$verifier_liste_reservations = $db->prepare($requette);
+
+			$resultat = $verifier_liste_reservations->execute();
+		} elseif (!is_null($num_clt)) {
+			$requette = 'SELECT * FROM reservations WHERE num_clt=:num_clt and est_supprimer=0';
+
+			$verifier_liste_reservations = $db->prepare($requette);
+
+			$resultat = $verifier_liste_reservations->execute([
+				'num_clt' => $num_clt
+			]);
+		}
+
+		if ($resultat) {
+
+			$liste_reservation = $verifier_liste_reservations->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_reservation;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des accompagnateurs par le numero de reservation de la base de donnée.
+ *
+ * @return array $liste_accompagnateurs la liste_accompagnateurs
+ */
+function recuperer_liste_accompagnateurs($num_res): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM listes_accompagnateurs_reservation WHERE num_res = :num_res and est_supprimer = 0';
+
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+
+		$resultat = $verifier_liste_accompagnateurs->execute([
+			'num_res' => $num_res
+		]);
+
+		if ($resultat) {
+
+			$liste_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_accompagnateurs;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le nom des accompagnateurs par le numero des accompagnateurs de la base de donnée.
+ *
+ * @param  int $num_acc
+ * @return array
+ */
+function recuperer_nom_accompagnateur($num_acc): array
+{
+	$nom_accompagnateur = [];
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requette = 'SELECT * FROM accompagnateur WHERE num_acc = :num_acc and est_supprimer = 0';
+
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+
+		if ($verifier_liste_accompagnateurs->execute([
+
+			'num_acc' => $num_acc
+
+		])) {
+			$nom_accompagnateur = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_ASSOC);
+		} else {
+
+			$nom_accompagnateur = [];
+		}
+	}
+	return $nom_accompagnateur;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le type de chambre lors d'une réservation.
+ *
+ * @param int $num_chambre Le numéro de la chambre.
+ * @return string|bool Le type de chambre ou false si non trouvé.
+ */
+function recuperer_type_chambre($num_chambre)
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete_chambre = 'SELECT lib_typ FROM chambre WHERE num_chambre = :num_chambre';
+
+		$recuperer_chambre = $db->prepare($requete_chambre);
+
+		if ($recuperer_chambre->execute(['num_chambre' => $num_chambre])) {
+
+			$resultat_chambre = $recuperer_chambre->fetch(PDO::FETCH_ASSOC);
+
+			if ($resultat_chambre && isset($resultat_chambre['lib_typ'])) {
+
+				return $resultat_chambre;  // Retourner directement le tableau associatif
+			}
+		}
+	}
+
+	return false;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le type de chambre pour une réservation.
+ *
+ * @param int $num_chambre Le numéro de la chambre.
+ * @return string|bool Le type de chambre ou false si non trouvé.
+ */
+function recuperer_type_chambre_pour_affichage($num_chambre)
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Requête pour récupérer le type de chambre associé au numéro de chambre
+		$requete_chambre = 'SELECT lib_typ FROM chambre WHERE num_chambre = :num_chambre';
+
+		$recuperer_chambre = $db->prepare($requete_chambre);
+
+		if ($recuperer_chambre->execute(['num_chambre' => $num_chambre])) {
+
+			$resultat_chambre = $recuperer_chambre->fetch(PDO::FETCH_ASSOC);
+
+			if ($resultat_chambre && isset($resultat_chambre['lib_typ'])) {
+
+				return $resultat_chambre['lib_typ'];
+			}
+		}
+	}
+
+	return false;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des reservations de la base de donnée.
+ *
+ * @return array $liste_des_reservations La liste des clients.
+ */
+function recuperer_liste_des_reservations(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM reservations';
+
+		$verifier_liste_reservations = $db->prepare($requette);
+
+		$resultat = $verifier_liste_reservations->execute();
+
+		if ($resultat) {
+
+			$liste_des_reservations = $verifier_liste_reservations->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_des_reservations;
+}
+
+
+/**
+ * Fonction pour mettre à jour l'état des réservations, des accompagnateurs et des chambres en fonction de la date de fin_occ
+ *
+ * @return void
+ */
+function mettre_a_jour_etat_reservations_accompagnateurs()
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Récupérer la date et l'heure actuelles
+		$now = date('Y-m-d H:i:s');
+
+		// Mettre à jour l'état des réservations dont la date de fin_occ est dépassée
+		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ < :now';
+		$stmtReservation = $db->prepare($requeteReservation);
+		$stmtReservation->bindParam(':now', $now);
+		$stmtReservation->execute();
+
+		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est dépassée
+		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ < :now)';
+		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
+		$stmtAccompagnateur->bindParam(':now', $now);
+		$stmtAccompagnateur->execute();
+
+		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est dépassée
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		$stmtChambre = $db->prepare($requeteChambre);
+		$stmtChambre->bindParam(':now', $now);
+		$stmtChambre->execute();
+	}
+}
+
+
+/**
+ * Cette fonction permet de modifier la date de debut et fin occupations ainsi que le prix total pour le type de chambre solo.
+ *
+ * @param int $num_res Le numéro de reservation $, int $finOcc, int $montantTotal
+ * @param string $debOcc La date de début occupation de chambre
+ * @param string $finOcc La date de fin occupation de chambre
+ * @param int $prix_total Le prix total
+ * @return bool Indique si la modification a réussi ou non.
+ */
+function modifier_reservation_chambre_solo(int $num_res, int $debOcc, int $finOcc, int $montantTotal): bool
+{
+	$reservation_chambre_solo = false;
 
 	$date = date("Y-m-d H:i:s");
 
 	$db = connect_db();
 
 	if (!is_null($db)) {
-		$requete = 'INSERT INTO reservation (num_res, num_chambre, date_debut, date_fin, statut, maj_le) VALUES (:num_res, :num_chambre, :date_debut, :date_fin, :statut, :maj_le)';
 
-		$enregistrer_reservation = $db->prepare($requete);
+		// Calculer le montant total en fonction des dates saisies
+		$prixParNuit = 15000; // Prix réel de la chambre par nuit
 
-		$resultat = $enregistrer_reservation->execute([
+		$dateDebut = new DateTime($debOcc);
+		$dateFin = new DateTime($finOcc);
+
+		// Calculer la différence en jours, y compris le jour de fin
+		$diff = $dateDebut->diff($dateFin);
+		$jours = $diff->days + 1;
+		$montantTotal = $jours * $prixParNuit;
+		//die(var_dump($montantTotal));
+
+
+		$requete = 'UPDATE reservations SET deb_occ = :deb_occ, fin_occ = :fin_occ, prix_total = :prix_total, maj_le = :maj_le  WHERE num_res = :num_res';
+
+		$reservation_chambre_solo = $db->prepare($requete);
+
+		$resultat = $reservation_chambre_solo->execute([
 			'num_res' => $num_res,
-			'num_chambre' => $num_chambre,
-			'date_debut' => $date_debut,
-			'date_fin' => $date_fin,
-			'statut' => $statut,
+			'deb_occ' => $debOcc,
+			'fin_occ' => $finOcc,
+			'prix_total' => $montantTotal,
 			'maj_le' => $date
 		]);
 
 		if ($resultat) {
-			$enregistrer_reservation = true;
+
+			$reservation_chambre_solo = true;
 		}
 	}
 
-	return $enregistrer_reservation;
+	return $reservation_chambre_solo;
 }

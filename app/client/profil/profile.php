@@ -623,7 +623,8 @@ if (!check_if_user_connected_client()) {
       </div>
       </div>
       </div>
-      </form><!-- End Profile Edit Form -->
+      </form>
+      <!-- End Profile Edit Form -->
       </div>
       </div>
       </div>
