@@ -137,8 +137,8 @@ include './app/commum/header_client.php';
 
                                                     </div>
                                                     <div class="modal-footer float-right">
-                                                        <!-- Formulaire de désactivation -->
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>">
+                                                        <!-- Formulaire de modification -->
+                                                        <button type="button" class="btn btn-primary btn-modifier" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>'>
                                                             Modifier
                                                         </button>
 
@@ -153,17 +153,19 @@ include './app/commum/header_client.php';
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <form action="traitement_modifier_reservation.php" method="POST">
+                                                                        <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-reservations" method="POST">
                                                                             <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                             <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
                                                                             <?php include 'modifier-reservations.php'; ?>
                                                                             <!-- ... Vos champs de formulaire ... -->
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                                                                            </div>
                                                                         </form>
                                                                     </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -227,6 +229,7 @@ include './app/commum/header_client.php';
         $('.btn-modifier').click(function() {
             var reservationId = $(this).data('reservation-id');
             var typeChambre = "<?php echo $type_chambre; ?>"; // Récupérez le type de chambre de la réservation
+            var accompagnateursInfo = JSON.parse($('#accompagnateurs_info').val());
 
             // Réinitialisez les champs du modal
             // ...
@@ -249,6 +252,8 @@ include './app/commum/header_client.php';
 </script>
 
 <?php
+// Supprimer les variables de session
+unset($_SESSION['donnees-chambre-solo-modifier'], $_SESSION['erreurs-chambre-solo-modifier'], $_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
 include './app/commum/footer_client_icm.php';
 

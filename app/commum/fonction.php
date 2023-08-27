@@ -1876,9 +1876,34 @@ function recuperer_liste_accompagnateurs($num_res): array
 		if ($resultat) {
 
 			$liste_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_ASSOC);
+
+			// (var_dump($liste_accompagnateurs));
 		}
 	}
 	return $liste_accompagnateurs;
+}
+
+
+
+function recuperer_noms_et_contacts_accompagnateurs($num_res): array
+{
+	$db = connect_db();
+	$accompagnateurs_info = [];
+	if (!is_null($db)) {
+		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res et est_supprimer = 0';
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
+		if ($resultat) {
+			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_COLUMN);
+			foreach ($numeros_accompagnateurs as $num_acc) {
+				$info_acc = recuperer_nom_et_contact_accompagnateur($num_acc);
+				if ($info_acc) {
+					$accompagnateurs_info[] = $info_acc;
+				}
+			}
+		}
+	}
+	return $accompagnateurs_info;
 }
 
 
@@ -2047,7 +2072,7 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
  * @param int $prix_total Le prix total
  * @return bool Indique si la modification a réussi ou non.
  */
-function modifier_reservation_chambre_solo(int $num_res, int $debOcc, int $finOcc, int $montantTotal): bool
+function modifier_reservation_chambre_solo($num_res, $debOcc, $finOcc, $montantTotal): bool
 {
 	$reservation_chambre_solo = false;
 
