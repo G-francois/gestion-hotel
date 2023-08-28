@@ -76,7 +76,7 @@ include './app/commum/aside.php';
                                                 echo '---';
                                             } else {
                                                 foreach ($accompagnateurs as $accompagnateurs) {
-                                                    echo recuperer_nom_accompagnateur($accompagnateurs['num_acc'])['nom_acc'] . '<br>';
+                                                    echo recuperer_info_accompagnateur($accompagnateurs['num_acc'])['nom_acc'] . '<br>';
                                                 }
                                             }
 

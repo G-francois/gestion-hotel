@@ -1884,7 +1884,12 @@ function recuperer_liste_accompagnateurs($num_res): array
 }
 
 
-
+/**
+ * recuperer_noms_et_contacts_accompagnateurs
+ *
+ * @param  mixed $num_res
+ * @return array
+ */
 function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 {
 	$db = connect_db();
@@ -1894,7 +1899,7 @@ function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 		$verifier_liste_accompagnateurs = $db->prepare($requette);
 		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
 		if ($resultat) {
-			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_COLUMN);
+			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_COLUMN);
 			foreach ($numeros_accompagnateurs as $num_acc) {
 				$info_acc = recuperer_nom_et_contact_accompagnateur($num_acc);
 				if ($info_acc) {
@@ -1909,12 +1914,12 @@ function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 
 
 /**
- * Cette fonction permet de récupérer le nom des accompagnateurs par le numero des accompagnateurs de la base de donnée.
+ * Cette fonction permet de récupérer les informations des accompagnateurs par le numero des accompagnateurs de la base de donnée.
  *
  * @param  int $num_acc
  * @return array
  */
-function recuperer_nom_accompagnateur($num_acc): array
+function recuperer_info_accompagnateur($num_acc): array
 {
 	$nom_accompagnateur = [];
 
@@ -2030,6 +2035,45 @@ function recuperer_liste_des_reservations(): array
 
 
 /**
+ * Cette fonction permet de supprimer une reservation
+ *
+ * @param  int $id
+ * @return bool
+ */
+function supprimer_reservation(int $num_res): bool
+{
+
+	$supprimer_reservation = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE reservations SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_res' => $num_res,
+			'est_actif' => 0,
+			'est_supprimer' => 1,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$supprimer_reservation = true;
+		}
+	}
+
+	return $supprimer_reservation;
+}
+
+
+
+/**
  * Fonction pour mettre à jour l'état des réservations, des accompagnateurs et des chambres en fonction de la date de fin_occ
  *
  * @return void
@@ -2072,7 +2116,7 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
  * @param int $prix_total Le prix total
  * @return bool Indique si la modification a réussi ou non.
  */
-function modifier_reservation_chambre_solo($num_res, $debOcc, $finOcc, $montantTotal): bool
+function modifier_reservation_chambre($num_chambre, $num_res, $debOcc, $finOcc, $montantTotal): bool
 {
 	$reservation_chambre_solo = false;
 
@@ -2081,37 +2125,124 @@ function modifier_reservation_chambre_solo($num_res, $debOcc, $finOcc, $montantT
 	$db = connect_db();
 
 	if (!is_null($db)) {
+		// Calculer le montant total en fonction des dates saisies et du type de chambre
+		$type_chambre = recuperer_type_chambre_pour_affichage($num_chambre);
 
-		// Calculer le montant total en fonction des dates saisies
-		$prixParNuit = 15000; // Prix réel de la chambre par nuit
+		if ($type_chambre) {
 
-		$dateDebut = new DateTime($debOcc);
-		$dateFin = new DateTime($finOcc);
+			switch ($type_chambre['lib_typ']) {
+				case 'Solo':
+					$prixParNuit = 15000;
+					break;
+				case 'Doubles':
+					$prixParNuit = 25000;
+					break;
+				case 'Triples':
+					$prixParNuit = 35000;
+					break;
+				case 'Suite':
+					$prixParNuit = 50000;
+					break;
+				default:
+					$prixParNuit = 0; // Prix par défaut en cas de type de chambre inconnu
+					break;
+					 
+			}
 
-		// Calculer la différence en jours, y compris le jour de fin
-		$diff = $dateDebut->diff($dateFin);
-		$jours = $diff->days + 1;
-		$montantTotal = $jours * $prixParNuit;
-		//die(var_dump($montantTotal));
+			$dateDebut = new DateTime($debOcc);
+			$dateFin = new DateTime($finOcc);
+
+			// Calculer la différence en jours, y compris le jour de fin
+			$diff = $dateDebut->diff($dateFin);
+			$jours = $diff->days + 1;
+			$montantTotal = $jours * $prixParNuit;
+
+			$requete = 'UPDATE reservations SET deb_occ = :deb_occ, fin_occ = :fin_occ, prix_total = :prix_total, maj_le = :maj_le  WHERE num_res = :num_res';
+
+			$reservation_chambre_solo = $db->prepare($requete);
+
+			$resultat = $reservation_chambre_solo->execute([
+				'num_res' => $num_res,
+				'deb_occ' => $debOcc,
+				'fin_occ' => $finOcc,
+				'prix_total' => $montantTotal,
+				'maj_le' => $date
+			]);
+
+			if ($resultat) {
+
+				$reservation_chambre_solo = true;
+			}
+		}
+	}
+	return $reservation_chambre_solo;
+}
 
 
-		$requete = 'UPDATE reservations SET deb_occ = :deb_occ, fin_occ = :fin_occ, prix_total = :prix_total, maj_le = :maj_le  WHERE num_res = :num_res';
+/**
+ * Supprime les entrées d'accompagnateurs associées à une réservation dans la table listes_accompagnateurs_reservation.
+ *
+ * @param int $num_res Le numéro de réservation.
+ * @return bool Indique si la suppression a réussi ou non.
+ */
+function supprimer_accompagnateurs_reservation($num_res): bool
+{
+	$suppression_reussie = false;
 
-		$reservation_chambre_solo = $db->prepare($requete);
+	$db = connect_db();
 
-		$resultat = $reservation_chambre_solo->execute([
-			'num_res' => $num_res,
-			'deb_occ' => $debOcc,
-			'fin_occ' => $finOcc,
-			'prix_total' => $montantTotal,
-			'maj_le' => $date
+	if (!is_null($db)) {
+
+		$requete = "DELETE FROM listes_accompagnateurs_reservation WHERE num_res = :num_res";
+
+		$suppression_reussie = $db->prepare($requete);
+
+		$resultat = $suppression_reussie->execute([
+
+			'num_res' => $num_res
 		]);
 
 		if ($resultat) {
-
-			$reservation_chambre_solo = true;
+			$suppression_reussie = true;
 		}
 	}
 
-	return $reservation_chambre_solo;
+	return $suppression_reussie;
+}
+
+
+/**
+ * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation.
+ *
+ * @param int $num_res Le numéro de réservation
+ * @param array $accompagnateurs Un tableau contenant les informations des accompagnateurs à mettre à jour
+ * @return bool Indique si la mise à jour a réussi ou non.
+ */
+function mettre_a_jour_accompagnateurs_reservation($num_res, $accompagnateurs): bool
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Supprimer les entrées existantes d'accompagnateurs pour cette réservation
+		supprimer_accompagnateurs_reservation($num_res);
+
+		// Parcourir les accompagnateurs et mettre à jour leurs informations
+		foreach ($accompagnateurs as $accompagnateur) {
+			$num_acc = recuperer_num_acc_par_son_contact($accompagnateur["contact"]);
+
+			$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc)
+                        VALUES (:num_res, :num_acc)";
+
+			$resultat = $db->prepare($requete);
+
+			$resultat->execute([
+				'num_res' => $num_res,
+				'num_acc' => $num_acc
+			]);
+		}
+
+		return true;
+	}
+
+	return false;
 }

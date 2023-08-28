@@ -271,51 +271,40 @@ unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESS
 </section>
 
 <script>
-    function calculateStayDuration() {
-        var dateDebut = document.getElementById('inscription-date-debut').value;
-        var dateFin = document.getElementById('inscription-date-fin').value;
+    // Fonction pour calculer le nombre de jours entre deux dates
+    function calculerDifferenceJours(debut, fin) {
+        const diffTime = Math.abs(fin - debut);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // Ajouter 1 jour
+        return diffDays;
+    }
 
-        // Vérifier si les champs de date de début et de date de fin sont remplis
-        if (dateDebut && dateFin) {
-            var startDate = new Date(dateDebut);
-            var endDate = new Date(dateFin);
+    // Fonction pour mettre à jour le nombre de jours et le prix total
+    function mettreAJourPrix() {
+        const dateDebut = new Date(document.getElementById('inscription-deb_occ').value);
+        const dateFin = new Date(document.getElementById('inscription-fin_occ').value);
 
-            // Calculer la différence en millisecondes
-            var diff = Math.abs(endDate - startDate);
-
-            // Convertir la différence en jours
-            var nbJours = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-            // Afficher le nombre de jours dans l'élément avec l'ID "staying_day"
-            document.getElementById('staying_day').textContent = nbJours;
-
-            // Mettre à jour le prix total en fonction du nombre de jours
-            updateTotalPrice(nbJours);
-        } else {
-            // Les champs de date de début et de date de fin ne sont pas remplis, réinitialiser les valeurs affichées
-            document.getElementById('staying_day').textContent = '0';
-            updateTotalPrice(0);
+        // Vérification que la date de fin est supérieure à la date de début
+        if (dateFin <= dateDebut) {
+            document.getElementById('nombre_jour').innerText = 'Date de fin doit être après la date de début';
+            document.getElementById('prix_total').innerText = '0 F';
+            return;
         }
+
+        const jours = calculerDifferenceJours(dateDebut, dateFin);
+
+        const prixParJour = 25000; // Remplacez ceci par le prix réel de la chambre par jour
+
+        const montantTotal = prixParJour * jours;
+
+        document.getElementById('nombre_jour').innerText = `${jours} jour(s)`;
+        document.getElementById('prix_total').innerText = montantTotal + ' F';
     }
 
-    function updateTotalPrice(nbJours) {
-        var prixParNuit = 25000; // Prix par nuit pour la chambre double
-        var total = prixParNuit * nbJours;
-
-        // Ajouter un point après chaque groupe de 3 chiffres
-        var formattedTotal = total.toLocaleString();
-
-        // Afficher le prix total dans l'élément avec l'ID "total_price"
-        document.getElementById('total_price').textContent = formattedTotal + " /-";
-    }
-
-    // Écouter les événements de changement de date de début et de date de fin
-    document.getElementById('inscription-date-debut').addEventListener('change', calculateStayDuration);
-    document.getElementById('inscription-date-fin').addEventListener('change', calculateStayDuration);
-
-    // Calculer la durée du séjour au chargement initial de la page
-    calculateStayDuration();
+    // Écouteurs d'événements pour mettre à jour les calculs lorsqu'une date est changée
+    document.getElementById('inscription-deb_occ').addEventListener('change', mettreAJourPrix);
+    document.getElementById('inscription-fin_occ').addEventListener('change', mettreAJourPrix);
 </script>
+
 
 <?php
 

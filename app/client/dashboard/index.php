@@ -104,11 +104,13 @@ include './app/commum/header_client.php';
                                                             // Récupérer la liste des accompagnateurs pour cette réservation
                                                             $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);
 
+                                                            // die(var_dump($accompagnateurs_res));
+
                                                             if (empty($accompagnateurs_res)) {
                                                                 echo '---';
                                                             } else {
                                                                 foreach ($accompagnateurs_res as $accompagnateur) {
-                                                                    echo recuperer_nom_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '<br>';
+                                                                    echo recuperer_info_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '<br>';
                                                                 }
                                                             }
                                                             ?>
@@ -138,7 +140,7 @@ include './app/commum/header_client.php';
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <!-- Formulaire de modification -->
-                                                        <button type="button" class="btn btn-primary btn-modifier" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>'>
+                                                        <button type="button" class="btn btn-warning btn-modifier" style="color: white;" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>'>
                                                             Modifier
                                                         </button>
 
@@ -153,11 +155,70 @@ include './app/commum/header_client.php';
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-reservations" method="POST">
+                                                                        <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-reservations" method="POST" novalidate>
                                                                             <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                             <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
-                                                                            <?php include 'modifier-reservations.php'; ?>
-                                                                            <!-- ... Vos champs de formulaire ... -->
+                                                                            <input type="hidden" name="num_chambre" value="<?php echo $reservation['num_chambre']; ?>">
+                                                                            <div class="row">
+                                                                                <!-- Le champ de date de début occupation -->
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="modification-deb_occ">
+                                                                                        Début de séjour :
+                                                                                        <span class="text-danger">(*)</span>
+                                                                                    </label>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <input type="date" name="deb_occ" id="modification-deb_occ" class="form-control" placeholder="Veuillez entrer la date de début occupation" value="<?= $reservation['deb_occ'] ?>" required>
+                                                                                    </div>
+                                                                                    <?php if (isset($erreurs["deb_occ"]) && !empty($erreurs["deb_occ"])) { ?>
+                                                                                        <span class="text-danger">
+                                                                                            <?php echo $erreurs["deb_occ"]; ?>
+                                                                                        </span>
+                                                                                    <?php } ?>
+                                                                                </div>
+
+                                                                                <!-- Le champ de date de fin occupation -->
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="modification-fin_occ">
+                                                                                        Fin de séjour :
+                                                                                        <span class="text-danger">(*)</span>
+                                                                                    </label>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <input type="date" name="fin_occ" id="modification-fin_occ" class="form-control" placeholder="Veuillez entrer la date de fin occupation" value="<?= $reservation['fin_occ'] ?>" required>
+                                                                                    </div>
+                                                                                    <?php if (isset($erreurs["fin_occ"]) && !empty($erreurs["fin_occ"])) { ?>
+                                                                                        <span class="text-danger">
+                                                                                            <?php echo $erreurs["fin_occ"]; ?>
+                                                                                        </span>
+                                                                                    <?php } ?>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <?php
+                                                                            if (!empty($accompagnateurs_res)) {
+                                                                                foreach ($accompagnateurs_res as $key => $accompagnateur) {
+                                                                                    $inf = recuperer_info_accompagnateur($accompagnateur['num_acc']);
+                                                                            ?>
+                                                                                    <div class="row">
+                                                                                        <!-- Le champs nom_acc -->
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <label for="modification-nom_acc">
+                                                                                                Nom de l'accompagnateur:
+                                                                                            </label>
+                                                                                            <input type="text" name="nom_acc[]" id="modification-nom_acc" class="form-control" value="<?= !empty($inf['nom_acc']) ? $inf['nom_acc'] : '' ?>">
+                                                                                        </div>
+
+                                                                                        <!-- Le champs contact_acc -->
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <label for="modification-contact_acc">
+                                                                                                Contact de l'accompagnateur:
+                                                                                            </label>
+                                                                                            <input type="text" name="contact_acc[]" id="modification-contact_acc" class="form-control" value="<?= !empty($inf['contact']) ? $inf['contact'] : '' ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                            <?php
+                                                                                }
+                                                                            }
+                                                                            ?>
 
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -170,56 +231,62 @@ include './app/commum/header_client.php';
                                                             </div>
                                                         </div>
 
-                                                        <!-- Button de suppression modal -->
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-reservation-<?php echo $reservation['num_res']; ?>">
-                                                            Supprimer
-                                                        </button>
+                                                        <form action="<?= PATH_PROJECT ?>clint/dashboard/traitement_supprimr_rsrvation" method="post" enctype="multipart/form-data"> <!-- Début du formulaire de modification du profil -->
 
-                                                        <!-- Modal de suppression -->
-                                                        <div class="modal fade" id="supprimer-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Supprimer l'reservation <?php echo $reservation['nom_reservation']; ?></h4>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p>Etes-vous sûr de vouloir supprimer l'reservation <?php echo $reservation['nom_reservation']; ?> ?</p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_suppression_compte_users" method="POST">
-                                                                            <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
-                                                                            <button type="submit" class="btn btn-danger">Oui</button>
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                                                        </form>
+                                                            <!-- Button de suppression modal -->
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-reservation-<?php echo $reservation['num_res']; ?>">
+                                                                Supprimer
+                                                            </button>
+
+                                                            <!-- Modal de suppression -->
+                                                            <div class="modal fade" id="supprimer-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Supprimer la réservationde la chambre <?php echo $reservation['num_chambre']; ?></h4>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour supprimer la réservation de la chambre <?php echo $reservation['num_chambre']; ?></label>
+                                                                                <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" name="sauvegarder" class="btn btn-primary">Valider</button>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-
                                 </tr>
-                            <?php
+            </div>
+
+
+
+        <?php
                             }
-                            ?>
-                        </tbody>
-                    </table>
-                <?php
+        ?>
+        </tbody>
+        </table>
+    <?php
                 } else {
                     // Affiche un message s'il n'y a aucune réservation trouvée
                     echo "Aucune réservation n'a été trouvée!";
                 }
-                ?>
-            </div>
+    ?>
         </div>
-
     </div>
+
+</div>
 </div>
 
 <!-- FIN -->
