@@ -5,8 +5,14 @@ $message_erreur_global = "";
 $message_success_global = "";
 $erreurs = [];
 //die(var_dump($_POST));
+
+
+// Récupération de la date actuelle
+$dateActuelle = date('d-m-Y');
+
 if (isset($_POST['enregistrer'])) {
 
+    
     if (empty($_SESSION['utilisateur_connecter_client'])) {
 
         if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
@@ -78,6 +84,16 @@ if (isset($_POST['enregistrer'])) {
         $donnees["deb_occ"] = $_POST["deb_occ"];
     } else {
         $erreurs["deb_occ"] = "Le champs date début de séjour est requis. Veuillez le renseigné.";
+    }
+    
+    $dateDebut = $_POST['deb_occ'];
+
+    // Vérification si la date de début est valide et supérieure ou égale à la date actuelle
+    if (!empty($dateDebut) && $dateDebut >= $dateActuelle) {
+        // La date de début est valide
+        // Vous pouvez continuer le traitement de la réservation ici
+    } else {
+        $erreur = "La date de début doit être supérieure ou égale à la date actuelle.";
     }
 
     if (isset($_POST["fin_occ"]) && !empty($_POST["fin_occ"])) {

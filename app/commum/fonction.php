@@ -1684,6 +1684,44 @@ function enregistrer_accompagnateur($nom_acc, $contact_acc): bool
 }
 
 
+
+/**
+ * Cette fonction permet de verifier si un accompagnateur dans la base de donnée ne possède pas ce contact.
+ * @param string $email L'email a vérifié.
+ *
+ * @return bool $check
+ */
+function vérifier_nom_contact_accompagnateur_exist_in_db(string $nom_acc, string $contact_acc): bool
+{
+
+	$check = false;
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$requette = "SELECT count(*) as nbr_utilisateur FROM accompagnateur WHERE nom_acc = :nom_acc and contact = :contact and est_supprimer = :est_supprimer";
+
+		$verifier_contact = $db->prepare($requette);
+
+		$resultat = $verifier_contact->execute([
+			'nom_acc' => $nom_acc,
+			'contact' => $contact_acc,
+			'est_supprimer' => 0
+		]);
+
+		if ($resultat) {
+
+			$nbr_utilisateur = $verifier_contact->fetch(PDO::FETCH_ASSOC)["nbr_utilisateur"];
+
+			$check = ($nbr_utilisateur > 0) ? true : false;
+		}
+	}
+
+	return $check;
+}
+
+
 /**
  * Cette fonction permet de verifier si un accompagnateur dans la base de donnée ne possède pas ce contact.
  * @param string $email L'email a vérifié.
@@ -1901,7 +1939,7 @@ function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 		if ($resultat) {
 			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_COLUMN);
 			foreach ($numeros_accompagnateurs as $num_acc) {
-				$info_acc = recuperer_nom_et_contact_accompagnateur($num_acc);
+				$info_acc = recuperer_noms_et_contacts_accompagnateurs($num_acc);
 				if ($info_acc) {
 					$accompagnateurs_info[] = $info_acc;
 				}
@@ -2034,10 +2072,87 @@ function recuperer_liste_des_reservations(): array
 }
 
 
+
+
+function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur): bool
+{
+	$enregistrer_accompagnateur = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = "UPDATE listes_accompagnateurs_reservation  SET num_res :num_res, num_acc :num_acc, est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
+
+		$inserer_accompagnateur = $db->prepare($requette);
+
+		$resultat = $inserer_accompagnateur->execute([
+			'num_res' => $num_res,
+			'num_acc' => $numAccompagnateur,
+			'maj_le' => $date
+		]);
+
+		$enregistrer_accompagnateur = $resultat;
+	}
+
+	return $enregistrer_accompagnateur;
+}
+
+/**
+ * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation.
+ *
+ * @param int $num_res Le numéro de réservation
+ * @param array $accompagnateurs Un tableau contenant les informations des accompagnateurs à mettre à jour
+ * @return bool Indique si la mise à jour a réussi ou non.
+ */
+function mettre_a_jour_accompagnateurs_reservation($num_res, $accompagnateurs): bool
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		foreach ($accompagnateurs as $accompagnateur) {
+			$num_acc = recuperer_num_acc_par_son_contact($accompagnateur["contact_acc"]);
+
+			// Vérifier si l'accompagnateur existe déjà pour cette réservation
+			$requete = "SELECT COUNT(*) AS count FROM listes_accompagnateurs_reservation WHERE num_res = :num_res AND num_acc = :num_acc";
+			$resultat = $db->prepare($requete);
+			$resultat->execute([
+				'num_res' => $num_res,
+				'num_acc' => $num_acc
+			]);
+			$existe_deja = $resultat->fetch(PDO::FETCH_ASSOC)['count'] > 0;
+
+			if ($existe_deja) {
+				// Mettre à jour les informations de l'accompagnateur
+				$requete = "UPDATE listes_accompagnateurs_reservation SET ... WHERE num_res = :num_res AND num_acc = :num_acc";
+			} else {
+
+				// Insérer une nouvelle entrée pour l'accompagnateur
+				$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc) VALUES (:num_res, :num_acc)";
+			}
+
+			$resultat = $db->prepare($requete);
+			$resultat->execute([
+				'num_res' => $num_res,
+				'num_acc' => $num_acc
+			]);
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+
+
 /**
  * Cette fonction permet de supprimer une reservation
  *
- * @param  int $id
+ * @param  int $num_rs
  * @return bool
  */
 function supprimer_reservation(int $num_res): bool
@@ -2146,7 +2261,6 @@ function modifier_reservation_chambre($num_chambre, $num_res, $debOcc, $finOcc, 
 				default:
 					$prixParNuit = 0; // Prix par défaut en cas de type de chambre inconnu
 					break;
-					 
 			}
 
 			$dateDebut = new DateTime($debOcc);
@@ -2212,37 +2326,102 @@ function supprimer_accompagnateurs_reservation($num_res): bool
 
 
 /**
- * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation.
+ * Cette fonction permet de supprimer une commande
  *
- * @param int $num_res Le numéro de réservation
- * @param array $accompagnateurs Un tableau contenant les informations des accompagnateurs à mettre à jour
- * @return bool Indique si la mise à jour a réussi ou non.
+ * @param  int $num_cmd
+ * @return bool
  */
-function mettre_a_jour_accompagnateurs_reservation($num_res, $accompagnateurs): bool
+function supprimer_commande(int $num_cmd): bool
+{
+
+	$supprimer_commande = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE commande SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_res' => $num_cmd,
+			'est_actif' => 0,
+			'est_supprimer' => 1,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$supprimer_commande = true;
+		}
+	}
+
+	return $supprimer_commande;
+}
+
+
+
+/**
+ * Cette fonction permet de récupérer la liste des repas de la base de donnée.
+ *
+ * @return array $liste_repas La liste des repas.
+ */
+function recuperer_nom_prix_repas()
 {
 	$db = connect_db();
 
 	if (!is_null($db)) {
-		// Supprimer les entrées existantes d'accompagnateurs pour cette réservation
-		supprimer_accompagnateurs_reservation($num_res);
+		$requete = 'SELECT cod_repas, nom_repas, pu_repas FROM repas';
+		$verifier_liste_repas = $db->prepare($requete);
 
-		// Parcourir les accompagnateurs et mettre à jour leurs informations
-		foreach ($accompagnateurs as $accompagnateur) {
-			$num_acc = recuperer_num_acc_par_son_contact($accompagnateur["contact"]);
+		$resultat = $verifier_liste_repas->execute();
 
-			$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc)
-                        VALUES (:num_res, :num_acc)";
-
-			$resultat = $db->prepare($requete);
-
-			$resultat->execute([
-				'num_res' => $num_res,
-				'num_acc' => $num_acc
-			]);
+		$liste_repas = array();
+		if ($resultat) {
+			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
 		}
-
-		return true;
 	}
 
-	return false;
+	return $liste_repas;
 }
+
+
+
+/* <?php
+function recuperer_liste_repas() {
+    // Utilisez votre propre logique pour établir la connexion à la base de données
+    $servername = "localhost";
+    $username = "votre_nom_d_utilisateur";
+    $password = "votre_mot_de_passe";
+    $dbname = "nom_de_votre_base_de_donnees";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Requête SQL pour obtenir les noms et prix des repas
+    $sql = "SELECT id, nom_repas, prix_repas FROM repas";
+    $result = $conn->query($sql);
+
+    $liste_repas = array();
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $liste_repas[] = $row;
+        }
+    }
+
+    $conn->close();
+
+    return $liste_repas;
+}
+
+$liste_repas = recuperer_liste_repas();
+
+foreach ($liste_repas as $repas) {
+    echo '<option value="' . $repas['id'] . '" data-prix="' . $repas['prix_repas'] . '">' . $repas['nom_repas'] . '</option>';
+}
+?> */

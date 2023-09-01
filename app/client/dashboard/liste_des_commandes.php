@@ -11,7 +11,7 @@ include './app/commum/header_client.php';
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>client/dashboard/index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Liste des reservations</li>
+                <li class="breadcrumb-item active">Liste des commandes</li>
             </ol>
         </nav>
     </div>
@@ -140,13 +140,9 @@ include './app/commum/header_client.php';
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <!-- Formulaire de modification -->
-                                                        <?php if ($type_chambre !== 'Solo') { ?>
-                                                            <!-- Button de modification modal -->
-                                                            <button type="button" class="btn btn-warning btn-modifier" style="color: white;" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>'>
-                                                                Modifier
-                                                            </button>
-                                                        <?php } ?>
-
+                                                        <button type="button" class="btn btn-warning btn-modifier" style="color: white;" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>'>
+                                                            Modifier
+                                                        </button>
 
                                                         <!-- Modal de modification -->
                                                         <div class="modal fade" id="modal-modifier-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,6 +159,39 @@ include './app/commum/header_client.php';
                                                                             <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                             <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
                                                                             <input type="hidden" name="num_chambre" value="<?php echo $reservation['num_chambre']; ?>">
+                                                                            <div class="row">
+                                                                                <!-- Le champ de date de début occupation -->
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="modification-deb_occ">
+                                                                                        Début de séjour :
+                                                                                        <span class="text-danger">(*)</span>
+                                                                                    </label>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <input type="date" name="deb_occ" id="modification-deb_occ" class="form-control" placeholder="Veuillez entrer la date de début occupation" value="<?= $reservation['deb_occ'] ?>" required>
+                                                                                    </div>
+                                                                                    <?php if (isset($erreurs["deb_occ"]) && !empty($erreurs["deb_occ"])) { ?>
+                                                                                        <span class="text-danger">
+                                                                                            <?php echo $erreurs["deb_occ"]; ?>
+                                                                                        </span>
+                                                                                    <?php } ?>
+                                                                                </div>
+
+                                                                                <!-- Le champ de date de fin occupation -->
+                                                                                <div class="col-md-6 mb-3">
+                                                                                    <label for="modification-fin_occ">
+                                                                                        Fin de séjour :
+                                                                                        <span class="text-danger">(*)</span>
+                                                                                    </label>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <input type="date" name="fin_occ" id="modification-fin_occ" class="form-control" placeholder="Veuillez entrer la date de fin occupation" value="<?= $reservation['fin_occ'] ?>" required>
+                                                                                    </div>
+                                                                                    <?php if (isset($erreurs["fin_occ"]) && !empty($erreurs["fin_occ"])) { ?>
+                                                                                        <span class="text-danger">
+                                                                                            <?php echo $erreurs["fin_occ"]; ?>
+                                                                                        </span>
+                                                                                    <?php } ?>
+                                                                                </div>
+                                                                            </div>
 
                                                                             <?php
                                                                             if (!empty($accompagnateurs_res)) {
@@ -190,16 +219,6 @@ include './app/commum/header_client.php';
                                                                                 }
                                                                             }
                                                                             ?>
-
-                                                                            <!-- Bouton pour ajouter un accompagnateur -->
-                                                                            <?php if ($type_chambre !== 'Solo') { ?>
-                                                                                <button type="button" class="btn btn-success" id="ajouter-accompagnateur">Ajouter</button>
-                                                                            <?php } ?>
-
-                                                                            <!-- Conteneur pour les nouveaux champs d'accompagnateurs -->
-                                                                            <div id="nouveaux-accompagnateurs">
-
-                                                                            </div>
 
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -249,19 +268,22 @@ include './app/commum/header_client.php';
                                         </div>
                                     </td>
                                 </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
             </div>
 
+
+
         <?php
+                            }
+        ?>
+        </tbody>
+        </table>
+
+    <?php
                 } else {
                     // Affiche un message s'il n'y a aucune réservation trouvée
                     echo "Aucune réservation n'a été trouvée!";
                 }
-        ?>
+    ?>
         </div>
     </div>
 
@@ -275,7 +297,7 @@ include './app/commum/header_client.php';
         $('.btn-modifier').click(function() {
             var reservationId = $(this).data('reservation-id');
             var typeChambre = "<?php echo $type_chambre; ?>"; // Récupérez le type de chambre de la réservation
-            var accompagnateursInfo = JSON.parse($(this).data('accompagnateurs'));
+            var accompagnateursInfo = JSON.parse($('#accompagnateurs_info').val());
 
             // Réinitialisez les champs du modal
             // ...
@@ -284,7 +306,9 @@ include './app/commum/header_client.php';
             $('#modal-modifier-' + reservationId).modal('show');
 
             // Manipulez les champs en fonction du type de chambre
-            if (typeChambre === 'Doubles') {
+            if (typeChambre === 'Solo') {
+                // Affichez et pré-remplissez les champs pour le type Solo
+            } else if (typeChambre === 'Doubles') {
                 // Affichez et pré-remplissez les champs pour le type Doubles
             } else if (typeChambre === 'Triples') {
                 // Affichez et pré-remplissez les champs pour le type Triples
@@ -294,49 +318,6 @@ include './app/commum/header_client.php';
         });
     });
 </script>
-
-
-<!-- Ajoutez cette balise script à la fin de la page -->
-<script>
-    $(document).ready(function() {
-        var typeChambre = "<?php echo $type_chambre; ?>";
-        var accompagnateursInfo = JSON.parse($(this).data('accompagnateurs'));
-        var accompagneurChampsMax = 0;
-
-        // Déterminez le nombre maximum de champs d'accompagnateurs en fonction du type de chambre
-        if (typeChambre === 'Doubles') {
-            accompagneurChampsMax = 1; // Pour les chambres doubles, ajoutez un seul accompagnateur
-        } else if (typeChambre === 'Triples') {
-            accompagneurChampsMax = 2; // Pour les chambres triples, ajoutez deux accompagnateurs
-        } else if (typeChambre === 'Suite') {
-            accompagneurChampsMax = 4; // Pour les suites, ajoutez jusqu'à quatre accompagnateurs
-        }
-
-        $('#ajouter-accompagnateur').click(function() {
-            var champCourant = $('#nouveaux-accompagnateurs .row').length;
-
-            // Vérifiez si le nombre maximum de champs d'accompagnateurs a été atteint
-            if (champCourant < accompagneurChampsMax) {
-                var nouveauChamp = `
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label>Nom de l'accompagnateur</label>
-                            <input type="text" name="nouveau_nom_acc[]" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Contact de l'accompagnateur</label>
-                            <input type="text" name="nouveau_contact_acc[]" class="form-control" required>
-                        </div>
-                    </div>
-                `;
-
-                $('#nouveaux-accompagnateurs').append(nouveauChamp);
-            }
-        });
-
-       
-</script>
-
 
 <?php
 // Supprimer les variables de session

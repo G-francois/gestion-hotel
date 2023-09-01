@@ -114,7 +114,7 @@ include './app/commum/header_client.php'
                             <?php
                             }
                             ?>
-                            
+
                             <form action="<?= PATH_PROJECT ?>client/site/traitement-reservation-triple" method="post" class="user" novalidate>
 
                                 <?php
@@ -194,7 +194,7 @@ include './app/commum/header_client.php'
                                     </select>
                                 </div>
 
-                                
+
                                 <div class="row" id="accompagnateur-1" style="display: none;">
                                     <!-- Le champs nom accompagnateur -->
                                     <div class="col-md-6 mb-3">
@@ -303,10 +303,12 @@ include './app/commum/header_client.php'
                                     <h5 style="font-weight: bold">Montant total : <span id="prix_total">0</span> </h5>
                                 </div>
 
-                                <div class="float-right" style="text-align: right;">
-                                    <button type="reset" class="btn btn-danger">Annuler</button>
-                                    <button type="submit" name="enregistrer" class="btn btn-success">Enregistrer</button>
-                                </div>
+                                <button type="reset" class="btn btn-danger" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">
+                                    Annuler
+                                </button>
+                                <button type="submit" name="enregistrer" class="btn btn-success" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">
+                                    Enregistrer
+                                </button>
 
                             </form>
                         </div>

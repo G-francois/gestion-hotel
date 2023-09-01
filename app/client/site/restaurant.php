@@ -13,7 +13,7 @@ include './app/commum/header_client.php'
 
         <div class="btns">
           <a href="#menu" class="btn-menu animated fadeInUp scrollto">Notre Carte</a>
-          <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Réserver une Table</a>
+          <a href="<?= PATH_PROJECT ?>client/site/commande" class="btn-book animated fadeInUp scrollto">Faire une Commande</a>
         </div>
       </div>
       <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
@@ -451,7 +451,7 @@ include './app/commum/header_client.php'
       <div class="row">
         <div class="col-lg-4 col-md-6">
           <div class="member" data-aos="zoom-in" data-aos-delay="100">
-            <img src="<?= PATH_PROJECT ?>public/images/chefs/chefs-1.jpg" class="img-fluid" alt="" />
+            <img src="<?= PATH_PROJECT ?>public/images/chefs/chefs-4.JPG" class="img-fluid" alt="" />
             <div class="member-info">
               <div class="member-info-content">
                 <h4>Walter White</h4>

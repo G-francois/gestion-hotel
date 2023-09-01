@@ -190,7 +190,7 @@ include './app/commum/header_client.php';
                       <span class="text-danger">(*)</span>
                     </label>
                     <div class="input-group mb-3">
-                      <input type="date" name="deb_occ" id="inscription-deb_occ" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["deb_occ"]) && !empty($donnees["deb_occ"])) ? $donnees["deb_occ"] : ""; ?>" required>
+                      <input type="date" name="deb_occ" id="inscription-deb_occ" class="form-control" placeholder="Veuillez entrer votre date de début occupation" value="<?= (isset($donnees["deb_occ"]) && !empty($donnees["deb_occ"])) ? $donnees["deb_occ"] : ""; ?>" min="<?= date('Y-m-d'); ?>" required>
                     </div>
                     <?php if (isset($erreurs["deb_occ"]) && !empty($erreurs["deb_occ"])) { ?>
                       <span class="text-danger">
@@ -224,8 +224,12 @@ include './app/commum/header_client.php';
                 </div>
 
                 <div class="float-right" style="text-align: right;">
-                  <button type="reset" class="btn btn-danger">Annuler</button>
-                  <button type="submit" name="enregistrer" class="btn btn-success">Enregistrer</button>
+                  <button type="reset" class="btn btn-danger" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">
+                    Annuler
+                  </button>
+                  <button type="submit" name="enregistrer" class="btn btn-success" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">
+                    Enregistrer
+                  </button>
                 </div>
 
               </form>

@@ -74,6 +74,10 @@ if (isset($_POST['enregistrer'])) {
         }
     }
 
+    if (!empty($_POST["nombre_accompagnateurs"])) {
+        $donnees["nombre_accompagnateurs"] = $_POST["nombre_accompagnateurs"];
+    }
+
     if (isset($_POST["nom_acc"])) {
         $donnees["nom_acc"] = $_POST["nom_acc"];
     }
@@ -82,6 +86,16 @@ if (isset($_POST['enregistrer'])) {
         $donnees["contact_acc"] = $_POST["contact_acc"];
     }
 
+    // Vérification si le champ "Nom Accompagnateur" est rempli, le champ "Contact Accompagnateur" doit être requis
+    if (!empty($_POST["nom_acc"]) && empty($_POST["contact_acc"])) {
+        $erreurs["contact_acc"] = "Le champ 'Contact Accompagnateur' est requis si le 'Nom Accompagnateur' est renseigné.";
+    }
+
+    if (empty($_POST["nom_acc"]) && !empty($_POST["contact_acc"])) {
+        $erreurs["nom_acc"] = "Le champ 'Nom Accompagnateur' est requis si le 'Contact Accompagnateur' est renseigné.";
+    }
+
+
     if (isset($_POST["nom_acc2"])) {
         $donnees["nom_acc2"] = $_POST["nom_acc2"];
     }
@@ -89,6 +103,43 @@ if (isset($_POST['enregistrer'])) {
     if (isset($_POST["contact_acc2"])) {
         $donnees["contact_acc2"] = $_POST["contact_acc2"];
     }
+
+    // Vérification si le champ "Nom Accompagnateur" est rempli, le champ "Contact Accompagnateur" doit être requis
+    if (!empty($_POST["nom_acc2"]) && empty($_POST["contact_acc2"])) {
+        $erreurs["contact_acc2"] = "Le champ 'Contact Accompagnateur 2' est requis si le 'Nom Accompagnateur 2' est renseigné.";
+    }
+
+    if (empty($_POST["nom_acc2"]) && !empty($_POST["contact_acc2"])) {
+        $erreurs["nom_acc2"] = "Le champ 'Nom Accompagnateur 2' est requis si le 'Contact Accompagnateur 2' est renseigné.";
+    }
+
+
+    if (!empty($_POST["nom_acc"]) && !empty($_POST["contact_acc"])) {
+
+        if (vérifier_nom_contact_accompagnateur_exist_in_db($_POST["nom_acc"], $_POST["contact_acc"])) {
+            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc']);
+        } elseif (vérifier_contact_accompagnateur_exist_in_db($_POST["contact_acc"])) {
+            $erreurs["contact_acc"] = "Ce contact est déjà utilisé. Veuillez le changer.";
+        } else {
+            // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
+            $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_POST["nom_acc"], $_POST["contact_acc"]);
+            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc']);
+        }
+    }
+
+    if (!empty($_POST["nom_acc2"]) && !empty($_POST["contact_acc2"])) {
+
+        if (vérifier_nom_contact_accompagnateur_exist_in_db($_POST["nom_acc2"], $_POST["contact_acc2"])) {
+            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
+        } elseif (vérifier_contact_accompagnateur_exist_in_db($_POST["contact_acc2"])) {
+            $erreurs["contact_acc2"] = "Ce contact est déjà utilisé. Veuillez le changer.";
+        } else {
+            // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
+            $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_POST["nom_acc2"], $_POST["contact_acc2"]);
+            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
+        }
+    }
+
 
     if (isset($_POST["deb_occ"]) && !empty($_POST["deb_occ"])) {
         $donnees["deb_occ"] = $_POST["deb_occ"];
@@ -102,17 +153,17 @@ if (isset($_POST['enregistrer'])) {
         $erreurs["fin_occ"] = "Le champs date fin de séjour est requis. Veuillez le renseigné.";
     }
 
-    $_SESSION['donnees-reservation'] = $donnees;
-
     $donnees["profil"] = "CLIENT";
 
     $donnees["nom-utilisateur"] = "NULL";
 
     $donnees["mot-passe"] = "NULL";
 
+    $_SESSION['donnees-reservation'] = $donnees;
+
     if (empty($erreurs)) {
 
-        // Appeler la fonction pour obtenir un numéro de chambre disponible de type "Solo"
+        // Appeler la fonction pour obtenir un numéro de chambre disponible de type "Triples"
         $numChambreDisponible = obtenir_numero_chambre_disponible('Triples');
 
         // Vérifier si un numéro de chambre est disponible
@@ -141,42 +192,27 @@ if (isset($_POST['enregistrer'])) {
             // Vérifier si l'insertion des informations du client a réussi
             if (!empty($numClient)) {
 
-                $debOcc = $_SESSION['donnees-reservation']['deb_occ'];
+                $debOcc = $donnees['deb_occ'];
 
-                $finOcc = $_SESSION['donnees-reservation']['fin_occ'];
+                $finOcc = $donnees['fin_occ'];
 
                 // Appeler la fonction pour insérer les informations de réservation dans la table "reservation"
                 $resultatInsertionReservation = enregistrer_reservation($numClient, $debOcc, $finOcc, $numChambreDisponible);
 
                 // Vérifier si l'insertion des informations de réservation a réussi
                 if ($resultatInsertionReservation) {
+
                     //recupérer le numero de réservation
                     $numReservation = recuperer_num_res_par_num_chambre($numChambreDisponible);
 
+
                     if (!empty($_POST["nom_acc"]) && !empty($_POST["contact_acc"])) {
-                        // Enregistrer le premier accompagnateur
-                        if (!vérifier_contact_accompagnateur_exist_in_db($_SESSION['donnees-reservation']["contact_acc"])) {
-                            // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
-                            $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_SESSION['donnees-reservation']['nom_acc'], $_SESSION['donnees-reservation']['contact_acc']);
-                            $numAccompagnateur = recuperer_num_acc_par_son_contact($_SESSION['donnees-reservation']['contact_acc']);
-                            $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);
-                        } else {
-                            $numAccompagnateur = recuperer_num_acc_par_son_contact($_SESSION['donnees-reservation']['contact_acc']);
-                            $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);
-                        }
+                        $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);
                     }
 
                     if (!empty($_POST["nom_acc2"]) && !empty($_POST["contact_acc2"])) {
-                        // Enregistrer le deuxième accompagnateur
-                        if (!vérifier_contact_accompagnateur_exist_in_db($_SESSION['donnees-reservation']["contact_acc2"])) {
-                            // Appeler la fonction pour insérer les informations du deuxième accompagnateur dans la table "client"
-                            $resultatInsertionAccompagnateur2 = enregistrer_accompagnateur($_SESSION['donnees-reservation']['nom_acc2'], $_SESSION['donnees-reservation']['contact_acc2']);
-                            $numAccompagnateur2 = recuperer_num_acc_par_son_contact($_SESSION['donnees-reservation']['contact_acc2']);
-                            $insertionReservationAccompagnateur2 = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur2);
-                        } else {
-                            $numAccompagnateur2 = recuperer_num_acc_par_son_contact($_SESSION['donnees-reservation']['contact_acc2']);
-                            $insertionReservationAccompagnateur2 = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur2);
-                        }
+
+                        $insertionReservationAccompagnateur2 = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur2);
                     }
 
                     //Mettre à jour le statut de la chambre est actif à 0
@@ -193,7 +229,7 @@ if (isset($_POST['enregistrer'])) {
                 $message_erreur_global = "Désolé, une erreur s'est produite lors de l'enregistrement de vos informations.";
             }
         } else {
-            // Aucune chambre disponible de type "Solo"
+            // Aucune chambre disponible de type "Triples"
             $message_erreur_global = "Désolé, il n'y a pas de chambre disponible pour le moment.";
         }
     }
