@@ -191,15 +191,16 @@ include './app/commum/header_client.php';
                                                                             }
                                                                             ?>
 
-                                                                            <!-- Bouton pour ajouter un accompagnateur -->
-                                                                            <?php if ($type_chambre !== 'Solo') { ?>
-                                                                                <button type="button" class="btn btn-success" id="ajouter-accompagnateur">Ajouter</button>
-                                                                            <?php } ?>
 
                                                                             <!-- Conteneur pour les nouveaux champs d'accompagnateurs -->
-                                                                            <div id="nouveaux-accompagnateurs">
-
+                                                                            <div id="nouveaux-accompagnateurs-<?php echo $reservation['num_res']; ?>">
                                                                             </div>
+
+
+                                                                            <!-- Bouton pour ajouter un accompagnateur -->
+                                                                            <button type="button" class="btn btn-success ajouter-accompagnateur" data-reservation-id="<?php echo $reservation['num_res']; ?>">
+                                                                                +
+                                                                            </button>
 
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -299,43 +300,33 @@ include './app/commum/header_client.php';
 <!-- Ajoutez cette balise script à la fin de la page -->
 <script>
     $(document).ready(function() {
-        var typeChambre = "<?php echo $type_chambre; ?>";
-        var accompagnateursInfo = JSON.parse($(this).data('accompagnateurs'));
-        var accompagneurChampsMax = 0;
+        $('.ajouter-accompagnateur').click(function() {
+            var reservationId = $(this).data('reservation-id');
+            var nouveauChamp = `
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Nom de l'accompagnateur</label>
+                    <input type="text" name="nom_acc[]" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Contact de l'accompagnateur</label>
+                    <input type="text" name="contact_acc[]" class="form-control">
+                </div>
+            </div>
+        `;
 
-        // Déterminez le nombre maximum de champs d'accompagnateurs en fonction du type de chambre
-        if (typeChambre === 'Doubles') {
-            accompagneurChampsMax = 1; // Pour les chambres doubles, ajoutez un seul accompagnateur
-        } else if (typeChambre === 'Triples') {
-            accompagneurChampsMax = 2; // Pour les chambres triples, ajoutez deux accompagnateurs
-        } else if (typeChambre === 'Suite') {
-            accompagneurChampsMax = 4; // Pour les suites, ajoutez jusqu'à quatre accompagnateurs
-        }
-
-        $('#ajouter-accompagnateur').click(function() {
-            var champCourant = $('#nouveaux-accompagnateurs .row').length;
-
-            // Vérifiez si le nombre maximum de champs d'accompagnateurs a été atteint
-            if (champCourant < accompagneurChampsMax) {
-                var nouveauChamp = `
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label>Nom de l'accompagnateur</label>
-                            <input type="text" name="nouveau_nom_acc[]" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Contact de l'accompagnateur</label>
-                            <input type="text" name="nouveau_contact_acc[]" class="form-control" required>
-                        </div>
-                    </div>
-                `;
-
-                $('#nouveaux-accompagnateurs').append(nouveauChamp);
-            }
+            $('#nouveaux-accompagnateurs-' + reservationId).append(nouveauChamp);
         });
-
-       
+    });
 </script>
+
+<?php
+// Supprimer les variables de session
+unset($_SESSION['donnees-chambre-solo-modifier'], $_SESSION['erreurs-chambre-solo-modifier'], $_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
+
+include './app/commum/footer_client_icm.php';
+
+?>
 
 
 <?php

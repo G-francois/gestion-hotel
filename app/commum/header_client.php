@@ -1,4 +1,5 @@
 <?php
+
 // LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION-SOLO DE L'ADMINISTRATEUR 
 if (isset($_SESSION['donnees-reservation']) && !empty($_SESSION['donnees-reservation'])) {
     $donnees = $_SESSION['donnees-reservation'];
@@ -58,6 +59,7 @@ mettre_a_jour_etat_reservations_accompagnateurs();
 
     <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
+    <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
     <style>
         #hero {
             width: 100%;

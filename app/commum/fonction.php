@@ -2072,8 +2072,13 @@ function recuperer_liste_des_reservations(): array
 }
 
 
-
-
+/**
+ * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation
+ *
+ * @param  mixed $num_res
+ * @param  mixed $numAccompagnateur
+ * @return bool
+ */
 function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur): bool
 {
 	$enregistrer_accompagnateur = false;
@@ -2083,10 +2088,9 @@ function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur
 	$db = connect_db();
 
 	if (!is_null($db)) {
+		$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc, est_actif, est_supprimer, maj_le) VALUES (:num_res, :num_acc, 1, 0, :maj_le)";
 
-		$requette = "UPDATE listes_accompagnateurs_reservation  SET num_res :num_res, num_acc :num_acc, est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
-
-		$inserer_accompagnateur = $db->prepare($requette);
+		$inserer_accompagnateur = $db->prepare($requete);
 
 		$resultat = $inserer_accompagnateur->execute([
 			'num_res' => $num_res,
@@ -2099,54 +2103,6 @@ function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur
 
 	return $enregistrer_accompagnateur;
 }
-
-/**
- * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation.
- *
- * @param int $num_res Le numéro de réservation
- * @param array $accompagnateurs Un tableau contenant les informations des accompagnateurs à mettre à jour
- * @return bool Indique si la mise à jour a réussi ou non.
- */
-function mettre_a_jour_accompagnateurs_reservation($num_res, $accompagnateurs): bool
-{
-	$db = connect_db();
-
-	if (!is_null($db)) {
-
-		foreach ($accompagnateurs as $accompagnateur) {
-			$num_acc = recuperer_num_acc_par_son_contact($accompagnateur["contact_acc"]);
-
-			// Vérifier si l'accompagnateur existe déjà pour cette réservation
-			$requete = "SELECT COUNT(*) AS count FROM listes_accompagnateurs_reservation WHERE num_res = :num_res AND num_acc = :num_acc";
-			$resultat = $db->prepare($requete);
-			$resultat->execute([
-				'num_res' => $num_res,
-				'num_acc' => $num_acc
-			]);
-			$existe_deja = $resultat->fetch(PDO::FETCH_ASSOC)['count'] > 0;
-
-			if ($existe_deja) {
-				// Mettre à jour les informations de l'accompagnateur
-				$requete = "UPDATE listes_accompagnateurs_reservation SET ... WHERE num_res = :num_res AND num_acc = :num_acc";
-			} else {
-
-				// Insérer une nouvelle entrée pour l'accompagnateur
-				$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc) VALUES (:num_res, :num_acc)";
-			}
-
-			$resultat = $db->prepare($requete);
-			$resultat->execute([
-				'num_res' => $num_res,
-				'num_acc' => $num_acc
-			]);
-		}
-
-		return true;
-	}
-
-	return false;
-}
-
 
 
 /**
@@ -2323,6 +2279,8 @@ function supprimer_accompagnateurs_reservation($num_res): bool
 
 	return $suppression_reussie;
 }
+
+
 
 
 /**
