@@ -144,7 +144,7 @@ include './app/commum/header_client.php';
                                 }
                                 ?>
 
-                                <div class="col-md-12 mb-3">
+                                <!-- <div class="col-md-12 mb-3">
                                     <label for="nombre-repas">Nombre de repas :</label>
                                     <select name="repas" id="nombre-repas" class="form-control" onchange="togglerepasFields()">
                                         <option value="0">Veuiller sélectionner le nombre de repas</option>
@@ -154,6 +154,21 @@ include './app/commum/header_client.php';
                                         <option value="4">4 repas</option>
                                     </select>
                                 </div>
+ -->
+
+
+
+                                <!-- Conteneur pour les nouveaux champs d'accompagnateurs -->
+                                <div id="nouveaux-repas-<?php echo $reservation['num_res']; ?>">
+                                
+                            </div>
+
+
+                                <!-- Bouton pour ajouter un accompagnateur -->
+                                <button type="button" class="btn btn-success ajouter-accompagnateur" data-reservation-id="<?php echo $reservation['num_res']; ?>">
+                                    +
+                                </button>
+
 
                                 <div class="row" id="repas-1" style="display: none;">
                                     <!-- Le champs Nom du Repas -->

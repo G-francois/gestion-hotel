@@ -1446,7 +1446,6 @@ function vérifier_email_client_exist_in_db(string $email): bool
 }
 
 
-
 /**
  * Cette fonction permet de récupérer l'id du client grâce a son mail.
  *
@@ -1510,6 +1509,37 @@ function recuperer_client_par_son_num_clt(int $id): array
 	}
 
 	return $client;
+}
+
+
+/**
+ * Cette fonction permet de récupérer le type de chambre lors d'une réservation.
+ *
+ * @param int $num_chambre Le numéro de la chambre.
+ * @return string|bool Le type de chambre ou false si non trouvé.
+ */
+function recuperer_type_chambre($num_chambre)
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete_chambre = 'SELECT lib_typ FROM chambre WHERE num_chambre = :num_chambre';
+
+		$recuperer_chambre = $db->prepare($requete_chambre);
+
+		if ($recuperer_chambre->execute(['num_chambre' => $num_chambre])) {
+
+			$resultat_chambre = $recuperer_chambre->fetch(PDO::FETCH_ASSOC);
+
+			if ($resultat_chambre && isset($resultat_chambre['lib_typ'])) {
+
+				return $resultat_chambre;  // Retourner directement le tableau associatif
+			}
+		}
+	}
+
+	return false;
 }
 
 
@@ -1580,7 +1610,6 @@ function enregistrer_reservation($numClient, $debOcc, $finOcc, $numChambreDispon
 
 	return $enregistrer_reservation;
 }
-
 
 
 /**
@@ -1682,7 +1711,6 @@ function enregistrer_accompagnateur($nom_acc, $contact_acc): bool
 
 	return $enregistrer_accompagnateur;
 }
-
 
 
 /**
@@ -1827,31 +1855,97 @@ function enregistrer_accompagnateur_des_reservations($numReservation, $numAccomp
 
 
 /**
- * Cette fonction permet de récupérer la liste des clients de la base de donnée.
+ * Cette fonction permet de mettre à jour l'état des réservations, des accompagnateurs et des chambres en fonction de la date de fin_occ
  *
- * @return array $liste_client La liste des clients.
+ * @return void
  */
-function recuperer_liste_client(): array
+function mettre_a_jour_etat_reservations_accompagnateurs()
 {
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Récupérer la date et l'heure actuelles
+		$now = date('Y-m-d H:i:s');
+
+		// Mettre à jour l'état des réservations dont la date de fin_occ est dépassée
+		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ < :now';
+		$stmtReservation = $db->prepare($requeteReservation);
+		$stmtReservation->bindParam(':now', $now);
+		$stmtReservation->execute();
+
+		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est dépassée
+		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ < :now)';
+		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
+		$stmtAccompagnateur->bindParam(':now', $now);
+		$stmtAccompagnateur->execute();
+
+		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est dépassée
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		$stmtChambre = $db->prepare($requeteChambre);
+		$stmtChambre->bindParam(':now', $now);
+		$stmtChambre->execute();
+	}
+}
+
+
+/**
+ * Cette fonction permet de récupérer le noms et contacts accompagnateurs
+ *
+ * @param  mixed $num_res
+ * @return array
+ */
+function recuperer_noms_et_contacts_accompagnateurs($num_res): array
+{
+	$db = connect_db();
+	$accompagnateurs_info = [];
+	if (!is_null($db)) {
+		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res et est_supprimer = 0';
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
+		if ($resultat) {
+			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_COLUMN);
+			foreach ($numeros_accompagnateurs as $num_acc) {
+				$info_acc = recuperer_noms_et_contacts_accompagnateurs($num_acc);
+				if ($info_acc) {
+					$accompagnateurs_info[] = $info_acc;
+				}
+			}
+		}
+	}
+	return $accompagnateurs_info;
+}
+
+
+/**
+ * Cette fonction permet de récupérer les informations des accompagnateurs par le numero des accompagnateurs de la base de donnée.
+ *
+ * @param  int $num_acc
+ * @return array
+ */
+function recuperer_info_accompagnateur($num_acc): array
+{
+	$nom_accompagnateur = [];
 
 	$db = connect_db();
 
 	if (!is_null($db)) {
+		$requette = 'SELECT * FROM accompagnateur WHERE num_acc = :num_acc and est_supprimer = 0';
 
-		$requette = 'SELECT * FROM clt';
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
 
-		$verifier_liste_client = $db->prepare($requette);
+		if ($verifier_liste_accompagnateurs->execute([
 
-		$resultat = $verifier_liste_client->execute();
+			'num_acc' => $num_acc
 
-		if ($resultat) {
+		])) {
+			$nom_accompagnateur = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_ASSOC);
+		} else {
 
-			$liste_client = $verifier_liste_client->fetchAll(PDO::FETCH_ASSOC);
+			$nom_accompagnateur = [];
 		}
 	}
-	return $liste_client;
+	return $nom_accompagnateur;
 }
-
 
 
 /**
@@ -1923,98 +2017,6 @@ function recuperer_liste_accompagnateurs($num_res): array
 
 
 /**
- * recuperer_noms_et_contacts_accompagnateurs
- *
- * @param  mixed $num_res
- * @return array
- */
-function recuperer_noms_et_contacts_accompagnateurs($num_res): array
-{
-	$db = connect_db();
-	$accompagnateurs_info = [];
-	if (!is_null($db)) {
-		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res et est_supprimer = 0';
-		$verifier_liste_accompagnateurs = $db->prepare($requette);
-		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
-		if ($resultat) {
-			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_COLUMN);
-			foreach ($numeros_accompagnateurs as $num_acc) {
-				$info_acc = recuperer_noms_et_contacts_accompagnateurs($num_acc);
-				if ($info_acc) {
-					$accompagnateurs_info[] = $info_acc;
-				}
-			}
-		}
-	}
-	return $accompagnateurs_info;
-}
-
-
-
-/**
- * Cette fonction permet de récupérer les informations des accompagnateurs par le numero des accompagnateurs de la base de donnée.
- *
- * @param  int $num_acc
- * @return array
- */
-function recuperer_info_accompagnateur($num_acc): array
-{
-	$nom_accompagnateur = [];
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		$requette = 'SELECT * FROM accompagnateur WHERE num_acc = :num_acc and est_supprimer = 0';
-
-		$verifier_liste_accompagnateurs = $db->prepare($requette);
-
-		if ($verifier_liste_accompagnateurs->execute([
-
-			'num_acc' => $num_acc
-
-		])) {
-			$nom_accompagnateur = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_ASSOC);
-		} else {
-
-			$nom_accompagnateur = [];
-		}
-	}
-	return $nom_accompagnateur;
-}
-
-
-/**
- * Cette fonction permet de récupérer le type de chambre lors d'une réservation.
- *
- * @param int $num_chambre Le numéro de la chambre.
- * @return string|bool Le type de chambre ou false si non trouvé.
- */
-function recuperer_type_chambre($num_chambre)
-{
-	$db = connect_db();
-
-	if (!is_null($db)) {
-
-		$requete_chambre = 'SELECT lib_typ FROM chambre WHERE num_chambre = :num_chambre';
-
-		$recuperer_chambre = $db->prepare($requete_chambre);
-
-		if ($recuperer_chambre->execute(['num_chambre' => $num_chambre])) {
-
-			$resultat_chambre = $recuperer_chambre->fetch(PDO::FETCH_ASSOC);
-
-			if ($resultat_chambre && isset($resultat_chambre['lib_typ'])) {
-
-				return $resultat_chambre;  // Retourner directement le tableau associatif
-			}
-		}
-	}
-
-	return false;
-}
-
-
-/**
  * Cette fonction permet de récupérer le type de chambre pour une réservation.
  *
  * @param int $num_chambre Le numéro de la chambre.
@@ -2042,139 +2044,6 @@ function recuperer_type_chambre_pour_affichage($num_chambre)
 	}
 
 	return false;
-}
-
-
-/**
- * Cette fonction permet de récupérer la liste des reservations de la base de donnée.
- *
- * @return array $liste_des_reservations La liste des clients.
- */
-function recuperer_liste_des_reservations(): array
-{
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-
-		$requette = 'SELECT * FROM reservations';
-
-		$verifier_liste_reservations = $db->prepare($requette);
-
-		$resultat = $verifier_liste_reservations->execute();
-
-		if ($resultat) {
-
-			$liste_des_reservations = $verifier_liste_reservations->fetchAll(PDO::FETCH_ASSOC);
-		}
-	}
-	return $liste_des_reservations;
-}
-
-
-/**
- * Met à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation
- *
- * @param  mixed $num_res
- * @param  mixed $numAccompagnateur
- * @return bool
- */
-function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur): bool
-{
-	$enregistrer_accompagnateur = false;
-
-	$date = date("Y-m-d H:i:s");
-
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc, est_actif, est_supprimer, maj_le) VALUES (:num_res, :num_acc, 1, 0, :maj_le)";
-
-		$inserer_accompagnateur = $db->prepare($requete);
-
-		$resultat = $inserer_accompagnateur->execute([
-			'num_res' => $num_res,
-			'num_acc' => $numAccompagnateur,
-			'maj_le' => $date
-		]);
-
-		$enregistrer_accompagnateur = $resultat;
-	}
-
-	return $enregistrer_accompagnateur;
-}
-
-
-/**
- * Cette fonction permet de supprimer une reservation
- *
- * @param  int $num_rs
- * @return bool
- */
-function supprimer_reservation(int $num_res): bool
-{
-
-	$supprimer_reservation = false;
-
-	$date = date("Y-m-d H:i:s");
-
-	$db = connect_db();
-
-	if (is_object($db)) {
-
-		$request = "UPDATE reservations SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
-
-		$request_prepare = $db->prepare($request);
-
-		$request_execution = $request_prepare->execute(array(
-			'num_res' => $num_res,
-			'est_actif' => 0,
-			'est_supprimer' => 1,
-			'maj_le' => $date
-		));
-
-		if ($request_execution) {
-
-			$supprimer_reservation = true;
-		}
-	}
-
-	return $supprimer_reservation;
-}
-
-
-
-/**
- * Fonction pour mettre à jour l'état des réservations, des accompagnateurs et des chambres en fonction de la date de fin_occ
- *
- * @return void
- */
-function mettre_a_jour_etat_reservations_accompagnateurs()
-{
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		// Récupérer la date et l'heure actuelles
-		$now = date('Y-m-d H:i:s');
-
-		// Mettre à jour l'état des réservations dont la date de fin_occ est dépassée
-		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ < :now';
-		$stmtReservation = $db->prepare($requeteReservation);
-		$stmtReservation->bindParam(':now', $now);
-		$stmtReservation->execute();
-
-		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est dépassée
-		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ < :now)';
-		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
-		$stmtAccompagnateur->bindParam(':now', $now);
-		$stmtAccompagnateur->execute();
-
-		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est dépassée
-		$requeteChambre = 'UPDATE chambre SET est_actif = 1 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
-		$stmtChambre = $db->prepare($requeteChambre);
-		$stmtChambre->bindParam(':now', $now);
-		$stmtChambre->execute();
-	}
 }
 
 
@@ -2250,6 +2119,39 @@ function modifier_reservation_chambre($num_chambre, $num_res, $debOcc, $finOcc, 
 
 
 /**
+ * Cette fonction permet de mettre à jour les informations des accompagnateurs d'une réservation dans la table listes_accompagnateurs_reservation
+ *
+ * @param  mixed $num_res
+ * @param  mixed $numAccompagnateur
+ * @return bool
+ */
+function mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur): bool
+{
+	$enregistrer_accompagnateur = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = "INSERT INTO listes_accompagnateurs_reservation (num_res, num_acc, est_actif, est_supprimer, maj_le) VALUES (:num_res, :num_acc, 1, 0, :maj_le)";
+
+		$inserer_accompagnateur = $db->prepare($requete);
+
+		$resultat = $inserer_accompagnateur->execute([
+			'num_res' => $num_res,
+			'num_acc' => $numAccompagnateur,
+			'maj_le' => $date
+		]);
+
+		$enregistrer_accompagnateur = $resultat;
+	}
+
+	return $enregistrer_accompagnateur;
+}
+
+
+/**
  * Supprime les entrées d'accompagnateurs associées à une réservation dans la table listes_accompagnateurs_reservation.
  *
  * @param int $num_res Le numéro de réservation.
@@ -2281,7 +2183,140 @@ function supprimer_accompagnateurs_reservation($num_res): bool
 }
 
 
+/**
+ * Cette fonction permet de supprimer une reservation
+ *
+ * @param  int $num_rs
+ * @return bool
+ */
+function supprimer_reservation(int $num_res): bool
+{
 
+	$supprimer_reservation = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE reservations SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_res' => $num_res,
+			'est_actif' => 0,
+			'est_supprimer' => 1,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$supprimer_reservation = true;
+		}
+	}
+
+	return $supprimer_reservation;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Cette fonction permet de récupérer la liste des clients de la base de donnée.
+ *
+ * @return array $liste_client La liste des clients.
+ */
+function recuperer_liste_client(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM clt';
+
+		$verifier_liste_client = $db->prepare($requette);
+
+		$resultat = $verifier_liste_client->execute();
+
+		if ($resultat) {
+
+			$liste_client = $verifier_liste_client->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_client;
+}
+
+/**
+ * Cette fonction permet de récupérer la liste des reservations de la base de donnée.
+ *
+ * @return array $liste_des_reservations La liste des clients.
+ */
+function recuperer_liste_des_reservations(): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM reservations';
+
+		$verifier_liste_reservations = $db->prepare($requette);
+
+		$resultat = $verifier_liste_reservations->execute();
+
+		if ($resultat) {
+
+			$liste_des_reservations = $verifier_liste_reservations->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_des_reservations;
+}
+
+
+
+
+
+
+
+
+
+/**
+ * Cette fonction permet de récupérer la liste des repas de la base de donnée.
+ *
+ * @return array $liste_repas La liste des repas.
+ */
+function recuperer_nom_prix_repas()
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'SELECT cod_repas, nom_repas, pu_repas FROM repas';
+		$verifier_liste_repas = $db->prepare($requete);
+
+		$resultat = $verifier_liste_repas->execute();
+
+		$liste_repas = array();
+		if ($resultat) {
+			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+
+	return $liste_repas;
+}
 
 /**
  * Cette fonction permet de supprimer une commande
@@ -2319,33 +2354,6 @@ function supprimer_commande(int $num_cmd): bool
 
 	return $supprimer_commande;
 }
-
-
-
-/**
- * Cette fonction permet de récupérer la liste des repas de la base de donnée.
- *
- * @return array $liste_repas La liste des repas.
- */
-function recuperer_nom_prix_repas()
-{
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		$requete = 'SELECT cod_repas, nom_repas, pu_repas FROM repas';
-		$verifier_liste_repas = $db->prepare($requete);
-
-		$resultat = $verifier_liste_repas->execute();
-
-		$liste_repas = array();
-		if ($resultat) {
-			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
-		}
-	}
-
-	return $liste_repas;
-}
-
 
 
 /* <?php
