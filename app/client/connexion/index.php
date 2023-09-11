@@ -1,8 +1,11 @@
+
 <?php
-include './app/commum/header_client_icm.php'
+$include_icm_header = true;
+include('./app/commum/header_.php');
 ?>
 
-<div class="container" style="margin-top: 70px;">
+
+<div class="container" style="margin-top: 70px; margin-bottom: 70px;">
     <div class="row justify-content-center;" style="color:black; justify-content:center;">
 
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -100,7 +103,7 @@ include './app/commum/header_client_icm.php'
 <?php
 session_destroy();
 ?>
-
 <?php
-include './app/commum/footer_client_icm.php'
+$include_icm_footer = true;
+include('./app/commum/footer_.php');
 ?>

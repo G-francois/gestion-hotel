@@ -1,6 +1,7 @@
 <?php
 
-include './app/commum/header_client.php'
+$include_client_header = true;
+include('./app/commum/header_.php');
 
 ?>
 
@@ -307,7 +308,6 @@ unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESS
 
 
 <?php
-
-include './app/commum/footer_client_icm.php';
-
+$include_icm_footer = true;
+include('./app/commum/footer_.php');
 ?>

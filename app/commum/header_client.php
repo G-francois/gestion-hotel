@@ -9,6 +9,14 @@ if (isset($_SESSION['erreurs-reservation']) && !empty($_SESSION['erreurs-reserva
     $erreurs = $_SESSION['erreurs-reservation'];
 }
 
+// LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION-SOLO DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnees-commande']) && !empty($_SESSION['donnees-commande'])) {
+    $donnees = $_SESSION['donnees-commande'];
+}
+
+if (isset($_SESSION['erreurs-commande']) && !empty($_SESSION['erreurs-commande'])) {
+    $erreurs = $_SESSION['erreurs-commande'];
+}
 
 // Appeler la fonction pour mettre à jour les états
 mettre_a_jour_etat_reservations_accompagnateurs();
@@ -35,7 +43,7 @@ mettre_a_jour_etat_reservations_accompagnateurs();
 
     <!-- Google Fonts -->
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" /> -->
 
     <!-- outils CSS Files -->
 
@@ -60,6 +68,7 @@ mettre_a_jour_etat_reservations_accompagnateurs();
     <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
     <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
+
     <style>
         #hero {
             width: 100%;
@@ -157,7 +166,7 @@ mettre_a_jour_etat_reservations_accompagnateurs();
                             </div>
                         </div> -->
 
-                        <div id="notification-container" class="notification-container">
+                        <!-- <div id="notification-container" class="notification-container">
                             <div class="notification-content d-flex">
                                 <span class="notification-message">Profitez d'un un cocktail de bienvenue pour vous <br>
                                     laissez imprégner du lieu. <br>
@@ -171,7 +180,7 @@ mettre_a_jour_etat_reservations_accompagnateurs();
                                 </span>
 
                             </div>
-                        </div>
+                        </div> -->
 
 
 
@@ -276,6 +285,3 @@ mettre_a_jour_etat_reservations_accompagnateurs();
     </header>
     <!-- End Header -->
 
-    </head>
-
-    <body>

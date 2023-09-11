@@ -100,7 +100,7 @@
 <script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
+<!-- <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script> -->
 
 
 <!-- Page level plugins -->
@@ -109,9 +109,9 @@
 <script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
+<!-- <script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
 <script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
-<script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
+<script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script> -->
 
 
 
@@ -127,7 +127,7 @@
 
 <script src="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.js"></script>
 
-<script src="<?= PATH_PROJECT ?>public/outils/php-email-form/validate.js"></script>
+<!-- <script src="<?= PATH_PROJECT ?>public/outils/php-email-form/validate.js"></script> -->
 
 <!-- Template Main JS File -->
 
@@ -139,7 +139,7 @@
 
 <script src="<?= PATH_PROJECT ?>public/js/plugins.js"></script>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 
 <script src="<?= PATH_PROJECT ?>public/js/init.js"></script>
 

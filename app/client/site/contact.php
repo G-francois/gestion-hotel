@@ -1,7 +1,9 @@
 <?php
-include './app/commum/header_client.php'
-?>
 
+$include_client_header = true;
+include('./app/commum/header_.php');
+
+?>
 
 <!-- ======= Contact Section ======= -->
 <section id="contact" class="contact mt-5">
@@ -81,8 +83,7 @@ include './app/commum/header_client.php'
   </div>
 </section>
 <!-- End Contact Section -->
+
 <?php
-
-include './app/commum/footer_client.php'
-
+include('./app/commum/footer_.php');
 ?>

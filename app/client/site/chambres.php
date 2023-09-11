@@ -1,5 +1,8 @@
 <?php
-include './app/commum/header_client.php'
+
+$include_client_header = true;
+include('./app/commum/header_.php');
+
 ?>
 
 
@@ -311,6 +314,6 @@ include './app/commum/header_client.php'
 
 <?php
 
-include './app/commum/footer_client.php'
+include('./app/commum/footer_.php');
 
 ?>

@@ -1,10 +1,12 @@
 <?php
-include './app/commum/header_client_icm.php'
+$include_icm_header = true;
+include('./app/commum/header_.php');
 ?>
+
 
 <div class="container" style="color: black;">
 
-	<div class="card o-hidden border-0 shadow-lg" style="margin-top: 5rem;">
+	<div class="card o-hidden border-0 shadow-lg" style="margin-top: 5rem; margin-bottom: 5rem;">
 		<div class="card-body p-0">
 			<!-- Nested Row within Card Body -->
 			<div class="row">
@@ -173,5 +175,6 @@ include './app/commum/header_client_icm.php'
 </div>
 
 <?php
-include './app/commum/footer_client_icm.php';
+$include_icm_footer = true;
+include('./app/commum/footer_.php');
 ?>

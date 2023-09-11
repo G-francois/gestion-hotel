@@ -174,7 +174,9 @@ if (isset($_POST['enregistrer'])) {
 
                     //recupérer le numero de réservation
                     $numReservation = recuperer_num_res_par_num_chambre($numChambreDisponible);
+
                     if (!empty($_POST["nom_acc"]) && !empty($_POST["contact_acc"])) {
+                        
                         $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);
                     }
 

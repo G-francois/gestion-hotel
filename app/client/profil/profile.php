@@ -140,8 +140,21 @@ if (!check_if_user_connected_client()) {
     }
 
     .btn-primary {
-      background-color: black;
-      border-color: black;
+      --bs-btn-color: #fff;
+      --bs-btn-bg: #013534;
+      --bs-btn-border-color: ##1a1814;
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: #9d6b15;
+      --bs-btn-hover-border-color: ##1a1814
+    }
+
+    .btn-danger {
+      --bs-btn-color: #fff;
+      --bs-btn-bg: #3b070c;
+      --bs-btn-border-color: #3b070c;
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: #b30617;
+      --bs-btn-hover-border-color: #b30617;
     }
 
     .card {
@@ -314,7 +327,7 @@ if (!check_if_user_connected_client()) {
 
                   <!-- maj_photo Form -->
                   <div class="modal-footer text-center col-sm-3" style="justify-content: center; margin-top: 31px;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal0" style="font-size: revert; padding: 9px;">Mettre à jour</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal0" style="font-size: revert; padding: 9px;">Modifier</button>
                     <div class="col-md-8 col-lg-12">
                       <div class="text-center" style="color: #070b3a;">
                         <!-- Modal -->
@@ -702,62 +715,9 @@ if (!check_if_user_connected_client()) {
 
   <?php
   unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
+
+  $include_icm_footer = true;
+  include('./app/commum/footer_.php');
   ?>
 
 
-
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
-  <script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="<?= PATH_PROJECT ?>public/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
-
-
-  <!-- Page level plugins -->
-  <script src="<?= PATH_PROJECT ?>public/vendor/chart.js/Chart.min.js"></script>
-  <script src="<?= PATH_PROJECT ?>public/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="<?= PATH_PROJECT ?>public/js/demo/chart-area-demo.js"></script>
-  <script src="<?= PATH_PROJECT ?>public/js/demo/chart-pie-demo.js"></script>
-  <script src="<?= PATH_PROJECT ?>public/js/demo/datatables-demo.js"></script>
-
-
-
-  <!-- outils JS Files -->
-
-  <script src="<?= PATH_PROJECT ?>public/outils/aos/aos.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/outils/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/outils/glightbox/js/glightbox.min.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/outils/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/outils/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-
-  <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/js/jquery.js"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/js/bootstrap.min.js"></script>
-
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
-  <script src="<?= PATH_PROJECT ?>public/js/init.js"></script>
-
-
-
-</body>
-
-</html>

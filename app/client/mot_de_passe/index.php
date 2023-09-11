@@ -1,5 +1,6 @@
 <?php
-include './app/commum/header_client_icm.php'
+$include_icm_header = true;
+include('./app/commum/header_.php');
 ?>
 
 <div class="container" style="margin-top: 145px;">
@@ -87,5 +88,6 @@ session_destroy();
 ?>
 
 <?php
-include './app/commum/footer_client_icm.php';
+$include_icm_footer = true;
+include('./app/commum/footer_.php');
 ?>
