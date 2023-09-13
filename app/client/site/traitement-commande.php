@@ -40,7 +40,6 @@ if (isset($_POST['enregistrer'])) {
     } else {
         $erreurs["pu_repas"] = "Le champ prix du repas est requis. Veuillez le renseigner.";
     }
-// die(var_dump($donnees["pu_repas"]));
 
     // Si aucune erreur n'a été détectée
     if (empty($erreurs)) {
@@ -55,26 +54,31 @@ if (isset($_POST['enregistrer'])) {
 
             // Vérifier si la chambre est inactive
             if (verifier_chambre_supprimer($numChambre)) {
-               
+
                 // Calculate the total price for all selected meals
                 $prix_total = 0;
                 foreach ($donnees["pu_repas"] as $puRepas) {
                     $prix_total += $puRepas;
                 }
-                
-                // die(var_dump($prix_total));
 
                 // Ajouter une commande avec le montant total
                 $insertionCommande = enregistrer_une_commande_avec_prix_total($num_res, $prix_total);
 
-                // die(var_dump($insertionCommande));
-
                 // Récupérer le numéro de commande
                 $numCommande = recuperer_num_cmd_par_num_res($num_res);
 
-                // Enregistrer la quantité de repas
-                $codeRepas = $donnees["nom_repas"];
-                $insertionCommandeQuantite = enregistrer_quantite_repas($numCommande, $numChambre, $codeRepas);
+                // die(var_dump($numCommande));
+
+                // Enregistrer la quantité de repas pour chaque repas sélectionné
+                foreach ($donnees["nom_repas"] as $codeRepas) {
+                    $insertionCommandeQuantite = enregistrer_quantite_repas($codeRepas, $numCommande, $numChambre);
+
+                    // Vérifiez si l'insertion a échoué et gérez les erreurs si nécessaire
+                    if (!$insertionCommandeQuantite) {
+                        $message_erreur_global = "Erreur lors de l'enregistrement de(s) repas.";
+                        break; // Sortez de la boucle si une erreur se produit pour un repas
+                    }
+                }
 
                 // La commande a été effectuée avec succès
                 $message_success_global = "Votre commande a été effectuée avec succès.";

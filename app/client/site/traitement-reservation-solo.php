@@ -152,6 +152,7 @@ if (isset($_POST['enregistrer'])) {
                 // Vérifier si l'insertion des informations de réservation a réussi
                 if ($resultatInsertionReservation) {
                     $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
+                    
                     // La réservation a été effectuée avec succès
                     $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible;
                 } else {

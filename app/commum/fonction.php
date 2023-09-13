@@ -1864,7 +1864,7 @@ function enregistrer_accompagnateur_des_reservations($numReservation, $numAccomp
  *
  * @return void
  */
-function mettre_a_jour_etat_reservations_accompagnateurs()
+/* function mettre_a_jour_etat_reservations_accompagnateurs()
 {
 	$db = connect_db();
 
@@ -1872,26 +1872,57 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 		// Récupérer la date et l'heure actuelles
 		$now = date('Y-m-d H:i:s');
 
-		// Mettre à jour l'état des réservations dont la date de fin_occ est dépassée
-		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ < :now';
+		// Mettre à jour l'état des réservations dont la date de fin_occ est passée
+		$requeteReservation = 'UPDATE reservations SET est_actif = 0, est_supprimer = 1 WHERE fin_occ <= :now';
 		$stmtReservation = $db->prepare($requeteReservation);
 		$stmtReservation->bindParam(':now', $now);
 		$stmtReservation->execute();
 
-		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est dépassée
-		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ < :now)';
+		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est passée
+		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ <= :now)';
 		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
 		$stmtAccompagnateur->bindParam(':now', $now);
 		$stmtAccompagnateur->execute();
 
-		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est dépassée
-		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ <= :now)';
 		$stmtChambre = $db->prepare($requeteChambre);
 		$stmtChambre->bindParam(':now', $now);
 		$stmtChambre->execute();
 	}
-}
+} */
 
+/**
+ * Cette fonction permet de mettre à jour l'état des réservations, des accompagnateurs et des chambres
+ * en fonction de la date de fin_occ fournie par l'utilisateur.
+ *
+ * @param string $dateLimite La date limite fournie par l'utilisateur au format 'Y-m-d H:i:s'.
+ * @return void
+ */
+/* function mettre_a_jour_etat_reservations_accompagnateurs($dateLimite)
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Mettre à jour l'état des réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
+		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ > :dateLimite';
+		$stmtReservation = $db->prepare($requeteReservation);
+		$stmtReservation->bindParam(':dateLimite', $dateLimite);
+		$stmtReservation->execute();
+
+		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
+		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ > :dateLimite)';
+		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
+		$stmtAccompagnateur->bindParam(':dateLimite', $dateLimite);
+		$stmtAccompagnateur->execute();
+
+		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ > :dateLimite)';
+		$stmtChambre = $db->prepare($requeteChambre);
+		$stmtChambre->bindParam(':dateLimite', $dateLimite);
+		$stmtChambre->execute();
+	}
+} */
 
 /**
  * Cette fonction permet de récupérer le noms et contacts accompagnateurs
@@ -2236,13 +2267,17 @@ function recuperer_nom_prix_repas()
 	$db = connect_db();
 
 	if (!is_null($db)) {
-		$requete = 'SELECT cod_repas, nom_repas, pu_repas FROM repas';
+
+		$requete = 'SELECT cod_repas, nom_repas, pu_repas FROM repas WHERE est_actif = 1';
+
 		$verifier_liste_repas = $db->prepare($requete);
 
 		$resultat = $verifier_liste_repas->execute();
 
 		$liste_repas = array();
+
 		if ($resultat) {
+
 			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
 		}
 	}
@@ -2264,7 +2299,7 @@ function verifier_appartenance_reservation($numRes, $clientConnecteID)
 
 	if (!is_null($db)) {
 		// Préparez la requête SQL pour vérifier l'appartenance
-		$requete = "SELECT COUNT(*) AS count FROM reservations WHERE num_res = :num_res AND num_clt = :num_clt";
+		$requete = "SELECT COUNT(*) AS count FROM reservations WHERE num_res = :num_res AND num_clt = :num_clt AND est_supprimer = :est_supprimer";
 
 		// Préparez la requête
 		$request_prepare = $db->prepare($requete);
@@ -2272,7 +2307,8 @@ function verifier_appartenance_reservation($numRes, $clientConnecteID)
 		// Exécutez la requête en passant les paramètres
 		$resultat = $request_prepare->execute([
 			'num_res' => $numRes,
-			'num_clt' => $clientConnecteID
+			'num_clt' => $clientConnecteID,
+			'est_supprimer' => 0
 		]);
 
 		// Vérifiez le résultat de la requête
@@ -2306,11 +2342,14 @@ function verifier_existence_num_res($numReservation): bool
 
 	if (!is_null($db)) {
 
-		$requete = 'SELECT COUNT(*) as count FROM reservations WHERE num_res = :num_res';
+		$requete = 'SELECT COUNT(*) as count FROM reservations WHERE num_res = :num_res and est_supprimer = :est_supprimer';
 
 		$request_prepare = $db->prepare($requete);
 
-		if ($request_prepare->execute(['num_res' => $numReservation])) {
+		if ($request_prepare->execute([
+			'num_res' => $numReservation,
+			'est_supprimer' => 0
+		])) {
 
 			$resultat = $request_prepare->fetch(PDO::FETCH_ASSOC);
 
@@ -2434,12 +2473,10 @@ function enregistrer_une_commande_avec_prix_total($num_res, $prix_total): bool
 function recuperer_num_cmd_par_num_res($num_res): ?int
 {
 	$numCommande = null;
-
-	$db = connect_db(); // Assurez-vous que cette fonction est définie pour établir la connexion à la base de données.
+	$db = connect_db();
 
 	if (!is_null($db)) {
-
-		$requete = 'SELECT num_cmd FROM commande WHERE num_res = :num_res';
+		$requete = 'SELECT num_cmd FROM commande WHERE num_res = :num_res ORDER BY creer_le DESC LIMIT 1';
 
 		$request_prepare = $db->prepare($requete);
 
@@ -2450,6 +2487,7 @@ function recuperer_num_cmd_par_num_res($num_res): ?int
 			if ($resultat && isset($resultat['num_cmd'])) {
 
 				$numCommande = $resultat['num_cmd'];
+
 			}
 		}
 	}
@@ -2466,32 +2504,139 @@ function recuperer_num_cmd_par_num_res($num_res): ?int
  * @param  mixed $codeRepas
  * @return bool
  */
-function enregistrer_quantite_repas($numCommande, $numChambre, $codeRepas): bool
+function enregistrer_quantite_repas($codeRepas, $numCommande, $numChambre): bool
 {
 	$enregistrerQuantite = false;
-
-	$db = connect_db(); // Assurez-vous que cette fonction est définie pour établir la connexion à la base de données.
+	$db = connect_db();
 
 	if (!is_null($db)) {
-		$requete = 'INSERT INTO quantite (cod_repas, num_cmd, num_chambre ) VALUES (:cod_repas, :num_cmd, :num_chambre)';
-
+		$requete = 'INSERT INTO quantite (cod_repas, num_cmd, num_chambre) VALUES (:cod_repas, :num_cmd, :num_chambre)';
 		$insererQuantite = $db->prepare($requete);
 
-		$resultat = $insererQuantite->execute([
-			'cod_repas' => $codeRepas,
-			'num_cmd' => $numCommande,
-			'num_chambre' => $numChambre
+		if ($insererQuantite) {
+			$resultat = $insererQuantite->execute([
+				'cod_repas' => $codeRepas,
+				'num_cmd' => $numCommande,
+				'num_chambre' => $numChambre
+			]);
 
-		]);
-
-		$enregistrerQuantite = $resultat;
+			if ($resultat) {
+				$enregistrerQuantite = true;
+			} else {
+				// En cas d'erreur lors de l'exécution de la requête, affichez les informations sur l'erreur
+				$errorInfo = $insererQuantite->errorInfo();
+				die("Erreur lors de l'insertion dans la table 'quantite': " . $errorInfo[2]);
+			}
+		} else {
+			// En cas d'erreur lors de la préparation de la requête
+			die("Erreur lors de la préparation de la requête 'INSERT'");
+		}
 	}
 
 	return $enregistrerQuantite;
 }
 
 
+/**
+ * Cette fonction récupère la liste des commandes pour un client connecté.
+ *
+ * @param int $clientConnecteID L'ID du client connecté.
+ * @return array|false Un tableau contenant les commandes ou false en cas d'erreur.
+ */
+function recuperer_liste_commandes_client($clientConnecteID)
+{
+	$db = connect_db();
 
+	if (!is_null($db)) {
+		// Requête SQL pour récupérer les commandes du client connecté
+		$requete = " SELECT c.num_cmd, c.num_res, c.prix_total, c.creer_le FROM commande c JOIN reservations r ON c.num_res = r.num_res WHERE r.num_clt = :num_clt AND c.est_actif = 1";
+
+		// Préparez la requête
+		$request_prepare = $db->prepare($requete);
+
+		// Exécutez la requête en passant les paramètres
+		$resultat = $request_prepare->execute([
+			'num_clt' => $clientConnecteID
+		]);
+
+		// Vérifiez le résultat de la requête
+		if ($resultat) {
+			// Récupérez les commandes sous forme de tableau associatif
+			$commandes = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+			return $commandes;
+		}
+	}
+
+	// En cas d'erreur ou d'absence de commandes, retournez false
+	return false;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des repas par le numero de commande de la base de donnée.
+ *
+ * @return array $liste_repas la liste_repas
+ */
+function recuperer_liste_repas_par_commande($num_cmd): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM quantite WHERE num_cmd = :num_cmd and est_actif = 1 and est_supprimer = 0';
+
+		$verifier_liste_repas = $db->prepare($requette);
+
+		$resultat = $verifier_liste_repas->execute([
+			'num_cmd' => $num_cmd
+		]);
+
+		if ($resultat) {
+
+			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
+
+			// (var_dump($liste_repas));
+		}
+	}
+	return $liste_repas;
+}
+
+
+/**
+ * Cette fonction permet de récupérer les informations des repas par leur code de repas de la base de données.
+ *
+ * @param  int $cod_repas
+ * @return array|null
+ */
+function recuperer_info_repas($cod_repas): ?array
+{
+	$nom_repas = null; // Initialisez à null au lieu d'un tableau vide
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas and est_supprimer = 0';
+
+		$verifier_liste_repas = $db->prepare($requette);
+
+		if ($verifier_liste_repas->execute([
+
+			'cod_repas' => $cod_repas
+
+		])) {
+
+			$nom_repas = $verifier_liste_repas->fetch(PDO::FETCH_ASSOC);
+
+			// Vérifiez si la requête a renvoyé des résultats, sinon retournez null
+			if (!$nom_repas) {
+				$nom_repas = null;
+			}
+		}
+	}
+	return $nom_repas;
+}
 
 
 /**
@@ -2511,12 +2656,12 @@ function supprimer_commande(int $num_cmd): bool
 
 	if (is_object($db)) {
 
-		$request = "UPDATE commande SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_res= :num_res";
+		$request = "UPDATE commande SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_cmd= :num_cmd";
 
 		$request_prepare = $db->prepare($request);
 
 		$request_execution = $request_prepare->execute(array(
-			'num_res' => $num_cmd,
+			'num_cmd' => $num_cmd,
 			'est_actif' => 0,
 			'est_supprimer' => 1,
 			'maj_le' => $date

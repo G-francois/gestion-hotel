@@ -200,7 +200,7 @@ include('./app/commum/header_.php');
                 <div class="row" id="repas-${compteurRepas}">
                     <div class="col-md-6 mb-3">
                         <label for="nom_repas-${compteurRepas}">Nom du Repas : <span class="text-danger">(*)</span></label>
-                        <select class="form-control nom_repas" id="nom_repas-${compteurRepas}" name="nom_repas-${compteurRepas}">
+                        <select class="form-control nom_repas" id="nom_repas-${compteurRepas}" name="nom_repas[]-${compteurRepas}">
                             <option value="">Sélectionnez un repas</option>
                             <?php
                             $liste_repas = recuperer_nom_prix_repas();

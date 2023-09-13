@@ -1,5 +1,3 @@
-
-
 <?php
 if (!check_if_user_connected_client()) {
     header('location: ' . PATH_PROJECT . 'client/connexion/index');
@@ -59,15 +57,15 @@ include('./app/commum/header_.php');
                 // Vérifiez s'il y a des réservations
                 if (!empty($liste_reservations)) {
                 ?>
-                    <div class="form-check">
+                    <!-- <div class="form-check">
                         <input type="checkbox" id="selectAllCheckbox">
                         <label class="form-check-label" for="selectAllCheckbox">Tout Sélectionner</label>
-                    </div>
+                    </div> -->
 
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
                         <thead>
                             <tr>
-                                <th scope="col">Sélection</th> <!-- Nouvelle colonne pour la sélection -->
+                                <!-- <th scope="col">Sélection</th> Nouvelle colonne pour la sélection -->
                                 <th scope="col">N° de Réservation</th>
                                 <th scope="col">Date & Heure</th>
                                 <th scope="col">Nom du Client</th>
@@ -98,7 +96,7 @@ include('./app/commum/header_.php');
                                 }
                             ?>
                                 <tr>
-                                    <td><input type="checkbox" name="selection[]" value="<?= $reservation['num_res']; ?>"></td> <!-- Case à cocher pour la sélection -->
+                                    <!-- <td><input type="checkbox" name="selection[]" value="<?= $reservation['num_res']; ?>"></td> Case à cocher pour la sélection -->
                                     <td><?php echo $reservation['num_res']; ?></td>
                                     <td><?php echo $reservation['creer_le']; ?></td>
                                     <td><?php echo $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?></td>
@@ -199,7 +197,7 @@ include('./app/commum/header_.php');
                                                                                                 <label for="modification-nom_acc">
                                                                                                     Nom de l'accompagnateur:
                                                                                                 </label>
-                                                                                                <input type="text" name="nom_acc[]" id="modification-nom_acc" class="form-control" value="<?= !empty($info['nom_acc']) ? $info['nom_acc'] : '' ?>">
+                                                                                                <input type="text" name="nom_acc[]" id="modification-nom_acc" class="form-control" value="<?= !empty($info['nom_acc']) ? $info['nom_acc'] : '' ?>" required>
                                                                                             </div>
 
                                                                                             <!-- Le champs contact_acc -->
@@ -207,7 +205,7 @@ include('./app/commum/header_.php');
                                                                                                 <label for="modification-contact_acc">
                                                                                                     Contact de l'accompagnateur:
                                                                                                 </label>
-                                                                                                <input type="text" name="contact_acc[]" id="modification-contact_acc" class="form-control" value="<?= !empty($info['contact']) ? $info['contact'] : '' ?>">
+                                                                                                <input type="text" name="contact_acc[]" id="modification-contact_acc" class="form-control" value="<?= !empty($info['contact']) ? $info['contact'] : '' ?>" required>
                                                                                             </div>
                                                                                         </div>
                                                                                 <?php
@@ -225,6 +223,13 @@ include('./app/commum/header_.php');
                                                                                 <button type="button" class="btn btn-success ajouter-accompagnateur" data-reservation-id="<?php echo $reservation['num_res']; ?>">
                                                                                     +
                                                                                 </button>
+
+                                                                                <!-- Champ de saisie de mot de passe -->
+                                                                                <div class="form-group">
+                                                                                    <label for="passwordImput">Mot de passe :</label>
+                                                                                    <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Veuillez entrer votre mot de passe" required>
+                                                                                </div>
+
 
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -310,7 +315,7 @@ include('./app/commum/header_.php');
 <!-- FIN -->
 
 
-<!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection -->
+<!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection
 <script>
     $(document).ready(function() {
         // Gérez la sélection/désélection de toutes les cases à cocher lorsque la case à cocher globale est cliquée
@@ -319,7 +324,7 @@ include('./app/commum/header_.php');
             $('input[name="selection[]"]').prop('checked', isChecked);
         });
     });
-</script>
+</script> -->
 
 
 <script>
@@ -354,23 +359,35 @@ include('./app/commum/header_.php');
         $('.ajouter-accompagnateur').click(function() {
             var reservationId = $(this).data('reservation-id');
             var nouveauChamp = `
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label>Nom de l'accompagnateur</label>
-                    <input type="text" name="nom_acc[]" class="form-control">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Contact de l'accompagnateur</label>
-                    <input type="text" name="contact_acc[]" class="form-control">
-                </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Nom de l'accompagnateur</label>
+                <input type="text" name="nom_acc[]" class="form-control" required>
             </div>
-        `;
+            <div class="col-md-6 mb-3">
+                <label>Contact de l'accompagnateur</label>
+                <input type="text" name="contact_acc[]" class="form-control" required>
+            </div>
+        </div>
+    `;
 
             $('#nouveaux-accompagnateurs-' + reservationId).append(nouveauChamp);
+
+            // Ajoutez une validation pour le champ "Contact de l'accompagnateur" ici
+            $('#nouveaux-accompagnateurs-' + reservationId + ' input[name="contact_acc[]"]').on('input', function() {
+                var contactAcc = $(this).val();
+
+                // Utilisez une expression régulière pour vérifier si contact_acc contient uniquement des nombres
+                var numbersOnlyRegex = /^[0-9]+$/;
+
+                if (!numbersOnlyRegex.test(contactAcc)) {
+                    alert('Le champ Contact de l\'accompagnateur doit contenir uniquement des nombres.');
+                    $(this).val(''); // Effacez la saisie incorrecte
+                }
+            });
         });
     });
 </script>
-
 
 
 <!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection -->

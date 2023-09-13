@@ -97,7 +97,16 @@ if (isset($include_icm_header) && $include_icm_header) {
         $erreurs = $_SESSION['erreurs-commande'];
     }
 
-    mettre_a_jour_etat_reservations_accompagnateurs();
+    // Supposez que vous avez une liste de réservations avec leurs dates de fin_occ
+    /* $reservations = [];
+
+    foreach ($reservations as $reservation) {
+        // Appelez la fonction pour chaque réservation avec sa date de fin_occ
+        mettre_a_jour_etat_reservations_accompagnateurs($reservation['fin_occ']);
+    } */
+
+
+    // mettre_a_jour_etat_reservations_accompagnateurs();
 
     ?>
         <!DOCTYPE html>
@@ -257,7 +266,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                             <i class="bi bi-calendar" style="margin-right: 12px;"></i>
                                             <span>Liste des reservations</span>
                                         </a>
-                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
+                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/liste_des_commandes">
                                             <i class="bi bi-calendar" style="margin-right: 12px;"></i>
                                             <span>Liste des commandes</span>
                                         </a>

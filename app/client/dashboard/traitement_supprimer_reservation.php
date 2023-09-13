@@ -15,7 +15,7 @@ if (isset($_POST['supprimer'])) {
 
     if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
         if (supprimer_reservation($num_res)) {
-            $message_success_global = "La suppression de la réservation été effectuer avec succès. Veuiller réessayez.";
+            $message_success_global = "La suppression de la réservation été effectuer avec succès.";
         } else {
             $message_erreur_global  = "La suppression à echouer. Veuiller réessayez.";
         }
