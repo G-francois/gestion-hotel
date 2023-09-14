@@ -2596,7 +2596,7 @@ function recuperer_liste_repas_par_commande($num_cmd): array
 
 			$liste_repas = $verifier_liste_repas->fetchAll(PDO::FETCH_ASSOC);
 
-			// (var_dump($liste_repas));
+			//  (var_dump($liste_repas));
 		}
 	}
 	return $liste_repas;

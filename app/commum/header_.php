@@ -74,6 +74,7 @@ if (isset($include_icm_header) && $include_icm_header) {
             </div>
         </header>
         <!-- End Header -->
+        
     <?php
 } elseif (isset($include_client_header) && $include_client_header) {
     // Inclure la partie du header spécifique à index_v.php

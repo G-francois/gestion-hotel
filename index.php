@@ -6,7 +6,7 @@ define('PATH_PROJECT', '/soutenance/');
 
 // DATABASE ACCES
 define('DATABASE_HOST', 'localhost');
-define('DATABASE_NAME', 'gestion-hotel');
+define('DATABASE_NAME', 'hotel-slc');
 define('DATABASE_USERNAME', 'root');
 define('DATABASE_PASSWORD', '');
 

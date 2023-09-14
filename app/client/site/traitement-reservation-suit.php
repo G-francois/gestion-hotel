@@ -163,39 +163,39 @@ if (isset($_POST['enregistrer'])) {
     if (!empty($_POST["nom_acc2"]) && !empty($_POST["contact_acc2"])) {
 
         if (vérifier_nom_contact_accompagnateur_exist_in_db($_POST["nom_acc2"], $_POST["contact_acc2"])) {
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
+            $numAccompagnateur2 = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
         } elseif (vérifier_contact_accompagnateur_exist_in_db($_POST["contact_acc2"])) {
             $erreurs["contact_acc2"] = "Ce contact est déjà utilisé. Veuillez le changer.";
         } else {
             // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
             $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_POST["nom_acc2"], $_POST["contact_acc2"]);
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
+            $numAccompagnateur2 = recuperer_num_acc_par_son_contact($_POST['contact_acc2']);
         }
     }
 
     if (!empty($_POST["nom_acc3"]) && !empty($_POST["contact_acc3"])) {
 
         if (vérifier_nom_contact_accompagnateur_exist_in_db($_POST["nom_acc3"], $_POST["contact_acc3"])) {
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc3']);
+            $numAccompagnateur3 = recuperer_num_acc_par_son_contact($_POST['contact_acc3']);
         } elseif (vérifier_contact_accompagnateur_exist_in_db($_POST["contact_acc3"])) {
             $erreurs["contact_acc3"] = "Ce contact est déjà utilisé. Veuillez le changer.";
         } else {
             // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
             $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_POST["nom_acc3"], $_POST["contact_acc3"]);
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc3']);
+            $numAccompagnateur3 = recuperer_num_acc_par_son_contact($_POST['contact_acc3']);
         }
     }
 
     if (!empty($_POST["nom_acc4"]) && !empty($_POST["contact_acc4"])) {
 
         if (vérifier_nom_contact_accompagnateur_exist_in_db($_POST["nom_acc4"], $_POST["contact_acc4"])) {
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc4']);
+            $numAccompagnateur4 = recuperer_num_acc_par_son_contact($_POST['contact_acc4']);
         } elseif (vérifier_contact_accompagnateur_exist_in_db($_POST["contact_acc4"])) {
             $erreurs["contact_acc4"] = "Ce contact est déjà utilisé. Veuillez le changer.";
         } else {
             // Appeler la fonction pour insérer les informations de l'accompagnateur dans la table "accompagnateur"
             $resultatInsertionAccompagnateur = enregistrer_accompagnateur($_POST["nom_acc4"], $_POST["contact_acc4"]);
-            $numAccompagnateur = recuperer_num_acc_par_son_contact($_POST['contact_acc4']);
+            $numAccompagnateur4 = recuperer_num_acc_par_son_contact($_POST['contact_acc4']);
         }
     }
 
@@ -265,8 +265,6 @@ if (isset($_POST['enregistrer'])) {
                     //recupérer le numero de réservation
                     $numReservation = recuperer_num_res_par_num_chambre($numChambreDisponible);
 
-                    // Associer le numéro de réservation aux données de la réservation actuelle
-                    $donnees["num_res"] = $numReservation; // Ajoutez cette ligne
 
                     if (!empty($_POST["nom_acc"]) && !empty($_POST["contact_acc"])) {
                         $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);

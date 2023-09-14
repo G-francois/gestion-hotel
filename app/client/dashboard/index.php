@@ -119,7 +119,7 @@ include('./app/commum/header_.php');
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <p><strong>Accompagnateur(s) : </strong> <br>
+                                                        <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
                                                             <?php
                                                             // Récupérer la liste des accompagnateurs pour cette réservation
                                                             $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);
@@ -130,7 +130,7 @@ include('./app/commum/header_.php');
                                                                 echo '---';
                                                             } else {
                                                                 foreach ($accompagnateurs_res as $accompagnateur) {
-                                                                    echo recuperer_info_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '<br>';
+                                                                    echo recuperer_info_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '   :  ' . recuperer_info_accompagnateur($accompagnateur['num_acc'])['contact'] . '<br>';
                                                                 }
                                                             }
                                                             ?>
