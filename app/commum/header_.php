@@ -74,13 +74,13 @@ if (isset($include_icm_header) && $include_icm_header) {
             </div>
         </header>
         <!-- End Header -->
-        
+
     <?php
 } elseif (isset($include_client_header) && $include_client_header) {
     // Inclure la partie du header spécifique à index_v.php
     $erreurs = [];
 
-    // LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION-SOLO DE L'ADMINISTRATEUR 
+    // LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION DU CLIENT & DE L'ADMINISTRATEUR 
     if (isset($_SESSION['donnees-reservation']) && !empty($_SESSION['donnees-reservation'])) {
         $donnees = $_SESSION['donnees-reservation'];
     }
@@ -89,13 +89,22 @@ if (isset($include_icm_header) && $include_icm_header) {
         $erreurs = $_SESSION['erreurs-reservation'];
     }
 
-    // LES SESSIONS UTILISEE LORS DE LA PAGE RESERVATION-SOLO DE L'ADMINISTRATEUR 
+    // LES SESSIONS UTILISEE LORS DE LA PAGE COMMANDE DU CLIENT & DE L'ADMINISTRATEUR 
     if (isset($_SESSION['donnees-commande']) && !empty($_SESSION['donnees-commande'])) {
         $donnees = $_SESSION['donnees-commande'];
     }
 
     if (isset($_SESSION['erreurs-commande']) && !empty($_SESSION['erreurs-commande'])) {
         $erreurs = $_SESSION['erreurs-commande'];
+    }
+
+    // LES SESSIONS UTILISEE LORS DE LA PAGE PLAINTE DU CLIENT & DE L'ADMINISTRATEUR 
+    if (isset($_SESSION['donnees-contact']) && !empty($_SESSION['donnees-contact'])) {
+        $donnees = $_SESSION['donnees-contact'];
+    }
+
+    if (isset($_SESSION['erreurs-contact']) && !empty($_SESSION['erreurs-contact'])) {
+        $erreurs = $_SESSION['erreurs-contact'];
     }
 
     // Supposez que vous avez une liste de réservations avec leurs dates de fin_occ
@@ -134,6 +143,14 @@ if (isset($include_icm_header) && $include_icm_header) {
             <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
 
             <style>
+                .hr {
+                    margin: 0rem 0;
+                    color: inherit;
+                    border: 0;
+                    border-top: 1px solid;
+                    opacity: .25;
+                }
+
                 .notification-container {
                     display: none;
                     position: fixed;
@@ -257,6 +274,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                         <div class="dropdown">
                                             <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
                                                 <span><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['profil'] : 'Profil' ?></span>
+                                            </p>
                                         </div>
                                         <hr>
                                         <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">

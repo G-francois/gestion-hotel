@@ -361,12 +361,17 @@ include('./app/commum/header_.php');
             var nouveauChamp = `
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label>Nom de l'accompagnateur</label>
+                <label>Nom de l'accompagnateur <span class="text-danger">(*)</span> </label>
                 <input type="text" name="nom_acc[]" class="form-control" required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label>Contact de l'accompagnateur</label>
+
+            <div class="col-md-4 mb-3">
+                <label>Contact <span class="text-danger">(*)</span> : </label>
                 <input type="text" name="contact_acc[]" class="form-control" required>
+            </div>
+
+            <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
+                <button type="button" class="btn btn-danger" onclick="supprimerAccompagnateur(this)" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">-</button>
             </div>
         </div>
     `;
@@ -387,11 +392,16 @@ include('./app/commum/header_.php');
             });
         });
     });
+
+    // Function to remove an accompagnateur
+    function supprimerAccompagnateur(button) {
+        $(button).closest('.row').remove();
+    }
 </script>
 
 
 <!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection -->
-<script>
+<!-- <script>
     $(document).ready(function() {
         // Gérez la sélection/désélection de toutes les cases à cocher lorsque la case à cocher globale est cliquée
         $('#selectAllCheckbox').click(function() {
@@ -416,7 +426,7 @@ include('./app/commum/header_.php');
             }
         });
     });
-</script>
+</script> -->
 
 
 

@@ -147,28 +147,67 @@ include('./app/commum/header_.php');
                                                             <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-commande" method="post" enctype="multipart/form-data">
                                                                 <input type="hidden" name="commande_id" value="<?php echo $num_cmd ?>">
 
-                                                                <!-- Boucle pour afficher les champs pour chaque repas -->
-                                                                <?php foreach ($repas_commande as $repas) { ?>
-                                                                    
-                                                                    <div class="row">
-                                                                        <!-- Champ nom_repas
-                                                                        <div class="col-md-6 mb-3">
-                                                                            <label for="modification-nom_repas-<?php echo $repas['cod_repas']; ?>">Nom du Repas</label>
-                                                                            <input type="text" name="nom_repas[]" id="modification-nom_repas-<?php echo $repas['cod_repas']; ?>" class="form-control" value="<?= $repas['nom_repas']; ?>" required>
-                                                                        </div> -->
-                                                                        <!-- Champ pu_repas
-                                                                        <div class="col-md-6 mb-3">
-                                                                            <label for="modification-pu_repas-<?php echo $repas['cod_repas']; ?>">Prix Unitaire:</label>
-                                                                            <input type="text" name="pu_repas[]" id="modification-pu_repas-<?php echo $repas['cod_repas']; ?>" class="form-control" value="<?= $repas['pu_repas']; ?>" required>
-                                                                        </div> -->
-                                                                    </div>
-                                                                <?php } ?>
 
-                                                                <!-- Champ de saisie du mot de passe -->
+                                                                <?php
+                                                                if (!empty($repas_commande)) {
+                                                                    foreach ($repas_commande as $key => $repas) {
+                                                                        $info_repas = recuperer_info_repas($repas['cod_repas']);
+                                                                ?>
+                                                                        <div class="row">
+                                                                            <!-- Le champ Nom du Repas -->
+                                                                            <div class="col-md-6 mb-3">
+                                                                                <label for="nom_repas">Nom du Repas :
+                                                                                    <span class="text-danger">(*)</span>
+                                                                                </label>
+                                                                                <select class="form-control" id="nom_repas" name="nom_repas[]">
+                                                                                    <option value="">Sélectionnez un repas</option>
+                                                                                    <?php
+                                                                                    $liste_repas = recuperer_nom_prix_repas();
+                                                                                    foreach ($liste_repas as $repas) {
+                                                                                        echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '">' . $repas['nom_repas'] . '</option>';
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
+                                                                                <?php if (isset($erreurs["nom_repas"]) && !empty($erreurs["nom_repas"])) { ?>
+                                                                                    <span class="text-danger">
+                                                                                        <?= $erreurs["nom_repas"]; ?>
+                                                                                    </span>
+                                                                                <?php } ?>
+                                                                            </div>
+
+                                                                            <!-- Le champ Prix du Repas -->
+                                                                            <div class="col-md-6 mb-3">
+                                                                                <label for="pu_repas">Prix du Repas :</label>
+                                                                                <input type="text" class="form-control" placeholder="Prix total du repas" id="pu_repas" name="pu_repas[]" readonly>
+                                                                                <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
+                                                                                    <span class="text-danger">
+                                                                                        <?= $erreurs["pu_repas"]; ?>
+                                                                                    </span>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                        </div>
+
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                                <!-- Conteneur pour les champs de repas dynamiques -->
+                                                                <div id="champs-repas-dynamiques-container">
+                                                                    <!-- Les champs de repas seront ajoutés ici en fonction des boutons "+" -->
+                                                                </div>
+
+                                                                <!-- Bouton pour ajouter un accompagnateur -->
+                                                                <button type="button" class="btn btn-success" id="ajouter-repas">
+                                                                    +
+                                                                </button>
+
+                                                                <!-- Champ de saisie de mot de passe -->
                                                                 <div class="form-group">
-                                                                    <label for="passwordInput">Mot de passe :</label>
+                                                                    <label for="passwordImput">Mot de passe :</label>
                                                                     <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Veuillez entrer votre mot de passe" required>
                                                                 </div>
+
 
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -237,10 +276,101 @@ include('./app/commum/header_.php');
 
 </div>
 
-<!-- FIN -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to update the meal price based on selection
+        function updateMealPrice() {
+            const selectElement = document.getElementById("nom_repas");
+            const prixInput = document.getElementById("pu_repas");
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            if (selectedOption) {
+                prixInput.value = selectedOption.getAttribute("data-prix");
+                updateMontantTotal(); // Update total price immediately after meal selection
+            } else {
+                prixInput.value = "";
+            }
+        }
+
+        // Update the initial meal price when the page loads
+        updateMealPrice();
+
+        // Attach an event listener to the meal selection dropdown
+        document.getElementById("nom_repas").addEventListener("change", updateMealPrice);
+    });
+
+    // Function to remove a meal
+    function supprimerRepas(idRepas) {
+        const champRepas = document.getElementById(`repas-${idRepas}`);
+        if (champRepas) {
+            champRepas.remove();
+            updateMontantTotal(); // Update total price immediately after removing a meal
+        }
+    }
+</script>
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialise le compteur de champs de repas
+        let compteurRepas = 1;
+
+        // Fonction pour ajouter un champ de repas
+        function ajouterRepas() {
+            compteurRepas++;
+            const champRepas = `
+                <div class="row" id="repas-${compteurRepas}">
+                    <div class="col-md-6 mb-3">
+                        <label for="nom_repas-${compteurRepas}">Nom du Repas : <span class="text-danger">(*)</span></label>
+                        <select class="form-control nom_repas" id="nom_repas-${compteurRepas}" name="nom_repas[]-${compteurRepas}">
+                            <option value="">Sélectionnez un repas</option>
+                            <?php
+                            $liste_repas = recuperer_nom_prix_repas();
+
+                            foreach ($liste_repas as $repas) {
+                                echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '">' . $repas['nom_repas'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="pu_repas-${compteurRepas}">Prix du Repas :</label>
+                        <input type="text" class="form-control pu_repas" placeholder="Le prix du repas sera automatiquement rempli" id="pu_repas-${compteurRepas}" name="pu_repas[]-${compteurRepas}" readonly>
+                    </div>
+                    <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
+                        <button type="button" class="btn btn-danger" onclick="supprimerRepas(${compteurRepas})" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">-</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("champs-repas-dynamiques-container").insertAdjacentHTML("beforeend", champRepas);
+            updateMontantTotal(); // Update total price immediately after adding a meal
+        }
+
+        // Gestionnaire d'événements pour le bouton "+" (ajouter un repas)
+        document.getElementById("ajouter-repas").addEventListener("click", ajouterRepas);
+
+        // Gestionnaire d'événements pour le changement de sélection
+        document.getElementById("champs-repas-dynamiques-container").addEventListener("change", function(event) {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            if (selectedOption) {
+                // Trouver l'élément parent du champ sélectionné
+                const parentRow = event.target.closest(".row");
+                const prixInput = parentRow.querySelector(".pu_repas");
+                prixInput.value = selectedOption.getAttribute("data-prix");
+
+                // Mise à jour du montant total lors du changement de sélection
+                updateMontantTotal();
+            }
+        });
+
+    });
+</script>
+
+
+<!-- FIN -->
+<!-- <script>
     $(document).ready(function() {
         $('.btn-modifier').click(function() {
             var reservationId = $(this).data('reservation-id');
@@ -263,11 +393,11 @@ include('./app/commum/header_.php');
             }
         });
     });
-</script>
+</script> -->
 
 
 <!-- Ajoutez cette balise script à la fin de la page -->
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.ajouter-accompagnateur').click(function() {
             var reservationId = $(this).data('reservation-id');
@@ -300,11 +430,11 @@ include('./app/commum/header_.php');
             });
         });
     });
-</script>
+</script> -->
 
 
 <!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection -->
-<script>
+<!-- <script>
     $(document).ready(function() {
         // Gérez la sélection/désélection de toutes les cases à cocher lorsque la case à cocher globale est cliquée
         $('#selectAllCheckbox').click(function() {
@@ -329,7 +459,7 @@ include('./app/commum/header_.php');
             }
         });
     });
-</script>
+</script> -->
 
 
 

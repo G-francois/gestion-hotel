@@ -260,7 +260,7 @@
     </script>
 
 
-    <script>
+    <!-- <script>
         // Code JavaScript pour afficher la notification après le chargement de la page
         document.addEventListener("DOMContentLoaded", function() {
             var notificationContainer = document.getElementById("notification-container");
@@ -279,7 +279,7 @@
 
             showNotification();
         });
-    </script>
+    </script> -->
     </body>
 
     </html>

@@ -25,57 +25,156 @@ include('./app/commum/header_.php');
           <div class="address">
             <i class="bi bi-geo-alt"></i>
             <h4>Emplacement:</h4>
-            <p>A108 Adam Street, New York, NY 535022</p>
+            <p>A108 Adam Street, NY 535022, BENIN</p>
           </div>
+
 
           <div class="open-hours">
             <i class="bi bi-clock"></i>
             <h4>Heures d'Ouverture:</h4>
             <p>
               Du lundi - dimanche:<br />
-              11H00 - 23H00
+              24H / 24H
             </p>
           </div>
 
           <div class="email">
             <i class="bi bi-envelope"></i>
             <h4>Email:</h4>
-            <p>info@example.com</p>
+            <p>slescocotiers@gmail.com</p>
           </div>
 
           <div class="phone">
             <i class="bi bi-phone"></i>
             <h4>Call:</h4>
-            <p>+1 5589 55488 55s</p>
+            <p>+229 62929439</p>
           </div>
         </div>
       </div>
 
       <div class="col-lg-8 mt-5 mt-lg-0">
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required />
+        <?php
+        // Vérifie s'il y a un message de succès global à afficher
+        if (isset($_SESSION['contact-message-success-global']) && !empty($_SESSION['contact-message-success-global'])) {
+        ?>
+          <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+            <?= $_SESSION['contact-message-success-global'] ?>
+          </div>
+        <?php
+        }
+        ?>
+
+        <?php
+        // Vérifie s'il y a un message d'erreur global à afficher
+        if (isset($_SESSION['contact-message-erreur-global']) && !empty($_SESSION['contact-message-erreur-global'])) {
+        ?>
+          <div class="alert alert-primary" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
+            <?= $_SESSION['contact-message-erreur-global'] ?>
+          </div>
+        <?php
+        }
+        ?>
+        
+        <form action="<?= PATH_PROJECT ?>client/site/traitement-contact" method="post" class="php-email-form" novalidate>
+          <?php
+          if (!check_if_user_connected_client()) {
+          ?>
+            <div class="row">
+              <!-- Le champ nom -->
+              <div class="col-md-6 mb-3">
+                <label for="inscription-nom">
+                  Nom :
+                  <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="nom" id="inscription-nom" class="form-control" placeholder="Veuillez entrer votre nom" value="<?= (isset($donnees["nom"]) && !empty($donnees["nom"])) ? $donnees["nom"] : ''; ?>" required>
+                <?php if (isset($erreurs["nom"]) && !empty($erreurs["nom"])) { ?>
+                  <span class="text-danger">
+                    <?php echo $erreurs["nom"]; ?>
+                  </span>
+                <?php } ?>
+              </div>
+
+              <!-- Le champ prénom -->
+              <div class="col-md-6 mb-3">
+                <label for="inscription-prenom">
+                  Prénom(s):
+                  <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="prenom" id="inscription-prenom" class="form-control" placeholder="Veuillez entrer vos prénoms" value="<?= (isset($donnees["prenom"]) && !empty($donnees["prenom"])) ? $donnees["prenom"] : ''; ?>" required>
+                <?php if (isset($erreurs["prenom"]) && !empty($erreurs["prenom"])) { ?>
+                  <span class="text-danger">
+                    <?php echo $erreurs["prenom"]; ?>
+                  </span>
+                <?php } ?>
+              </div>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required />
+
+
+            <div class="row">
+              <!-- Le champ téléphone -->
+              <div class="col-md-6 mb-3">
+                <label for="inscription-telephone">
+                  Téléphone :
+                  <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
+                <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
+                  <span class="text-danger">
+                    <?php echo $erreurs["telephone"]; ?>
+                  </span>
+                <?php } ?>
+              </div>
+
+              <!-- Le champs email -->
+              <div class="col-md-6 mb-3">
+                <label for="inscription-email">
+                  Adresse mail :
+                  <span class="text-danger">(*)</span>
+                </label>
+                <input type="email" name="email" id="inscription-email" class="form-control" placeholder="Veuillez entrer votre adresse mail" value="<?= (isset($donnees["email"]) && !empty($donnees["email"])) ? $donnees["email"] : ''; ?>" required>
+                <?php if (isset($erreurs["email"]) && !empty($erreurs["email"])) { ?>
+                  <span class="text-danger">
+                    <?php echo $erreurs["email"]; ?>
+                  </span>
+                <?php } ?>
+              </div>
             </div>
-          </div>
+          <?php
+          }
+          ?>
+
+          <!-- Le champs sujet du message-->
           <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required />
+            <label for="inscription-subject">
+              Sujet du message :
+              <span class="text-danger">(*)</span>
+            </label>
+            <input type="text" class="form-control" name="subject" id="inscription-subject" placeholder="Veuillez entrer le sujet du message" value="<?= (isset($donnees["subject"]) && !empty($donnees["subject"])) ? $donnees["subject"] : ''; ?>" required />
+            <?php if (isset($erreurs["subject"]) && !empty($erreurs["subject"])) { ?>
+              <span class="text-danger">
+                <?php echo $erreurs["subject"]; ?>
+              </span>
+            <?php } ?>
           </div>
+
+          <!-- Le champs message-->
           <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
+            <textarea class="form-control" name="message" rows="8" placeholder="Veuillez entrer votre message" value="<?= (isset($donnees["message"]) && !empty($donnees["message"])) ? $donnees["message"] : ''; ?>" required></textarea>
+            <?php if (isset($erreurs["message"]) && !empty($erreurs["message"])) { ?>
+              <span class="text-danger">
+                <?php echo $erreurs["message"]; ?>
+              </span>
+            <?php } ?>
           </div>
-          <div class="my-3">
+          <!-- <div class="my-3">
             <div class="loading">Loading</div>
             <div class="error-message"></div>
             <div class="sent-message">
               Your message has been sent. Thank you!
             </div>
-          </div>
+          </div> -->
           <div class="text-center">
-            <button type="submit">Send Message</button>
+            <button type="submit" name="envoyer">Send Message</button>
           </div>
         </form>
       </div>
@@ -83,6 +182,10 @@ include('./app/commum/header_.php');
   </div>
 </section>
 <!-- End Contact Section -->
+
+<?php
+unset($_SESSION['erreurs-contact'], $_SESSION['donnees-contact'], $_SESSION['contact-message-success-global'], $_SESSION['contact-message-erreur-global']);
+?>
 
 <?php
 include('./app/commum/footer_.php');

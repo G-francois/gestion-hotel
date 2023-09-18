@@ -480,6 +480,7 @@ header .intro-text .intro-heading {
 }
 
 .navbar-mobile ul {
+  height: fit-content;
   display: block;
   position: absolute;
   top: 55px;

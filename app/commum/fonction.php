@@ -2487,7 +2487,6 @@ function recuperer_num_cmd_par_num_res($num_res): ?int
 			if ($resultat && isset($resultat['num_cmd'])) {
 
 				$numCommande = $resultat['num_cmd'];
-
 			}
 		}
 	}
@@ -2617,7 +2616,7 @@ function recuperer_info_repas($cod_repas): ?array
 
 	if (!is_null($db)) {
 
-		$requette = 'SELECT * FROM repas WHERE cod_repas = :cod_repas and est_supprimer = 0';
+		$requette = 'SELECT *  FROM repas WHERE cod_repas = :cod_repas and est_supprimer = 0';
 
 		$verifier_liste_repas = $db->prepare($requette);
 
@@ -2631,6 +2630,7 @@ function recuperer_info_repas($cod_repas): ?array
 
 			// Vérifiez si la requête a renvoyé des résultats, sinon retournez null
 			if (!$nom_repas) {
+
 				$nom_repas = null;
 			}
 		}
@@ -2676,6 +2676,88 @@ function supprimer_commande(int $num_cmd): bool
 	return $supprimer_commande;
 }
 
+
+/**
+ * Cette fonction permet d'enregistrer les messages client
+ *
+ * @param  mixed $numClient
+ * @param  mixed $type_sujet
+ * @param  mixed $messages
+ * @return bool
+ */
+function enregistrer_messages($numClient, $type_sujet, $messages): bool
+{
+	$enregistrerMessages = false;
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete = 'INSERT INTO plaintes (num_clt, type_sujet, messages) VALUES (:num_clt, :type_sujet, :messages)';
+
+		$inserermessage = $db->prepare($requete);
+
+		if ($inserermessage) {
+			$resultat = $inserermessage->execute([
+				'num_clt' => $numClient,
+				'type_sujet' => $type_sujet,
+				'messages' => $messages
+			]);
+
+			if ($resultat) {
+				$enregistrerMessages = true;
+			} else {
+				// En cas d'erreur lors de l'exécution de la requête, affichez les informations sur l'erreur
+				$errorInfo = $inserermessage->errorInfo();
+				die("Erreur lors de l'insertion dans la table 'quantite': " . $errorInfo[2]);
+			}
+		} else {
+			// En cas d'erreur lors de la préparation de la requête
+			die("Erreur lors de la préparation de la requête 'INSERT'");
+		}
+	}
+
+	return $enregistrerMessages;
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des messages de la base de donnée en fonction du client connecter.
+ *
+ * @return array $liste_messages La liste des messages.
+ */
+function recuperer_liste_messages($num_clt = null): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		if (is_null($num_clt)) {
+
+			$requette = 'SELECT * FROM plaintes WHERE est_supprimer=0';
+
+			$verifier_liste_messages = $db->prepare($requette);
+
+			$resultat = $verifier_liste_messages->execute();
+
+		} elseif (!is_null($num_clt)) {
+
+			$requette = 'SELECT * FROM plaintes WHERE num_clt=:num_clt and est_supprimer=0';
+
+			$verifier_liste_messages = $db->prepare($requette);
+
+			$resultat = $verifier_liste_messages->execute([
+				'num_clt' => $num_clt
+			]);
+		}
+
+		if ($resultat) {
+
+			$liste_messages = $verifier_liste_messages->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+	return $liste_messages;
+}
 
 
 
