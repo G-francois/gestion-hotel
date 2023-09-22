@@ -42,9 +42,7 @@ include('./app/commum/header_.php');
 
                         <h3 class="card-title">Suites</h3>
                         <p class="card-text">
-                            Situé au dernier étage de l'hôtel avec une vue imprenable,
-                            il possède généralement une salle de bain attenante, un
-                            salon et la plupart du temps, un coin repas.
+                            Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable.
                         </p>
                         <div>
                             <div style="display: flex">
@@ -326,27 +324,6 @@ include('./app/commum/header_.php');
                                     </div>
                                 </div>
 
-                                <!-- Le champs numeros de chambre -->
-                                <!-- <div class="col-sm-12 mb-3">
-                                    <label for="type" class="col-sm-4 col-form-label">Numéros de chambre
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <select class="form-control" name="lib_typ" id="type">
-                                            <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                                            <?php
-                                            $chambres = recuperer_liste_chambres();
-                                            foreach ($chambres as $chambre) {
-                                                if ($chambre['lib_typ'] === 'Solo') {
-                                                    echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div> -->
-
-
                                 <div class="col-lg-12 mt-4">
                                     <h5 style="font-weight: bold">Nombre total de jours : <span id="nombre_jour">0</span></h5>
                                     <h5 style="font-weight: bold">Montant total : <span id="prix_total">0</span> </h5>
@@ -368,20 +345,12 @@ include('./app/commum/header_.php');
         </div>
     </div>
 </section>
-</div>
-</div>
-</div>
-</section>
 
 
 <?php
 unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESSION['reservation-solo-message-success-global'], $_SESSION['reservation-solo-message-erreur-global']);
 ?>
-</div>
-</div>
-</div>
-</div>
-</section>
+
 
 
 <script>

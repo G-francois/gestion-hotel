@@ -42,10 +42,8 @@ include('./app/commum/header_.php');
 
                         <h3 class="card-title">Chambre Doubles</h3>
                         <p class="card-text">
-                            Situé au deuxième étage de l'hôtel, profitez du balcon et de
-                            la vue sur la vallée. Ces chambres conçu pour héberger deux
-                            personnes et est équipé d'un grand lit standard
-                            (140-160*200) ou de deux lits simples (90*200)
+                            Profitez du balcon et de la vue sur l'esplanade. Cette chambre est conçue pour héberger deux
+                            personnes et est équipée d'un grand lit standard (140-160*200) ou de deux lits simples (90*200).
                         </p>
                         <div>
                             <div style="display: flex">

@@ -1,4 +1,3 @@
-
 <?php
 
 $include_client_header = true;
@@ -41,11 +40,9 @@ include('./app/commum/header_.php');
 
                         <h3 class="card-title">Chambre Triples</h3>
                         <p class="card-text">
-                            Situé au troisième étage et idéal pour les excursion en
-                            petits groupes. Elle est équipée de 3 couchages et pouvant
-                            donc accueillir 3 personnes. La configuration peut être 3
-                            lits d'une personne ou bien 1 lit double de 2 personnes et 1
-                            d'une personne avec un canapé.
+                            Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peuvent
+                            donc accueillir 3 personnes. La configuration peut être 3 lits d'une personne ou bien
+                            1 lit double de 2 personnes et 1 d'une personne avec un canapé.
                         </p>
                         <div>
                             <div style="display: flex">
@@ -279,26 +276,6 @@ include('./app/commum/header_.php');
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <!-- Le champs numeros de chambre -->
-                                <!-- <div class="col-sm-12 mb-3">
-                                    <label for="type" class="col-sm-4 col-form-label">Numéros de chambre
-                                        <span class="text-danger">(*)</span>
-                                    </label>
-                                    <div class="input-group">
-                                        <select class="form-control" name="lib_typ" id="type">
-                                            <option value="" disabled selected>Veuillez choisir le numéro de chambre</option>
-                                            <?php
-                                            $chambres = recuperer_liste_chambres();
-                                            foreach ($chambres as $chambre) {
-                                                if ($chambre['lib_typ'] === 'Solo') {
-                                                    echo '<option value="' . $chambre['num_chambre'] . '">' . $chambre['num_chambre'] . '</option>';
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div> -->
-
 
                                 <div class="col-lg-12 mt-4">
                                     <h5 style="font-weight: bold">Nombre total de jours : <span id="nombre_jour">0</span></h5>
@@ -324,11 +301,7 @@ include('./app/commum/header_.php');
 <?php
 unset($_SESSION['erreurs-reservation'], $_SESSION['donnees-reservation'], $_SESSION['reservation-solo-message-success-global'], $_SESSION['reservation-solo-message-erreur-global']);
 ?>
-</div>
-</div>
-</div>
-</div>
-</section>
+
 
 
 

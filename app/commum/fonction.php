@@ -2795,6 +2795,44 @@ function recuperer_liste_messages($num_clt = null): array
 
 
 /**
+ * mettre_a_jour_messages
+ *
+ * @param  mixed $id
+ * @param  mixed $type_sujet
+ * @param  mixed $messages
+ * @return bool
+ */
+function mettre_a_jour_messages($id, $type_sujet, $messages): bool
+{
+	$statut = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE plaintes SET type_sujet = :type_sujet, messages = :messages, maj_le = :maj_le WHERE id = :id";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'id' => $id,
+			'type_sujet' => $type_sujet,
+			'messages' => $messages,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+			$statut = true;
+		}
+	}
+
+	return $statut;
+}
+
+
+/**
  * Cette fonction permet de supprimer un message
  *
  * @param  mixed $id

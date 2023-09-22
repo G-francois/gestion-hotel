@@ -60,7 +60,6 @@ $liste_chambre = recuperer_liste_chambres();
                                 <th>Numéro de chambre</th>
                                 <th>Code type</th>
                                 <th>Libellés</th>
-                                <th>Statut</th>
                                 <th>Prix Unitaire</th>
                                 <th>Actions</th>
                             </tr>
@@ -75,7 +74,6 @@ $liste_chambre = recuperer_liste_chambres();
                                     <td><?php echo $chambre['num_chambre']; ?></td>
                                     <td><?php echo $chambre['cod_typ']; ?></td>
                                     <td><?php echo $chambre['lib_typ']; ?></td>
-                                    <td><?php echo $chambre['statut']; ?></td>
                                     <td><?php echo $chambre['pu']; ?></td>
                                     <td>
                                         <!-- lien bouton pour modifier et supprimer -->

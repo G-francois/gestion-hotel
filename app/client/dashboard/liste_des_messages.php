@@ -99,9 +99,32 @@ include('./app/commum/header_.php');
                                                         </div>
                                                         <div class="modal-body">
                                                             <!-- Formulaire de modification de la commande -->
-                                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-commande" method="post" enctype="multipart/form-data">
-                                                                <input type="hidden" name="commande_id" value="<?php echo $messages['id'] ?>">
+                                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-messages" method="post" enctype="multipart/form-data">
+                                                                <input type="hidden" name="message_id" value="<?php echo $messages['id'] ?>">
 
+                                                                <!-- Le champs sujet du message-->
+                                                                <div class="form-group mt-3">
+                                                                    <label for="inscription-subject">
+                                                                        Sujet du message :
+                                                                        <span class="text-danger">(*)</span>
+                                                                    </label>
+                                                                    <input type="text" class="form-control" name="subject" id="inscription-subject" placeholder="Veuillez entrer le sujet du message" value="<?= !empty($messages['type_sujet']) ? $messages['type_sujet'] : '' ?>" required />
+                                                                    <?php if (isset($erreurs["subject"]) && !empty($erreurs["subject"])) { ?>
+                                                                        <span class="text-danger">
+                                                                            <?php echo $erreurs["subject"]; ?>
+                                                                        </span>
+                                                                    <?php } ?>
+                                                                </div>
+
+                                                                <!-- Le champs message-->
+                                                                <div class="form-group mt-3">
+                                                                    <textarea class="form-control" name="message" rows="8"  value="<?= !empty($messages['messages']) ? $messages['messages'] : '' ?>" required></textarea>
+                                                                    <?php if (isset($erreurs["message"]) && !empty($erreurs["message"])) { ?>
+                                                                        <span class="text-danger">
+                                                                            <?php echo $erreurs["message"]; ?>
+                                                                        </span>
+                                                                    <?php } ?>
+                                                                </div>
 
                                                                 <!-- Champ de saisie de mot de passe -->
                                                                 <div class="form-group">
@@ -120,16 +143,16 @@ include('./app/commum/header_.php');
                                                 </div>
                                             </div>
 
-                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement_supprimer_commande" method="post" enctype="multipart/form-data">
+                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement_supprimer_messages" method="post" enctype="multipart/form-data">
                                                 <!-- Début du formulaire de supprimé commande -->
-                                                <input type="hidden" name="commande_id" value="<?php echo $messages['id'] ?>">
+                                                <input type="hidden" name="message_id" value="<?php echo $messages['id'] ?>">
 
                                                 <!-- Button de suppression modal -->
-                                                <button type="button" class="btn btn-danger btn-supprimer" data-toggle="modal" data-target="#supprimer-commande-<?php echo $messages['id'] ?>">
+                                                <button type="button" class="btn btn-danger btn-supprimer" data-toggle="modal" data-target="#supprimer-messages-<?php echo $messages['id'] ?>">
                                                     Supprimer
                                                 </button>
                                                 <!-- Modal de suppression -->
-                                                <div class="modal fade" id="supprimer-commande-<?php echo $messages['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal fade" id="supprimer-messages-<?php echo $messages['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -167,7 +190,7 @@ include('./app/commum/header_.php');
                 } else {
                     // Aucune réservation n'a été trouvée, affichez le message en couleur noire
                 ?>
-                    <p style="color: black;">Aucun repas n'a été trouvé!</p>
+                    <p style="color: black;">Aucun message(s) n'a été trouvé!</p>
                 <?php
                 }
                 ?>
@@ -178,7 +201,7 @@ include('./app/commum/header_.php');
 </div>
 
 <!-- Ajoutez ce script JavaScript à la fin de votre page -->
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.ajouter-repas').click(function() {
             var repasId = $(this).data('repas-id');
@@ -235,12 +258,12 @@ include('./app/commum/header_.php');
     function supprimerrepas(button) {
         $(button).closest('.row').remove();
     }
-</script>
+</script> -->
 
 
 <?php
 // Supprimer les variables de session
-unset($_SESSION['donnees-chambre-solo-modifier'], $_SESSION['erreurs-chambre-solo-modifier'], $_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
+unset( $_SESSION['message-success-global'], $_SESSION['message-erreur-global']);
 
 $include_icm_footer = true;
 include('./app/commum/footer_.php');

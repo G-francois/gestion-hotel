@@ -17,8 +17,8 @@ include('./app/commum/header_.php');
           <br />
           À l'hôtel Sous les Cocotiers, vous trouverez nos chambres qui offrent un maximum de confort : grandes, meublées et
           décorées dans un style minimaliste, qui permet une utilisation optimal de l'espace. Nous vous invitons
-          à profiter des services que nous vous proposons : 30 logements au
-          Sous les Cocotiers, des chambres avec balcon ou terrasse, avec de grands lits confortables, bureau, TV LCD, internet Wi-Fi, 
+          à profiter des services que nous vous proposons : 32 logements au
+          Sous les Cocotiers, des chambres avec balcon ou terrasse, avec de grands lits confortables, bureau, TV LCD, internet Wi-Fi,
           minibar et climatisation.
         </h2>
       </div>
@@ -37,12 +37,9 @@ include('./app/commum/header_.php');
             <div class="card-body px-0">
               <h3 class="card-title">Chambre Solo</h3>
               <p class="card-text">
-                Situé au premier étage de l'hôtel, la chambres solo allie
-                confort et fonctionnalité dans un esprit simple et
-                chaleureux. La taille de la chambre et la vue sur la petite
-                cour pavée vous donne une vue panoramique. Devant
-                le pupitre, le solitaire peut prendre la plume… Rien ne
-                viendra le perturber.
+                La chambres solo allie confort et fonctionnalité dans un esprit simple et chaleureux.
+                La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles
+                d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber.
               </p>
               <div>
                 <div style="display: flex">
@@ -135,10 +132,8 @@ include('./app/commum/header_.php');
             <div class="card-body px-0">
               <h3 class="card-title">Chambre Doubles</h3>
               <p class="card-text">
-                Situé au deuxième étage de l'hôtel, profitez du balcon et de
-                la vue sur la vallée. Cette chambre est conçue pour héberger deux
-                personnes et est équipée d'un grand lit standard
-                (140-160*200) ou de deux lits simples (90*200)
+                Profitez du balcon et de la vue sur l'esplanade. Cette chambre est conçue pour héberger deux
+                personnes et est équipée d'un grand lit standard (140-160*200) ou de deux lits simples (90*200).
               </p>
               <div>
                 <div style="display: flex">
@@ -176,11 +171,9 @@ include('./app/commum/header_.php');
             <div class="card-body px-0">
               <h3 class="card-title">Chambre Triples</h3>
               <p class="card-text">
-                Situé au troisième étage et idéal pour les excursions en
-                petits groupes. Elle est équipée de 3 couchages et peuvent
-                donc accueillir 3 personnes. La configuration peut être 3
-                lits d'une personne ou bien 1 lit double de 2 personnes et 1
-                d'une personne avec un canapé.
+                Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peuvent
+                donc accueillir 3 personnes. La configuration peut être 3 lits d'une personne ou bien 
+                1 lit double de 2 personnes et 1 d'une personne avec un canapé.
               </p>
               <div>
                 <div style="display: flex">
@@ -276,8 +269,7 @@ include('./app/commum/header_.php');
             <div class="card-body px-0">
               <h3 class="card-title">Suites</h3>
               <p class="card-text">
-                Situé au dernier étage de l'hôtel avec une vue imprenable,
-                il possède une salle de bain attenante, de petites dépendances et un coin repas.
+              Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable.
               </p>
               <div>
                 <div style="display: flex">

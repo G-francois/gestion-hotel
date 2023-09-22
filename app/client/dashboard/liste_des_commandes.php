@@ -121,7 +121,7 @@ include('./app/commum/header_.php');
                                     <td>
                                         <div class="modal-footer float-right">
                                             <!-- Button pour modifier le repas modal -->
-                                            <button type="button" class="btn btn-warning btn-modifier-commande" style="color: white;" data-toggle="modal" data-target="#modifier-commande-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>" data-nom-repas="<?= htmlspecialchars(json_encode($repas_commande)) ?>">
+                                            <button type="button" class="btn btn-warning btn-modifier-commande" style="color: white; margin-right: 8px;" data-toggle="modal" data-target="#modifier-commande-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>" data-nom-repas="<?= htmlspecialchars(json_encode($repas_commande)) ?>">
                                                 Modifier
                                             </button>
 

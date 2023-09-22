@@ -138,7 +138,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-starters">
           <img src="<?= PATH_PROJECT ?>public/images/menu/L'attiéké.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Attiéké</a><span>$5.95</span>
+            <a href="#">Attiéké</a><span>3.500 FCFA</span>
           </div>
           <div class="menu-ingredients">
             L'attiéké est un couscous traditionnel ivoirien composé de
@@ -151,7 +151,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-specialty">
           <img src="<?= PATH_PROJECT ?>public/images/menu/bread-barrel.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Baril de pain</a><span>$6.95</span>
+            <a href="#">Baril de pain</a><span>4.250 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Le pain maison est un acte de simplicité volontaire.
@@ -161,7 +161,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-starters">
           <img src="<?= PATH_PROJECT ?>public/images/menu/cake.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Gâtaeu au Crabe</a><span>$7.95</span>
+            <a href="#">Gâtaeu au Crabe</a><span>5.000 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Un gâteau de crabe délicat servi sur un petit pain grillé avec
@@ -172,7 +172,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-salads">
           <img src="<?= PATH_PROJECT ?>public/images/menu/caesar.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Selection de caesar</a><span>$8.95</span>
+            <a href="#">Selection de caesar</a><span>5.500 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Un ensemble de plat collectionné composé de viandes et de
@@ -183,7 +183,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-specialty">
           <img src="<?= PATH_PROJECT ?>public/images/menu/tuscan-grilled.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#"> Grillarde Toscanes</a><span>$9.95</span>
+            <a href="#"> Grillarde Toscanes</a><span>6.200 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Poulet grillé avec provolone, cœurs d'artichauts et pesto rouge
@@ -194,7 +194,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-starters">
           <img src="<?= PATH_PROJECT ?>public/images/menu/mozzarella.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Baton de Mozzarella</a><span>$4.95</span>
+            <a href="#">Baton de Mozzarella</a><span>3.000 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Les bâtonnets de mozzarella sont une collation frite populaire
@@ -207,7 +207,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-salads">
           <img src="<?= PATH_PROJECT ?>public/images/menu/greek-salad.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Salade Grecque</a><span>$9.95</span>
+            <a href="#">Salade Grecque</a><span>4.200 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Épinards frais, romaine croustillante, tomates et olives
@@ -218,7 +218,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-salads">
           <img src="<?= PATH_PROJECT ?>public/images/menu/spinach-salad.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Salade d'épinards</a><span>$9.95</span>
+            <a href="#">Salade d'épinards</a><span>3.000 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Épinards frais aux champignons, œuf dur et vinaigrette chaude au
@@ -229,7 +229,7 @@ include('./app/commum/header_.php');
         <div class="col-lg-6 menu-item filter-specialty">
           <img src="<?= PATH_PROJECT ?>public/images/menu/lobster-roll.jpg" class="menu-img" alt="" />
           <div class="menu-content">
-            <a href="#">Rouleau de homard</a><span>$12.95</span>
+            <a href="#">Rouleau de homard</a><span>8.000 FCFA</span>
           </div>
           <div class="menu-ingredients">
             Chair de homard dodue, mayonnaise et laitue croustillante sur un
@@ -367,7 +367,7 @@ include('./app/commum/header_.php');
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Fêtes d'anniversaire</h3>
                 <div class="price">
-                  <p><span>$189</span></p>
+                  <p><span>116.500 FCFA</span></p>
                 </div>
                 <p class="fst-italic">
                   Offrez-vous un escape game avec des copains. <br />
@@ -394,7 +394,7 @@ include('./app/commum/header_.php');
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Soirées privées</h3>
                 <div class="price">
-                  <p><span>$290</span></p>
+                  <p><span>180.000 FCFA</span></p>
                 </div>
                 <p class="fst-italic">
                   Organisez une soirée privée mémorable ! <br />
@@ -419,7 +419,7 @@ include('./app/commum/header_.php');
               <div class="col-lg-6 pt-4 pt-lg-0 content">
                 <h3>Fêtes personnalisées</h3>
                 <div class="price">
-                  <p><span>$99</span></p>
+                  <p><span>60.000 FCFA</span></p>
                 </div>
                 <p class="fst-italic">
                   Offrez-vous un escape game. <br />
