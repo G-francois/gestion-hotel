@@ -1864,65 +1864,35 @@ function enregistrer_accompagnateur_des_reservations($numReservation, $numAccomp
  *
  * @return void
  */
-/* function mettre_a_jour_etat_reservations_accompagnateurs()
+function mettre_a_jour_etat_reservations_accompagnateurs()
 {
 	$db = connect_db();
 
 	if (!is_null($db)) {
 		// Récupérer la date et l'heure actuelles
-		$now = date('Y-m-d H:i:s');
+		$now = date('Y-m-d');
 
 		// Mettre à jour l'état des réservations dont la date de fin_occ est passée
-		$requeteReservation = 'UPDATE reservations SET est_actif = 0, est_supprimer = 1 WHERE fin_occ <= :now';
+		$requeteReservation = 'UPDATE reservations SET est_actif = 0, est_supprimer = 1 WHERE fin_occ < :now';
 		$stmtReservation = $db->prepare($requeteReservation);
 		$stmtReservation->bindParam(':now', $now);
 		$stmtReservation->execute();
 
 		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est passée
-		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ <= :now)';
+		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ < :now)';
 		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
 		$stmtAccompagnateur->bindParam(':now', $now);
 		$stmtAccompagnateur->execute();
 
 		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
-		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ <= :now)';
-		$stmtChambre = $db->prepare($requeteChambre);
-		$stmtChambre->bindParam(':now', $now);
-		$stmtChambre->execute();
+		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		// $stmtChambre = $db->prepare($requeteChambre);
+		// $stmtChambre->bindParam(':now', $now);
+		// $stmtChambre->execute();
+
 	}
-} */
+}
 
-/**
- * Cette fonction permet de mettre à jour l'état des réservations, des accompagnateurs et des chambres
- * en fonction de la date de fin_occ fournie par l'utilisateur.
- *
- * @param string $dateLimite La date limite fournie par l'utilisateur au format 'Y-m-d H:i:s'.
- * @return void
- */
-/* function mettre_a_jour_etat_reservations_accompagnateurs($dateLimite)
-{
-	$db = connect_db();
-
-	if (!is_null($db)) {
-		// Mettre à jour l'état des réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
-		$requeteReservation = 'UPDATE reservations SET est_actif = 0 WHERE fin_occ > :dateLimite';
-		$stmtReservation = $db->prepare($requeteReservation);
-		$stmtReservation->bindParam(':dateLimite', $dateLimite);
-		$stmtReservation->execute();
-
-		// Mettre à jour l'état des accompagnateurs pour les réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
-		$requeteAccompagnateur = 'UPDATE listes_accompagnateurs_reservation SET est_actif = 0 WHERE num_res IN (SELECT num_res FROM reservations WHERE fin_occ > :dateLimite)';
-		$stmtAccompagnateur = $db->prepare($requeteAccompagnateur);
-		$stmtAccompagnateur->bindParam(':dateLimite', $dateLimite);
-		$stmtAccompagnateur->execute();
-
-		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est supérieure à la date fournie par l'utilisateur
-		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ > :dateLimite)';
-		$stmtChambre = $db->prepare($requeteChambre);
-		$stmtChambre->bindParam(':dateLimite', $dateLimite);
-		$stmtChambre->execute();
-	}
-} */
 
 /**
  * Cette fonction permet de récupérer le noms et contacts accompagnateurs
@@ -2640,6 +2610,71 @@ function recuperer_info_repas($cod_repas): ?array
 
 
 /**
+ * Supprime les entrées des repas associées à une commande dans la table quantite.
+ *
+ * @param int $num_cmd Le numéro de commande.
+ * @return bool Indique si la suppression a réussi ou non.
+ */
+function supprimer_repas_commande($num_cmd): bool
+{
+	$suppression_reussie = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete = "DELETE FROM quantite WHERE num_cmd = :num_cmd";
+
+		$suppression_reussie = $db->prepare($requete);
+
+		$resultat = $suppression_reussie->execute([
+
+			'num_cmd' => $num_cmd
+		]);
+
+		if ($resultat) {
+			$suppression_reussie = true;
+		}
+	}
+
+	return $suppression_reussie;
+}
+
+/**
+ *  Cette fonction permet de mettre à jour le statut de chambre
+ *
+ * @param  int $numChambreDisponible
+ * @return bool
+ */
+function mettre_a_jour_commande($num_cmd, $prix_total): bool
+{
+	$statut = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+		$request = "UPDATE commande SET prix_total = :prix_total, maj_le = :maj_le WHERE num_cmd = :num_cmd";
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_cmd' => $num_cmd,
+			'prix_total' => $prix_total,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+			$statut = true;
+		}
+	}
+
+	return $statut;
+}
+
+
+
+/**
  * Cette fonction permet de supprimer une commande
  *
  * @param  int $num_cmd
@@ -2739,10 +2774,9 @@ function recuperer_liste_messages($num_clt = null): array
 			$verifier_liste_messages = $db->prepare($requette);
 
 			$resultat = $verifier_liste_messages->execute();
-
 		} elseif (!is_null($num_clt)) {
 
-			$requette = 'SELECT * FROM plaintes WHERE num_clt=:num_clt and est_supprimer=0';
+			$requette = 'SELECT * FROM plaintes WHERE num_clt = :num_clt and est_supprimer = 0';
 
 			$verifier_liste_messages = $db->prepare($requette);
 
@@ -2760,7 +2794,42 @@ function recuperer_liste_messages($num_clt = null): array
 }
 
 
+/**
+ * Cette fonction permet de supprimer un message
+ *
+ * @param  mixed $id
+ * @return bool
+ */
+function supprimer_messages(int $id): bool
+{
 
+	$supprimer_messages = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE plaintes SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE id= :id";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'id' => $id,
+			'est_actif' => 0,
+			'est_supprimer' => 1,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$supprimer_messages = true;
+		}
+	}
+
+	return $supprimer_messages;
+}
 
 
 /**

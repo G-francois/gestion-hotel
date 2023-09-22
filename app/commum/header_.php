@@ -116,7 +116,7 @@ if (isset($include_icm_header) && $include_icm_header) {
     } */
 
 
-    // mettre_a_jour_etat_reservations_accompagnateurs();
+     mettre_a_jour_etat_reservations_accompagnateurs();
 
     ?>
         <!DOCTYPE html>
@@ -270,13 +270,13 @@ if (isset($include_icm_header) && $include_icm_header) {
                                         <h5 class="ml-2"><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></h5>
                                     </a>
                                     <!-- Dropdown - User Information -->
-                                    <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem;" aria-labelledby="userDropdown">
-                                        <div class="dropdown">
+                                    <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
+                                        <!-- <div class="dropdown">
                                             <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
                                                 <span><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['profil'] : 'Profil' ?></span>
                                             </p>
                                         </div>
-                                        <hr>
+                                        <hr> -->
                                         <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>
                                             <span>Mon Profile</span>

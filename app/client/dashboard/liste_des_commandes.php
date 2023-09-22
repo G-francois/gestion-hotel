@@ -75,6 +75,9 @@ include('./app/commum/header_.php');
                             <?php
                             // Parcours de la liste des chambres
                             foreach ($liste_commandes_client as $commande) {
+                                $num_cmd = $commande['num_cmd'];
+                                // Récupérer la liste des repas pour cette commande
+                                $repas_commande = recuperer_liste_repas_par_commande($num_cmd);
                             ?>
                                 <tr>
                                     <td><?php echo $commande['creer_le']; ?></td>
@@ -82,11 +85,6 @@ include('./app/commum/header_.php');
                                     <td><?php echo $commande['num_res']; ?></td>
                                     <td>
                                         <?php
-                                        $num_cmd = $commande['num_cmd'];
-
-                                        // Récupérer la liste des repas pour cette commande
-                                        $repas_commande = recuperer_liste_repas_par_commande($num_cmd);
-
                                         if (empty($repas_commande)) {
                                             echo '---';
                                         } else {
@@ -103,10 +101,6 @@ include('./app/commum/header_.php');
                                     </td>
                                     <td>
                                         <?php
-                                        $num_cmd = $commande['num_cmd'];
-
-                                        // Récupérer la liste des repas pour cette commande
-                                        $repas_commande = recuperer_liste_repas_par_commande($num_cmd);
 
                                         if (empty($repas_commande)) {
                                             echo '---';
@@ -127,9 +121,10 @@ include('./app/commum/header_.php');
                                     <td>
                                         <div class="modal-footer float-right">
                                             <!-- Button pour modifier le repas modal -->
-                                            <button type="button" class="btn btn-primary btn-modifier-commande" data-toggle="modal" data-target="#modifier-commande-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>">
+                                            <button type="button" class="btn btn-warning btn-modifier-commande" style="color: white;" data-toggle="modal" data-target="#modifier-commande-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>" data-nom-repas="<?= htmlspecialchars(json_encode($repas_commande)) ?>">
                                                 Modifier
                                             </button>
+
 
 
                                             <!-- Modal de modification du repas -->
@@ -146,59 +141,75 @@ include('./app/commum/header_.php');
                                                             <!-- Formulaire de modification de la commande -->
                                                             <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-commande" method="post" enctype="multipart/form-data">
                                                                 <input type="hidden" name="commande_id" value="<?php echo $num_cmd ?>">
+                                                                <input type="hidden" name="reservation_id" value="<?php echo $commande['num_res']; ?>">
 
 
                                                                 <?php
+                                                                // foreach ($liste_commandes_client as $commande) {
+                                                                $num_cmd = $commande['num_cmd'];
+                                                                $repas_commande = recuperer_liste_repas_par_commande($num_cmd);
+
+                                                                // Vérifiez s'il y a des repas associés à cette commande
                                                                 if (!empty($repas_commande)) {
-                                                                    foreach ($repas_commande as $key => $repas) {
-                                                                        $info_repas = recuperer_info_repas($repas['cod_repas']);
                                                                 ?>
+
+                                                                    <?php
+                                                                    foreach ($repas_commande as $repas) {
+                                                                        $info_repas = recuperer_info_repas($repas['cod_repas']);
+                                                                        if ($info_repas !== null) {
+                                                                            $nom_repas = $info_repas['nom_repas'];
+                                                                            $pu_repas = $info_repas['pu_repas'];
+                                                                        } else {
+                                                                            $nom_repas = '';
+                                                                            $pu_repas = '';
+                                                                        }
+                                                                    ?>
                                                                         <div class="row">
-                                                                            <!-- Le champ Nom du Repas -->
+                                                                            <!-- Le champ nom_repas -->
                                                                             <div class="col-md-6 mb-3">
-                                                                                <label for="nom_repas">Nom du Repas :
-                                                                                    <span class="text-danger">(*)</span>
-                                                                                </label>
-                                                                                <select class="form-control" id="nom_repas" name="nom_repas[]">
+                                                                                <label for="modification-nom_repas">Nom du repas:</label>
+                                                                                <select class="form-control nom_repas" id="modification-nom_repas" name="nom_repas[]">
                                                                                     <option value="">Sélectionnez un repas</option>
                                                                                     <?php
                                                                                     $liste_repas = recuperer_nom_prix_repas();
+
                                                                                     foreach ($liste_repas as $repas) {
-                                                                                        echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '">' . $repas['nom_repas'] . '</option>';
+                                                                                        $selected = ($repas['nom_repas'] == $nom_repas) ? 'selected' : '';
+                                                                                        echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '" ' . $selected . '>' . $repas['nom_repas'] . '</option>';
                                                                                     }
                                                                                     ?>
                                                                                 </select>
-                                                                                <?php if (isset($erreurs["nom_repas"]) && !empty($erreurs["nom_repas"])) { ?>
-                                                                                    <span class="text-danger">
-                                                                                        <?= $erreurs["nom_repas"]; ?>
-                                                                                    </span>
-                                                                                <?php } ?>
                                                                             </div>
 
-                                                                            <!-- Le champ Prix du Repas -->
-                                                                            <div class="col-md-6 mb-3">
-                                                                                <label for="pu_repas">Prix du Repas :</label>
-                                                                                <input type="text" class="form-control" placeholder="Prix total du repas" id="pu_repas" name="pu_repas[]" readonly>
-                                                                                <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
-                                                                                    <span class="text-danger">
-                                                                                        <?= $erreurs["pu_repas"]; ?>
-                                                                                    </span>
-                                                                                <?php } ?>
+                                                                            <!-- Le champ pu_repas -->
+                                                                            <div class="col-md-4 mb-3">
+                                                                                <label for="modification-pu_repas">Prix unitaire:</label>
+                                                                                <input type="text" name="pu_repas[]" class="form-control pu_repas" value="<?= $pu_repas ?>" readonly>
+                                                                            </div>
+
+                                                                            <!-- Bouton pour retirer le champ de repas -->
+                                                                            <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end;">
+                                                                                <button type="button" class="btn btn-danger" onclick="supprimerrepas(this)" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">
+                                                                                    -
+                                                                                </button>
                                                                             </div>
                                                                         </div>
-
-                                                                <?php
+                                                                    <?php
                                                                     }
+                                                                    ?>
+                                                                <?php
                                                                 }
+                                                                // }
                                                                 ?>
 
+
                                                                 <!-- Conteneur pour les champs de repas dynamiques -->
-                                                                <div id="champs-repas-dynamiques-container">
+                                                                <div id="nouveaux-repas-<?php echo $num_cmd; ?>">
                                                                     <!-- Les champs de repas seront ajoutés ici en fonction des boutons "+" -->
                                                                 </div>
 
-                                                                <!-- Bouton pour ajouter un accompagnateur -->
-                                                                <button type="button" class="btn btn-success" id="ajouter-repas">
+                                                                <!-- Bouton pour ajouter un repas -->
+                                                                <button type="button" class="btn btn-success ajouter-repas" data-repas-id="<?php echo $num_cmd; ?>">
                                                                     +
                                                                 </button>
 
@@ -266,7 +277,7 @@ include('./app/commum/header_.php');
                 } else {
                     // Aucune réservation n'a été trouvée, affichez le message en couleur noire
                 ?>
-                    <p style="color: black;">Aucune réservation n'a été trouvée!</p>
+                    <p style="color: black;">Aucun repas n'a été trouvé!</p>
                 <?php
                 }
                 ?>
@@ -276,192 +287,82 @@ include('./app/commum/header_.php');
 
 </div>
 
-
+<!-- Ajoutez ce script JavaScript à la fin de votre page -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Function to update the meal price based on selection
-        function updateMealPrice() {
-            const selectElement = document.getElementById("nom_repas");
-            const prixInput = document.getElementById("pu_repas");
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
+    $(document).ready(function() {
+        // Gestionnaire d'événement pour le changement de sélection
+        $('.nom_repas').change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var prixInput = $(this).closest('.row').find('.pu_repas');
 
-            if (selectedOption) {
-                prixInput.value = selectedOption.getAttribute("data-prix");
-                updateMontantTotal(); // Update total price immediately after meal selection
+            if (selectedOption.length > 0) {
+                var prix = selectedOption.data('prix');
+                prixInput.val(prix);
             } else {
-                prixInput.value = "";
+                prixInput.val('');
             }
-        }
-
-        // Update the initial meal price when the page loads
-        updateMealPrice();
-
-        // Attach an event listener to the meal selection dropdown
-        document.getElementById("nom_repas").addEventListener("change", updateMealPrice);
+        });
     });
 
-    // Function to remove a meal
-    function supprimerRepas(idRepas) {
-        const champRepas = document.getElementById(`repas-${idRepas}`);
-        if (champRepas) {
-            champRepas.remove();
-            updateMontantTotal(); // Update total price immediately after removing a meal
-        }
-    }
-</script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Initialise le compteur de champs de repas
-        let compteurRepas = 1;
+    $(document).ready(function() {
+        $('.ajouter-repas').click(function() {
+            var repasId = $(this).data('repas-id');
+            var nouveauChamp = `
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nom_repas">Nom du Repas : <span class="text-danger">(*)</span></label>
+                    <select class="form-control nom_repas" id="nom_repas" name="nom_repas[]">
+                        <option value="">Sélectionnez un repas</option>
+                        <?php
+                        $liste_repas = recuperer_nom_prix_repas();
 
-        // Fonction pour ajouter un champ de repas
-        function ajouterRepas() {
-            compteurRepas++;
-            const champRepas = `
-                <div class="row" id="repas-${compteurRepas}">
-                    <div class="col-md-6 mb-3">
-                        <label for="nom_repas-${compteurRepas}">Nom du Repas : <span class="text-danger">(*)</span></label>
-                        <select class="form-control nom_repas" id="nom_repas-${compteurRepas}" name="nom_repas[]-${compteurRepas}">
-                            <option value="">Sélectionnez un repas</option>
-                            <?php
-                            $liste_repas = recuperer_nom_prix_repas();
-
-                            foreach ($liste_repas as $repas) {
-                                echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '">' . $repas['nom_repas'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="pu_repas-${compteurRepas}">Prix du Repas :</label>
-                        <input type="text" class="form-control pu_repas" placeholder="Le prix du repas sera automatiquement rempli" id="pu_repas-${compteurRepas}" name="pu_repas[]-${compteurRepas}" readonly>
-                    </div>
-                    <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
-                        <button type="button" class="btn btn-danger" onclick="supprimerRepas(${compteurRepas})" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">-</button>
-                    </div>
+                        foreach ($liste_repas as $repas) {
+                            echo '<option value="' . $repas['cod_repas'] . '" data-prix="' . $repas['pu_repas'] . '">' . $repas['nom_repas'] . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="pu_repas">Prix du Repas :</label>
+                    <input type="text" class="form-control pu_repas" placeholder="Le prix du repas sera automatiquement rempli" id="pu_repas" name="pu_repas[]">
+                </div>
+
+                <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
+                    <button type="button" class="btn btn-danger" onclick="supprimerrepas(this)" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">-</button>
+                </div>
+            </div>
             `;
 
-            document.getElementById("champs-repas-dynamiques-container").insertAdjacentHTML("beforeend", champRepas);
-            updateMontantTotal(); // Update total price immediately after adding a meal
+            $('#nouveaux-repas-' + repasId).append(nouveauChamp);
+
+            // Ajoutez le gestionnaire d'événements change pour mettre à jour le prix du repas
+            $('#nouveaux-repas-' + repasId).find('.nom_repas').last().change(function() {
+                updateMealPrice($(this));
+            });
+        });
+
+        // Fonction pour mettre à jour le prix du repas en fonction de la sélection
+        function updateMealPrice(selectElement) {
+            var prixInput = selectElement.closest('.row').find('.pu_repas');
+            var selectedOption = selectElement.find('option:selected');
+
+            if (selectedOption.length > 0) {
+                var prix = selectedOption.data('prix');
+                prixInput.val(prix);
+            } else {
+                prixInput.val('');
+            }
         }
-
-        // Gestionnaire d'événements pour le bouton "+" (ajouter un repas)
-        document.getElementById("ajouter-repas").addEventListener("click", ajouterRepas);
-
-        // Gestionnaire d'événements pour le changement de sélection
-        document.getElementById("champs-repas-dynamiques-container").addEventListener("change", function(event) {
-            const selectedOption = event.target.options[event.target.selectedIndex];
-            if (selectedOption) {
-                // Trouver l'élément parent du champ sélectionné
-                const parentRow = event.target.closest(".row");
-                const prixInput = parentRow.querySelector(".pu_repas");
-                prixInput.value = selectedOption.getAttribute("data-prix");
-
-                // Mise à jour du montant total lors du changement de sélection
-                updateMontantTotal();
-            }
-        });
-
     });
+
+    // Fonction pour supprimer un repas
+    function supprimerrepas(button) {
+        $(button).closest('.row').remove();
+    }
 </script>
-
-
-<!-- FIN -->
-<!-- <script>
-    $(document).ready(function() {
-        $('.btn-modifier').click(function() {
-            var reservationId = $(this).data('reservation-id');
-            var typeChambre = "<?php echo $type_chambre; ?>"; // Récupérez le type de chambre de la réservation
-            var accompagnateursInfo = JSON.parse($(this).data('accompagnateurs'));
-
-            // Réinitialisez les champs du modal
-            // ...
-
-            // Afficher le modal de modification
-            $('#modal-modifier-' + reservationId).modal('show');
-
-            // Manipulez les champs en fonction du type de chambre
-            if (typeChambre === 'Doubles') {
-                // Affichez et pré-remplissez les champs pour le type Doubles
-            } else if (typeChambre === 'Triples') {
-                // Affichez et pré-remplissez les champs pour le type Triples
-            } else if (typeChambre === 'Suite') {
-                // Affichez et pré-remplissez les champs pour le type Suite
-            }
-        });
-    });
-</script> -->
-
-
-<!-- Ajoutez cette balise script à la fin de la page -->
-<!-- <script>
-    $(document).ready(function() {
-        $('.ajouter-accompagnateur').click(function() {
-            var reservationId = $(this).data('reservation-id');
-            var nouveauChamp = `
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label>Nom de l'accompagnateur</label>
-                <input type="text" name="nom_acc[]" class="form-control" required>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label>Contact de l'accompagnateur</label>
-                <input type="text" name="contact_acc[]" class="form-control" required>
-            </div>
-        </div>
-    `;
-
-            $('#nouveaux-accompagnateurs-' + reservationId).append(nouveauChamp);
-
-            // Ajoutez une validation pour le champ "Contact de l'accompagnateur" ici
-            $('#nouveaux-accompagnateurs-' + reservationId + ' input[name="contact_acc[]"]').on('input', function() {
-                var contactAcc = $(this).val();
-
-                // Utilisez une expression régulière pour vérifier si contact_acc contient uniquement des nombres
-                var numbersOnlyRegex = /^[0-9]+$/;
-
-                if (!numbersOnlyRegex.test(contactAcc)) {
-                    alert('Le champ Contact de l\'accompagnateur doit contenir uniquement des nombres.');
-                    $(this).val(''); // Effacez la saisie incorrecte
-                }
-            });
-        });
-    });
-</script> -->
-
-
-<!-- Ajoutez cette balise script à la fin de votre page pour gérer la sélection/désélection -->
-<!-- <script>
-    $(document).ready(function() {
-        // Gérez la sélection/désélection de toutes les cases à cocher lorsque la case à cocher globale est cliquée
-        $('#selectAllCheckbox').click(function() {
-            var isChecked = $(this).prop('checked');
-
-            // Parcourez toutes les lignes du tableau
-            $('tbody tr').each(function() {
-                var row = $(this);
-                var dateFin = new Date(row.find('td:eq(6)').text()); // La septième colonne contient la date de fin (fin_occ)
-
-                // Comparez la date de fin avec la date actuelle
-                if (dateFin < new Date()) {
-                    row.find('input[name="selection[]"]').prop('checked', isChecked);
-                }
-            });
-        });
-
-        // Désactivez la case à cocher globale lorsque toutes les cases à cocher individuelles ne sont pas cochées
-        $('input[name="selection[]"]').click(function() {
-            if ($('input[name="selection[]"]:checked').length === 0) {
-                $('#selectAllCheckbox').prop('checked', false);
-            }
-        });
-    });
-</script> -->
-
-
 
 
 <?php

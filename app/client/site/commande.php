@@ -108,7 +108,7 @@ include('./app/commum/header_.php');
 
                                     <!-- Le champ Prix du Repas -->
                                     <div class="col-md-4 mb-3">
-                                        <label for="pu_repas">Prix du Repas :</label>
+                                        <label for="pu_repas">Prix :</label>
                                         <input type="text" class="form-control" placeholder="Prix total du repas" id="pu_repas" name="pu_repas[]" readonly>
                                         <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
                                             <span class="text-danger">

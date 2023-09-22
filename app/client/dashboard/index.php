@@ -201,11 +201,15 @@ include('./app/commum/header_.php');
                                                                                             </div>
 
                                                                                             <!-- Le champs contact_acc -->
-                                                                                            <div class="col-md-6 mb-3">
+                                                                                            <div class="col-md-4 mb-3">
                                                                                                 <label for="modification-contact_acc">
-                                                                                                    Contact de l'accompagnateur:
+                                                                                                    Contact:
                                                                                                 </label>
                                                                                                 <input type="text" name="contact_acc[]" id="modification-contact_acc" class="form-control" value="<?= !empty($info['contact']) ? $info['contact'] : '' ?>" required>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
+                                                                                                <button type="button" class="btn btn-danger" onclick="supprimerAccompagnateur(this)" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">-</button>
                                                                                             </div>
                                                                                         </div>
                                                                                 <?php

@@ -45,6 +45,39 @@
                                 <i class="bx bx-chevron-right"></i>
                                 <a href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                             </li>
+
+                            <?php
+                            if (check_if_user_connected_client()) {
+                            ?>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/profil/profile">Mon Profile</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/dashboard/index">Liste des reservations</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/dashboard/liste_des_commandes">Liste des commandes</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/dashboard/liste_des_messages">Liste des messages</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/deconnexion/index">Déconnexion</a>
+                                </li>
+
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -75,6 +108,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
+    
 
     </body>
 
@@ -146,6 +180,38 @@
                                 <a href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                             </li>
 
+                            <?php
+                            if (check_if_user_connected_client()) {
+                            ?>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/profil/profile">Mon Profile</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/dashboard/index">Liste des reservations</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/dashboard/liste_des_commandes">Liste des commandes</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/site/liste_des_messages">Liste des messages</a>
+                                </li>
+
+                                <li>
+                                    <i class="bx bx-chevron-right"></i>
+                                    <a href="<?= PATH_PROJECT ?>client/deconnexion/index">Déconnexion</a>
+                                </li>
+
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
