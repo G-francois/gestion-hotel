@@ -29,7 +29,7 @@ if (check_password_exist($_POST['password'], $_SESSION['utilisateur_connecter_cl
         $type_sujet = $donnees["subject"];
         $messages = $donnees["message"];
 
-        $mise_a_jour_message = mettre_a_jour_messages($id, $type_sujet, $messages);
+        $mise_a_jour_message = modifier_messages($id, $type_sujet, $messages);
 
         // die(var_dump($mise_a_jour_message));
 

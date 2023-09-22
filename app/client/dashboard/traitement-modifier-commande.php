@@ -55,7 +55,7 @@ if (check_password_exist($_POST['password'], $_SESSION['utilisateur_connecter_cl
                 // die(var_dump($prix_total));
 
                 // Ajouter une commande avec le montant total
-                $mise_a_jour_commande = mettre_a_jour_commande($num_cmd, $prix_total);
+                $mise_a_jour_commande = modifier_commande($num_cmd, $prix_total);
 
                 // die(var_dump($mise_a_jour_commande));
 

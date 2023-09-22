@@ -2646,7 +2646,7 @@ function supprimer_repas_commande($num_cmd): bool
  * @param  int $numChambreDisponible
  * @return bool
  */
-function mettre_a_jour_commande($num_cmd, $prix_total): bool
+function modifier_commande($num_cmd, $prix_total): bool
 {
 	$statut = false;
 
@@ -2795,14 +2795,14 @@ function recuperer_liste_messages($num_clt = null): array
 
 
 /**
- * mettre_a_jour_messages
+ * Cette fonction permet de mettre a jour messages
  *
  * @param  mixed $id
  * @param  mixed $type_sujet
  * @param  mixed $messages
  * @return bool
  */
-function mettre_a_jour_messages($id, $type_sujet, $messages): bool
+function modifier_messages($id, $type_sujet, $messages): bool
 {
 	$statut = false;
 
