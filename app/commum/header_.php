@@ -107,6 +107,37 @@ if (isset($include_icm_header) && $include_icm_header) {
         $erreurs = $_SESSION['erreurs-contact'];
     }
 
+    // LES SESSIONS UTILISEE LORS DE LA PAGE PROFIL DU CLIENT & DE L'ADMINISTRATEUR 
+    if (isset($_SESSION['changement-erreurs']) && !empty($_SESSION['changement-erreurs'])) {
+        $erreurs = $_SESSION['changement-erreurs'];
+    }
+
+    if (isset($_SESSION['sauvegarder-erreurs']) && !empty($_SESSION['sauvegarder-erreurs'])) {
+        $erreurs = $_SESSION['sauvegarder-erreurs'];
+    }
+
+    if (isset($_SESSION['suppression-erreurs']) && !empty($_SESSION['suppression-erreurs'])) {
+        $erreurs = $_SESSION['suppression-erreurs'];
+    }
+
+    if (isset($_SESSION['suppression-photo-erreurs']) && !empty($_SESSION['suppression-photo-erreurs'])) {
+        $erreurs = $_SESSION['suppression-photo-erreurs'];
+    }
+
+    if (isset($_SESSION['desactivation-erreurs']) && !empty($_SESSION['desactivation-erreurs'])) {
+        $erreurs = $_SESSION['desactivation-erreurs'];
+    }
+
+    if (isset($_SESSION['photo-erreurs']) && !empty($_SESSION['photo-erreurs'])) {
+        $erreurs = $_SESSION['photo-erreurs'];
+    }
+
+    if (isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])) {
+        $erreurs = $_SESSION['erreurs'];
+    }
+
+
+
     // Supposez que vous avez une liste de réservations avec leurs dates de fin_occ
     /* $reservations = [];
 
@@ -116,7 +147,7 @@ if (isset($include_icm_header) && $include_icm_header) {
     } */
 
 
-     mettre_a_jour_etat_reservations_accompagnateurs();
+    mettre_a_jour_etat_reservations_accompagnateurs();
 
     ?>
         <!DOCTYPE html>
@@ -141,6 +172,12 @@ if (isset($include_icm_header) && $include_icm_header) {
             <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
             <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
+
+            <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+            <!-- Google Fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
 
             <style>
                 .hr {
@@ -191,6 +228,8 @@ if (isset($include_icm_header) && $include_icm_header) {
                     }
                 }
             </style>
+
+            
         </head>
 
         <body>
