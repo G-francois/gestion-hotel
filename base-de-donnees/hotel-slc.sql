@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 22 sep. 2023 à 19:09
+-- Généré le : sam. 23 sep. 2023 à 23:24
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -277,21 +277,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `creer_le` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `maj_le` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `sexe`, `telephone`, `email`, `nom_utilisateur`, `avatar`, `profil`, `mot_passe`, `est_actif`, `est_supprimer`, `creer_le`, `maj_le`) VALUES
-(1, 'GNONHOUE', 'Fran&ccedil;ois Rom&eacute;o', 'Masculin', '62929439', 'franois.gnonhoue@gmail.com', 'FRANCHESCO', '/soutenance/public/images/upload/FRANCHESCO/profile.jpg', 'ADMINISTRATEUR', '7898552a15e06e86d529e573fef684a1b45f4f40', 1, 0, '2023-06-06 22:13:38', '2023-06-15 22:29:33'),
-(2, 'GNONHOUE', 'Christelle ', 'Feminin', '12345678', 'christine@gmail.com', 'G. Christina', '/soutenance/public/images/upload/G. Christina/640px-WhatsApp.svg.png', 'RECEPTIONNISTE', 'b41238934314fae676bb84c941f013a42e36ae68', 1, 0, '2023-06-06 22:15:45', '2023-06-15 22:42:47'),
-(3, 'DUPONT', 'L&eacute;onard ', NULL, '12345678', 'neon@gmail.com', 'neon_229', '/soutenance/public/images/upload/neon_229/2fedf831-b60e-4b57-90d5-88331627646c.jpeg', 'CLIENT', '6c3a4053dcac0b7068bff91cc765475ae7256801', 1, 0, '2023-06-06 22:52:30', '2023-08-12 17:03:26'),
-(4, 'YEHOUENOU', 'Déborah', 'Féminin', '24681012', 'deboyehouenou@gmail.com', 'Débowê', 'no_image', 'RECEPTIONNISTE', 'f840a916ffd473dd637aa23000691527d1d2231c', 1, 0, '2023-06-16 13:20:26', '2023-06-16 11:20:59'),
-(11, 'BESS', 'JOW ', NULL, '1234', 'jow@gmail.com', 'neon_228', 'no_image', 'CLIENT', '29596ef73246afe32d6f5275e3f88575d73de0e8', 1, 0, '2023-08-22 10:58:34', NULL),
-(12, 'DUPONT', 'JOW ', NULL, '123400', 'jown@gmail.com', 'NULL', 'no_image', 'CLIENT', 'eef19c54306daa69eda49c0272623bdb5e2b341f', 0, 0, '2023-08-25 10:54:25', NULL),
-(13, 'NOUVEAU ', 'contact ', NULL, '12345', 'ranco@gmail.com', 'nouv', 'no_image', 'CLIENT', 'b4f635f6ed19f35fe3a0737c61e480b8ccc1d6f3', 1, 0, '2023-08-29 09:45:04', '2023-08-29 07:46:07'),
-(14, 'GNONHOUE', 'Léonard ', NULL, '555455', 'ro@gmail.vom', 'NULL', 'no_image', 'CLIENT', 'eef19c54306daa69eda49c0272623bdb5e2b341f', 0, 0, '2023-09-01 08:09:03', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contraintes pour les tables déchargées

@@ -96,7 +96,7 @@ include('./app/commum/header_.php');
                             ?>
                                 <h5 style="color: #cda45e; text-align:center; margin-bottom: 20px;">
                                     <i class="bi bi-exclamation-triangle me-1"></i>
-                                    Veuiller retenir le numéro de chambre que vous réservez après une réservation.
+                                    Veuiller retenir le numéro de chambre après votre réservation. Un compte par défaut vous ai créer si vous n'avez pas de compte.
                                 </h5>
                             <?php
                             }
@@ -243,7 +243,7 @@ include('./app/commum/header_.php');
 
                                 <div class="col-lg-12">
                                     <h5 style="font-weight: bold">Nombre total de jours : <span id="nombre_jour">0</span></h5>
-                                    <h5 style="font-weight: bold">Montant total : <span id="prix_total">0</span> F</h5>
+                                    <h5 style="font-weight: bold">Montant total : <span id="prix_total">0</span></h5>
                                 </div>
 
                                 <button type="reset" class="btn btn-danger" style="--bs-btn-color: #fff; --bs-btn-bg: #3b070c; --bs-btn-border-color: #3b070c; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #b30617; --bs-btn-hover-border-color: #b30617;">

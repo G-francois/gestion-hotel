@@ -12,7 +12,7 @@ $dateActuelle = date('d-m-Y');
 
 if (isset($_POST['enregistrer'])) {
 
-    
+
     if (empty($_SESSION['utilisateur_connecter_client'])) {
 
         if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
@@ -85,7 +85,7 @@ if (isset($_POST['enregistrer'])) {
     } else {
         $erreurs["deb_occ"] = "Le champs date début de séjour est requis. Veuillez le renseigné.";
     }
-    
+
     $dateDebut = $_POST['deb_occ'];
 
     // Vérification si la date de début est valide et supérieure ou égale à la date actuelle
@@ -104,13 +104,16 @@ if (isset($_POST['enregistrer'])) {
 
     $_SESSION['donnees-reservation'] = $donnees;
 
-    $donnees["profil"] = "CLIENT";
-
-    $donnees["nom-utilisateur"] = "NULL";
-
-    $donnees["mot-passe"] = "NULL";
 
     if (empty($erreurs)) {
+
+        $donnees["profil"] = "CLIENT";
+
+        $donnees["nom-utilisateur"] = "Client";
+
+        $motDePasseParDefaut = bin2hex(random_bytes(8)); // Génère un mot de passe de 8 caractères aléatoires
+
+        $donnees["mot-passe"] = $motDePasseParDefaut;
 
         // Appeler la fonction pour obtenir un numéro de chambre disponible de type "Solo"
         $numChambreDisponible = obtenir_numero_chambre_disponible('Solo');
@@ -151,10 +154,35 @@ if (isset($_POST['enregistrer'])) {
 
                 // Vérifier si l'insertion des informations de réservation a réussi
                 if ($resultatInsertionReservation) {
+
                     $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
-                    
-                    // La réservation a été effectuée avec succès
-                    $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible;
+
+
+                    if ($miseajour) {
+
+                        $token = uniqid("");
+
+                        $id_utilisateur = $numClient;
+
+                        if (!insertion_token($id_utilisateur, 'VALIDATION_COMPTE', $token)) {
+
+                            $message_erreur_global = "La création de votre compte s'est effectué avec succès mais une erreur est survenue lors de la génération de la clè de validation de votre compte. Veuillez contacter un administrateur.";
+                        } else {
+                            $objet = 'Validation et mot de passe par défaut après votre réservation';
+                            ob_start(); // Démarre la temporisation de sortie
+                            include 'app/client/site/message_mail_défaut_mot_de_passe.php'; // Inclut le fichier HTML dans le tampon
+                            $template_mail = ob_get_contents(); // Récupère le contenu du tampon
+                            ob_end_clean(); // Arrête et vide la temporisation de sortie
+
+                            if (send_email($donnees["email"], $objet, $template_mail)) {
+
+                                $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible . " et un compte par défaut vous a été créer. Veuillez consulter votre adresse mail pour valider votre compte.";
+                            } else {
+                                $message_erreur_global = "Un compte par défaut vous a été créer avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";
+                            }
+                        }
+                    }
+
                 } else {
                     // La réservation a échoué
                     $message_erreur_global =  "Désolé, une erreur s'est produite lors de la réservation de la chambre.";

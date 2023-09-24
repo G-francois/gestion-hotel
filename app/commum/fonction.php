@@ -23,6 +23,27 @@ function connect_db()
 	return $db;
 }
 
+
+/**
+ * Cette fonction de génération d'un nom d'utilisateur par défaut
+ *
+ * @param  mixed $nom
+ * @param  mixed $prenom
+ * @return void
+ */
+function generateDefaultUsername($nom, $prenom)
+{
+	// Supprimez les espaces et convertissez en minuscules
+	$nom = strtolower(str_replace(' ', '', $nom));
+	$prenom = strtolower(str_replace(' ', '', $prenom));
+
+	// Concaténez le nom et le prénom
+	$username = $prenom . '.' . $nom;
+
+	return $username;
+}
+
+
 /** Cette fonction permet d'inserer un utilisateur de profile CLIENT
  * @param int $id
  * @return bool
@@ -1885,10 +1906,10 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 		$stmtAccompagnateur->execute();
 
 		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
-		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
-		// $stmtChambre = $db->prepare($requeteChambre);
-		// $stmtChambre->bindParam(':now', $now);
-		// $stmtChambre->execute();
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		$stmtChambre = $db->prepare($requeteChambre);
+		$stmtChambre->bindParam(':now', $now);
+		$stmtChambre->execute();
 
 	}
 }

@@ -96,7 +96,7 @@ include('./app/commum/header_.php');
                             ?>
                                 <h5 style="color: #cda45e; text-align:center; margin-bottom: 20px;">
                                     <i class="bi bi-exclamation-triangle me-1"></i>
-                                    Veuiller retenir le numéro de chambre que vous réservez après une réservation.
+                                    Veuiller retenir le numéro de chambre après votre réservation. Un compte par défaut vous ai créer si vous n'avez pas de compte.
                                 </h5>
                             <?php
                             }
