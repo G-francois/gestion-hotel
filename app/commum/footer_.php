@@ -108,7 +108,20 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= PATH_PROJECT ?>public/js/sb-admin-2.min.js"></script>
-    
+
+
+
+    <!-- outils JS Files -->
+
+    <script src="<?= PATH_PROJECT ?>public/outils/aos/aos.js"></script>
+
+    <script src="<?= PATH_PROJECT ?>public/outils/glightbox/js/glightbox.min.js"></script>
+
+    <script src="<?= PATH_PROJECT ?>public/outils/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <script src="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.js"></script>
+
+    <script src="<?= PATH_PROJECT ?>public/js/main.js"></script>
 
     </body>
 

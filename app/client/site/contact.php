@@ -188,6 +188,6 @@ unset($_SESSION['erreurs-contact'], $_SESSION['donnees-contact'], $_SESSION['con
 ?>
 
 <?php
-
+$include_icm_footer = true;
 include('./app/commum/footer_.php');
 ?>
