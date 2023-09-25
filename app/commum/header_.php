@@ -171,6 +171,9 @@ if (isset($include_icm_header) && $include_icm_header) {
             <link href="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.css" rel="stylesheet" />
             <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
+            <!-- Custom styles for this page -->
+            <link href="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
             <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
 
             <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -229,7 +232,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                 }
             </style>
 
-            
+
         </head>
 
         <body>
@@ -310,12 +313,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                     </a>
                                     <!-- Dropdown - User Information -->
                                     <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
-                                        <!-- <div class="dropdown">
-                                            <p style="color: black;"> <strong><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></strong> <br>
-                                                <span><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['profil'] : 'Profil' ?></span>
-                                            </p>
-                                        </div>
-                                        <hr> -->
+                                        
                                         <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>
                                             <span>Mon Profile</span>

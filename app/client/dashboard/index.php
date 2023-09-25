@@ -8,6 +8,12 @@ include('./app/commum/header_.php');
 
 ?>
 
+<style>
+    .card-body{
+        color: black;
+    }
+</style>
+
 <!-- Commencement du contenu de la page -->
 <div class="container-fluid">
     <!-- Titre de la page -->

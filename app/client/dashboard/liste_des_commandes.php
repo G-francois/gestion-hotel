@@ -3,11 +3,17 @@ if (!check_if_user_connected_client()) {
     header('location: ' . PATH_PROJECT . 'client/connexion/index');
     exit;
 }
+
 $include_client_header = true;
 include('./app/commum/header_.php');
 
 ?>
 
+<style>
+    .card-body{
+        color: black;
+    }
+</style>
 <!-- Commencement du contenu de la page -->
 <div class="container-fluid">
     <!-- Titre de la page -->

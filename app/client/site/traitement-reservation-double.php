@@ -181,11 +181,7 @@ if (isset($_POST['enregistrer'])) {
                         $insertionReservationAccompagnateur = enregistrer_accompagnateur_des_reservations($numReservation, $numAccompagnateur);
                     }
 
-                    //Mettre à jour le statut de la chambre est actif à 0
-                    $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
-
-
-                    if ($miseajour) {
+                    if (!check_if_user_connected_client()) {
 
                         $token = uniqid("");
 
@@ -202,15 +198,21 @@ if (isset($_POST['enregistrer'])) {
                             ob_end_clean(); // Arrête et vide la temporisation de sortie
 
                             if (send_email($donnees["email"], $objet, $template_mail)) {
-
-                                $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible . " et un compte par défaut vous a été créer. Veuillez consulter votre adresse mail pour valider votre compte.";
+                                //Mettre à jour le statut de la chambre est actif à 0
+                                $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
+                                if ($miseajour) {
+                                    $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible . " et un compte par défaut vous a été créer. Veuillez consulter votre adresse mail pour valider votre compte.";
+                                }
                             } else {
                                 $message_erreur_global = "Un compte par défaut vous a été créer avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";
                             }
                         }
                     } else {
-                        // La réservation a échoué
-                        $message_erreur_global =  "Désolé, une erreur s'est produite lors de la réservation de la chambre.";
+                        //Mettre à jour le statut de la chambre est actif à 0
+                        $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
+                        if ($miseajour) {
+                            $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible . " .";
+                        }
                     }
                 } else {
                     // La réservation a échoué

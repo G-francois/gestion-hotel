@@ -1906,11 +1906,18 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 		$stmtAccompagnateur->execute();
 
 		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
+		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		// $stmtChambre = $db->prepare($requeteChambre);
+		// $stmtChambre->bindParam(':now', $now);
+		// $stmtChambre->execute();
+
+		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
 		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
 		$stmtChambre = $db->prepare($requeteChambre);
 		$stmtChambre->bindParam(':now', $now);
-		$stmtChambre->execute();
 
+		// Exécutez la mise à jour uniquement si la date de fin est dépassée
+		$stmtChambre->execute();
 	}
 }
 
@@ -2891,6 +2898,49 @@ function supprimer_messages(int $id): bool
 }
 
 
+// function liste_reservations($page = null, $nom_acc = null, $typ_chambre = null): array
+// {
+// 	$liste_reservations = [];
+// 	$nb_reservations_par_page = 10;
+// 	$db = connect_db();
+// 	if (is_object($db)) {
+// 		$conditions = [];
+// 		$params = [];
+
+// 		if (!is_null($page)) {
+// 			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
+// 			$params['page'] = $page;
+// 			$params['limit'] = $nb_reservations_par_page * $page;
+
+// 			if (!is_null($nom_acc)) {
+// 				$conditions[] = "a.nom_acc LIKE :nom_acc";
+// 				$params['nom_acc'] = '%' . $nom_acc . '%';
+// 			}
+
+// 			if (!is_null($typ_chambre)) {
+// 				$conditions[] = "r.typ_chambre = :typ_chambre";
+// 				$params['typ_chambre'] = $typ_chambre;
+// 			}
+// 		} else {
+// 			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
+// 		}
+
+// 		// Construire la condition WHERE
+// 		$whereClause = implode(' AND ', $conditions);
+
+// 		// Construire la requête SQL complète avec une jointure sur la table de listes d'accompagnateurs
+// 		$sql = "SELECT r.* FROM reservations r INNER JOIN listes_accompagnateurs_reservation a ON r.num_res = a.num_res
+//             WHERE $whereClause ORDER BY r.num_res DESC LIMIT :page, :limit";
+
+// 		$stmt = $db->prepare($sql);
+// 		$stmt->execute($params);
+
+// 		$liste_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 	}
+// 	return $liste_reservations;
+// }
+
+
 /**
  * Cette fonction permet de récupérer la liste des clients de la base de donnée.
  *
@@ -2942,16 +2992,6 @@ function recuperer_liste_des_reservations(): array
 	}
 	return $liste_des_reservations;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /* <?php
