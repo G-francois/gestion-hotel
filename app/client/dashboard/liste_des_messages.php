@@ -88,7 +88,7 @@ include('./app/commum/header_.php');
                                     <td>
                                         <div class="modal-footer float-right">
                                             <!-- Button pour modifier le repas modal -->
-                                            <button type="button" class="btn btn-warning btn-modifier-messages" style="color: white;" data-toggle="modal" data-target="#modifier-messages-<?php echo $messages['id'] ?>" data-num-messages="<?php echo $messages['id'] ?>">
+                                            <button type="button" class="btn btn-warning btn-modifier-messages" style="color: white; margin-right: 8px" data-toggle="modal" data-target="#modifier-messages-<?php echo $messages['id'] ?>" data-num-messages="<?php echo $messages['id'] ?>">
                                                 Modifier
                                             </button>
 
@@ -98,7 +98,7 @@ include('./app/commum/header_.php');
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Modifier l messages <?php echo $messages['id'] ?></h4>
+                                                            <h4 class="modal-title">Modifier le message <?php echo $messages['id'] ?></h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -162,7 +162,7 @@ include('./app/commum/header_.php');
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Supprimer la commande <?php echo $messages['id'] ?></h4>
+                                                                <h4 class="modal-title">Supprimer le message <?php echo $messages['id'] ?></h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
