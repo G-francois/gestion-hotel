@@ -310,6 +310,9 @@ if (isset($_POST['enregistrer'])) {
                                 $message_erreur_global = "Un compte par défaut vous a été créer avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";
                             }
                         }
+                    } else {
+                        // La réservation a échoué
+                        $message_erreur_global =  "Désolé, une erreur s'est produite lors de la réservation de la chambre.";
                     }
                 } else {
                     // La réservation a échoué
