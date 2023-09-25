@@ -3,9 +3,10 @@ if (!check_if_user_connected_client()) {
   header('location: ' . PATH_PROJECT . 'client/connexion/index');
   exit;
 }
-
 $include_client_header = true;
 include('./app/commum/header_.php');
+
+
 
 ?>
 
@@ -359,7 +360,7 @@ include('./app/commum/header_.php');
     </div>
     </div>
 
-    <div class="col-xl-8">
+    <div class="col-md-8">
       <div class="col-lg-12">
         <h5 style="margin-bottom: 13px; margin-top: 80px; font-size: 32px; font-weight: 700; color: #cda45e;">Modification(s) des informations usuelles</h5>
         <div class="card">
