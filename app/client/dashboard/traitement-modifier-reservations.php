@@ -10,6 +10,9 @@ if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_
 
     $num_res = $_POST['reservation_id'];
 
+    // Définissez une variable pour suivre les erreurs
+    $erreur_occure = false;
+
     if (!empty($_POST['type_chambre']) && $_POST['type_chambre'] == 'Doubles') {
         if (is_array($_POST['nom_acc']) && sizeof($_POST['nom_acc']) <= 1) {
             foreach ($_POST['nom_acc'] as $nom_acc) {
@@ -83,7 +86,6 @@ if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_
     }
 
     if (!empty($donnees['nom_acc']) && !empty($donnees['contact_acc']) && empty($message_erreur_global)) {
-        supprimer_accompagnateurs_reservation($num_res);
 
         // Créez un tableau pour stocker les numéros d'accompagnateurs à mettre à jour
         $accompagnateurs_a_mettre_a_jour = [];
@@ -94,7 +96,8 @@ if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_
                 $accompagnateurs_a_mettre_a_jour[] = $numAccompagnateur;
             } else {
                 if (vérifier_contact_accompagnateur_exist_in_db($donnees['contact_acc'][$key])) {
-                    $erreurs["contact_acc"] = "Ce contact est déjà utilisé. Veuillez le changer.";
+                    $erreur_occure = true;
+                    $message_erreur_global = "Un des contact accompanateurs est déjà utilisé. Veuillez le changer.";
                 } else {
                     $resultatInsertionAccompagnateur = enregistrer_accompagnateur($nom, $donnees['contact_acc'][$key]);
                     $numAccompagnateur = recuperer_num_acc_par_son_contact($donnees['contact_acc'][$key]);
@@ -103,12 +106,15 @@ if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_
             }
         }
 
-        // Mettez à jour la réservation avec les nouveaux accompagnateurs une seule fois
-        foreach ($accompagnateurs_a_mettre_a_jour as $numAccompagnateur) {
-            mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur);
-        }
+        if (!$erreur_occure) {
+            supprimer_accompagnateurs_reservation($num_res);
+            // Mettez à jour la réservation avec les nouveaux accompagnateurs une seule fois
+            foreach ($accompagnateurs_a_mettre_a_jour as $numAccompagnateur) {
+                mis_a_jour_accompagnateur_des_reservations($num_res, $numAccompagnateur);
+            }
 
-        $message_success_global = "La réservation a été modifiée avec succès !";
+            $message_success_global = "La réservation a été modifiée avec succès !";
+        }
     } elseif (empty($donnees['nom_acc']) && empty($donnees['contact_acc']) && empty($message_erreur_global)) {
 
         supprimer_accompagnateurs_reservation($num_res);
