@@ -304,7 +304,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                             ?>
 
                                 <!-- Nav Item - User Information -->
-                                <li class="nav-item">
+                                <li class="nav-item" style="width: auto;">
                                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                         <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
