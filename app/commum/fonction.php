@@ -1906,18 +1906,11 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 		$stmtAccompagnateur->execute();
 
 		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
-		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ <= :now)';
 		// $stmtChambre = $db->prepare($requeteChambre);
 		// $stmtChambre->bindParam(':now', $now);
 		// $stmtChambre->execute();
 
-		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
-		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
-		$stmtChambre = $db->prepare($requeteChambre);
-		$stmtChambre->bindParam(':now', $now);
-
-		// Exécutez la mise à jour uniquement si la date de fin est dépassée
-		$stmtChambre->execute();
 	}
 }
 

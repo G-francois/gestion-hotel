@@ -111,7 +111,7 @@ if (isset($_POST['enregistrer'])) {
 
         $donnees["nom-utilisateur"] = "Nouveau Client";
 
-        $motDePasseParDefaut = bin2hex(random_bytes(8)); // Génère un mot de passe de 8 caractères aléatoires
+        $motDePasseParDefaut = bin2hex(random_bytes(4)); // Génère un mot de passe de 8 caractères aléatoires
 
         $donnees["mot-passe"] = $motDePasseParDefaut;
 
