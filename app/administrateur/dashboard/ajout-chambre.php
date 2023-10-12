@@ -47,15 +47,30 @@ include './app/commum/aside.php';
     ?>
 
     <!-- Formulaire d'ajout de chambre-->
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user">
+    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user" enctype="multipart/form-data">
         <div class="form-group row pt-5">
+            <!-- Le champ photo -->
+            <div class="col-sm-6 mb-3">
+                <label class="form-label" for="customFile" style="color: gray;">
+                    Importer une image
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="file" class="form-control" id="image" name="image" />
+
+                <?php if (isset($erreurs["image"]) && !empty($erreurs["image"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["image"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
             <!-- Le champ Code du numéros de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="num_chambre">
                     Numéros de chambre :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="number" name="num_chambre" id="num_chambre" class="form-control" placeholder="Veuillez entrer le code type de chambre" value="<?= (isset($donnees["num_chambre"]) && !empty($donnees["num_chambre"])) ? $donnees["num_chambre"] : ''; ?>" required>
+                <input type="number" name="num_chambre" id="num_chambre" class="form-control" placeholder="Veuillez entrer le numero de chambre" value="<?= (isset($donnees["num_chambre"]) && !empty($donnees["num_chambre"])) ? $donnees["num_chambre"] : ''; ?>" required>
 
                 <?php if (isset($erreurs["num_chambre"]) && !empty($erreurs["num_chambre"])) { ?>
                     <span class="text-danger">
@@ -64,23 +79,8 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
-            <!-- Le champ Code du type de chambre -->
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <label for="cod_typ">
-                    Code du type de chambre :
-                    <span class="text-danger">(*)</span>
-                </label>
-                <input type="text" name="cod_typ" id="cod_typ" class="form-control" placeholder="Le code du type de chambre sera automatiquement rempli" value="<?= (isset($donnees["cod_typ"]) && !empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : ''; ?>" readonly>
-
-                <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["code_type"])) { ?>
-                    <span class="text-danger">
-                        <?php echo $erreurs["code_typ"]; ?>
-                    </span>
-                <?php } ?>
-            </div>
-
             <!-- Le champ Libellé du type de chambre -->
-            <div class="col-sm-6 mt-3">
+            <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="libelle_type">
                     Libellé du type de chambre :
                     <span class="text-danger">(*)</span>
@@ -101,6 +101,23 @@ include './app/commum/aside.php';
                 </div>
             </div>
 
+
+            <!-- Le champ Code du type de chambre -->
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <label for="cod_typ">
+                    Code du type de chambre :
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="cod_typ" id="cod_typ" class="form-control" placeholder="Le code du type de chambre sera automatiquement rempli" value="<?= (isset($donnees["cod_typ"]) && !empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : ''; ?>" readonly>
+
+                <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["code_type"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["code_typ"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
+
             <!-- Le champ Prix unitaire -->
             <div class="col-sm-6 mt-3">
                 <label for="prix_unitaire">
@@ -118,9 +135,10 @@ include './app/commum/aside.php';
 
 
             <!-- Le bouton d'ajout -->
-            <div class="col-md-6 offset-md-6" style="padding-top: 47px;">
+            <div class="col-sm-6 mt-5">
                 <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
             </div>
+
         </div>
     </form>
 </div>

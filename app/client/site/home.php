@@ -19,7 +19,7 @@ include('./app/commum/header_.php');
           un séjour d'affaire/loisir relaxant, un confort remarquable, des
           salles de conférence, un espace Restaurant.</span>
       </div>
-<!-- 
+      <!-- 
       <div class="dropdown">
         <button class="btn btn-primary btn-white mt30 page-scroll dropdown-toggle" style="background-color: black; border-color: black;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           NOS MEILLEURS OFFRES
@@ -127,51 +127,127 @@ include('./app/commum/header_.php');
       </div>
 
       <div class="row">
-        <section class="col-md-6 col-lg-4">
-          <a href="#">
-            <figure id="vignette1">
-              <img id="photo1" src="<?= PATH_PROJECT ?>public/images/Chambres/Solo/Solo.jpg" alt="Chambres Solo" />
+        <section class="col-md-6 col-lg-4 mb-5">
 
+          <a href="#">
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(27);
+
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
+            <figure id="vignette2">
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
               <figcaption>
-                <h3 class="titre" id="intitule1">Chambres Solo</h3>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
+              </figcaption>
+            </figure>
+          </a>
+
+          <a href="#">
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(28);
+
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
+            <figure id="vignette2">
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
+              <figcaption>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
               </figcaption>
             </figure>
           </a>
         </section>
 
         <section class="col-md-6 col-lg-4 mb-5">
+
           <a href="#">
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(29);
+
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
             <figure id="vignette2">
-              <img id="photo2" src="<?= PATH_PROJECT ?>public/images/Chambres/Suites/Suites.jpg" alt="Suite" />
-
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
               <figcaption>
-                <h3 id="intitule2">Suite</h3>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
               </figcaption>
             </figure>
           </a>
 
           <a href="#">
-            <figure id="vignette3">
-              <img id="photo3" src="<?= PATH_PROJECT ?>public/images/Chambres/Triples/Triples.jpg" alt="Chambres Triples" />
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(30);
 
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
+            <figure id="vignette2">
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
               <figcaption>
-                <h3 id="intitule3">Chambre Triple</h3>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
               </figcaption>
             </figure>
           </a>
         </section>
 
-        <section class="col-md-6 col-lg-4">
+        <section class="col-md-6 col-lg-4 mb-1">
+
           <a href="#">
-            <figure id="vignette4">
-              <img id="photo4" src="<?= PATH_PROJECT ?>public/images/Chambres/Doubles/Doubles.jpg" alt="chambre doubles" />
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(31);
 
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
+            <figure id="vignette2">
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
               <figcaption>
-                <h3 id="intitule4">Chambre Double</h3>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
+              </figcaption>
+            </figure>
+          </a>
+
+          <a href="#">
+            <?php
+            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
+            $chambreInfo = recuperer_chambre_par_son_num_chambre(32);
+
+            if ($chambreInfo) {
+              $photos = $chambreInfo['photos'];
+              $nomChambre = $chambreInfo['lib_typ'];
+            }
+            ?>
+            <figure id="vignette2">
+              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
+              <figcaption>
+                <h3 id="intitule2"><?= $nomChambre ?></h3>
               </figcaption>
             </figure>
           </a>
         </section>
+
+        <div class="float-right" style="text-align: right;">
+          <a href="<?= PATH_PROJECT ?>client/site/chambres" class="btn btn-primary" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">Voir plus >></a>
+        </div>
+        
       </div>
     </div>
   </div>

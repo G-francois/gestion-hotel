@@ -48,7 +48,7 @@ function generateDefaultUsername($nom, $prenom)
  * @param int $id
  * @return bool
  */
-function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
+function enregistrer_utilisateur(string $nom, string $prenom, string $email, string $nom_utilisateur, string $mot_passe, string $profil = "CLIENT"): bool
 {
 	$enregistrer_utilisateur = false;
 
@@ -57,7 +57,7 @@ function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, st
 	if (!is_null($db)) {
 
 		// Ecriture de la requête
-		$requette = 'INSERT INTO utilisateur (nom, prenom, telephone, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :telephone, :email, :nom_utilisateur, :profil, :mot_passe)';
+		$requette = 'INSERT INTO utilisateur (nom, prenom, email, nom_utilisateur, profil, mot_passe) VALUES (:nom, :prenom, :email, :nom_utilisateur, :profil, :mot_passe)';
 
 		// Préparation
 		$inserer_utilisateur = $db->prepare($requette);
@@ -66,7 +66,6 @@ function enregistrer_utilisateur(string $nom, string $prenom, int $telephone, st
 		$resultat = $inserer_utilisateur->execute([
 			'nom' => $nom,
 			'prenom' => $prenom,
-			'telephone' => $telephone,
 			'email' => $email,
 			'nom_utilisateur' => $nom_utilisateur,
 			'profil' => $profil,
@@ -1179,7 +1178,7 @@ function supprimer_repas(int $cod_repas): bool
  * @param  int $est_actif
  * @return bool
  */
-function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ, int $pu,  int $est_actif = 1): bool
+function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ, int $pu, string $image, int $est_actif = 1): bool
 {
 	$enregistrer_chambre = false;
 
@@ -1187,7 +1186,7 @@ function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ,
 
 	if (!is_null($db)) {
 
-		$requette = 'INSERT INTO chambre (num_chambre, cod_typ, lib_typ, pu, est_actif) VALUES (:num_chambre, :cod_typ, :lib_typ, :pu, :est_actif)';
+		$requette = 'INSERT INTO chambre (num_chambre, cod_typ, lib_typ, pu, photos,  est_actif) VALUES (:num_chambre, :cod_typ, :lib_typ, :pu, :photos,  :est_actif)';
 
 		$inserer_chambre = $db->prepare($requette);
 
@@ -1196,6 +1195,7 @@ function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ,
 			'cod_typ' => $cod_typ,
 			'lib_typ' => $lib_typ,
 			'pu' => $pu,
+			'photos' => $image,
 			'est_actif' => $est_actif
 		]);
 
@@ -1291,7 +1291,7 @@ function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
 
 	if ($resultat) {
 
-		$chambre = $verifier_repas->fetchAll(PDO::FETCH_ASSOC);
+		$chambre = $verifier_repas->fetch(PDO::FETCH_ASSOC);
 	}
 
 	return $chambre;
@@ -3022,3 +3022,17 @@ foreach ($liste_repas as $repas) {
     echo '<option value="' . $repas['id'] . '" data-prix="' . $repas['prix_repas'] . '">' . $repas['nom_repas'] . '</option>';
 }
 ?> */
+
+
+function is_current_page($page_name)
+        {
+            // Récupérer le chemin actuel de la page
+            $current_page = $_SERVER['REQUEST_URI'];
+
+            // Comparer le chemin actuel avec le nom de la page
+            if (strpos($current_page, $page_name) !== false) {
+                return 'active';
+            }
+
+            return '';
+        }

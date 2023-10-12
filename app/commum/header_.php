@@ -3,6 +3,8 @@ if (isset($include_icm_header) && $include_icm_header) {
     // Inclure la partie du header spécifique à include_icm_header.php
     $erreurs = [];
 
+    $donnees = [];
+
     if (isset($_SESSION['inscription-erreurs']) && !empty($_SESSION['inscription-erreurs'])) {
         $erreurs = $_SESSION['inscription-erreurs'];
     }
@@ -17,10 +19,6 @@ if (isset($include_icm_header) && $include_icm_header) {
 
     if (isset($_SESSION['verification-erreurs']) && !empty($_SESSION['verification-erreurs'])) {
         $erreurs = $_SESSION['verification-erreurs'];
-    }
-
-    if (isset($_COOKIE["donnees-utilisateur"]) && !empty($_COOKIE["donnees-utilisateur"])) {
-        $data = json_decode($_COOKIE["donnees-utilisateur"]);
     }
 
     if (isset($_SESSION['enregistrer-erreurs']) && !empty($_SESSION['enregistrer-erreurs'])) {
@@ -51,6 +49,18 @@ if (isset($include_icm_header) && $include_icm_header) {
         <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
     </head>
 
+    <style>
+        /* Style pour les liens de navigation actifs */
+        .nav-link.active {
+            color: #d9ba85;
+            /* Couleur du texte */
+            padding: 5px 10px;
+            /* Espacement interne pour une apparence du texte */
+            font-size: larger;
+            /* Taille du texte */
+        }
+    </style>
+
     <body>
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top d-flex align-items-center">
@@ -60,13 +70,13 @@ if (isset($include_icm_header) && $include_icm_header) {
                 </h1>
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
-                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a></li>
-                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a></li>
-                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a></li>
-                        <li><a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a></li>
+                        <li><a class="nav-link scrollto <?= is_current_page('client/site/home') ?>" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
+                        <li><a class="nav-link scrollto <?= is_current_page('client/site/chambres') ?>" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a></li>
+                        <li><a class="nav-link scrollto <?= is_current_page('client/site/restaurant') ?>" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a></li>
+                        <li><a class="nav-link scrollto <?= is_current_page('client/site/galeries') ?>" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a></li>
+                        <li><a class="nav-link scrollto <?= is_current_page('client/site/contact') ?>" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a></li>
                         <?php if (!check_if_user_connected_client()) : ?>
-                            <li><a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a></li>
+                            <li><a class="nav-link scrollto <?= is_current_page('client/connexion/index') ?>" href="<?= PATH_PROJECT ?>client/connexion/index"><strong>SE CONNECTER</strong></a></li>
                         <?php endif; ?>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle" style="margin-left: 80px;"></i>
@@ -230,6 +240,16 @@ if (isset($include_icm_header) && $include_icm_header) {
                         transform: translateY(0);
                     }
                 }
+
+                /* Style pour les liens de navigation actifs */
+                .nav-link.active {
+                    color: #d9ba85;
+                    /* Couleur du texte */
+                    padding: 5px 10px;
+                    /* Espacement interne pour une apparence du texte */
+                    font-size: larger;
+                    /* Taille du texte */
+                }
             </style>
 
 
@@ -244,57 +264,42 @@ if (isset($include_icm_header) && $include_icm_header) {
                     </h1>
                     <nav id="navbar" class="navbar order-last order-lg-0">
                         <ul>
+                            <!-- Lien pour la page "Acceuil" -->
                             <li>
-                                <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/site/home') ?>" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
                             </li>
 
+                            <!-- Lien pour la page "Chambres" -->
                             <li>
-                                <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/site/chambres') ?>" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
                             </li>
 
+                            <!-- Lien pour la page "Restaurant" -->
                             <li>
-                                <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/site/restaurant') ?>" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
                             </li>
 
+                            <!-- Lien pour la page "Galeries" -->
                             <li>
-                                <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/site/galeries') ?>" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
                             </li>
 
+                            <!-- Lien pour la page "Contact" -->
                             <li>
-                                <a class="nav-link scrollto" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/site/contact') ?>" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
                             </li>
 
                             <?php
                             if (!check_if_user_connected_client()) {
                             ?>
 
+                                <!-- Lien pour se connecter -->
                                 <li>
-                                    <a href="<?= PATH_PROJECT ?>client/connexion/index" class="nav-link scrollto" style="color: #d9ba85;"><strong>SE CONNECTER</strong></a>
+                                    <a class="nav-link scrollto <?= is_current_page('client/connexion/index') ?>" href="<?= PATH_PROJECT ?>client/connexion/index"><strong>SE CONNECTER</strong></a>
                                 </li>
 
-                                <!-- <div id="notification-container" class="notification-container">
-                                    <div class="notification-content d-flex">
-                                        <img id="offre" src="<?= PATH_PROJECT ?>public/images/remise.jpg" alt="Remise" />
-                                        <span class="notification-message">Profitez d'un rabais de 5% sur toutes vos <br> réservations lorsque vous vous inscrivez <br> sur notre platforme dès maintnant.</span>
+                                <!-- Les autres éléments que vous avez commentés -->
 
-                                    </div>
-                                </div> -->
-
-                                <!-- <div id="notification-container" class="notification-container">
-                                    <div class="notification-content d-flex">
-                                        <span class="notification-message">Profitez d'un un cocktail de bienvenue pour vous <br>
-                                            laissez imprégner du lieu. <br>
-                                            Après votre réservation vous avez accès à notre: <br>
-                                            - Wifi haut débit disponible gratuitement dans tout l'hotel. <br>
-                                            - Piscine intérieure équipée d'un jacuzzi et sauna. <br>
-                                            - Espace Wellness en découvrant notre sauna et <br>
-                                            nos prestations de massage. <br>
-                                            - Services + qui vous oriente vers nos partenaires de location de vélos, <br>
-                                            skis, heliski, et bien plus. <br>
-                                        </span>
-
-                                    </div>
-                                </div> -->
                             <?php
                             }
                             ?>
@@ -303,17 +308,20 @@ if (isset($include_icm_header) && $include_icm_header) {
                             if (check_if_user_connected_client()) {
                             ?>
 
-                                <!-- Nav Item - User Information -->
+                                <!-- Lien pour le profil de l'utilisateur connecté -->
                                 <li class="nav-item" style="width: auto;">
                                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
+                                        <!-- Image de profil de l'utilisateur -->
                                         <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="margin-right: 12px; width: 2rem; height: 2rem;" alt="Profile" class="rounded-circle">
 
+                                        <!-- Nom de l'utilisateur -->
                                         <h5 class="ml-2"><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></h5>
                                     </a>
-                                    <!-- Dropdown - User Information -->
+                                    <!-- Contenu du dropdown pour l'utilisateur connecté -->
                                     <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
-                                        
+
+
                                         <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>
                                             <span>Mon Profile</span>
@@ -330,10 +338,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                             <i class="bi bi-mailbox" style="margin-right: 12px;"></i>
                                             <span>Liste des messages</span>
                                         </a>
-                                        <!-- <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/notification">
-                                            <i class="bi bi-bell" style="margin-right: 12px;"></i>
-                                            <span>Notification(s)</span>
-                                        </a> -->
+
                                         <hr>
                                         <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
                                             <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
@@ -341,7 +346,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                         </a>
                                     </div>
                                 </li>
-                                <!-- End Profile Nav -->
+                                <!-- Fin du profil de l'utilisateur connecté -->
 
                             <?php
                             }

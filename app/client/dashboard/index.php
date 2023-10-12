@@ -9,7 +9,7 @@ include('./app/commum/header_.php');
 ?>
 
 <style>
-    .card-body{
+    .card-body {
         color: black;
     }
 </style>
@@ -116,13 +116,13 @@ include('./app/commum/header_.php');
 
                                     <td>
                                         <!-- Button de détails modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details-reservation-<?php echo $reservation['num_res']; ?>">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details-reservation-<?= $reservation['num_res']; ?>">
                                             Détails
                                         </button>
 
+
                                         <!-- Modal de détails -->
-                                        <div class="modal fade" id="details-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal fade" id="details-reservation-<?= $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">                                            <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>

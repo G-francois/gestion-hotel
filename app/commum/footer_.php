@@ -97,6 +97,8 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?= PATH_PROJECT ?>public/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= PATH_PROJECT ?>public/js/bootstrap.min.js"></script>
+
     <script src="<?= PATH_PROJECT ?>public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?= PATH_PROJECT ?>public/outils/bootstrap/js/bootstrap.bundle.min.js"></script>
 

@@ -27,7 +27,7 @@ include('./app/commum/header_.php');
 						<?php
 						if (isset($_SESSION['inscription-message-erreur-global']) && !empty($_SESSION['inscription-message-erreur-global'])) {
 						?>
-							<div class="alert alert-primary" style="color: white; background-color: red; border-color: snow;">
+							<div class="alert alert-primary" style="color: white; background-color: #490303; border-color: snow;">
 								<?= $_SESSION['inscription-message-erreur-global'] ?>
 							</div>
 						<?php
@@ -68,7 +68,7 @@ include('./app/commum/header_.php');
 							</div>
 
 							<!-- Le champ téléphone -->
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label for="inscription-telephone">
 									Téléphone:
 									<span class="text-danger">(*)</span>
@@ -79,7 +79,7 @@ include('./app/commum/header_.php');
 										<?php echo $erreurs["telephone"]; ?>
 									</span>
 								<?php } ?>
-							</div>
+							</div> -->
 
 							<!-- Le champ email -->
 							<div class="form-group">
@@ -173,6 +173,10 @@ include('./app/commum/header_.php');
 	</div>
 
 </div>
+
+<?php
+unset($_SESSION['donnees-utilisateur'], $_SESSION['inscription-erreurs'], $_SESSION['inscription-message-success-global'], $_SESSION['inscription-message-erreur-global']);
+?>
 
 <?php
 $include_icm_footer = true;
