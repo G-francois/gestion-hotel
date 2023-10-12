@@ -330,6 +330,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                             <i class="bi bi-card-checklist" style="margin-right: 12px;"></i>
                                             <span>Liste des reservations</span>
                                         </a>
+                                        
                                         <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/liste_des_commandes">
                                             <i class="bi bi-card-list" style="margin-right: 12px;"></i>
                                             <span>Liste des commandes</span>
