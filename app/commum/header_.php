@@ -270,12 +270,13 @@ if (isset($include_icm_header) && $include_icm_header) {
                 }
 
                 /* Style pour les liens de navigation actifs */
-                .dropdown-item.active {
+                .nav-link.active {
                     color: #d9ba85;
                     /* Couleur du texte */
                     padding: 5px 10px;
                     /* Espacement interne pour une apparence du texte */
-
+                    font-size: larger;
+                    /* Taille du texte */
                 }
             </style>
 
@@ -344,6 +345,7 @@ if (isset($include_icm_header) && $include_icm_header) {
                                     </a>
                                     <!-- Contenu du dropdown pour l'utilisateur connecté -->
                                     <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
+
 
                                         <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/profil') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>

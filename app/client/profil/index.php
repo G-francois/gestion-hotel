@@ -471,22 +471,20 @@ include('./app/commum/header_.php');
                             <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour appliquer les modifications.</label>
                             <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                           </div>
-
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" name="sauvegarder" class="btn btn-primary">Valider</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" name="sauvegarder" class="btn btn-primary">Valider</button>
+            <!-- Fin du formulaire de modification du profil -->
           </div>
         </div>
       </div>
-    </div>
-    </div>
-    </div>
-    </form>
-    <!-- End Profile Edit Form -->
-    </div>
-    </div>
-    </div>
 
     <!-- Changed password Form -->
     <div class="col-lg-12 mt-5">
