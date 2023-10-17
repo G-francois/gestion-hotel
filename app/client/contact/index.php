@@ -71,7 +71,7 @@ include('./app/commum/header_.php');
         }
         ?>
         
-        <form action="<?= PATH_PROJECT ?>client/site/traitement-contact" method="post" class="php-email-form" novalidate>
+        <form action="<?= PATH_PROJECT ?>client/contact/traitement-contact" method="post" class="php-email-form" novalidate>
           <?php
           if (!check_if_user_connected_client()) {
           ?>
@@ -107,20 +107,6 @@ include('./app/commum/header_.php');
 
 
             <div class="row">
-              <!-- Le champ téléphone -->
-              <div class="col-md-6 mb-3">
-                <label for="inscription-telephone">
-                  Téléphone :
-                  <span class="text-danger">(*)</span>
-                </label>
-                <input type="text" name="telephone" id="inscription-telephone" class="form-control" placeholder="Veuillez entrer votre numéro de téléphone" value="<?= (isset($donnees["telephone"]) && !empty($donnees["telephone"])) ? $donnees["telephone"] : ''; ?>" required>
-                <?php if (isset($erreurs["telephone"]) && !empty($erreurs["telephone"])) { ?>
-                  <span class="text-danger">
-                    <?php echo $erreurs["telephone"]; ?>
-                  </span>
-                <?php } ?>
-              </div>
-
               <!-- Le champs email -->
               <div class="col-md-6 mb-3">
                 <label for="inscription-email">
@@ -170,7 +156,7 @@ include('./app/commum/header_.php');
             </div>
           </div> -->
           <div class="text-center">
-            <button type="submit" name="envoyer">Send Message</button>
+            <button type="submit" name="envoyer">Envoyer Message</button>
           </div>
         </form>
       </div>

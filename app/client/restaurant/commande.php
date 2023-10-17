@@ -63,12 +63,12 @@ include('./app/commum/header_.php');
                             ?>
                                 <h5 style="color: #cda45e; text-align:center; margin-bottom: 20px;">
                                     <i class="bi bi-exclamation-triangle me-1"></i>
-                                    Vous pouvez consulter la liste de vos réservations dans le tableau de bord après une réservation.
+                                    Vous pouvez consulter la liste de vos commande dans le tableau de bord liste des commandes après une commande.
                                 </h5>
                             <?php
                             }
                             ?>
-                            <form action="<?= PATH_PROJECT ?>client/site/traitement-commande" method="post" class="user" novalidate>
+                            <form action="<?= PATH_PROJECT ?>client/restaurant/traitement-commande" method="post" class="user" novalidate>
 
                                 <!-- Le champ numéro de réservation -->
                                 <div class="col-md-12 mb-3">

@@ -208,11 +208,11 @@ include('./app/commum/header_.php');
         <!-- suppression_photo Form -->
         <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
           <div class="row">
-            <button type="reset" class="btn btn-secondary" data-toggle="modal" data-target="#modal5"><i class="fa fa-trash"></i> Supprimer</button>
+            <button type="reset" class="btn btn-secondary" data-toggle="modal" data-target="#modal1"><i class="fa fa-trash"></i> Supprimer</button>
             <div class="col-md-8 col-lg-12">
               <div class="text-center" style="color: #070b3a;">
                 <!-- Modal -->
-                <div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -446,13 +446,13 @@ include('./app/commum/header_.php');
 
               <div class="text-center" style="color: #070b3a;">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#modal1">
+                <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#modal4">
                   Sauvegarder
                 </button>
 
                 <div class="text-center" style="color: #070b3a;">
                   <!-- Modal -->
-                  <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -547,17 +547,13 @@ include('./app/commum/header_.php');
         </div>
       </div>
     </div>
-    </div>
-
-    </div>
-    </div>
   </section>
 
-</main><!-- End #main -->
-
+</main>
+<!-- End #main -->
 <?php
 unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
 
-$include_icm_footer = true;
-include('./app/commum/footer_.php');
+// $include_icm_footer = true;
+// include('./app/commum/footer_.php');
 ?>

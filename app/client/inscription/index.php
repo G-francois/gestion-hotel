@@ -157,12 +157,12 @@ include('./app/commum/header_.php');
 						</form>
 						<hr>
 						<div class="text-center">
-							<a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe/index">
+							<a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe">
 								Mot de passe oublié ?
 							</a>
 						</div>
 						<div class="text-center">
-							<a class="small" href="<?= PATH_PROJECT ?>client/connexion/index">
+							<a class="small" href="<?= PATH_PROJECT ?>client/connexion">
 								Vous avez déjà un compte ? Connectez-vous!
 							</a>
 						</div>

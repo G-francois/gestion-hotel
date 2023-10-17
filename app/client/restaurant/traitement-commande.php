@@ -97,4 +97,4 @@ $_SESSION['commande-message-erreur-global'] = $message_erreur_global;
 $_SESSION['commande-message-success-global'] = $message_success_global;
 
 // Rediriger vers la page de commande
-header('location: ' . PATH_PROJECT . 'client/site/commande');
+header('location: ' . PATH_PROJECT . 'client/restaurant/commande');

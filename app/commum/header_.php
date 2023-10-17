@@ -70,13 +70,37 @@ if (isset($include_icm_header) && $include_icm_header) {
                 </h1>
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto <?= is_current_page('client/site/home') ?>" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a></li>
-                        <li><a class="nav-link scrollto <?= is_current_page('client/site/chambres') ?>" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a></li>
-                        <li><a class="nav-link scrollto <?= is_current_page('client/site/restaurant') ?>" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a></li>
-                        <li><a class="nav-link scrollto <?= is_current_page('client/site/galeries') ?>" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a></li>
-                        <li><a class="nav-link scrollto <?= is_current_page('client/site/contact') ?>" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a></li>
+                        <!-- Lien pour la page "Acceuil" -->
+                        <li>
+                            <a class="nav-link scrollto <?= is_current_page('client/acceuil') ?>" href="<?= PATH_PROJECT ?>client/acceuil">Acceuil</a>
+                        </li>
+
+                        <!-- Lien pour la page "Chambres" -->
+                        <li>
+                            <a class="nav-link scrollto <?= is_current_page('client/chambres') ?>" href="<?= PATH_PROJECT ?>client/chambres">Chambres</a>
+                        </li>
+
+                        <!-- Lien pour la page "Restaurant" -->
+                        <li>
+                            <a class="nav-link scrollto <?= is_current_page('client/restaurant') ?>" href="<?= PATH_PROJECT ?>client/restaurant">Restaurant</a>
+                        </li>
+
+                        <!-- Lien pour la page "Galeries" -->
+                        <li>
+                            <a class="nav-link scrollto <?= is_current_page('client/galeries') ?>" href="<?= PATH_PROJECT ?>client/galeries">Galeries</a>
+                        </li>
+
+
+                        <!-- Lien pour la page "Contact" -->
+                        <li>
+                            <a class="nav-link scrollto <?= is_current_page('client/contact') ?>" href="<?= PATH_PROJECT ?>client/contact">Contact</a>
+                        </li>
+
                         <?php if (!check_if_user_connected_client()) : ?>
-                            <li><a class="nav-link scrollto <?= is_current_page('client/connexion/index') ?>" href="<?= PATH_PROJECT ?>client/connexion/index"><strong>SE CONNECTER</strong></a></li>
+                            <!-- Lien pour se connecter -->
+                            <li>
+                                <a class="nav-link scrollto <?= is_current_page('client/connexion') ?>" href="<?= PATH_PROJECT ?>client/connexion"><strong>SE CONNECTER</strong></a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle" style="margin-left: 80px;"></i>
@@ -181,6 +205,7 @@ if (isset($include_icm_header) && $include_icm_header) {
             <link href="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.css" rel="stylesheet" />
             <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
 
+
             <!-- Custom styles for this page -->
             <link href="<?= PATH_PROJECT ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -266,40 +291,37 @@ if (isset($include_icm_header) && $include_icm_header) {
                         <ul>
                             <!-- Lien pour la page "Acceuil" -->
                             <li>
-                                <a class="nav-link scrollto <?= is_current_page('client/site/home') ?>" href="<?= PATH_PROJECT ?>client/site/home">Acceuil</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/acceuil') ?>" href="<?= PATH_PROJECT ?>client/acceuil">Acceuil</a>
                             </li>
 
                             <!-- Lien pour la page "Chambres" -->
                             <li>
-                                <a class="nav-link scrollto <?= is_current_page('client/site/chambres') ?>" href="<?= PATH_PROJECT ?>client/site/chambres">Chambres</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/chambres') ?>" href="<?= PATH_PROJECT ?>client/chambres">Chambres</a>
                             </li>
 
                             <!-- Lien pour la page "Restaurant" -->
                             <li>
-                                <a class="nav-link scrollto <?= is_current_page('client/site/restaurant') ?>" href="<?= PATH_PROJECT ?>client/site/restaurant">Restaurant</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/restaurant') ?>" href="<?= PATH_PROJECT ?>client/restaurant">Restaurant</a>
                             </li>
 
                             <!-- Lien pour la page "Galeries" -->
                             <li>
-                                <a class="nav-link scrollto <?= is_current_page('client/site/galeries') ?>" href="<?= PATH_PROJECT ?>client/site/galeries">Galeries</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/galeries') ?>" href="<?= PATH_PROJECT ?>client/galeries">Galeries</a>
                             </li>
+
 
                             <!-- Lien pour la page "Contact" -->
                             <li>
-                                <a class="nav-link scrollto <?= is_current_page('client/site/contact') ?>" href="<?= PATH_PROJECT ?>client/site/contact">Contact</a>
+                                <a class="nav-link scrollto <?= is_current_page('client/contact') ?>" href="<?= PATH_PROJECT ?>client/contact">Contact</a>
                             </li>
 
                             <?php
                             if (!check_if_user_connected_client()) {
                             ?>
-
                                 <!-- Lien pour se connecter -->
                                 <li>
-                                    <a class="nav-link scrollto <?= is_current_page('client/connexion/index') ?>" href="<?= PATH_PROJECT ?>client/connexion/index"><strong>SE CONNECTER</strong></a>
+                                    <a class="nav-link scrollto <?= is_current_page('client/connexion') ?>" href="<?= PATH_PROJECT ?>client/connexion"><strong>SE CONNECTER</strong></a>
                                 </li>
-
-                                <!-- Les autres éléments que vous avez commentés -->
-
                             <?php
                             }
                             ?>
@@ -322,26 +344,26 @@ if (isset($include_icm_header) && $include_icm_header) {
                                     <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
 
 
-                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil/profile">
+                                        <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/profil') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>
                                             <span>Mon Profile</span>
                                         </a>
-                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/index">
+                                        <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/liste_des_reservations') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
                                             <i class="bi bi-card-checklist" style="margin-right: 12px;"></i>
                                             <span>Liste des reservations</span>
                                         </a>
-                                        
-                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/liste_des_commandes">
+
+                                        <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/liste_des_commandes') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/liste_des_commandes">
                                             <i class="bi bi-card-list" style="margin-right: 12px;"></i>
                                             <span>Liste des commandes</span>
                                         </a>
-                                        <a class="dropdown-item d-flex align-items-center mb-3" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/dashboard/liste_des_messages">
+                                        <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/liste_des_messages') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/liste_des_messages">
                                             <i class="bi bi-mailbox" style="margin-right: 12px;"></i>
                                             <span>Liste des messages</span>
                                         </a>
 
                                         <hr>
-                                        <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion/index">
+                                        <a class="dropdown-item d-flex align-items-center" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/deconnexion">
                                             <i class="bi bi-box-arrow-right" style="margin-right: 12px;"></i>
                                             <span>Déconnexion</span>
                                         </a>

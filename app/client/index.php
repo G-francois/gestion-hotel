@@ -4,8 +4,8 @@ include './app/commum/fonction.php';
 
 $params = explode('/', $_GET['p']);
 $profile = "client";
-$default_ressource = "site";
-$default_action = "home";
+$default_ressource = "Acceuil";
+$default_action = "index";
 $default_action_folder = "app/" . $profile . "/" . $default_ressource . "/" . $default_action . ".php";
 
 if (isset($_GET['p']) && !empty($_GET['p'])) {

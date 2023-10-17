@@ -15,7 +15,7 @@ include('./app/commum/header_.php');
 
         <div class="btns">
           <a href="#menu" class="btn-menu animated fadeInUp scrollto">Notre Carte</a>
-          <a href="<?= PATH_PROJECT ?>client/site/commande" class="btn-book animated fadeInUp scrollto">Faire une Commande</a>
+          <a href="<?= PATH_PROJECT ?>client/restaurant/commande" class="btn-book animated fadeInUp scrollto">Faire une Commande</a>
         </div>
       </div>
       <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">

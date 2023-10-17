@@ -32,7 +32,7 @@ if (empty($erreurs)) {
 
         $_SESSION['utilisateur_connecter_client'] = $user;
 
-        header('location:' . PATH_PROJECT . 'client/dashboard/index');
+        header('location:' . PATH_PROJECT . 'client/liste_des_reservations');
 
         exit;
     } else {

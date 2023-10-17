@@ -5,8 +5,8 @@ include('./app/commum/header_.php');
 
 ?>
 
-<!-- ======= Hero Section ======= -->
 
+<!-- ======= Hero Section ======= -->
 <header id="headerwrap" class="backstretched no-overlay fullheight">
   <div class="container vertical-center">
     <div class="intro-text vertical-center text-left smoothie">
@@ -45,8 +45,9 @@ include('./app/commum/header_.php');
 </header>
 <!-- End Hero -->
 
-<!-- ======= Why Us Section ======= -->
 
+
+<!-- ======= Why Us Section ======= -->
 <section id="why-us" class="why-us">
   <div class="container" data-aos="fade-up">
     <div class="section-title">
@@ -110,9 +111,10 @@ include('./app/commum/header_.php');
 </section>
 <!-- End Why Us Section -->
 
-<section class="cc-chambre">
-  <!-- Les différents types de chambres -->
 
+
+<!-- Section des différents types de chambres -->
+<section class="cc-chambre">
   <div class="py-2">
     <div class="container">
       <div class="row text-center">
@@ -127,134 +129,63 @@ include('./app/commum/header_.php');
       </div>
 
       <div class="row">
-        <section class="col-md-6 col-lg-4 mb-5">
+        <section>
+          <div class="container">
+            <div class="row">
+              <?php
+              $liste_chambres = recuperer_liste_chambres_acceuil();
 
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(27);
+              if (!empty($liste_chambres)) {
+                $total_chambres = count($liste_chambres);
+                $chambres_par_ligne = 3;
+                $chambres_par_groupe = $chambres_par_ligne * 2;
 
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
+                for ($i = 0; $i < $total_chambres; $i += $chambres_par_groupe) {
+                  echo '<div class="row">';
 
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(28);
+                  for ($j = $i; $j < $i + $chambres_par_groupe && $j < $total_chambres; $j++) {
+                    $chambre = $liste_chambres[$j];
+                    $photos = $chambre['photos'];
+                    $nomChambre = $chambre['lib_typ'];
+              ?>
+                    <div class="col-md-4">
+                      <a href="<?= $photos ?>">
+                        <figure id="vignette2">
+                          <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
+                          <figcaption>
+                            <h3 id="intitule2"><?= $nomChambre ?></h3>
+                          </figcaption>
+                        </figure>
+                      </a>
+                    </div>
+                <?php
+                  }
 
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
+                  echo '</div>';
+                  echo '<div class="float-right mt-4" style="text-align: right;">
+                          <a href="' . PATH_PROJECT . 'client/chambres" class="btn btn-primary" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">Voir plus >></a>
+                        </div>';
+                }
+              } else {
+                ?>
+                <!-- Affiche un message d'erreur si la chambre n'existe pas -->
+                <p class="size-18 m-size-14">
+                  Aucune chambre n'est disponible actuellement.
+                </p>
+
+              <?php
+              }
+              ?>
+            </div>
+          </div>
         </section>
-
-        <section class="col-md-6 col-lg-4 mb-5">
-
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(29);
-
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
-
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(30);
-
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
-        </section>
-
-        <section class="col-md-6 col-lg-4 mb-1">
-
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(31);
-
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
-
-          <a href="#">
-            <?php
-            // Supposons que vous avez une fonction pour récupérer les informations de la chambre depuis la base de données, par exemple getChambreInfoById
-            $chambreInfo = recuperer_chambre_par_son_num_chambre(32);
-
-            if ($chambreInfo) {
-              $photos = $chambreInfo['photos'];
-              $nomChambre = $chambreInfo['lib_typ'];
-            }
-            ?>
-            <figure id="vignette2">
-              <img id="photo2" src="<?= $photos ?>" alt="<?= $nomChambre ?>" />
-              <figcaption>
-                <h3 id="intitule2"><?= $nomChambre ?></h3>
-              </figcaption>
-            </figure>
-          </a>
-        </section>
-
-        <div class="float-right" style="text-align: right;">
-          <a href="<?= PATH_PROJECT ?>client/site/chambres" class="btn btn-primary" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">Voir plus >></a>
-        </div>
-        
       </div>
     </div>
   </div>
 </section>
+<!-- End Section -->
 
 <!-- ======= Testimonials Section ======= -->
-
 <section id="testimonials" class="testimonials section-bg">
   <div class="container" data-aos="fade-up">
     <div class="section-title">

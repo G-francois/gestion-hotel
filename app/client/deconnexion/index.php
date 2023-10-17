@@ -1,7 +1,7 @@
 <?php
 session_destroy();
 
-header('location: '.PATH_PROJECT .'client/connexion/index');
+header('location: '.PATH_PROJECT .'client/connexion');
 exit;
 
 

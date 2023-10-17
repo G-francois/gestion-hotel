@@ -252,6 +252,7 @@ include('./app/commum/header_.php');
                                 <button type="submit" name="enregistrer" class="btn btn-success" style="--bs-btn-color: #fff; --bs-btn-bg: #013534; --bs-btn-border-color: #000000; --bs-btn-hover-color: #fff; --bs-btn-hover-bg: #9d6b15; --bs-btn-hover-border-color: #000000;">
                                     Enregistrer
                                 </button>
+                            </form>
                         </div>
                     </div>
                 </div>

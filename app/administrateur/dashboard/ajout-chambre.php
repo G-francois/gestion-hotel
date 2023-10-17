@@ -64,21 +64,6 @@ include './app/commum/aside.php';
                 <?php } ?>
             </div>
 
-            <!-- Le champ Code du numéros de chambre -->
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <label for="num_chambre">
-                    Numéros de chambre :
-                    <span class="text-danger">(*)</span>
-                </label>
-                <input type="number" name="num_chambre" id="num_chambre" class="form-control" placeholder="Veuillez entrer le numero de chambre" value="<?= (isset($donnees["num_chambre"]) && !empty($donnees["num_chambre"])) ? $donnees["num_chambre"] : ''; ?>" required>
-
-                <?php if (isset($erreurs["num_chambre"]) && !empty($erreurs["num_chambre"])) { ?>
-                    <span class="text-danger">
-                        <?php echo $erreurs["num_chambre"]; ?>
-                    </span>
-                <?php } ?>
-            </div>
-
             <!-- Le champ Libellé du type de chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <label for="libelle_type">
@@ -102,8 +87,53 @@ include './app/commum/aside.php';
             </div>
 
 
-            <!-- Le champ Code du type de chambre -->
+            <!-- Le champ details_chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
+                <label for="details_chambre">
+                    Informations :
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="details_chambre" id="details_chambre" class="form-control" placeholder="Le details chambre sera automatiquement rempli" readonly>
+
+                <?php if (isset($erreurs["details_chambre"]) && !empty($erreurs["details_chambre"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["details_chambre"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
+            <!-- Le champ details_personne_chambre -->
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <label for="details_personne_chambre">
+                    Nombre de pesonne(s):
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="details_personne_chambre" id="details_personne_chambre" class="form-control" placeholder="Le nombre de pesonne(s) sera automatiquement rempli" readonly>
+
+                <?php if (isset($erreurs["details_personne_chambre"]) && !empty($erreurs["details_personne_chambre"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["details_personne_chambre"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
+            <!-- Le champ details_superficie_chambre -->
+            <div class="col-sm-6 mt-3">
+                <label for="details_superficie_chambre">
+                    Superficie:
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="details_superficie_chambre" id="details_superficie_chambre" class="form-control" placeholder="La superficie sera automatiquement rempli" readonly>
+
+                <?php if (isset($erreurs["details_superficie_chambre"]) && !empty($erreurs["details_superficie_chambre"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["details_superficie_chambre"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+
+            <!-- Le champ Code du type de chambre -->
+            <div class="col-sm-6 mt-3">
                 <label for="cod_typ">
                     Code du type de chambre :
                     <span class="text-danger">(*)</span>
@@ -157,22 +187,40 @@ include './app/commum/footer.php';
         var libelleType = document.getElementById("libelle_type").value;
         var codTypField = document.getElementById("cod_typ");
         var puField = document.getElementById("prix_unitaire");
+        var detailsField = document.getElementById("details_chambre");
+        var details_personne_chambreField = document.getElementById("details_personne_chambre");
+        var details_superficie_chambreField = document.getElementById("details_superficie_chambre");
 
         if (libelleType === "Solo") {
             codTypField.value = "01";
             puField.value = "15000";
+            detailsField.value = "La chambre solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber. Elle a une superficie de 30m² et ne peut accueillir qu'un seul voyageur.";
+            details_personne_chambreField.value = "1"; // Mettre à jour le nombre de personnes
+            details_superficie_chambreField.value = "30m²"; // Mettre à jour la superficie
         } else if (libelleType === "Doubles") {
             codTypField.value = "02";
             puField.value = "25000";
+            detailsField.value = "Profitez du balcon et de la vue sur l'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².";
+            details_personne_chambre.value = "2";
+            details_superficie_chambreField.value = "50m²";
         } else if (libelleType === "Triples") {
             codTypField.value = "03";
             puField.value = "35000";
+            detailsField.value = "Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d'une personne ou bien 1 lit double de 2 personnes et 1 d'une personne avec un canapé et a une superficie de 70m².";
+            details_personne_chambre.value = "3";
+            details_superficie_chambreField.value = "70m²";
         } else if (libelleType === "Suite") {
             codTypField.value = "04";
             puField.value = "50000";
+            detailsField.value = "Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable. Elle a une superficie de 100m² et peut accueillir jusqu'à cinq voyageurs.";
+            details_personne_chambre.value = "5";
+            details_superficie_chambreField.value = "100m²";
         } else {
             codTypField.value = "";
             puField.value = "";
+            detailsField.value = "";
+            details_personne_chambre.value = "";
+            details_superficie_chambreField.value = "";
         }
     }
 

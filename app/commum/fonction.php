@@ -25,23 +25,137 @@ function connect_db()
 
 
 /**
- * Cette fonction de génération d'un nom d'utilisateur par défaut
+ * Vérifie si la page actuelle correspond au nom de la page donné.
  *
- * @param  mixed $nom
- * @param  mixed $prenom
- * @return void
+ * @param string $page_name Le nom de la page à vérifier.
+ * @return string Une chaîne indiquant si la page est active ou non.
  */
-function generateDefaultUsername($nom, $prenom)
+function is_current_page($page_name)
 {
-	// Supprimez les espaces et convertissez en minuscules
-	$nom = strtolower(str_replace(' ', '', $nom));
-	$prenom = strtolower(str_replace(' ', '', $prenom));
+	// Récupérer le chemin actuel de la page
+	$current_page = $_SERVER['REQUEST_URI'];
 
-	// Concaténez le nom et le prénom
-	$username = $prenom . '.' . $nom;
+	// Comparer le chemin actuel avec le nom de la page
+	if (strpos($current_page, $page_name) !== false) {
+		return 'active';
+	}
 
-	return $username;
+	return '';
 }
+
+
+/**
+ * Récupère la liste des chambres pour la page d'accueil.
+ *
+ * @return array Un tableau contenant les détails des chambres récupérées.
+ */
+function recuperer_liste_chambres_acceuil(): array
+{
+	$db = connect_db();
+	$liste_chambre = [];
+
+	if (!is_null($db)) {
+		$requete = 'SELECT * FROM chambre ORDER BY creer_le DESC LIMIT 6';
+
+		$verifier_liste_chambres = $db->prepare($requete);
+
+		$resultat = $verifier_liste_chambres->execute();
+
+		if ($resultat) {
+			$liste_chambre = $verifier_liste_chambres->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+
+	return $liste_chambre;
+}
+
+
+/**
+ * Récupère une liste de chambres en fonction de la pagination et du type de chambre donné.
+ *
+ * @param int $page Le numéro de la page actuelle.
+ * @param string|null $type Le type de chambre (facultatif).
+ * @return array Un tableau contenant les détails des chambres récupérées.
+ */
+function liste_chambres($page, $type = null): array
+{
+
+	$liste_chambres = [];
+
+	$nb_chambres_par_page = 9;
+
+	$database = connect_db();
+
+	if (!is_null($type)) {
+
+		$request = "SELECT * FROM chambre WHERE lib_typ = :lib_typ and est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page-1);
+
+		$request_prepare = $database->prepare($request);
+
+		$request_execution = $request_prepare->execute([
+			'lib_typ' => $type
+		]);
+
+	} else {
+
+		$request = "SELECT * FROM chambre WHERE est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page-1);
+
+		$request_prepare = $database->prepare($request);
+
+		$request_execution = $request_prepare->execute();
+	}
+
+
+	if (!empty($request_execution)) {
+
+		$data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+
+		if (!empty($data) && is_array($data)) {
+
+			$liste_chambres = $data;
+		}
+	}
+
+	return $liste_chambres;
+}
+
+
+/**
+ * Récupère la liste des types de chambres disponibles.
+ *
+ * @return array Un tableau contenant les noms des types de chambres.
+ */
+function liste_types(): array
+{
+
+	$types = [];
+
+	$database = connect_db();
+
+	$request = "SELECT * FROM chambre WHERE est_actif = 1 and est_supprimer = 0";
+
+	$request_prepare = $database->prepare($request);
+
+	$request_execution = $request_prepare->execute();
+
+
+	if (!empty($request_execution)) {
+
+		$data = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+
+		if (!empty($data) && is_array($data)) {
+
+			foreach ($data as $type) {
+				$types[] = $type['lib_typ'];
+			}
+
+			$types = array_unique($types);
+		}
+	}
+
+	return $types;
+}
+
 
 
 /** Cette fonction permet d'inserer un utilisateur de profile CLIENT
@@ -1178,24 +1292,23 @@ function supprimer_repas(int $cod_repas): bool
  * @param  int $est_actif
  * @return bool
  */
-function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ, int $pu, string $image, int $est_actif = 1): bool
+function enregistrer_chambre(string $cod_typ, string $lib_typ, string $details_chambre, int $details_personne_chambre, string $details_superficie_chambre,  float $pu, string $image_path, int $est_actif = 1): bool
 {
 	$enregistrer_chambre = false;
-
 	$db = connect_db();
 
 	if (!is_null($db)) {
-
-		$requette = 'INSERT INTO chambre (num_chambre, cod_typ, lib_typ, pu, photos,  est_actif) VALUES (:num_chambre, :cod_typ, :lib_typ, :pu, :photos,  :est_actif)';
-
+		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, details, pu, photos, est_actif) VALUES (:cod_typ, :lib_typ, :details, :pu, :photos, :est_actif)';
 		$inserer_chambre = $db->prepare($requette);
 
 		$resultat = $inserer_chambre->execute([
-			'num_chambre' => $num_chambre,
 			'cod_typ' => $cod_typ,
 			'lib_typ' => $lib_typ,
+			'details' => $details_chambre,
+			'personnes' => $details_personne_chambre,
+			'superficies' => $details_superficie_chambre,
 			'pu' => $pu,
-			'photos' => $image,
+			'photos' => $image_path,
 			'est_actif' => $est_actif
 		]);
 
@@ -1204,6 +1317,8 @@ function enregistrer_chambre(string $num_chambre, int $cod_typ, string $lib_typ,
 
 	return $enregistrer_chambre;
 }
+
+
 
 
 /**
@@ -1296,6 +1411,38 @@ function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
 
 	return $chambre;
 }
+
+
+/**
+ * Cette fonction permet de vérifier si une chambre dans la base de données est active et non supprimée.
+ * @param int $num_chambre Le numéro de la chambre à vérifier.
+ * @return bool $check
+ */
+function verifier_chambre_actif_non_supprime(int $num_chambre): bool
+{
+    $check = false;
+
+    $db = connect_db();
+
+    if (is_object($db)) {
+        $requete = "SELECT count(*) as nbr_chambre FROM chambre WHERE num_chambre = :num_chambre AND est_actif = :est_actif AND est_supprimer = :est_supprimer";
+        $verifier_chambre = $db->prepare($requete);
+
+        $resultat = $verifier_chambre->execute([
+            'num_chambre' => $num_chambre,
+            'est_actif' => 1,
+            'est_supprimer' => 0
+        ]);
+
+        if ($resultat) {
+            $nbr_chambre = $verifier_chambre->fetch(PDO::FETCH_ASSOC)["nbr_chambre"];
+            $check = ($nbr_chambre > 0) ? true : false;
+        }
+    }
+
+    return $check;
+}
+
 
 
 /**
@@ -1926,7 +2073,7 @@ function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 	$db = connect_db();
 	$accompagnateurs_info = [];
 	if (!is_null($db)) {
-		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res et est_supprimer = 0';
+		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res est_supprimer = 0';
 		$verifier_liste_accompagnateurs = $db->prepare($requette);
 		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
 		if ($resultat) {
@@ -2891,6 +3038,8 @@ function supprimer_messages(int $id): bool
 }
 
 
+
+
 // function liste_reservations($page = null, $nom_acc = null, $typ_chambre = null): array
 // {
 // 	$liste_reservations = [];
@@ -3024,15 +3173,3 @@ foreach ($liste_repas as $repas) {
 ?> */
 
 
-function is_current_page($page_name)
-        {
-            // Récupérer le chemin actuel de la page
-            $current_page = $_SERVER['REQUEST_URI'];
-
-            // Comparer le chemin actuel avec le nom de la page
-            if (strpos($current_page, $page_name) !== false) {
-                return 'active';
-            }
-
-            return '';
-        }

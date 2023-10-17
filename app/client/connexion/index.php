@@ -1,4 +1,3 @@
-
 <?php
 $include_icm_header = true;
 include('./app/commum/header_.php');
@@ -82,12 +81,13 @@ include('./app/commum/header_.php');
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe/index">Mot de
+                                    <a class="small" href="<?= PATH_PROJECT ?>client/mot_de_passe">Mot de
                                         passe oublié ?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="<?= PATH_PROJECT ?>client/inscription/index">Créez un
-                                        compte !</a>
+                                    <a class="small" href="<?= PATH_PROJECT ?>client/inscription">
+                                        Créez un compte !
+                                    </a>
                                 </div>
                             </div>
                         </div>
