@@ -160,6 +160,8 @@ include('./app/commum/header_.php');
                 <p class="font-size-sm" style="color: white;">SOUS LES COCOTIERS</p>
               </div>
             </div>
+
+            <!-- Formulaire de mise à jour photo -->
             <form action="<?= PATH_PROJECT ?>client/profil/traitement_photo" method="post" enctype="multipart/form-data">
               <div class="row" style="text-align: center; display:flex;">
                 <div class="col-sm-9 text-secondary">
@@ -167,20 +169,21 @@ include('./app/commum/header_.php');
                   <input type="file" class="form-control" id="image" name="image" />
                 </div>
 
-                <!-- maj_photo Form -->
+
                 <div class="modal-footer text-center col-sm-3" style="justify-content: center; margin-top: 31px;">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal0" style="font-size: revert; padding: 9px;">Modifier</button>
+                  <!-- Button maj_photo modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModifierModal" style="font-size: revert; padding: 9px;">
+                    Modifier
+                  </button>
                   <div class="col-md-8 col-lg-12">
                     <div class="text-center" style="color: #070b3a;">
-                      <!-- Modal -->
-                      <div class="modal fade" id="modal0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                      <!-- Modal maj_photo -->
+                      <div class="modal fade" id="ModifierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Mettre à jour la photo de profil</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
+                              <h1 class="modal-title fs-5" style="text-transform: uppercase;">Mettre à jour la photo de profil</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                               <div class="row mb-3">
@@ -199,7 +202,6 @@ include('./app/commum/header_.php');
                         </div>
                       </div>
                     </div>
-
                   </div>
             </form>
           </div>
@@ -208,18 +210,21 @@ include('./app/commum/header_.php');
         <!-- suppression_photo Form -->
         <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression_photo" method="post" enctype="multipart/form-data" style="display: flex; justify-content: center; align-items: center;">
           <div class="row">
-            <button type="reset" class="btn btn-secondary" data-toggle="modal" data-target="#modal1"><i class="fa fa-trash"></i> Supprimer</button>
+            <!-- Button suppression_photo modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suppression_photoModal">
+              <i class="bi bi-trash"></i>
+              Supprimer
+            </button>
+
             <div class="col-md-8 col-lg-12">
               <div class="text-center" style="color: #070b3a;">
-                <!-- Modal -->
-                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
+                <!-- Modal suppression_photo -->
+                <div class="modal fade" id="suppression_photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer la photo de profil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer la photo de profil</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="row mb-3">
@@ -238,10 +243,8 @@ include('./app/commum/header_.php');
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-
         </form>
         <hr>
 
@@ -274,19 +277,21 @@ include('./app/commum/header_.php');
           <form action="<?= PATH_PROJECT ?>client/profil/traitement_suppression" method="post" enctype="multipart/form-data">
             <div class="row mb-3 text-center">
               <div class="col-md-8 col-lg-12">
-                <button type="button" style="padding: 10px; background-color:#9f0808;" name="supprimer-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal2 "><i class="bi bi-trash"></i> Supprimer mon compte</button>
+                <!-- Button suppression modal -->
+                <button type="button" style="padding: 10px; background-color:#9f0808;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#suppressionModal">
+                  <i class="bi bi-trash"></i>
+                  Supprimer mon compte
+                </button>
 
                 <div class="text-center" style="color: #070b3a;">
-                  <!-- Modal -->
-                  <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                  <!-- Modal suppression -->
+                  <div class="modal fade" id="suppressionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                       <div class="modal-content">
                         <!-- <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer mon compte</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div> -->
+                          <h1 class="modal-title fs-5" id="exampleModalLabel" style="text-transform: uppercase;">Supprimer mon compte</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> -->
                         <div class="modal-body">
                           <div class="row mb-3">
                             <div>
@@ -302,13 +307,12 @@ include('./app/commum/header_.php');
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                          <button type="submit" name="suppression" class="btn btn-primary">Valider</button>
+                          <button type="submit" name="supprimer_photo" class="btn btn-primary">Valider</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </form>
@@ -317,19 +321,20 @@ include('./app/commum/header_.php');
           <form action="<?= PATH_PROJECT ?>client/profil/traitement_desactivation" method="post" enctype="multipart/form-data">
             <div class="row mb-3 text-center">
               <div class="col-md-8 col-lg-12">
-                <button type="button" style="padding: 10px; background-color:#9f0808;" name="désactiver-compte" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal3" style="margin-top: 8px;">Désactiver mon compte</button>
+                <!-- Button desactivation modal -->
+                <button type="button" style="padding: 10px; background-color:#9f0808;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#desactivationModal">
+                  Désactiver mon compte
+                </button>
 
                 <div class="text-center" style="color: #070b3a;">
-                  <!-- Modal -->
-                  <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                  <!-- Modal desactivation -->
+                  <div class="modal fade" id="desactivationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                       <div class="modal-content">
                         <!-- <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Désactiver mon compte</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div> -->
+                          <h1 class="modal-title fs-5" id="exampleModalLabel" style="text-transform: uppercase;">Désactiver mon compte</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> -->
                         <div class="modal-body">
                           <div class="row mb-3">
                             <div>
@@ -354,6 +359,7 @@ include('./app/commum/header_.php');
               </div>
             </div>
           </form>
+
         </div>
       </div>
 
@@ -444,28 +450,26 @@ include('./app/commum/header_.php');
                 </div>
               </div>
 
+
               <div class="text-center" style="color: #070b3a;">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#modal4">
+                <!-- Button Modifier_informations modal -->
+                <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#ModifierinformationsModal">
                   Sauvegarder
                 </button>
 
                 <div class="text-center" style="color: #070b3a;">
-                  <!-- Modal -->
-                  <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                  <!-- Modal Modifier_informations -->
+                  <div class="modal fade" id="ModifierinformationsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel" style="text-transform: uppercase;">Modifier les informations de mon compte</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                          <h1 class="modal-title fs-5" id="exampleModalLabel" style="text-transform: uppercase;">Modifier les informations de mon compte</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                           <div class="form-group">
                             <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour appliquer les modifications.</label>
                             <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
-
                           </div>
 
             </form>
@@ -554,6 +558,6 @@ include('./app/commum/header_.php');
 <?php
 unset($_SESSION['changement-erreurs'], $_SESSION['suppression-erreurs'],  $_SESSION['desactivation-erreurs'], $_SESSION['success'], $_SESSION['sauvegarder-erreurs'], $_SESSION['photo-erreurs'], $_SESSION['suppression-photo-erreurs'], $_SESSION['erreurs']);
 
-// $include_icm_footer = true;
-// include('./app/commum/footer_.php');
+$include_icm_footer = true;
+include('./app/commum/footer_.php');
 ?>

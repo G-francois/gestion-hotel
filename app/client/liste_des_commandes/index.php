@@ -10,7 +10,7 @@ include('./app/commum/header_.php');
 ?>
 
 <style>
-    .card-body{
+    .card-body {
         color: black;
     }
 </style>
@@ -20,7 +20,7 @@ include('./app/commum/header_.php');
     <div class="pagetitle" style="padding-top: 126px;">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>client/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item active">Liste des commandes</li>
             </ol>
         </nav>
@@ -122,30 +122,28 @@ include('./app/commum/header_.php');
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo $commande['prix_total']; ?></td>
+                                    <td>
+                                        <?php echo $commande['prix_total']; ?>
+                                    </td>
 
                                     <td>
-                                        <div class="modal-footer float-right">
-                                            <!-- Button pour modifier le repas modal -->
-                                            <button type="button" class="btn btn-warning btn-modifier-commande" style="color: white; margin-right: 8px;" data-toggle="modal" data-target="#modifier-commande-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>" data-nom-repas="<?= htmlspecialchars(json_encode($repas_commande)) ?>">
-                                                Modifier
-                                            </button>
+                                        <div style="display: flex; align-items: center;">
 
+                                            <!-- Button Modifier modal -->
+                                            <i class="far fa-edit modifier-icon" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#modifierModal-<?php echo $num_cmd ?>" data-num-cmd="<?php echo $num_cmd ?>" data-nom-repas="<?= htmlspecialchars(json_encode($repas_commande)) ?>" title="Modifier la commande ">
+                                            </i>
 
-
-                                            <!-- Modal de modification du repas -->
-                                            <div class="modal fade" id="modifier-commande-<?php echo $num_cmd ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <!-- Modal Modifier-->
+                                            <div class="modal fade" id="modifierModal-<?php echo $num_cmd ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Modifier la commande <?php echo $num_cmd ?></h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier la commande <?php echo $num_cmd ?></h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <!-- Formulaire de modification de la commande -->
-                                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-commande" method="post" enctype="multipart/form-data">
+                                                            <form action="<?= PATH_PROJECT ?>client/liste_des_commandes/traitement-modifier-commande" method="post" enctype="multipart/form-data">
                                                                 <input type="hidden" name="commande_id" value="<?php echo $num_cmd ?>">
                                                                 <input type="hidden" name="reservation_id" value="<?php echo $commande['num_res']; ?>">
 
@@ -236,39 +234,39 @@ include('./app/commum/header_.php');
                                                 </div>
                                             </div>
 
-                                            <form action="<?= PATH_PROJECT ?>client/dashboard/traitement_supprimer_commande" method="post" enctype="multipart/form-data">
-                                                <!-- Début du formulaire de supprimé commande -->
-                                                <input type="hidden" name="commande_id" value="<?php echo $num_cmd ?>">
 
-                                                <!-- Button de suppression modal -->
-                                                <button type="button" class="btn btn-danger btn-supprimer" data-toggle="modal" data-target="#supprimer-commande-<?php echo $num_cmd ?>" data-nom-repas="<?php echo $info_repas['nom_repas']; ?>" data-pu-repas="<?php echo $info_repas['pu_repas']; ?>">
-                                                    Supprimer
-                                                </button>
-                                                <!-- Modal de suppression -->
-                                                <div class="modal fade" id="supprimer-commande-<?php echo $num_cmd ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Supprimer la commande <?php echo $num_cmd ?></h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
+
+                                            <!-- Button supprimer modal -->
+                                            <i class="far fa-trash-alt supprimer-icon" data-bs-toggle="modal" data-bs-target="#supprimerModal-<?php echo $num_cmd ?>" data-nom-repas="<?php echo $info_repas['nom_repas']; ?>" data-pu-repas="<?php echo $info_repas['pu_repas']; ?>" title="Supprimer repas ">
+                                            </i>
+
+                                            <!-- Modal supprimer -->
+                                            <div class="modal fade" id="supprimerModal-<?php echo $num_cmd ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Supprimer la commande <?php echo $num_cmd ?></h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="<?= PATH_PROJECT ?>client/liste_des_commandes/traitement_supprimer_commande" method="post" enctype="multipart/form-data">
+                                                                <!-- Début du formulaire de supprimé commande -->
+                                                                <input type="hidden" name="commande_id" value="<?php echo $num_cmd ?>">
+
                                                                 <div class="form-group">
-                                                                    <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe </label>
+                                                                    <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe</label>
                                                                     <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                                                                 </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" name="supprimer" class="btn btn-primary">Valider</button>
-                                                            </div>
 
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="supprimer" class="btn btn-primary">Valider</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>

@@ -2063,31 +2063,33 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 
 
 /**
- * Cette fonction permet de récupérer le noms et contacts accompagnateurs
+ * Cette fonction permet de récupérer le noms et contacts des accompagnateurs
  *
  * @param  mixed $num_res
  * @return array
  */
 function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 {
-	$db = connect_db();
-	$accompagnateurs_info = [];
-	if (!is_null($db)) {
-		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res est_supprimer = 0';
-		$verifier_liste_accompagnateurs = $db->prepare($requette);
-		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
-		if ($resultat) {
-			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetch(PDO::FETCH_COLUMN);
-			foreach ($numeros_accompagnateurs as $num_acc) {
-				$info_acc = recuperer_noms_et_contacts_accompagnateurs($num_acc);
-				if ($info_acc) {
-					$accompagnateurs_info[] = $info_acc;
-				}
-			}
-		}
-	}
-	return $accompagnateurs_info;
+    $db = connect_db();
+    $accompagnateurs_info = [];
+    if (!is_null($db)) {
+        $requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res and est_supprimer = 0';
+        $verifier_liste_accompagnateurs = $db->prepare($requette);
+        $resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
+        if ($resultat) {
+            $numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_COLUMN);
+            foreach ($numeros_accompagnateurs as $num_acc) {
+                $info_acc = recuperer_info_accompagnateur($num_acc); 
+				// Assurez-vous que recuperer_info_accompagnateur est correctement définie et renvoie les informations appropriées
+                if ($info_acc) {
+                    $accompagnateurs_info[] = $info_acc;
+                }
+            }
+        }
+    }
+    return $accompagnateurs_info;
 }
+
 
 
 /**

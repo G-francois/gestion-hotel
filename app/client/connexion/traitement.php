@@ -46,4 +46,4 @@ $_SESSION['connexion-message-erreur-global'] = $message_erreur_global;
 
 $_SESSION['connexion-message-success-global'] = $message_success_global;
 
-header('location: ' . PATH_PROJECT . 'client/connexion/index');
+header('location: ' . PATH_PROJECT . 'client/connexion');

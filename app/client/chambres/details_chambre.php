@@ -542,6 +542,8 @@ if (!empty($params[3])) {
           </div>
         </div>
       </div>
+
+      
   </section>
 </div>
 <?php } ?>

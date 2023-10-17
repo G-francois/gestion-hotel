@@ -20,10 +20,12 @@ include('./app/commum/header_.php');
     <div class="pagetitle" style="padding-top: 126px;">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>client/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item active">Liste des reservations</li>
             </ol>
         </nav>
+
+
     </div>
 
     <!-- Tableau de données liste reservations -->
@@ -94,7 +96,7 @@ include('./app/commum/header_.php');
                                     $afficherBoutonModifier = false;
                                 } else {
                                     // La date de fin de séjour n'est pas encore passée, n'affichez pas le bouton "Supprimer"
-                                    $afficherBoutonSupprimer = false;
+                                    $afficherBoutonSupprimer = true;
                                     // Récupérer le type de chambre pour cette réservation
                                     $type_chambre = recuperer_type_chambre_pour_affichage($reservation['num_chambre']);
                                     // Afficher le bouton "Modifier" uniquement si le type de chambre n'est pas 'Solo'
@@ -115,14 +117,21 @@ include('./app/commum/header_.php');
 
 
                                     <td>
-                                        <div style="display: flex; align-items: center;">
-                                            <!-- Icône de détails modal -->
-                                            <i class="far fa-eye details-icon" data-toggle="modal" data-target="#details-reservation-<?= $reservation['num_res']; ?>" title="Voir les détails"></i>
 
-                                            <!-- Modal de détails -->
-                                            <div class="modal fade" id="details-reservation-<?= $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                        <div style="display: flex; align-items: center;">
+                                            <!-- Button Détails modal -->
+                                            <i class="far fa-eye details-icon " style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $reservation['num_res']; ?>" title="Voir les détails">
+                                            </i>
+
+                                            <!-- Modal Détails-->
+                                            <div class="modal fade" id="exampleModal-<?= $reservation['num_res']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
                                                     <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Détails de la réservation <?php echo $reservation['num_res']; ?></h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
                                                         <div class="modal-body">
                                                             <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
                                                                 <?php
@@ -141,11 +150,13 @@ include('./app/commum/header_.php');
                                                                 ?>
                                                             </p>
 
-                                                            <p><strong>N° de Chambre : </strong>
+                                                            <p>
+                                                                <strong>N° de Chambre : </strong>
                                                                 <?= $reservation['num_chambre'] ?>
                                                             </p>
 
-                                                            <p><strong>Type de chambre: </strong>
+                                                            <p>
+                                                                <strong>Type de chambre: </strong>
                                                                 <?php
                                                                 // Récupérer le type de chambre pour cette réservation
                                                                 $type_chambre = recuperer_type_chambre_pour_affichage($reservation['num_chambre']);
@@ -158,10 +169,10 @@ include('./app/commum/header_.php');
                                                                 ?>
                                                             </p>
 
-                                                            <p><strong>Prix Total: </strong>
+                                                            <p>
+                                                                <strong>Prix Total: </strong>
                                                                 <?= $reservation['prix_total'] ?>
                                                             </p>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,21 +184,22 @@ include('./app/commum/header_.php');
                                             if ($afficherBoutonModifier) {
                                                 // La date de fin de séjour n'est pas passée et le type de chambre n'est pas 'Solo', affichez le bouton "Modifier"
                                             ?>
-                                                <!-- Icône de modification modal -->
-                                                <i class="fas fa-address-book modifier-icon" data-toggle="modal" data-target="#modal-modifier-<?php echo $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>' title="Modifier la réservation"></i>
 
-                                                <!-- Modal de modification -->
-                                                <div class="modal fade" id="modal-modifier-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                <!-- Button Modifier modal -->
+                                                <i class="far fa-edit modifier-icon" style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#exampleModal1-<?= $reservation['num_res']; ?>" data-accompagnateurs='<?php echo json_encode(recuperer_noms_et_contacts_accompagnateurs($reservation['num_res'])); ?>' title="Modifier la réservation">
+                                                </i>
+
+                                                <!-- Modal Modifier -->
+                                                <div class="modal fade" id="exampleModal1-<?= $reservation['num_res']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modifier la réservation</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier la réservation <?php echo $reservation['num_res']; ?></h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="<?= PATH_PROJECT ?>client/dashboard/traitement-modifier-reservations" method="POST" novalidate>
+                                                                <form action="<?= PATH_PROJECT ?>client/liste_des_reservations/traitement-modifier-reservations" method="POST" novalidate>
                                                                     <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                     <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
                                                                     <input type="hidden" name="num_chambre" value="<?php echo $reservation['num_chambre']; ?>">
@@ -247,49 +259,47 @@ include('./app/commum/header_.php');
                                                                     </div>
                                                                 </form>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             <?php
                                             }
 
                                             if ($afficherBoutonSupprimer) {
                                                 // La date de fin de séjour est passée, affichez le bouton "Supprimer"
                                             ?>
-                                                <form action="<?= PATH_PROJECT ?>client/dashboard/traitement_supprimer_reservation" method="post" enctype="multipart/form-data"> <!-- Début du formulaire de modification du profil -->
-                                                    <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
 
-                                                    <!-- Icône de suppression modal -->
-                                                    <i class="fas fa-trash-alt supprimer-icon" data-toggle="modal" data-target="#supprimer-reservation-<?php echo $reservation['num_res']; ?>" title="Supprimer"></i>
+                                                <!-- Button supprimer modal -->
+                                                <i class="far fa-trash supprimer-icon" data-bs-toggle="modal" data-bs-target="#exampleModal2-<?= $reservation['num_res']; ?>" title="Supprimer la réservation">
+                                                </i>
 
-
-                                                    <!-- Modal de suppression -->
-                                                    <div class="modal fade" id="supprimer-reservation-<?php echo $reservation['num_res']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">Supprimer la réservationde la chambre <?php echo $reservation['num_chambre']; ?></h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
+                                                <!-- Modal supprimer -->
+                                                <div class="modal fade" id="exampleModal2-<?= $reservation['num_res']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Supprimer la réservation <?php echo $reservation['num_res']; ?></h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="<?= PATH_PROJECT ?>client/dashboard/traitement_supprimer_reservation" method="post" enctype="multipart/form-data">
+                                                                    <!-- Début du formulaire de modification du profil -->
+                                                                    <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                     <div class="form-group">
                                                                         <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour supprimer la réservation de la chambre <?php echo $reservation['num_chambre']; ?></label>
                                                                         <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" name="supprimer" class="btn btn-primary">Valider</button>
-                                                                </div>
 
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" name="supprimer" class="btn btn-primary">Valider</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                </form>
+
                                             <?php
                                             }
                                             ?>

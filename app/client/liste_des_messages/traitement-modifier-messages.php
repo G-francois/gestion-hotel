@@ -52,4 +52,4 @@ $_SESSION['erreurs-contact'] = $erreurs;
 // Redirection vers la page de liste des réservations avec un message de succès ou d'erreur
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('location: ' . PATH_PROJECT . 'client/dashboard/liste_des_messages');
+header('location: ' . PATH_PROJECT . 'client/liste_des_messages');

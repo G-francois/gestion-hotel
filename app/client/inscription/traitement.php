@@ -112,4 +112,4 @@ $_SESSION['donnees-utilisateur'] = $donnees;
 $_SESSION['inscription-erreurs'] = $erreurs;
 $_SESSION['inscription-message-erreur-global'] = $message_erreur_global;
 $_SESSION['inscription-message-success-global'] = $message_success_global;
-header('location: ' . PATH_PROJECT . 'client/inscription/index');
+header('location: ' . PATH_PROJECT . 'client/inscription');

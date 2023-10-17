@@ -25,4 +25,4 @@ if (isset($_POST['supprimer'])) {
 
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('location: ' . PATH_PROJECT . 'client/dashboard/liste_des_messages');
+header('location: ' . PATH_PROJECT . 'client/liste_des_messages');

@@ -47,6 +47,9 @@ if (isset($include_icm_header) && $include_icm_header) {
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="<?= PATH_PROJECT ?>public/css/sb-admin-2.css" rel="stylesheet">
         <link href="<?= PATH_PROJECT ?>public/css/style.css" rel="stylesheet" />
+
+        <script src="<?= PATH_PROJECT ?>public/jquery/jquery.min.js"></script>
+
     </head>
 
     <style>
@@ -267,13 +270,12 @@ if (isset($include_icm_header) && $include_icm_header) {
                 }
 
                 /* Style pour les liens de navigation actifs */
-                .nav-link.active {
+                .dropdown-item.active {
                     color: #d9ba85;
                     /* Couleur du texte */
                     padding: 5px 10px;
                     /* Espacement interne pour une apparence du texte */
-                    font-size: larger;
-                    /* Taille du texte */
+
                 }
             </style>
 
@@ -342,7 +344,6 @@ if (isset($include_icm_header) && $include_icm_header) {
                                     </a>
                                     <!-- Contenu du dropdown pour l'utilisateur connecté -->
                                     <div class="dropdown-menu dropdown-menu-center shadow animated--grow-in text-center" style="min-width: 12rem; width: -webkit-fill-available;" aria-labelledby="userDropdown">
-
 
                                         <a class="dropdown-item d-flex align-items-center mb-3 <?= is_current_page('client/profil') ?>" style="justify-content: unset; color: black; padding: 0px 0 0px 20px;" href="<?= PATH_PROJECT ?>client/profil">
                                             <i class="bi bi-person" style="margin-right: 12px;"></i>

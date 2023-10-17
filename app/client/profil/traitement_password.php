@@ -55,12 +55,12 @@ if (empty($erreurs)) {
 
     if (mise_a_jour_mot_passe($_SESSION['utilisateur_connecter_client']['id'], $donnees["newpassword"])) {
         session_destroy();
-        header('location:' . PATH_PROJECT . 'client/connexion/index');
+        header('location:' . PATH_PROJECT . 'client/connexion');
     } else {
         $_SESSION['changement-erreurs'] = $erreurs;
-        header('location:' . PATH_PROJECT . 'client/profil/profile');
+        header('location:' . PATH_PROJECT . 'client/profil');
     }
 } else {
     $_SESSION['changement-erreurs'] = $erreurs;
-    header('location:' . PATH_PROJECT . 'client/profil/profile');
+    header('location:' . PATH_PROJECT . 'client/profil');
 }

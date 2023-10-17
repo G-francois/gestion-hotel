@@ -97,4 +97,4 @@ if (isset($_POST['sauvegarder'])) {
     $_SESSION['sauvegarder-erreurs'] = "Veuiller appuyer sur le boutton sauvegarder.";
 }
 
-header('location:' . PATH_PROJECT . 'client/profil/profile');
+header('location:' . PATH_PROJECT . 'client/profil');
