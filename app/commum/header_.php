@@ -2,7 +2,6 @@
 if (isset($include_icm_header) && $include_icm_header) {
     // Inclure la partie du header spécifique à include_icm_header.php
     $erreurs = [];
-
     $donnees = [];
 
     if (isset($_SESSION['inscription-erreurs']) && !empty($_SESSION['inscription-erreurs'])) {
@@ -19,6 +18,10 @@ if (isset($include_icm_header) && $include_icm_header) {
 
     if (isset($_SESSION['verification-erreurs']) && !empty($_SESSION['verification-erreurs'])) {
         $erreurs = $_SESSION['verification-erreurs'];
+    }
+
+    if (isset($_COOKIE["donnees-utilisateur"]) && !empty($_COOKIE["donnees-utilisateur"])) {
+        $data = json_decode($_COOKIE["donnees-utilisateur"]);
     }
 
     if (isset($_SESSION['enregistrer-erreurs']) && !empty($_SESSION['enregistrer-erreurs'])) {
@@ -41,6 +44,8 @@ if (isset($include_icm_header) && $include_icm_header) {
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Sous les Cocotiers - Login</title>
+        <link href="<?= PATH_PROJECT ?>public/images/al_copyrighter.png" rel="icon" />
+        <link href="<?= PATH_PROJECT ?>public/images/al_copyrighter.png" rel="apple-touch-icon" />
         <link href="<?= PATH_PROJECT ?>public/outils/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
         <link href="<?= PATH_PROJECT ?>public/outils/boxicons/css/boxicons.min.css" rel="stylesheet" />
         <link href="<?= PATH_PROJECT ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

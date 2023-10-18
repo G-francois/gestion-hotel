@@ -1,6 +1,7 @@
 <?php
 
 use Random\Engine\Secure;
+
 $donnees = [];
 $message_erreur_global = "";
 $message_success_global = "";
@@ -16,13 +17,14 @@ if (isset($_POST["email"]) && !empty($_POST["email"]) && filter_var($_POST["emai
 $_SESSION['donnees-utilisateur'] = $donnees;
 $_SESSION['verification-erreurs'] = $erreurs;
 
-$_SESSION['email-utilisateur'] = $id_utilisateur;
 
 if (empty($erreurs)) {
 
     if (check_email_exist_in_db($_POST["email"])) {
         $token = uniqid("");
         $id_utilisateur = recuperer_id_utilisateur_par_son_mail($donnees['email']);
+
+        $_SESSION['email-utilisateur'] = $id_utilisateur;
 
         if (!insertion_token($id_utilisateur, 'NOUVEAU_MOT_DE_PASSE', $token)) {
             $message_erreur_global = "La vérification de l'adresse mail s'est effectué avec succès mais une erreur est survenue lors de la génération de la clé de modification de mot de passe. Veuillez contacter un administrateur.";
@@ -34,18 +36,18 @@ if (empty($erreurs)) {
             ob_end_clean(); // Arrête et vide la temporisation de sortie
 
             if (send_email($donnees["email"], $objet, $template_mail)) {
-                $donnees = ($_POST["email"]);
+                $donnees['email'] = ($_POST["email"]);
                 //Création du cookie
                 setcookie(
                     "mot_passe",
                     json_encode($donnees['email']),
-                    [
-                        'expires' => time() + 365 * 24 * 36000,
-                        'path' => '/',
-                        'secure' => 'true',
-                        'httponly' => 'true',
-                    ]
+                    time() + 365 * 24 * 36000, // expiration time
+                    '/', // path
+                    null, // domain
+                    true, // secure
+                    true // httponly
                 );
+                
                 $message_success_global = "La vérification de l'adresse mail s'est effectué avec succès. Veuillez consulter votre adresse mail pour mettre un nouveau mot de passe.";
             } else {
                 $message_erreur_global = "La vérification de l'adresse mail s'est effectué avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";

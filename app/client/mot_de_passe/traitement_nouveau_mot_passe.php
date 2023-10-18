@@ -33,12 +33,12 @@ if (empty($erreurs)) {
 
     if (mise_a_jour_mot_passe($_SESSION['id_user'], $donnees["mot-passe"])) {
         session_destroy();
-        header('location:' . PATH_PROJECT . 'client/connexion/index');
+        header('location:' . PATH_PROJECT . 'client/connexion');
     } else {
         $_SESSION['enregistrer-erreurs'] = $erreurs;
-        header('location: ' . PATH_PROJECT . 'client/mot_de_passe/nv_mot_passe');
+        header('location: ' . PATH_PROJECT . 'client/mot_de_passe/nouveau_mot_passe');
     }
 } else {
     $_SESSION['enregistrer-erreurs'] = $erreurs;
-    header('location: ' . PATH_PROJECT . 'client/mot_de_passe/nv_mot_passe');
+    header('location: ' . PATH_PROJECT . 'client/mot_de_passe/nouveau_mot_passe');
 }

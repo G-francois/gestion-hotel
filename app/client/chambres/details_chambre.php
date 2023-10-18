@@ -41,8 +41,19 @@ if (!empty($params[3])) {
 
     <?php } else { ?>
 
-      <div class="row mt-5">
+      <div class="row mt-4">
         <div class="card my-2 border-0 rounded-0">
+          <!-- ======= Hero Section ======= -->
+          <section id="hero4" class="d-flex align-items-center">
+            <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="row">
+                <div class="col-lg-12 mb-3">
+                  <h1>Espace<span> Détails</span></h1>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- End Hero -->
           <div class="row" style="background-color: #0c0b09">
             <div class="col-md-6">
               <div class="card mb-4 shadow-sm zoom-effect-container">
@@ -88,20 +99,20 @@ if (!empty($params[3])) {
                   }
                   ?>
 
-                  <?php
-                  if (check_if_user_connected_client()) {
-                  ?>
+                  <!-- <?php
+                        if (check_if_user_connected_client()) {
+                        ?>
                     <button class="btn btn-primary mt-1" id="toggleButton" onclick="toggleBlock()">
                       Réserver maintenant
                     </button>
                   <?php
-                  }
-                  ?>
+                        }
+                  ?> -->
                 </div>
               </div>
 
 
-              <div class="card-body px-0" id="contentBlock" style="display: none;">
+              <div class="card-body px-0">
                 <?php
                 // Vérifie s'il y a un message de succès global à afficher
                 if (isset($_SESSION['reservation-message-success-global']) && !empty($_SESSION['reservation-message-success-global'])) {
@@ -128,8 +139,11 @@ if (!empty($params[3])) {
                 if (check_if_user_connected_client()) {
                 ?>
                   <h5 style=" text-align:center; margin-bottom: 20px;">
-                    <i class="bi bi-exclamation-triangle me-1"></i>
-                    Bienvenue cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>. Après une réservation vous pouvez consulter la liste de vos réservations dans le tableau de bord.
+                    Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>.
+                    Après cette réservation vous pouvez consulter 
+                    <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
+                      la liste de vos réservations
+                    </a>.
                   </h5>
 
                   <?php if ($chambre['lib_typ'] === 'Solo') { ?>
@@ -543,13 +557,13 @@ if (!empty($params[3])) {
         </div>
       </div>
 
-      
+
   </section>
 </div>
 <?php } ?>
 
 
-<script>
+<!-- <script>
   function toggleBlock() {
     var block = document.getElementById('contentBlock');
     var button = document.getElementById('toggleButton');
@@ -561,7 +575,7 @@ if (!empty($params[3])) {
       button.textContent = 'Réserver maintenant';
     }
   }
-</script>
+</script> -->
 
 <script>
   // Fonction pour afficher/cacher les ensembles de champs d'accompagnateurs en fonction du nombre sélectionné

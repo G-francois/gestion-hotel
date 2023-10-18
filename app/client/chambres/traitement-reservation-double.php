@@ -107,7 +107,7 @@ if (isset($_POST['enregistrer'])) {
                             $miseajour = mettre_a_jour_statut_chambre_reserver($numChambreDisponible);
                             // die(var_dump($miseajour));
                             if ($miseajour) {
-                                $message_success_global = "Vous avez réservé la chambre numéro : " . $numChambreDisponible . " .";
+                                $message_success_global = "Réservation de la chambre " . $numChambreDisponible . " effectuée avec succès.";
                             } else {
                                 // La  mise à jour du statut a échoué
                                 $message_erreur_global =  "Désolé, une erreur s'est produite lors de la mise à jour du statut de la chambre reserver.";

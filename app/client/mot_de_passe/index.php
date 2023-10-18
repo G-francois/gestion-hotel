@@ -3,7 +3,7 @@ $include_icm_header = true;
 include('./app/commum/header_.php');
 ?>
 
-<div class="container" style="margin-top: 145px;">
+<div class="container" style="margin-top: 135px; margin-bottom: 35px;">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">

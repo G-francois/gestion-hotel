@@ -4,7 +4,7 @@ include('./app/commum/header_.php');
 ?>
 
 
-<div class="container" style="margin-top: 145px;">
+<div class="container" style="margin-top: 135px; margin-bottom: 35px;">
     <div class="row justify-content-center;" style="color:black; justify-content:center;">
 
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -15,32 +15,32 @@ include('./app/commum/header_.php');
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                         <div class="col-lg-6">
-                            <?php
-                            if (isset($_SESSION['validation-compte-message-success']) && !empty($_SESSION['validation-compte-message-success'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-                                    <?= $_SESSION['validation-compte-message-success'] ?>
-                                </div>
-                            <?php
-                            }
-
-                            if (isset($_SESSION['validation-compte-message-erreur']) && !empty($_SESSION['validation-compte-message-erreur'])) {
-                            ?>
-                                <div class="alert alert-primary" style="color: white; text-align:center; background-color: red; border-color: snow;">
-                                    <?= $_SESSION['validation-compte-message-erreur'] ?>
-                                </div>
-                            <?php
-                            }
-                            ?>
 
                             <div class="p-5">
+                                <?php
+                                if (isset($_SESSION['validation-compte-message-success']) && !empty($_SESSION['validation-compte-message-success'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
+                                        <?= $_SESSION['validation-compte-message-success'] ?>
+                                    </div>
+                                <?php
+                                }
 
+                                if (isset($_SESSION['validation-compte-message-erreur']) && !empty($_SESSION['validation-compte-message-erreur'])) {
+                                ?>
+                                    <div class="alert alert-primary" style="color: white; text-align:center; background-color: red; border-color: snow;">
+                                        <?= $_SESSION['validation-compte-message-erreur'] ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Nouveau mot de passe</h1>
                                 </div>
 
 
-                                <form action="<?= PATH_PROJECT ?>client/mot_de_passe/traitement_nv_mot_passe" method="post" class="user">
+                                <form action="<?= PATH_PROJECT ?>client/mot_de_passe/traitement_nouveau_mot_passe" method="post" class="user">
 
                                     <!-- Le champ mot de passe -->
                                     <div class="form-group">
