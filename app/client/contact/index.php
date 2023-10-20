@@ -77,7 +77,7 @@ include('./app/commum/header_.php');
           ?>
             <div class="row">
               <!-- Le champ nom -->
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="inscription-nom">
                   Nom :
                   <span class="text-danger">(*)</span>
@@ -91,7 +91,7 @@ include('./app/commum/header_.php');
               </div>
 
               <!-- Le champ prénom -->
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="inscription-prenom">
                   Prénom(s):
                   <span class="text-danger">(*)</span>
@@ -103,12 +103,9 @@ include('./app/commum/header_.php');
                   </span>
                 <?php } ?>
               </div>
-            </div>
 
-
-            <div class="row">
               <!-- Le champs email -->
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="inscription-email">
                   Adresse mail :
                   <span class="text-danger">(*)</span>
@@ -120,6 +117,7 @@ include('./app/commum/header_.php');
                   </span>
                 <?php } ?>
               </div>
+
             </div>
           <?php
           }

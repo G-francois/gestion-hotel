@@ -101,6 +101,10 @@ if (empty($erreurs)) {
 				$message_success_global = "Votre inscription s'est effectué avec succès. Veuillez consulter votre adresse mail pour valider votre compte.";
 			} else {
 				$message_erreur_global = "Votre inscription s'est effectué avec succès mais une erreur est survenue lors de l'envoi du mail de validation de votre compte. Veuillez contacter un administrateur.";
+				// Ajoutez l'instruction de suppression de l'utilisateur ici
+				if (isset($id_utilisateur)) {
+					suppression_compte_utilisateur($id_utilisateur);
+				}
 			}
 		}
 	} else {

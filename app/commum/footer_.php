@@ -262,9 +262,7 @@
     <script src="<?= PATH_PROJECT ?>public/outils/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script src="<?= PATH_PROJECT ?>public/outils/glightbox/js/glightbox.min.js"></script>
-
     <script src="<?= PATH_PROJECT ?>public/outils/isotope-layout/isotope.pkgd.min.js"></script>
-
     <script src="<?= PATH_PROJECT ?>public/outils/swiper/swiper-bundle.min.js"></script>
 
     <!-- <script src="<?= PATH_PROJECT ?>public/outils/php-email-form/validate.js"></script> -->
