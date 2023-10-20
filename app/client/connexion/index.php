@@ -48,7 +48,7 @@ include('./app/commum/header_.php');
                                 }
                                 ?>
 
-                                <form action="<?= PATH_PROJECT ?>client/connexion/traitement" method="post" class="user" novalidate>
+                                <form action="<?= PATH_PROJECT ?>client/connexion/traitement" method="post" class="user">
                                     <!-- Le champs email ou nom utilisateur-->
                                     <div class="form-group">
                                         <label for="inscription-email">

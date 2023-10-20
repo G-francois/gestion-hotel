@@ -38,7 +38,7 @@ include('./app/commum/header_.php');
 							<h1 class="h4 text-gray-900 mb-4">Créez un compte Client!</h1>
 						</div>
 
-						<form action="<?= PATH_PROJECT ?>client/inscription/traitement" method="post" class="user" novalidate>
+						<form action="<?= PATH_PROJECT ?>client/inscription/traitement" method="post" class="user">
 							<!-- Le champ nom -->
 							<div class="form-group">
 								<label for="inscription-nom">

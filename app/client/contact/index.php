@@ -71,7 +71,7 @@ include('./app/commum/header_.php');
         }
         ?>
         
-        <form action="<?= PATH_PROJECT ?>client/contact/traitement-contact" method="post" class="php-email-form" novalidate>
+        <form action="<?= PATH_PROJECT ?>client/contact/traitement-contact" method="post" class="php-email-form">
           <?php
           if (!check_if_user_connected_client()) {
           ?>

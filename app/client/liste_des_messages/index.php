@@ -118,15 +118,16 @@ include('./app/commum/header_.php');
                                                                     <?php } ?>
                                                                 </div>
 
-                                                                <!-- Le champs message-->
+                                                                <!-- Le champ message -->
                                                                 <div class="form-group mt-3">
-                                                                    <textarea class="form-control" name="message" rows="8" value="<?= !empty($messages['messages']) ? $messages['messages'] : '' ?>" required></textarea>
+                                                                    <textarea class="form-control" name="message" rows="8" required style="background-color: white;"> <?= !empty($messages['messages']) ? $messages['messages'] : '' ?> </textarea>
                                                                     <?php if (isset($erreurs["message"]) && !empty($erreurs["message"])) { ?>
                                                                         <span class="text-danger">
                                                                             <?php echo $erreurs["message"]; ?>
                                                                         </span>
                                                                     <?php } ?>
                                                                 </div>
+
 
                                                                 <!-- Champ de saisie de mot de passe -->
                                                                 <div class="form-group">
@@ -164,7 +165,7 @@ include('./app/commum/header_.php');
 
                                                                 <div class="form-group">
                                                                     <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe</label>
-                                                                    <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                                                                    <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="" required>
                                                                 </div>
 
                                                                 <div class="modal-footer">

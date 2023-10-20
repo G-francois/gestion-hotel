@@ -86,6 +86,20 @@ include './app/commum/aside.php';
                 </div>
             </div>
 
+            <!-- Le champ Code du type de chambre -->
+            <div class="col-sm-6 mb-3">
+                <label for="cod_typ">
+                    Code du type de chambre :
+                    <span class="text-danger">(*)</span>
+                </label>
+                <input type="text" name="cod_typ" id="cod_typ" class="form-control" placeholder="Le code du type de chambre sera automatiquement rempli" value="<?= (isset($donnees["cod_typ"]) && !empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : ''; ?>" readonly>
+
+                <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["code_type"])) { ?>
+                    <span class="text-danger">
+                        <?php echo $erreurs["code_typ"]; ?>
+                    </span>
+                <?php } ?>
+            </div>
 
             <!-- Le champ details_chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -93,14 +107,16 @@ include './app/commum/aside.php';
                     Informations :
                     <span class="text-danger">(*)</span>
                 </label>
-                <input type="text" name="details_chambre" id="details_chambre" class="form-control" placeholder="Le details chambre sera automatiquement rempli" readonly>
-
+                <textarea name="details_chambre" id="details_chambre" class="form-control" placeholder="Le détail de la chambre sera automatiquement rempli" readonly><?php if (isset($donnees["details_chambre"])) {
+                                                                                                                                                                            echo $donnees["details_chambre"];
+                                                                                                                                                                        } ?></textarea>
                 <?php if (isset($erreurs["details_chambre"]) && !empty($erreurs["details_chambre"])) { ?>
                     <span class="text-danger">
                         <?php echo $erreurs["details_chambre"]; ?>
                     </span>
                 <?php } ?>
             </div>
+
 
             <!-- Le champ details_personne_chambre -->
             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -118,7 +134,7 @@ include './app/commum/aside.php';
             </div>
 
             <!-- Le champ details_superficie_chambre -->
-            <div class="col-sm-6 mt-3">
+            <div class="col-sm-6 mb-3">
                 <label for="details_superficie_chambre">
                     Superficie:
                     <span class="text-danger">(*)</span>
@@ -131,22 +147,6 @@ include './app/commum/aside.php';
                     </span>
                 <?php } ?>
             </div>
-
-            <!-- Le champ Code du type de chambre -->
-            <div class="col-sm-6 mt-3">
-                <label for="cod_typ">
-                    Code du type de chambre :
-                    <span class="text-danger">(*)</span>
-                </label>
-                <input type="text" name="cod_typ" id="cod_typ" class="form-control" placeholder="Le code du type de chambre sera automatiquement rempli" value="<?= (isset($donnees["cod_typ"]) && !empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : ''; ?>" readonly>
-
-                <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["code_type"])) { ?>
-                    <span class="text-danger">
-                        <?php echo $erreurs["code_typ"]; ?>
-                    </span>
-                <?php } ?>
-            </div>
-
 
             <!-- Le champ Prix unitaire -->
             <div class="col-sm-6 mt-3">

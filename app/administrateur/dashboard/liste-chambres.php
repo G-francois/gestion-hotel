@@ -50,7 +50,7 @@ $liste_chambre = recuperer_liste_chambres();
         ?>
         <div class="card-body">
             <div class="table-responsive">
-                <?php 
+                <?php
                 // Vérifie si la liste des chambres existe et n'est pas vide
                 if (isset($liste_chambre) && !empty($liste_chambre)) {
                 ?>
@@ -60,6 +60,9 @@ $liste_chambre = recuperer_liste_chambres();
                                 <th>Numéro de chambre</th>
                                 <th>Code type</th>
                                 <th>Libellés</th>
+                                <th>Détails</th>
+                                <th>Nombre de personne(s)</th>
+                                <th>Superficies</th>
                                 <th>Prix Unitaire</th>
                                 <th>Actions</th>
                             </tr>
@@ -74,11 +77,20 @@ $liste_chambre = recuperer_liste_chambres();
                                     <td><?php echo $chambre['num_chambre']; ?></td>
                                     <td><?php echo $chambre['cod_typ']; ?></td>
                                     <td><?php echo $chambre['lib_typ']; ?></td>
+                                    <td><?php echo $chambre['details']; ?></td>
+                                    <td><?php echo $chambre['personnes']; ?></td>
+                                    <td><?php echo $chambre['superficies']; ?></td>
                                     <td><?php echo $chambre['pu']; ?></td>
                                     <td>
                                         <!-- lien bouton pour modifier et supprimer -->
-                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre/<?= $chambre['num_chambre'] ?>" class="btn btn-warning">Modifier</a>
-                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["num_chambre"]; ?>">Supprimer</a>
+                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre/<?= $chambre['num_chambre'] ?>" style="margin-right: 20px;">
+                                            <i class="far fa-edit modifier-icon" title="Modifier la chambre"></i>
+                                        </a>
+
+
+                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["num_chambre"]; ?>">
+                                            <i class="far fa-trash-alt supprimer-icon"></i>
+                                        </a>
                                     </td>
 
                                     <!-- Modal supprimer -->

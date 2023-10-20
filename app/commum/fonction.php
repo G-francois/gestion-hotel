@@ -88,17 +88,16 @@ function liste_chambres($page, $type = null): array
 
 	if (!is_null($type)) {
 
-		$request = "SELECT * FROM chambre WHERE lib_typ = :lib_typ and est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page-1);
+		$request = "SELECT * FROM chambre WHERE lib_typ = :lib_typ and est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page - 1);
 
 		$request_prepare = $database->prepare($request);
 
 		$request_execution = $request_prepare->execute([
 			'lib_typ' => $type
 		]);
-
 	} else {
 
-		$request = "SELECT * FROM chambre WHERE est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page-1);
+		$request = "SELECT * FROM chambre WHERE est_actif = 1 and est_supprimer = 0 ORDER BY num_chambre ASC LIMIT " . $nb_chambres_par_page . "  OFFSET " . $nb_chambres_par_page * ($page - 1);
 
 		$request_prepare = $database->prepare($request);
 
@@ -1420,27 +1419,27 @@ function recuperer_chambre_par_son_num_chambre(int $num_chambre): array
  */
 function verifier_chambre_actif_non_supprime(int $num_chambre): bool
 {
-    $check = false;
+	$check = false;
 
-    $db = connect_db();
+	$db = connect_db();
 
-    if (is_object($db)) {
-        $requete = "SELECT count(*) as nbr_chambre FROM chambre WHERE num_chambre = :num_chambre AND est_actif = :est_actif AND est_supprimer = :est_supprimer";
-        $verifier_chambre = $db->prepare($requete);
+	if (is_object($db)) {
+		$requete = "SELECT count(*) as nbr_chambre FROM chambre WHERE num_chambre = :num_chambre AND est_actif = :est_actif AND est_supprimer = :est_supprimer";
+		$verifier_chambre = $db->prepare($requete);
 
-        $resultat = $verifier_chambre->execute([
-            'num_chambre' => $num_chambre,
-            'est_actif' => 1,
-            'est_supprimer' => 0
-        ]);
+		$resultat = $verifier_chambre->execute([
+			'num_chambre' => $num_chambre,
+			'est_actif' => 1,
+			'est_supprimer' => 0
+		]);
 
-        if ($resultat) {
-            $nbr_chambre = $verifier_chambre->fetch(PDO::FETCH_ASSOC)["nbr_chambre"];
-            $check = ($nbr_chambre > 0) ? true : false;
-        }
-    }
+		if ($resultat) {
+			$nbr_chambre = $verifier_chambre->fetch(PDO::FETCH_ASSOC)["nbr_chambre"];
+			$check = ($nbr_chambre > 0) ? true : false;
+		}
+	}
 
-    return $check;
+	return $check;
 }
 
 
@@ -2053,11 +2052,10 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
 		$stmtAccompagnateur->execute();
 
 		// Mettre à jour l'état des chambres pour les réservations dont la date de fin_occ est passée
-		// $requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ <= :now)';
-		// $stmtChambre = $db->prepare($requeteChambre);
-		// $stmtChambre->bindParam(':now', $now);
-		// $stmtChambre->execute();
-
+		$requeteChambre = 'UPDATE chambre SET est_actif = 1, est_supprimer = 0 WHERE num_chambre IN (SELECT num_chambre FROM reservations WHERE fin_occ < :now)';
+		$stmtChambre = $db->prepare($requeteChambre);
+		$stmtChambre->bindParam(':now', $now);
+		$stmtChambre->execute();
 	}
 }
 
@@ -2070,24 +2068,24 @@ function mettre_a_jour_etat_reservations_accompagnateurs()
  */
 function recuperer_noms_et_contacts_accompagnateurs($num_res): array
 {
-    $db = connect_db();
-    $accompagnateurs_info = [];
-    if (!is_null($db)) {
-        $requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res and est_supprimer = 0';
-        $verifier_liste_accompagnateurs = $db->prepare($requette);
-        $resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
-        if ($resultat) {
-            $numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_COLUMN);
-            foreach ($numeros_accompagnateurs as $num_acc) {
-                $info_acc = recuperer_info_accompagnateur($num_acc); 
+	$db = connect_db();
+	$accompagnateurs_info = [];
+	if (!is_null($db)) {
+		$requette = 'SELECT num_acc FROM listes_accompagnateurs_reservation WHERE num_res = :num_res and est_supprimer = 0';
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+		$resultat = $verifier_liste_accompagnateurs->execute(['num_res' => $num_res]);
+		if ($resultat) {
+			$numeros_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_COLUMN);
+			foreach ($numeros_accompagnateurs as $num_acc) {
+				$info_acc = recuperer_info_accompagnateur($num_acc);
 				// Assurez-vous que recuperer_info_accompagnateur est correctement définie et renvoie les informations appropriées
-                if ($info_acc) {
-                    $accompagnateurs_info[] = $info_acc;
-                }
-            }
-        }
-    }
-    return $accompagnateurs_info;
+				if ($info_acc) {
+					$accompagnateurs_info[] = $info_acc;
+				}
+			}
+		}
+	}
+	return $accompagnateurs_info;
 }
 
 
@@ -3173,5 +3171,3 @@ foreach ($liste_repas as $repas) {
     echo '<option value="' . $repas['id'] . '" data-prix="' . $repas['prix_repas'] . '">' . $repas['nom_repas'] . '</option>';
 }
 ?> */
-
-

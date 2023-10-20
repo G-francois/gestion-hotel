@@ -18,6 +18,13 @@ if (isset($_POST["lib_typ"]) && !empty($_POST["lib_typ"])) {
     $erreurs["lib_typ"] = "Le champs libelle type de chambre est requis. Veuillez le renseigné.";
 }
 
+
+if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
+    $donnees["pu"] = $_POST["pu"];
+} else {
+    $erreurs["pu"] = "Le champs prix unitaire est requis. Veuillez le renseigné.";
+}
+
 if (isset($_POST["pu"]) && !empty($_POST["pu"])) {
     $donnees["pu"] = $_POST["pu"];
 } else {

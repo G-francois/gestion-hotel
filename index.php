@@ -2,11 +2,11 @@
 require "vendor/autoload.php";
 
 // PROJET VAR
-define('PATH_PROJECT', '/soutenance/');
+define('PATH_PROJECT', '/Soutenance/');
 
 // DATABASE ACCES
 define('DATABASE_HOST', 'localhost');
-define('DATABASE_NAME', 'hotel-slc');
+define('DATABASE_NAME', 'gestion_hotel');
 define('DATABASE_USERNAME', 'root');
 define('DATABASE_PASSWORD', '');
 

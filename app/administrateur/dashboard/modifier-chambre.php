@@ -70,22 +70,23 @@ if (!empty($params[3])) {
             <!-- Affiche le formulaire de modification de la chambre -->
             <form action="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre-traitement" novalidate method="post" class="user">
                 <div class="form-group row pt-5">
-                    <!-- Le champ Code du type de chambre -->
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="inscription-code" class="col-sm-4 col-form-label">
-                            Code du type:
+                    <!-- Le champ photo -->
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="customFile" style="color: gray;">
+                            Importer une image
                             <span class="text-danger">(*)</span>
                         </label>
-                        <input type="number" class="form-control" name="cod_typ" id="inscription-code" placeholder="Veuillez entrer le code type de chambre" value="<?= (!empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : $chambre[0]["cod_typ"]; ?>" required>
-                        <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["cod_typ"])) { ?>
+                        <input type="file" class="form-control" id="image" name="image" />
+
+                        <?php if (isset($erreurs["image"]) && !empty($erreurs["image"])) { ?>
                             <span class="text-danger">
-                                <?= $erreurs["cod_typ"]; ?>
+                                <?php echo $erreurs["image"]; ?>
                             </span>
                         <?php } ?>
                     </div>
 
                     <!-- Le champ Libellé du type de chambre -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 mb-3">
                         <label for="inscription-libelle" class="col-sm-4 col-form-label">
                             Libellé:
                             <span class="text-danger">(*)</span>
@@ -109,7 +110,66 @@ if (!empty($params[3])) {
                             </span>
                         <?php } ?>
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <!-- Le champ Code du type de chambre -->
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="inscription-code" class="col-sm-4 col-form-label">
+                            Code du type:
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <input type="number" class="form-control" name="cod_typ" id="inscription-code" placeholder="Veuillez entrer le code type de chambre" value="<?= (!empty($donnees["cod_typ"])) ? $donnees["cod_typ"] : $chambre["cod_typ"]; ?>" required>
+                        <?php if (isset($erreurs["cod_typ"]) && !empty($erreurs["cod_typ"])) { ?>
+                            <span class="text-danger">
+                                <?= $erreurs["cod_typ"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
+
+                    <!-- Le champ Détails -->
+                    <div class="col-sm-6">
+                        <label for="inscription-details" class="col-sm-4 col-form-label">
+                            Détails:
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <textarea class="form-control" name="pu" id="inscription-details" placeholder="Veuillez entrer le(s) detail(s)" required><?= (!empty($donnees_chambre_modifier["details"])) ? $donnees_chambre_modifier["details"] : $chambre["details"]; ?></textarea>
+                        <?php if (isset($erreurs["details"]) && !empty($erreurs["details"])) { ?>
+                            <span class="text-danger">
+                                <?= $erreurs["details"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Le champ nombre de personne(s) -->
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="inscription-code" class="col-sm-4 col-form-label">
+                            Nombre de personne(s):
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <input type="number" class="form-control" name="personnes" id="inscription-personnes" placeholder="Veuillez entrer le nombre de personne(s)" value="<?= (!empty($donnees["personnes"])) ? $donnees["personnes"] : $chambre["personnes"]; ?>" required>
+                        <?php if (isset($erreurs["personnes"]) && !empty($erreurs["personnes"])) { ?>
+                            <span class="text-danger">
+                                <?= $erreurs["personnes"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
+
+                    <!-- Le champ superficies -->
+                    <div class="col-sm-6">
+                        <label for="inscription-superficies" class="col-sm-4 col-form-label">
+                            Superficies:
+                            <span class="text-danger">(*)</span>
+                        </label>
+                        <input type="text" class="form-control" name="pu" id="inscription-superficies" placeholder="Veuillez entrer la superficies" value="<?= (!empty($donnees_chambre_modifier["superficies"])) ? $donnees_chambre_modifier["superficies"] : $chambre["superficies"]; ?>" required>
+                        <?php if (isset($erreurs["superficies"]) && !empty($erreurs["superficies"])) { ?>
+                            <span class="text-danger">
+                                <?= $erreurs["superficies"]; ?>
+                            </span>
+                        <?php } ?>
+                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -119,7 +179,7 @@ if (!empty($params[3])) {
                             Prix unitaire:
                             <span class="text-danger">(*)</span>
                         </label>
-                        <input type="number" class="form-control" name="pu" id="inscription-prix" placeholder="Veuillez entrer le prix unitaire de chambre" value="<?= (!empty($donnees_chambre_modifier["pu"])) ? $donnees_chambre_modifier["pu"] : $chambre[0]["pu"]; ?>" required>
+                        <input type="number" class="form-control" name="pu" id="inscription-prix" placeholder="Veuillez entrer le prix unitaire de chambre" value="<?= (!empty($donnees_chambre_modifier["pu"])) ? $donnees_chambre_modifier["pu"] : $chambre["pu"]; ?>" required>
                         <?php if (isset($erreurs["pu"]) && !empty($erreurs["pu"])) { ?>
                             <span class="text-danger">
                                 <?= $erreurs["pu"]; ?>

@@ -1,9 +1,12 @@
 <?php
+
+// Initialisation des variables
 $donnees = [];
 $message_erreur_global = "";
 $message_success_global = "";
 $erreurs = [];
 
+// Validation du champ "nom"
 if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
 	$nom = htmlentities($_POST["nom"]);
 	$pattern = '/^[A-Z]+$/';
@@ -21,13 +24,14 @@ if (isset($_POST["nom"]) && !empty($_POST["nom"])) {
 	$erreurs["nom"] = "Le champ nom est requis. Veuillez le renseigner.";
 }
 
+// Validation du champ "prenom"
 if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
 	$donnees["prenom"] = trim(htmlentities($_POST["prenom"]));
 } else {
 	$erreurs["prenom"] = "Le champs prénom est requis. Veuillez le renseigné.";
 }
 
-
+// Validation du champ "email"
 if (isset($_POST["email"]) && !empty($_POST["email"])) {
 	if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 		$donnees["email"] = $_POST["email"];
@@ -38,13 +42,14 @@ if (isset($_POST["email"]) && !empty($_POST["email"])) {
 	$erreurs["email"] = "Le champs email est vide. Veuillez le renseigné.";
 }
 
+// Validation du champ "nom-utilisateur"
 if (isset($_POST["nom-utilisateur"]) && !empty($_POST["nom-utilisateur"])) {
 	$donnees["nom-utilisateur"] = trim(htmlentities($_POST["nom-utilisateur"]));
 } else {
 	$erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigné.";
 }
 
-
+// Validation du champ "mot-passe" et "retapez-mot-passe"
 if (isset($_POST["mot-passe"])) {
 	$password = trim($_POST["mot-passe"]);
 	$retapezMotPasse = trim($_POST["retapez-mot-passe"]);
@@ -62,22 +67,26 @@ if (isset($_POST["mot-passe"])) {
 	}
 }
 
+// Validation de la case "termes-conditions"
 if (!isset($_POST["termes-conditions"]) || empty($_POST["termes-conditions"])) {
 	$erreurs["termes-conditions"] = "Veuillez cocher cette case svp";
 }
 
+// Vérification de l'existence de l'adresse e-mail dans la base de données
 $check_email_exist_in_db = check_email_exist_in_db($_POST["email"]);
 
 if ($check_email_exist_in_db) {
 	$erreurs["email"] = "Cette adresse mail est déjà utilisée. Veuillez le changez.";
 }
 
+// Vérification de l'existence du nom d'utilisateur dans la base de données
 $check_user_name_exist_in_db = check_user_name_exist_in_db($_POST["nom-utilisateur"]);
 
 if ($check_user_name_exist_in_db) {
 	$erreurs["nom-utilisateur"] = "Ce nom d'utilisateur est déjà utilisé. Veuillez le changez.";
 }
 
+// Vérification des erreurs et enregistrement de l'utilisateur
 if (empty($erreurs)) {
 
 	$donnees["profil"] = "CLIENT";
@@ -112,6 +121,7 @@ if (empty($erreurs)) {
 	}
 }
 
+// Stockage des données et des messages dans les variables de session
 $_SESSION['donnees-utilisateur'] = $donnees;
 $_SESSION['inscription-erreurs'] = $erreurs;
 $_SESSION['inscription-message-erreur-global'] = $message_erreur_global;

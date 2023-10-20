@@ -199,7 +199,7 @@ include('./app/commum/header_.php');
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="<?= PATH_PROJECT ?>client/liste_des_reservations/traitement-modifier-reservations" method="POST" novalidate>
+                                                                <form action="<?= PATH_PROJECT ?>client/liste_des_reservations/traitement-modifier-reservations" method="POST">
                                                                     <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                     <input type="hidden" name="type_chambre" value="<?php echo $type_chambre; ?>">
                                                                     <input type="hidden" name="num_chambre" value="<?php echo $reservation['num_chambre']; ?>">
@@ -287,7 +287,7 @@ include('./app/commum/header_.php');
                                                                     <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                     <div class="form-group">
                                                                         <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour supprimer la réservation de la chambre <?php echo $reservation['num_chambre']; ?></label>
-                                                                        <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                                                                        <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="" required>
                                                                     </div>
 
                                                                     <div class="modal-footer">

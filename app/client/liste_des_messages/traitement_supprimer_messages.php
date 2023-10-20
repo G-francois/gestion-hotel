@@ -1,28 +1,28 @@
 <?php
 
-$donnees = [];
+$donnees = []; // Initialise un tableau pour stocker les données
+$erreurs = []; // Initialise un tableau pour stocker les erreurs
+$messages = $_POST['message_id']; // Récupère l'identifiant du message à supprimer depuis la requête POST
 
-$erreurs = [];
+if (isset($_POST['supprimer'])) { // Vérifie si le formulaire de suppression a été soumis
 
-$messages = $_POST['message_id'];
+    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) { // Vérifie si le mot de passe est correct
 
-if (isset($_POST['supprimer'])) {
-
-    if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
-
-        if (supprimer_messages($messages)) {
-            // die(var_dump(supprimer_reservation($messages)));
-            $message_success_global = "La suppression du message a été effectuer avec succès.";
+        if (supprimer_messages($messages)) { // Supprime le message avec l'identifiant spécifié
+            $message_success_global = "La suppression du message a été effectuée avec succès.";
         } else {
-            $message_erreur_global  = "La suppression à echouer. Veuiller réessayez.";
+            $message_erreur_global  = "La suppression a échoué. Veuillez réessayer.";
         }
     } else {
-        $message_erreur_global  = "La suppression à echouer. Vérifier votre mot de passe et réessayez.";
+        $message_erreur_global  = "La suppression a échoué. Vérifiez votre mot de passe et réessayez.";
     }
 } else {
-    $message_erreur_global  = "La suppression à echouer. Veuiller réessayez.";
+    $message_erreur_global  = "La suppression a échoué. Veuillez réessayer.";
 }
 
+// Stocke les messages de succès et d'erreur dans les variables de session
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
+
+// Redirige vers la page de liste des messages
 header('location: ' . PATH_PROJECT . 'client/liste_des_messages');

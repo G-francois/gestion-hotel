@@ -203,7 +203,7 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Doubles') { ?>
-                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-double" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user" novalidate>
+                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-double" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="row">
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
@@ -279,7 +279,7 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Triples') { ?>
-                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-triple" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user" novalidate>
+                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-triple" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="col-md-6 mb-3">
                         <label for="nombre-accompagnateurs">Nombre d'accompagnateurs :</label>
                         <select name="nombre_accompagnateurs" id="nombre-accompagnateurs" class="form-control" onchange="toggleAccompagnateursFields()">
@@ -389,7 +389,7 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Suite') { ?>
-                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-suit" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user" novalidate>
+                    <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-suit" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="col-md-6 mb-3">
                         <label for="nombre-accompagnateurs">Nombre d'accompagnateurs :</label>
                         <select name="nombre_accompagnateurs" id="nombre-accompagnateurs" class="form-control" onchange="toggleAccompagnateursFields()">

@@ -149,8 +149,8 @@ include('./app/commum/header_.php');
 
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center" style="color: #cda45e;">
-              <a href="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
-                <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
+              <a href="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
               </a>
 
 
@@ -470,7 +470,7 @@ include('./app/commum/header_.php');
                         <div class="modal-body">
                           <div class="form-group">
                             <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour appliquer les modifications.</label>
-                            <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                            <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="" required>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -501,7 +501,7 @@ include('./app/commum/header_.php');
               <div class="row mb-3">
                 <label for="currentPassword" class="col-md-5 col-lg-4 col-form-label" require>Mot de passe actuel</label>
                 <div class="col-md-7 col-lg-8">
-                  <input name="password" type="password" class="form-control" placeholder="Veuillez entrer votre mot de passe actuel" id="currentPassword">
+                  <input name="password" type="password" class="form-control" placeholder="Veuillez entrer votre mot de passe actuel" id="currentPassword" required>
                   <span class="text-danger">
                     <?php
                     if (isset($erreurs["password"]) && !empty($erreurs["password"])) {
@@ -516,7 +516,7 @@ include('./app/commum/header_.php');
               <div class="row mb-3">
                 <label for="newPassword" class="col-md-5 col-lg-4 col-form-label">Nouveau Mot de passe</label>
                 <div class="col-md-7 col-lg-8">
-                  <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" requi#9f0808>
+                  <input name="newpassword" type="password" class="form-control" placeholder="Veuillez entrer votre nouveau mot de passe" id="newPassword" required>
                   <span class="text-danger">
                     <?php
                     if (isset($erreurs["newpassword"]) && !empty($erreurs["newpassword"])) {
@@ -531,7 +531,7 @@ include('./app/commum/header_.php');
               <div class="row mb-3">
                 <label for="renewPassword" class="col-md-5 col-lg-4 col-form-label">Retaper Nouveau Mot de passe</label>
                 <div class="col-md-7 col-lg-8">
-                  <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" requi#9f0808>
+                  <input name="renewpassword" type="password" class="form-control" placeholder="Veuillez retaper votre nouveau mot de passe" id="renewPassword" required>
                   <span class="text-danger">
                     <?php
                     if (isset($erreurs["renewpassword"]) && !empty($erreurs["renewpassword"])) {

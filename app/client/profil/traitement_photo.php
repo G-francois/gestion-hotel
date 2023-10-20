@@ -1,74 +1,72 @@
 <?php
 
+// Initialisation des variables de session
 $_SESSION['photo-erreurs'] = "";
-
 $_SESSION['donnees-utilisateur'] = [];
 
+// Initialisation des variables locales
 $donnees = $_SESSION['utilisateur_connecter_client'];
-
-$donnees = [];
-
+$donnees = []; // Réinitialisation de $donnees à un tableau vide
 $erreurs = [];
-
 $new_data = [];
 
+// Récupération de l'ID de l'utilisateur pour créer le chemin du dossier d'images
 $idUtilisateur = $_SESSION['utilisateur_connecter_client']['nom_utilisateur'];
-
 $dossierImage = "public/images/";
-
 $dossierUtilisateur = $dossierImage . "upload/" . $idUtilisateur . "/";
 
 // Vérifier si le dossier "upload" existe, sinon le créer
 if (!is_dir($dossierUtilisateur)) {
     if (!is_dir($dossierImage . "upload/")) {
-        //création du dossier upload
+        // Création du dossier "upload" s'il n'existe pas
         mkdir($dossierImage . "upload/");
     }
-    //création du dossier image avec id de l'utilisateur
-    mkdir($dossierUtilisateur); //Crée le dossier de l'utilisateur dans "upload"
+    // Création du dossier pour l'utilisateur dans "upload"
+    mkdir($dossierUtilisateur);
 }
 
+// Initialisation de la variable de session 'donnees-utilisateur' à un tableau vide
 $_SESSION['donnees-utilisateur'] = $new_data;
 
+// Vérification de la soumission du formulaire
 if (isset($_POST['change_photo'])) {
 
+    // Vérification de l'existence du mot de passe via une fonction 'check_password_exist'
     if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
 
+        // Vérification de l'existence du fichier et de son poids
         if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-
             if ($_FILES["image"]["size"] <= 3000000) {
 
+                // Récupération des informations du fichier
                 $file_name = $_FILES["image"]["name"];
-
                 $file_info = pathinfo($file_name);
-
                 $file_ext = $file_info["extension"];
-
                 $allowed_ext = ["png", "jpg", "jpeg", "gif"];
 
+                // Vérification de l'extension du fichier
                 if (in_array(strtolower($file_ext), $allowed_ext)) {
 
+                    // Déplacement du fichier téléchargé vers le dossier de l'utilisateur
                     move_uploaded_file($_FILES['image']['tmp_name'], $dossierUtilisateur . basename($_FILES['image']['name']));
-
                     $profiledonnees["image"] = PATH_PROJECT . $dossierUtilisateur . basename($_FILES['image']['name']);
 
+                    // Mise à jour de l'avatar de l'utilisateur
                     if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_client']['id'], $profiledonnees["image"])) {
 
-                        $new_user_data = recuperer_mettre_a_jour_informations_utilisateur( $_SESSION['utilisateur_connecter_client']['id']);
+                        // Récupération et mise à jour des informations utilisateur
+                        $new_user_data = recuperer_mettre_a_jour_informations_utilisateur($_SESSION['utilisateur_connecter_client']['id']);
 
                         if (!empty($new_user_data)) {
-
                             $_SESSION['utilisateur_connecter_client'] = $new_user_data;
-        
                             header('location: ' . PATH_PROJECT . 'client/profil');
                         }
                     } else {
-
-                        $_SESSION['photo-erreurs'] = "La mise à jour de l'image à echouer.";
+                        $_SESSION['photo-erreurs'] = "La mise à jour de l'image a échoué.";
                         header('location:' . PATH_PROJECT . 'client/profil');
                     }
                 } else {
-                    $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas pris en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
+                    $_SESSION['photo-erreurs'] = "L'extension de votre image n'est pas prise en compte. <br> Extensions autorisées [ PNG/JPG/JPEG/GIF ]";
                     header('location:' . PATH_PROJECT . 'client/profil');
                 }
             } else {
@@ -76,11 +74,10 @@ if (isset($_POST['change_photo'])) {
                 header('location:' . PATH_PROJECT . 'client/profil');
             }
         } else {
-
             $profiledonnees["image"] = $donnees["image_profil"];
         }
     } else {
-        $_SESSION['photo-erreurs'] = "La mise à jour à echouer. Vérifier votre mot de passe et réessayez.";
+        $_SESSION['photo-erreurs'] = "La mise à jour a échoué. Vérifiez votre mot de passe et réessayez.";
         header('location:' . PATH_PROJECT . 'client/profil');
     }
 }
