@@ -18,7 +18,7 @@ include './app/commum/aside.php';
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active">Ajouter une chambre</li>
             </ol>
         </nav>
@@ -47,7 +47,7 @@ include './app/commum/aside.php';
     ?>
 
     <!-- Formulaire d'ajout de chambre-->
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre-traitement" method="post" class="user" enctype="multipart/form-data">
+    <form action="<?= PATH_PROJECT ?>administrateur/chambres/ajout-chambre-traitement" method="post" class="user" enctype="multipart/form-data">
         <div class="form-group row pt-5">
             <!-- Le champ photo -->
             <div class="col-sm-6 mb-3">

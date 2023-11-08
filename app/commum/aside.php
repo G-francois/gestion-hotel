@@ -29,12 +29,12 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ajouter une réservation:</h6>
-                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-solo">Chambre Solo</a>
-                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-double">Chambre Doubles</a>
-                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-triple">Chambre triples</a>
-                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/dashboard/reservation-suit">Chambre Suite</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/reservations/reservation-solo">Chambre Solo</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/reservations/reservation-double">Chambre Doubles</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/reservations/reservation-triple">Chambre triples</a>
+                        <a class="collapse-item ml-4" href="<?= PATH_PROJECT ?>administrateur/reservations/reservation-suit">Chambre Suite</a>
 
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-reservations">Liste des réservations</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/reservations/liste-reservations">Liste des réservations</a>
                     </div>
                 </div>
             </li>
@@ -48,8 +48,8 @@
                 <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Personnaliser:</h6>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-commande">Ajouter une commande</a>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-commandes">Liste des Commandes</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/commandes">Ajouter une commande</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/commandes/liste-commandes">Liste des Commandes</a>
                     </div>
                 </div>
             </li>
@@ -63,8 +63,8 @@
                 <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Personnaliser:</h6>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-chambre">Ajouter une chambre</a>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-chambres">Liste des chambres</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/chambres">Ajouter une chambre</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/chambres/liste-chambres">Liste des chambres</a>
                     </div>
                 </div>
             </li>
@@ -78,8 +78,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Personnaliser:</h6>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-repas">Ajouter un repas</a>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-repas">Listes des repas</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/repas">Ajouter un repas</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/repas/liste-repas">Listes des repas</a>
                     </div>
                 </div>
             </li>
@@ -96,15 +96,15 @@
                 <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Personnaliser:</h6>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user">Ajouter un utilisateur</a>
-                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-users">Listes des utilisateurs</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/users">Ajouter un utilisateur</a>
+                        <a class="collapse-item" href="<?= PATH_PROJECT ?>administrateur/users/liste-users">Listes des utilisateurs</a>
                     </div>
                 </div>
             </li>
 
             <div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="<?= PATH_PROJECT ?>administrateur/dashboard/profil">
+                    <a class="nav-link collapsed" href="<?= PATH_PROJECT ?>administrateur/profil">
                         <i class='fas fa-cog'></i>
                         <span>Paramètres</span>
                     </a>
@@ -244,7 +244,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <div class="nav-link">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= isset($_SESSION['utilisateur_connecter_admin']) ?  $_SESSION['utilisateur_connecter_admin']['nom_utilisateur'] : 'Pseudo' ?></span>
-                                <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>">
+                                <img class="img-profile rounded-circle" src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'Aucune_image' ? PATH_PROJECT . 'public/images/default_profil.jpg' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>">
                             </div>
 
 

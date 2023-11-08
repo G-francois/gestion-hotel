@@ -19,7 +19,7 @@ $liste_chambre = recuperer_liste_chambres();
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active">Liste des chambres</li>
             </ol>
         </nav>
@@ -83,12 +83,12 @@ $liste_chambre = recuperer_liste_chambres();
                                     <td><?php echo $chambre['pu']; ?></td>
                                     <td>
                                         <!-- lien bouton pour modifier et supprimer -->
-                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-chambre/<?= $chambre['num_chambre'] ?>" style="margin-right: 20px;">
+                                        <a href="<?= PATH_PROJECT ?>administrateur/chambres/modifier-chambre/<?= $chambre['num_chambre'] ?>" style="margin-right: 20px;">
                                             <i class="far fa-edit modifier-icon" title="Modifier la chambre"></i>
                                         </a>
 
 
-                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["num_chambre"]; ?>">
+                                        <a href="<?= PATH_PROJECT ?>administrateur/chambres/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" data-toggle="modal" data-target="#supprimer-chambre-<?= $chambre["num_chambre"]; ?>">
                                             <i class="far fa-trash-alt supprimer-icon"></i>
                                         </a>
                                     </td>
@@ -107,7 +107,7 @@ $liste_chambre = recuperer_liste_chambres();
                                                     <p style="font-size: larger;">Etes-vous sûr de vouloir supprimer la chambre <?= $chambre["lib_typ"]; ?> ?</p>
                                                 </div>
                                                 <div class="modal-footer ">
-                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" class="btn btn-danger">Oui</a>
+                                                    <a href="<?= PATH_PROJECT ?>administrateur/chambres/traitement-supprimer-chambre/<?= $chambre["num_chambre"]; ?>" class="btn btn-danger">Oui</a>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>

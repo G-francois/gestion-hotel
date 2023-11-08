@@ -122,7 +122,7 @@ $types = liste_types();
               <a href="<?= PATH_PROJECT . 'client/chambres/details_chambre/' . $chambre['num_chambre'] ?>">
                 <div class="card mb-4 shadow-sm">
                   <div class="zoom-effect-container">
-                    <img class="bd-placeholder-img card-img-top zoom-effect" width="100%" height="225" src="<?php echo $chambre['photos']; ?>" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                    <img class="bd-placeholder-img card-img-top zoom-effect" width="100%" height="225" src="<?= $chambre['photos'] == 'Aucune_image' ? PATH_PROJECT . 'public/images/default_chambre.jpeg' : $chambre['photos'] ?>" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
                   </div>
                   <div class="card-body">
                     <p class="card-text" style="color:black;"> Chambre <?php echo $chambre['num_chambre']; ?></p>

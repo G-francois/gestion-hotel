@@ -1286,8 +1286,11 @@ function supprimer_repas(int $cod_repas): bool
  *
  * @param  int $cod_typ
  * @param  string $lib_typ
- * @param  string $statut
- * @param  int $pu
+ * @param  string $details_chambre
+ * @param  int $details_personne_chambre
+ * @param  string $details_superficie_chambre
+ * @param  float $pu
+ * @param  string $image_path
  * @param  int $est_actif
  * @return bool
  */
@@ -1297,7 +1300,7 @@ function enregistrer_chambre(string $cod_typ, string $lib_typ, string $details_c
 	$db = connect_db();
 
 	if (!is_null($db)) {
-		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, details, pu, photos, est_actif) VALUES (:cod_typ, :lib_typ, :details, :pu, :photos, :est_actif)';
+		$requette = 'INSERT INTO chambre (cod_typ, lib_typ, details, personnes, superficies, pu, photos, est_actif) VALUES (:cod_typ, :lib_typ, :details, :personnes, :superficies, :pu, :photos, :est_actif)';
 		$inserer_chambre = $db->prepare($requette);
 
 		$resultat = $inserer_chambre->execute([
@@ -1453,7 +1456,7 @@ function verifier_chambre_actif_non_supprime(int $num_chambre): bool
  * @param int $pu Le prix unitaire  de la chambre
  * @return bool Indique si la modification a réussi ou non.
  */
-function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $pu): bool
+function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, string $details, string $personnes, string $superficies, int $pu): bool
 {
 	$modifier_chambre = false;
 
@@ -1462,7 +1465,7 @@ function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $
 	$db = connect_db();
 
 	if (!is_null($db)) {
-		$requete = 'UPDATE chambre SET cod_typ = :cod_typ, lib_typ = :lib_typ, pu = :pu, maj_le = :maj_le  WHERE num_chambre = :num_chambre';
+		$requete = 'UPDATE chambre SET cod_typ = :cod_typ, lib_typ = :lib_typ, details = :details, personnes = :personnes, superficies= :superficies, pu = :pu, maj_le = :maj_le  WHERE num_chambre = :num_chambre';
 
 		$modifier_chambre = $db->prepare($requete);
 
@@ -1470,6 +1473,9 @@ function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $
 			'num_chambre' => $num_chambre,
 			'cod_typ' => $cod_typ,
 			'lib_typ' => $lib_typ,
+			'details' => $details,
+			'personnes' => $personnes,
+			'superficies' => $superficies,
 			'pu' => $pu,
 			'maj_le' => $date
 		]);
@@ -1482,6 +1488,47 @@ function modifier_chambre(int $num_chambre, int $cod_typ, string $lib_typ, int $
 
 	return $modifier_chambre;
 }
+
+
+/**
+ * Cette fonction permet d'effectuer la mise à jour de la photo de chambre
+ *
+ * @param  int $num_chambre Le numéro  de chambre
+ * @param  string $photo La photo de chambre
+ * @return bool
+ */
+function mise_a_jour_photo_chambre(int $num_chambre, string $photo): bool
+{
+
+	$mise_a_jour_photo_chambre = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE chambre SET photos = :photos, maj_le = :maj_le  WHERE num_chambre= :num_chambre";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(
+			[
+				'num_chambre' => $num_chambre,
+				'photos' => $photo,
+				'maj_le' => $date,
+			]
+		);
+
+		if ($request_execution) {
+
+			$mise_a_jour_photo_chambre = true;
+		}
+	}
+
+	return $mise_a_jour_photo_chambre;
+}
+
 
 
 /**

@@ -102,4 +102,4 @@ $_SESSION['erreurs-chambre'] = $erreurs;
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
 // Redirection vers la page d'ajout de chambre
-header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-chambre');
+header('location: ' . PATH_PROJECT . 'administrateur/chambres/');

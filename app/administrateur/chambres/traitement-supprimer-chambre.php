@@ -10,4 +10,4 @@ if (supprimer_chambre($chambreId)) {
 
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/liste-chambres');
+header('Location: ' . PATH_PROJECT . 'administrateur/chambres/liste-chambres');
