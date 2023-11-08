@@ -155,8 +155,8 @@ include './app/commum/aside.php';
                         <div class="d-flex flex-column align-items-center text-center">
 
                             <!-- Affichage de l'image de profil -->
-                            <a href="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
-                                <img src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'no_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
+                            <a href="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="<?= $_SESSION['utilisateur_connecter_admin']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_admin']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
                             </a>
 
 

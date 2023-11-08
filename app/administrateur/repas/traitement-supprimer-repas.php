@@ -10,4 +10,4 @@ if (supprimer_repas($repasId)) {
 
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/liste-repas');
+header('Location: ' . PATH_PROJECT . 'administrateur/repas/liste-repas');

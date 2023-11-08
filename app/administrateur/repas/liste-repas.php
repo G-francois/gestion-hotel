@@ -88,7 +88,7 @@ $liste_repas = recuperer_liste_repas();
                                     </td>
                                     <td>
                                         <!-- lien bouton pour modifier et supprimer -->
-                                        <a href="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-repas/<?= $repas['cod_repas'] ?>" class="btn btn-warning">Modifier</a>
+                                        <a href="<?= PATH_PROJECT ?>administrateur/repas/modifier-repas/<?= $repas['cod_repas'] ?>" class="btn btn-warning">Modifier</a>
                                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-repas-<?= $repas["cod_repas"]; ?>">Supprimer</a>
                                     </td>
                                     <!-- Modal supprimer -->
@@ -105,7 +105,7 @@ $liste_repas = recuperer_liste_repas();
                                                     <p>Etes-vous sûr de vouloir supprimer le repas <?= $repas["nom_repas"]; ?> ?</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-supprimer-repas/<?= $repas['cod_repas'] ?>" class="btn btn-danger">Oui</a>
+                                                    <a href="<?= PATH_PROJECT ?>administrateur/repas/traitement-supprimer-repas/<?= $repas['cod_repas'] ?>" class="btn btn-danger">Oui</a>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>

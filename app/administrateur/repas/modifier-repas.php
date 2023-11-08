@@ -27,7 +27,7 @@ if (!empty($params[3])) {
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/liste-repas">Liste des repas</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/repas/liste-repas">Liste des repas</a></li>
                 <li class="breadcrumb-item active">Modifier repas</li>
             </ol>
         </nav>
@@ -67,7 +67,7 @@ if (!empty($params[3])) {
         <?php } else { ?>
 
             <!-- Affiche le formulaire de modification du repas -->
-            <form action="<?= PATH_PROJECT ?>administrateur/dashboard/modifier-repas-traitement" method="post" class="user">
+            <form action="<?= PATH_PROJECT . "administrateur/repas/modifier-repas-traitement" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user" novalidate>
                 <div class="form-group row pt-5">
                     <!-- Champ pour le nom du repas -->
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -77,7 +77,6 @@ if (!empty($params[3])) {
                         </label>
 
                         <input type="text" class="form-control" name="nom_repas" id="inscription-nom" placeholder="Veuillez entrer le nom du repas" value="<?= (isset($_POST["nom_repas"]) && !empty($_POST["nom_repas"])) ? $_POST["nom_repas"] : $repas[0]["nom_repas"]; ?>" required>
-                        <input type="hidden" name="cod_repas" value="<?= $repas[0]["cod_repas"]; ?>">
 
                         <?php
                         if (isset($erreurs["nom_repas"]) && !empty($erreurs["nom_repas"])) { ?>
@@ -94,7 +93,6 @@ if (!empty($params[3])) {
                             <span class="text-danger">(*)</span>
                         </label>
                         <input type="number" class="form-control" name="pu_repas" id="inscription-prix" placeholder="Veuillez entrer le prix du repas" value="<?= (isset($_POST["pu_repas"]) && !empty($_POST["pu_repas"])) ? $_POST["pu_repas"] : $repas[0]["pu_repas"]; ?>" required>
-                        <input type="hidden" name="pu_repas" value="<?= $repas[0]["pu_repas"]; ?>">
 
                         <?php if (isset($erreurs["pu_repas"]) && !empty($erreurs["pu_repas"])) { ?>
                             <span class="text-danger">
@@ -105,7 +103,6 @@ if (!empty($params[3])) {
 
                     <!-- Le bouton modifier -->
                     <div class="col-sm-12 mb-3" style="margin-top: 35px;">
-                        <input type="hidden" name="num_chambre" value="<?= $params[3] ?>">
                         <input type="submit" value="Modifier" class="btn btn-primary btn-block">
                     </div>
                 </div>

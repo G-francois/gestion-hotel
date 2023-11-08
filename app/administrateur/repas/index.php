@@ -46,7 +46,7 @@ include './app/commum/aside.php';
     ?>
 
     <!-- Formulaire d'ajout de repas -->
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-repas-traitement" method="post" class="user">
+    <form action="<?= PATH_PROJECT ?>administrateur/repas/ajout-repas-traitement" method="post" class="user">
 
         <div class="form-group row pt-5">
             <!-- Champ pour le nom du repas -->

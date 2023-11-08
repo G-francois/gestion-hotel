@@ -1,48 +1,56 @@
 <?php
-$donnees = [];
 $message_erreur_global = "";
 $message_success_global = "";
+$donnees =  recuperer_repas_par_son_code_repas($params[3]);
+$new_donnees = [];
 $erreurs = [];
 
-
-if (isset($_POST["nom_repas"]) && !empty($_POST["nom_repas"])) {
-    $donnees["nom_repas"] = $_POST["nom_repas"];
+if (isset($_POST['nom_repas']) && !empty($_POST['nom_repas']) && $_POST['nom_repas'] != $donnees[0]['nom_repas']) {
+    $new_data['nom_repas'] = $_POST['nom_repas'];
 } else {
-    $erreurs["nom_repas"] = "Le champs nom du repas est requis. Veuillez le renseigné.";
+    if (empty($_POST['nom_repas'])) {
+        $erreurs["nom_repas"] = "Le champ nom repas ne doit pas être vide.";
+    } else {
+        $new_data['nom_repas'] = $donnees[0]['nom_repas'];
+    }
 }
 
-if (isset($_POST["pu_repas"]) && !empty($_POST["pu_repas"])) {
-    $donnees["pu_repas"] = $_POST["pu_repas"];
+if (isset($_POST['pu_repas']) && !empty($_POST['pu_repas']) && $_POST['pu_repas'] != $donnees[0]['pu_repas']) {
+    $new_data['pu_repas'] = $_POST['pu_repas'];
 } else {
-    $erreurs["pu_repas"] = "Le champs prix unitaire est requis. Veuillez le renseigné.";
+    if (empty($_POST['pu_repas'])) {
+        $erreurs["pu_repas"] = "Le champ prix unitaire repas ne doit pas être vide.";
+    } else {
+        $new_data['pu_repas'] = $donnees[0]['pu_repas'];
+    }
 }
+
+$_SESSION['donnees-repas-modifier'] = $new_data;
+$_SESSION['erreurs-repas-modifier'] = $erreurs;
+
 
 if (empty($erreurs)) {
 
-    $check_if_auteur_exist = check_if_repas_exist_in_db($donnees["nom_repas"]);
+    if (!empty($params[3])) {
 
-    if (isset($_POST["cod_repas"]) && !empty($_POST["cod_repas"])) {
-        $cod_repas = $_POST["cod_repas"];
-    }
+        $cod_repas = $params[3];
 
-    if (!$check_if_auteur_exist) {
+        $miseajour = modifier_repas($cod_repas, $new_data["nom_repas"], $new_data["pu_repas"]);
 
-        $resultat = modifier_repas($cod_repas, $donnees["nom_repas"], $donnees["pu_repas"]);
-
-        if ($resultat) {
-
+        if ($miseajour) {
             $message_success_global = "Le repas a été modifié avec succès !";
-            
         } else {
-            $message_erreur_global = "Oups ! Une erreur s'est produite lors de la modification du repas.";
+            // La  mise à jour du statut a échoué
+            $message_erreur_global =  "Oups ! Une erreur s'est produite lors de la modification du repas. Veuiller réessayez.";
         }
     } else {
-        $message_erreur_global = "Oups! Le nom de ce repas existe deja. Veuillez réesayer.";
+        // Aucune chambre disponible de type "Doubles"
+        $message_erreur_global = "Désolé, il n'y a pas de repas disponible pour le moment.";
     }
+
 }
 
-$_SESSION['donnees-repas-modifier'] = $donnees;
-$_SESSION['erreurs-repas-modifier'] = $erreurs;
+
 $_SESSION['message-erreur-global'] = $message_erreur_global;
 $_SESSION['message-success-global'] = $message_success_global;
-header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/modifier-repas/' . $cod_repas);
+header('Location: ' . PATH_PROJECT . 'administrateur/repas/modifier-repas/' . $params[3]);

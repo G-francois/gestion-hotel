@@ -11,7 +11,7 @@ if (isset($_POST['lib_typ']) && !empty($_POST['lib_typ']) && $_POST['lib_typ'] !
     $new_data['lib_typ'] = $_POST['lib_typ'];
 } else {
     if (empty($_POST['lib_typ'])) {
-        $erreurs["lib_typ"] = "Le champ lib_typ ne doit pas être vide.";
+        $erreurs["lib_typ"] = "Le champ libelle type ne doit pas être vide.";
     } else {
         $new_data['lib_typ'] = $donnees['lib_typ'];
     }
@@ -21,7 +21,7 @@ if (isset($_POST['cod_typ']) && !empty($_POST['cod_typ']) && $_POST['cod_typ'] !
     $new_data['cod_typ'] = $_POST['cod_typ'];
 } else {
     if (empty($_POST['cod_typ'])) {
-        $erreurs["cod_typ"] = "Le champ cod_typ ne doit pas être vide.";
+        $erreurs["cod_typ"] = "Le champ code type ne doit pas être vide.";
     } else {
         $new_data['cod_typ'] = $donnees['cod_typ'];
     }
