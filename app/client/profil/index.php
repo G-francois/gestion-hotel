@@ -227,10 +227,10 @@ include('./app/commum/header_.php');
                       </div>
                       <div class="modal-body">
                         <div class="row mb-3">
-                          <label for="MP" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour supprimer la photo. </label>
+                          <label for="MP1" class="col-12 col-form-label" style="color: #070b3a;">Veuiller entrer votre mot de passe pour supprimer la photo. </label>
                           <br>
                           <div class="col-md-8 col-lg-12">
-                            <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                            <input type="password" id="MP1" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                           </div>
                         </div>
                       </div>
@@ -296,11 +296,11 @@ include('./app/commum/header_.php');
                             <div>
                               <i class="bi bi-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
                             </div>
-                            <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action votre compte sera supprimer de façon définitive.
+                            <label for="MP2" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action votre compte sera supprimer de façon définitive.
                               Si oui veuiller entrer votre mot de passe pour appliquer l'action. </label>
                             <br>
                             <div class="col-md-8 col-lg-12">
-                              <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                              <input type="password" id="MP2" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                             </div>
                           </div>
                         </div>
@@ -339,11 +339,11 @@ include('./app/commum/header_.php');
                             <div>
                               <i class="bi bi-exclamation-triangle me-1" style="font-size: xxx-large;color: #d70e0e;"></i>
                             </div>
-                            <label for="MP" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
+                            <label for="MP3" class="col-12 col-form-label" style="color: #d11818;">Vous êtes sûre d'effectuer cette action ? Après cette action vous ne serez plus en mesure de vous connecter.
                               Si oui veuiller entrer votre mot de passe pour appliquer l'action. Pour réactiver votre compte veuiller contacter un administrateur.</label>
                             <br>
                             <div class="col-md-8 col-lg-12">
-                              <input type="password" id="MP" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
+                              <input type="password" id="MP3" name="password" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="">
                             </div>
                           </div>
                         </div>

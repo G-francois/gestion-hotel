@@ -140,7 +140,7 @@ if (!empty($params[3])) {
                 ?>
                   <h5 style=" text-align:center; margin-bottom: 20px;">
                     Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>.
-                    Après cette réservation vous pouvez consulter 
+                    Après cette réservation vous pouvez consulter
                     <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
                       la liste de vos réservations
                     </a>.
@@ -282,10 +282,16 @@ if (!empty($params[3])) {
                     <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-triple" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="col-md-6 mb-3">
                         <label for="nombre-accompagnateurs">Nombre d'accompagnateurs :</label>
+                        
                         <select name="nombre_accompagnateurs" id="nombre-accompagnateurs" class="form-control" onchange="toggleAccompagnateursFields()">
                           <option value="0">Aucun</option>
-                          <option value="1">1 Accompagnateur</option>
-                          <option value="2">2 Accompagnateurs</option>
+                          <?php
+                          for ($i = 1; $i < 3; $i++) {
+                          ?>
+                            <option value="<?= $i ?>" <?php echo (!empty($donnees['nombre_accompagnateurs']) && $donnees['nombre_accompagnateurs'] == $i) ? 'selected' : '' ?>><?= $i . ' Accompagnateur' ?></option>
+                          <?php
+                          }
+                          ?>
                         </select>
                       </div>
 
@@ -579,19 +585,45 @@ if (!empty($params[3])) {
 
 <script>
   // Fonction pour afficher/cacher les ensembles de champs d'accompagnateurs en fonction du nombre sélectionné
-  function toggleAccompagnateursFields() {
-    var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
+ function toggleAccompagnateursFields() {
+  var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
 
-    for (var i = 1; i <= 4; i++) {
-      var accompagnateurFields = document.getElementById("accompagnateur-" + i);
+  for (var i = 1; i <= 4; i++) {
+    var accompagnateurFields = document.getElementById("accompagnateur-" + i);
 
+    if (accompagnateurFields) {
+      // Vérifier si l'élément existe avant d'accéder à sa propriété style
       if (i <= nombreAccompagnateurs) {
         accompagnateurFields.style.display = "flex";
       } else {
         accompagnateurFields.style.display = "none";
       }
+    } else {
+      console.error("Element not found: accompagnateur-" + i);
     }
   }
+}
+
+
+function toggleAccompagnateursFields() {
+  var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
+
+  for (var i = 1; i <3; i++) {
+    var accompagnateurFields = document.getElementById("accompagnateur-" + i);
+
+    if (accompagnateurFields) {
+      // Vérifier si l'élément existe avant d'accéder à sa propriété style
+      if (i <= nombreAccompagnateurs) {
+        accompagnateurFields.style.display = "flex";
+      } else {
+        accompagnateurFields.style.display = "none";
+      }
+    } else {
+      console.error("Element not found: accompagnateur-" + i);
+    }
+  }
+}
+
 </script>
 
 <script>

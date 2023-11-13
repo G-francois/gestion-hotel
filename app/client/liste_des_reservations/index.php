@@ -212,18 +212,18 @@ include('./app/commum/header_.php');
                                                                             <div class="row">
                                                                                 <!-- Le champs nom_acc -->
                                                                                 <div class="col-md-6 mb-3">
-                                                                                    <label for="modification-nom_acc">
+                                                                                    <label for="modification-nom_acc-<?php echo $reservation['num_res']; ?>">
                                                                                         Nom de l'accompagnateur:
                                                                                     </label>
-                                                                                    <input type="text" name="nom_acc[]" id="modification-nom_acc" class="form-control" value="<?= !empty($info['nom_acc']) ? $info['nom_acc'] : '' ?>" required>
+                                                                                    <input type="text" name="nom_acc[]" id="modification-nom_acc-<?php echo $reservation['num_res'] . '-' . $accompagnateur['num_acc']; ?>" class="form-control" value="<?= !empty($info['nom_acc']) ? $info['nom_acc'] : '' ?>" required>
                                                                                 </div>
 
                                                                                 <!-- Le champs contact_acc -->
                                                                                 <div class="col-md-4 mb-3">
-                                                                                    <label for="modification-contact_acc">
+                                                                                    <label for="modification-contact_acc-<?php echo $reservation['num_res']; ?>">
                                                                                         Contact:
                                                                                     </label>
-                                                                                    <input type="text" name="contact_acc[]" id="modification-contact_acc" class="form-control" value="<?= !empty($info['contact']) ? $info['contact'] : '' ?>" required>
+                                                                                    <input type="text" name="contact_acc[]" id="modification-contact_acc-<?php echo $reservation['num_res'] . '-' . $accompagnateur['num_acc']; ?>" class="form-control" value="<?= !empty($info['contact']) ? $info['contact'] : '' ?>" required>
                                                                                 </div>
 
                                                                                 <div class="col-md-2 mb-3" style="display: flex; align-items: flex-end; justify-content: center;">
@@ -248,8 +248,8 @@ include('./app/commum/header_.php');
 
                                                                     <!-- Champ de saisie de mot de passe -->
                                                                     <div class="form-group">
-                                                                        <label for="passwordImput">Mot de passe :</label>
-                                                                        <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Veuillez entrer votre mot de passe" required>
+                                                                        <label for="passwordInput1-<?php echo $reservation['num_res']; ?>">Mot de passe :</label>
+                                                                        <input type="password" name="password" id="passwordInput1-<?php echo $reservation['num_res']; ?>" class="form-control" placeholder="Veuillez entrer votre mot de passe" required>
                                                                     </div>
 
 
@@ -286,8 +286,8 @@ include('./app/commum/header_.php');
                                                                     <!-- Début du formulaire de modification du profil -->
                                                                     <input type="hidden" name="reservation_id" value="<?php echo $reservation['num_res']; ?>">
                                                                     <div class="form-group">
-                                                                        <label for="passwordImput" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour supprimer la réservation de la chambre <?php echo $reservation['num_chambre']; ?></label>
-                                                                        <input type="password" name="password" id="passwordImput" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="" required>
+                                                                        <label for="passwordImput2-<?php echo $reservation['num_res']; ?>" class="col-12 col-form-label" style="color: #070b3a;">Veuillez entrer votre mot de passe pour supprimer la réservation de la chambre <?php echo $reservation['num_chambre']; ?></label>
+                                                                        <input type="password" name="password" id="passwordImput2-<?php echo $reservation['num_res']; ?>" class="form-control" placeholder="Veuillez entrer votre mot de passe" value="" required>
                                                                     </div>
 
                                                                     <div class="modal-footer">

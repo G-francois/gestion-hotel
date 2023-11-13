@@ -2182,13 +2182,13 @@ function recuperer_liste_reservations($num_clt = null): array
 	if (!is_null($db)) {
 
 		if (is_null($num_clt)) {
-			$requette = 'SELECT * FROM reservations WHERE est_supprimer=0';
+			$requette = 'SELECT * FROM reservations WHERE est_actif=1, est_supprimer=0';
 
 			$verifier_liste_reservations = $db->prepare($requette);
 
 			$resultat = $verifier_liste_reservations->execute();
 		} elseif (!is_null($num_clt)) {
-			$requette = 'SELECT * FROM reservations WHERE num_clt=:num_clt and est_supprimer=0';
+			$requette = 'SELECT * FROM reservations WHERE num_clt=:num_clt and est_actif=1 and est_supprimer=0';
 
 			$verifier_liste_reservations = $db->prepare($requette);
 

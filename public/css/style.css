@@ -1816,7 +1816,7 @@ section {
 
 /*partie chambre*/
 .cc-chambre {
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/soutenance/public/img/page home/febrian-zakaria-sjvU0THccQA-unsplash.jpg') center center fixed no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) center center fixed no-repeat;
 	background-size: cover;
 }
 #bloc_activites {
