@@ -152,8 +152,7 @@ include('./app/commum/header_.php');
               <a href="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" class="gallery-lightbox" data-gall="gallery-item">
                 <img src="<?= $_SESSION['utilisateur_connecter_client']['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $_SESSION['utilisateur_connecter_client']['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
               </a>
-
-
+              
               <div class="mt-3">
                 <h4><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] : 'Pseudo' ?></h4>
                 <p class="mb-1" style="color: white;"><?= isset($_SESSION['utilisateur_connecter_client']) ?  $_SESSION['utilisateur_connecter_client']['profil'] : 'Profil' ?></p>

@@ -1546,9 +1546,9 @@ function supprimer_chambre(int $num_chambre): bool
 	if (!is_null($db)) {
 		$requete = 'DELETE FROM chambre WHERE num_chambre = :num_chambre';
 
-		$supprimer_chambre = $db->prepare($requete);
+		$suppression_reussie = $db->prepare($requete);
 
-		$resultat = $supprimer_chambre->execute([
+		$resultat = $suppression_reussie->execute([
 			'num_chambre' => $num_chambre,
 		]);
 
@@ -2757,6 +2757,38 @@ function recuperer_liste_commandes_client($clientConnecteID)
 
 
 /**
+ * Cette fonction récupère la liste de toutes les commandes.
+ *
+ * @return array|false Un tableau contenant les commandes ou false en cas d'erreur.
+ */
+function recuperer_liste_toutes_commandes()
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		// Requête SQL pour récupérer toutes les commandes
+		$requete = "SELECT c.num_cmd, c.num_res, c.prix_total, c.creer_le FROM commande c WHERE c.est_actif = 1";
+
+		// Préparez la requête
+		$request_prepare = $db->prepare($requete);
+
+		// Exécutez la requête
+		$resultat = $request_prepare->execute();
+
+		// Vérifiez le résultat de la requête
+		if ($resultat) {
+			// Récupérez les commandes sous forme de tableau associatif
+			$commandes = $request_prepare->fetchAll(PDO::FETCH_ASSOC);
+			return $commandes;
+		}
+	}
+
+	// En cas d'erreur ou d'absence de commandes, retournez false
+	return false;
+}
+
+
+/**
  * Cette fonction permet de récupérer la liste des repas par le numero de commande de la base de donnée.
  *
  * @return array $liste_repas la liste_repas
@@ -2926,6 +2958,67 @@ function supprimer_commande(int $num_cmd): bool
 	return $supprimer_commande;
 }
 
+
+/**
+ * Cette fonction permet de supprimer une commande administrateur
+ *
+ * @param  int $num_cmd
+ * @return bool
+ */
+function supprimer_commande_administrateur(int $num_cmd): bool
+{
+
+	$supprimer_commande_administrateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM commande WHERE num_cmd = :num_cmd';
+
+		$suppression_reussie = $db->prepare($requete);
+
+		$resultat = $suppression_reussie->execute([
+			'num_cmd' => $num_cmd,
+		]);
+
+		if ($resultat) {
+			$supprimer_commande_administrateur = true;
+		}
+	}
+
+	return $supprimer_commande_administrateur;
+
+
+
+
+
+	$supprimer_commande = false;
+
+	$date = date("Y-m-d H:i:s");
+
+	$db = connect_db();
+
+	if (is_object($db)) {
+
+		$request = "UPDATE commande SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_cmd= :num_cmd";
+
+		$request_prepare = $db->prepare($request);
+
+		$request_execution = $request_prepare->execute(array(
+			'num_cmd' => $num_cmd,
+			'est_actif' => 0,
+			'est_supprimer' => 1,
+			'maj_le' => $date
+		));
+
+		if ($request_execution) {
+
+			$supprimer_commande = true;
+		}
+	}
+
+	return $supprimer_commande;
+}
 
 /**
  * Cette fonction permet d'enregistrer les messages client

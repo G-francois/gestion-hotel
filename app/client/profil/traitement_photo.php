@@ -6,7 +6,6 @@ $_SESSION['donnees-utilisateur'] = [];
 
 // Initialisation des variables locales
 $donnees = $_SESSION['utilisateur_connecter_client'];
-$donnees = []; // Réinitialisation de $donnees à un tableau vide
 $erreurs = [];
 $new_data = [];
 
@@ -27,6 +26,8 @@ if (!is_dir($dossierUtilisateur)) {
 
 // Initialisation de la variable de session 'donnees-utilisateur' à un tableau vide
 $_SESSION['donnees-utilisateur'] = $new_data;
+
+// die(var_dump($donnees));
 
 // Vérification de la soumission du formulaire
 if (isset($_POST['change_photo'])) {
@@ -74,10 +75,11 @@ if (isset($_POST['change_photo'])) {
                 header('location:' . PATH_PROJECT . 'client/profil');
             }
         } else {
-            $profiledonnees["image"] = $donnees["image_profil"];
+            $profiledonnees["image"] = $donnees["avatar"];
         }
     } else {
         $_SESSION['photo-erreurs'] = "La mise à jour a échoué. Vérifiez votre mot de passe et réessayez.";
-        header('location:' . PATH_PROJECT . 'client/profil');
     }
 }
+
+header('location:' . PATH_PROJECT . 'client/profil');

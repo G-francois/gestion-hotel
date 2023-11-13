@@ -93,7 +93,10 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                         <div class="modal fade" id="details-utilisateur-<?php echo $utilisateur['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-body">
+                                                    <div class="modal-body text-center">
+                                                        <p> 
+                                                            <img src="<?= $utilisateur['avatar'] == 'Aucune_image' ?  PATH_PROJECT . 'public/images/default_profil.JPG' : $utilisateur['avatar'] ?>" style="width: 130px;" alt="Profile" class="rounded-circle" class="img-fluid">
+                                                        </p>
                                                         <p><strong>Téléphone : </strong><?php echo $utilisateur['telephone']; ?></p>
                                                         <p><strong>Email : </strong><?php echo $utilisateur['email']; ?></p>
                                                         <p><strong>Nom d'utilisateur : </strong><?php echo $utilisateur['nom_utilisateur']; ?></p>
@@ -117,20 +120,21 @@ $liste_utilisateur = recuperer_liste_utilisateurs();
                                                     </div>
                                                     <div class="modal-footer float-right">
                                                         <!-- Formulaire d'activation -->
-                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_activer_compte_user" method="POST">
+                                                        <form action="<?= PATH_PROJECT ?>administrateur/users/traitement_activer_compte_user" method="POST">
                                                             <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
-                                                            <button type="submit" class="btn btn-success">Activer</button>
+                                                            <button type="submit" class="btn btn-success" ><i class="fas fa-user-check" title="Activer le compte"></i></button>
                                                         </form>
 
                                                         <!-- Formulaire de désactivation -->
-                                                        <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement_desactiver_compte_user" method="POST">
+                                                        <form action="<?= PATH_PROJECT ?>administrateur/users/traitement_desactiver_compte_user" method="POST">
                                                             <input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
-                                                            <button type="submit" class="btn btn-warning">Désactiver</button>
+                                                            <button type="submit" class="btn btn-warning"><i class="fas fa-user-slash" title="Désactiver le compte"></i></button>
+
                                                         </form>
 
                                                         <!-- Button de suppression modal -->
                                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-utilisateur-<?php echo $utilisateur['id']; ?>">
-                                                            Supprimer
+                                                            <i class="fas fa-user-minus" title="Supprimer le compte"></i>
                                                         </button>
 
                                                         <!-- Modal de suppression -->

@@ -85,7 +85,7 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider"> -->
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -105,7 +105,7 @@
             <div>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="<?= PATH_PROJECT ?>administrateur/profil">
-                        <i class='fas fa-cog'></i>
+                        <i class='fas fa-user-gear'></i>
                         <span>Paramètres</span>
                     </a>
                 </li>

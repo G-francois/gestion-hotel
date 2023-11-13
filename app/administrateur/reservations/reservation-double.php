@@ -18,7 +18,7 @@ include './app/commum/aside.php';
     <div class="pagetitle ">
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard/index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?= PATH_PROJECT ?>administrateur/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active">Ajouter une réservation de chambre double</li>
             </ol>
         </nav>
@@ -48,7 +48,7 @@ include './app/commum/aside.php';
     ?>
 
 
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/traitement-reservation-double" method="post" class="user" novalidate>
+    <form action="<?= PATH_PROJECT ?>administrateur/reservations/traitement-reservation-double" method="post" class="user" novalidate>
 
         <div class="row">
             <!-- Le champ nom -->

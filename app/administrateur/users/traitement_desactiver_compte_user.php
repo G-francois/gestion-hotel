@@ -11,5 +11,5 @@ $utilisateurId = $_POST['utilisateur_id'];
 
  $_SESSION['message-erreur-global'] = $message_erreur_global;
  $_SESSION['message-success-global'] = $message_success_global;
-header('Location: ' . PATH_PROJECT . 'administrateur/dashboard/liste-users');
+header('Location: ' . PATH_PROJECT . 'administrateur/users/liste-users');
 

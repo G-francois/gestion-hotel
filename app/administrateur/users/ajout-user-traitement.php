@@ -73,36 +73,22 @@ if (isset($_POST["nom-utilisateur"]) && !empty($_POST["nom-utilisateur"])) {
     $erreurs["nom-utilisateur"] = "Le champs nom-utilisateur est requis. Veuillez le renseigner.";
 }
 
-if (isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"])) {
-    $password = $_POST["mot-passe"];
-    $pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
-    /* Dans ce code, j'ai ajouté une nouvelle validation pour le champ "mot de passe". J'ai défini le
-	pattern /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ qui vérifie que la chaîne $password respecte les
-	critères suivants :
+// Validation du champ "mot-passe" et "retapez-mot-passe"
+if (isset($_POST["mot-passe"])) {
+	$password = trim($_POST["mot-passe"]);
+	$retapezMotPasse = trim($_POST["retapez-mot-passe"]);
 
-	Au moins 8 caractères
-	Au moins une lettre majuscule
-	Au moins une lettre minuscule
-	Au moins un chiffre
-	Au moins un caractère spécial parmi (@$!%*?&)
-	Ensuite, j'ai utilisé la fonction preg_match() pour valider si le mot de passe correspond au pattern. Si c'est le cas, le mot de passe 
-	est ajouté aux données ($donnees["password"]). Sinon, un message d'erreur approprié est stocké dans le tableau $erreurs["password"].
-	*/
-    if (preg_match($pattern, $password)) {
-        $donnees["mot-passe"] = $password;
-    } else {
-        $erreurs["mot-passe"] = "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (@$!%*?&).";
-    }
-} else {
-    $erreurs["mot-passe"] = "Le champ mot de passe est requis. Veuillez le renseigner.";
-}
-
-if ((isset($_POST["retapez-mot-passe"]) && !empty($_POST["retapez-mot-passe"]) && $_POST["retapez-mot-passe"] != $_POST["mot-passe"])) {
-    $erreurs["retapez-mot-passe"] = "Mot de passe erroné. Entrez le mot de passe du précédent champs";
-}
-
-if ((isset($_POST["mot-passe"]) && !empty($_POST["mot-passe"]) && $_POST["retapez-mot-passe"] == $_POST["mot-passe"])) {
-    $donnees["mot-passe"] = trim(htmlentities($_POST['mot-passe']));
+	if (empty($password)) {
+		$erreurs["mot-passe"] = "Le champ du mot de passe est vide. Veuillez le renseigner.";
+	} elseif (strlen($password) < 8) {
+		$erreurs["mot-passe"] = "Le champ doit contenir au moins 8 caractères. Les espaces ne sont pas pris en compte.";
+	} elseif (empty($retapezMotPasse)) {
+		$erreurs["retapez-mot-passe"] = "Entrez votre mot de passe à nouveau.";
+	} elseif ($password != $retapezMotPasse) {
+		$erreurs["retapez-mot-passe"] = "Mot de passe erroné. Entrez le mot de passe du champ précédent.";
+	} else {
+		$donnees["mot-passe"] = htmlentities($password);
+	}
 }
 
 if (check_email_exist_in_db($_POST["email"])) {
@@ -138,4 +124,4 @@ $_SESSION['donnees-utilisateur'] = $donnees;
 $_SESSION['erreurs-utilisateur'] = $erreurs;
 $_SESSION['ajout-message-success-global'] = $message_success_global;
 $_SESSION['ajout-message-erreur-global'] = $message_erreur_global;
-header('location: ' . PATH_PROJECT . 'administrateur/dashboard/ajout-user');
+header('location: ' . PATH_PROJECT . 'administrateur/users');

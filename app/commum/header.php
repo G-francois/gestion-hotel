@@ -1,4 +1,3 @@
-
 <?php
 // LES SESSIONS UTILISEE LORS DE LA PAGE INSCRIPTION - CONNECTION - MOT DE PASSE OUBLIER DE L'ADMINISTRATEUR 
 if (isset($_SESSION['inscription-erreurs-admin']) && !empty($_SESSION['inscription-erreurs-admin'])) {
@@ -152,6 +151,17 @@ if (isset($_SESSION['erreurs-utilisateur']) && !empty($_SESSION['erreurs-utilisa
     $erreurs = $_SESSION['erreurs-utilisateur'];
 }
 
+
+// LES SESSIONS UTILISEE LORS DE LA PAGE COMMANDE DE L'ADMINISTRATEUR 
+if (isset($_SESSION['donnees-commande']) && !empty($_SESSION['donnees-commande'])) {
+    $donnees = $_SESSION['donnees-commande'];
+}
+
+if (isset($_SESSION['erreurs-commande']) && !empty($_SESSION['erreurs-commande'])) {
+    $erreurs = $_SESSION['erreurs-commande'];
+}
+
+
 ?>
 
 
@@ -203,4 +213,3 @@ if (isset($_SESSION['erreurs-utilisateur']) && !empty($_SESSION['erreurs-utilisa
         }
     </style>
 </head>
-

@@ -51,7 +51,7 @@ $liste_repas = recuperer_liste_repas();
 
         <div class="card-body">
             <div class="table-responsive">
-                <?php 
+                <?php
                 // Vérifie si la liste des repas existe et n'est pas vide
                 if (isset($liste_repas) && !empty($liste_repas)) {
                 ?>
@@ -61,7 +61,7 @@ $liste_repas = recuperer_liste_repas();
                                 <th>Code type</th>
                                 <th>Libellés</th>
                                 <th>Prix</th>
-                                <th>Statut du Repas</th>
+                                <!-- <th>Statut du Repas</th> -->
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -75,7 +75,7 @@ $liste_repas = recuperer_liste_repas();
                                     <td><?php echo $repas['cod_repas']; ?></td>
                                     <td><?php echo $repas['nom_repas']; ?></td>
                                     <td><?php echo $repas['pu_repas']; ?></td>
-                                    <td>
+                                    <!-- <td>
                                         <button class="btn <?php echo ($repas['est_actif'] == 1 && $repas['est_supprimer'] == 0) ? 'btn-success' : 'btn-danger'; ?> ">
                                             <?php
                                             if ($repas['est_actif'] == 1 && $repas['est_supprimer'] == 0) {
@@ -85,11 +85,16 @@ $liste_repas = recuperer_liste_repas();
                                             }
                                             ?>
                                         </button>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <!-- lien bouton pour modifier et supprimer -->
-                                        <a href="<?= PATH_PROJECT ?>administrateur/repas/modifier-repas/<?= $repas['cod_repas'] ?>" class="btn btn-warning">Modifier</a>
-                                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#supprimer-repas-<?= $repas["cod_repas"]; ?>">Supprimer</a>
+                                        <a href="<?= PATH_PROJECT ?>administrateur/repas/modifier-repas/<?= $repas['cod_repas'] ?>" style="margin-right: 20px;">
+                                            <i class="far fa-edit modifier-icon" title="Modifier la chambre"></i>
+                                        </a>
+
+                                        <a href="#" data-toggle="modal" data-target="#supprimer-repas-<?= $repas["cod_repas"]; ?>">
+                                            <i class="far fa-trash-alt supprimer-icon"></i>
+                                        </a>
                                     </td>
                                     <!-- Modal supprimer -->
                                     <div class="modal fade" id="supprimer-repas-<?= $repas["cod_repas"]; ?>" style="display: none;" aria-hidden="true">

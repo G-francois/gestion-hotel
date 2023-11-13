@@ -24,10 +24,10 @@ include './app/commum/aside.php';
 
     <?php
     // Vérifier s'il y a un message de succès et s'il n'est pas vide
-    if (isset($_SESSION['message-success-global']) && !empty($_SESSION['message-success-global'])) {
+    if (isset($_SESSION['ajout-message-success-global']) && !empty($_SESSION['ajout-message-success-global'])) {
     ?>
         <div class="alert alert-primary" style="color: white; background-color: #2653d4; text-align:center; border-color: snow;">
-            <?= $_SESSION['message-success-global'] ?>
+            <?= $_SESSION['ajout-message-success-global'] ?>
         </div>
     <?php
     }
@@ -35,17 +35,17 @@ include './app/commum/aside.php';
 
     <?php
     // Vérifier s'il y a un message d'erreur et s'il n'est pas vide
-    if (isset($_SESSION['message-erreur-global']) && !empty($_SESSION['message-erreur-global'])) {
+    if (isset($_SESSION['ajout-message-erreur-global']) && !empty($_SESSION['ajout-message-erreur-global'])) {
     ?>
         <div class="alert alert-danger" style="color: white; background-color: #9f0808; text-align:center; border-color: snow;">
-            <?= $_SESSION['message-erreur-global'] ?>
+            <?= $_SESSION['ajout-message-erreur-global'] ?>
         </div>
     <?php
     }
     ?>
 
     <!-- Formulaire d'ajout d'utilisateur -->
-    <form action="<?= PATH_PROJECT ?>administrateur/dashboard/ajout-user-traitement" method="post" class="user" novalidate>
+    <form action="<?= PATH_PROJECT ?>administrateur/users/ajout-user-traitement" method="post" class="user" novalidate>
         <div class="form-group row pt-3">
             <!-- Le champ nom -->
             <div class="col-sm-6  mb-2">
