@@ -208,7 +208,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc">Accompagnateur :</label>
-                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" required>
+                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>">
                           <?php if (isset($erreurs["nom_acc"]) && !empty($erreurs["nom_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc"]; ?>
@@ -218,7 +218,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc">Contact de l'accompagnateur :</label>
-                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" required>
+                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>">
                           <?php if (isset($erreurs["contact_acc"]) && !empty($erreurs["contact_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc"]; ?>
@@ -300,7 +300,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc">Accompagnateur :</label>
-                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" required>
+                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>">
                           <?php if (isset($erreurs["nom_acc"]) && !empty($erreurs["nom_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc"]; ?>
@@ -310,7 +310,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc">Contact de l'accompagnateur :</label>
-                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" required>
+                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>">
                           <?php if (isset($erreurs["contact_acc"]) && !empty($erreurs["contact_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc"]; ?>
@@ -323,7 +323,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc2">Accompagnateur 2 :</label>
-                          <input type="text" name="nom_acc2" id="inscription-nom_acc2" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2" value="<?= (isset($donnees["nom_acc2"]) && !empty($donnees["nom_acc2"])) ? $donnees["nom_acc2"] : ""; ?>" required>
+                          <input type="text" name="nom_acc2" id="inscription-nom_acc2" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2" value="<?= (isset($donnees["nom_acc2"]) && !empty($donnees["nom_acc2"])) ? $donnees["nom_acc2"] : ""; ?>">
                           <?php if (isset($erreurs["nom_acc2"]) && !empty($erreurs["nom_acc2"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc2"]; ?>
@@ -333,7 +333,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc2">Contact de l'accompagnateur 2 :</label>
-                          <input type="text" name="contact_acc2" id="inscription-contact-acc2" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 2" value="<?= (isset($donnees["contact_acc2"]) && !empty($donnees["contact_acc2"])) ? $donnees["contact_acc2"] : ""; ?>" required>
+                          <input type="text" name="contact_acc2" id="inscription-contact-acc2" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 2" value="<?= (isset($donnees["contact_acc2"]) && !empty($donnees["contact_acc2"])) ? $donnees["contact_acc2"] : ""; ?>">
                           <?php if (isset($erreurs["contact_acc2"]) && !empty($erreurs["contact_acc2"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc2"]; ?>
@@ -414,7 +414,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc">Accompagnateur :</label>
-                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" data-validation="nom_acc" required>
+                          <input type="text" name="nom_acc" id="inscription-nom_acc" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur" value="<?= (isset($donnees["nom_acc"]) && !empty($donnees["nom_acc"])) ? $donnees["nom_acc"] : ""; ?>" data-validation="nom_acc">
                           <?php if (isset($erreurs["nom_acc"]) && !empty($erreurs["nom_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc"]; ?>
@@ -424,7 +424,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc">Contact de l'accompagnateur :</label>
-                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" data-validation="contact_acc" required>
+                          <input type="text" name="contact_acc" id="inscription-contact-acc" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur" value="<?= (isset($donnees["contact_acc"]) && !empty($donnees["contact_acc"])) ? $donnees["contact_acc"] : ""; ?>" data-validation="contact_acc">
                           <?php if (isset($erreurs["contact_acc"]) && !empty($erreurs["contact_acc"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc"]; ?>
@@ -437,7 +437,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc2">Accompagnateur 2 :</label>
-                          <input type="text" name="nom_acc2" id="inscription-nom_acc2" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2" value="<?= (isset($donnees["nom_acc2"]) && !empty($donnees["nom_acc2"])) ? $donnees["nom_acc2"] : ""; ?>" data-validation="nom_acc2" required>
+                          <input type="text" name="nom_acc2" id="inscription-nom_acc2" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 2" value="<?= (isset($donnees["nom_acc2"]) && !empty($donnees["nom_acc2"])) ? $donnees["nom_acc2"] : ""; ?>" data-validation="nom_acc2">
                           <?php if (isset($erreurs["nom_acc2"]) && !empty($erreurs["nom_acc2"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc2"]; ?>
@@ -447,7 +447,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc2">Contact de l'accompagnateur 2 :</label>
-                          <input type="text" name="contact_acc2" id="inscription-contact-acc2" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 2" value="<?= (isset($donnees["contact_acc2"]) && !empty($donnees["contact_acc2"])) ? $donnees["contact_acc2"] : ""; ?>" data-validation="contact_acc2" required>
+                          <input type="text" name="contact_acc2" id="inscription-contact-acc2" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 2" value="<?= (isset($donnees["contact_acc2"]) && !empty($donnees["contact_acc2"])) ? $donnees["contact_acc2"] : ""; ?>" data-validation="contact_acc2">
                           <?php if (isset($erreurs["contact_acc2"]) && !empty($erreurs["contact_acc2"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc2"]; ?>
@@ -460,7 +460,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc3">Accompagnateur 3 :</label>
-                          <input type="text" name="nom_acc3" id="inscription-nom_acc3" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 3" value="<?= (isset($donnees["nom_acc3"]) && !empty($donnees["nom_acc3"])) ? $donnees["nom_acc3"] : ""; ?>" data-validation="nom_acc3" required>
+                          <input type="text" name="nom_acc3" id="inscription-nom_acc3" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 3" value="<?= (isset($donnees["nom_acc3"]) && !empty($donnees["nom_acc3"])) ? $donnees["nom_acc3"] : ""; ?>" data-validation="nom_acc3">
                           <?php if (isset($erreurs["nom_acc3"]) && !empty($erreurs["nom_acc3"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc3"]; ?>
@@ -470,7 +470,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc3">Contact de l'accompagnateur 3 :</label>
-                          <input type="text" name="contact_acc3" id="inscription-contact-acc3" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 3" value="<?= (isset($donnees["contact_acc3"]) && !empty($donnees["contact_acc3"])) ? $donnees["contact_acc3"] : ""; ?>" data-validation="contact_acc3" required>
+                          <input type="text" name="contact_acc3" id="inscription-contact-acc3" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 3" value="<?= (isset($donnees["contact_acc3"]) && !empty($donnees["contact_acc3"])) ? $donnees["contact_acc3"] : ""; ?>" data-validation="contact_acc3">
                           <?php if (isset($erreurs["contact_acc3"]) && !empty($erreurs["contact_acc3"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc3"]; ?>
@@ -483,7 +483,7 @@ if (!empty($params[3])) {
                         <!-- Le champs nom accompagnateur -->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-nom_acc4">Accompagnateur 4 :</label>
-                          <input type="text" name="nom_acc4" id="inscription-nom_acc4" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 4" value="<?= (isset($donnees["nom_acc4"]) && !empty($donnees["nom_acc4"])) ? $donnees["nom_acc4"] : ""; ?>" data-validation="nom_acc4" required>
+                          <input type="text" name="nom_acc4" id="inscription-nom_acc4" class="form-control" placeholder="Veuillez entrer le nom de l'accompagnateur 4" value="<?= (isset($donnees["nom_acc4"]) && !empty($donnees["nom_acc4"])) ? $donnees["nom_acc4"] : ""; ?>" data-validation="nom_acc4">
                           <?php if (isset($erreurs["nom_acc4"]) && !empty($erreurs["nom_acc4"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["nom_acc4"]; ?>
@@ -493,7 +493,7 @@ if (!empty($params[3])) {
                         <!-- Le champs contact accompagnateur-->
                         <div class="col-md-6 mb-3">
                           <label for="inscription-contact-acc4">Contact de l'accompagnateur 4 :</label>
-                          <input type="text" name="contact_acc4" id="inscription-contact-acc4" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 4" value="<?= (isset($donnees["contact_acc4"]) && !empty($donnees["contact_acc4"])) ? $donnees["contact_acc4"] : ""; ?>" data-validation="contact_acc4" required>
+                          <input type="text" name="contact_acc4" id="inscription-contact-acc4" class="form-control" placeholder="Veuillez entrer le contact de l'accompagnateur 4" value="<?= (isset($donnees["contact_acc4"]) && !empty($donnees["contact_acc4"])) ? $donnees["contact_acc4"] : ""; ?>" data-validation="contact_acc4">
                           <?php if (isset($erreurs["contact_acc4"]) && !empty($erreurs["contact_acc4"])) { ?>
                             <span class="text-danger">
                               <?php echo $erreurs["contact_acc4"]; ?>
