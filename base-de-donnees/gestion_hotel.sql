@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 20 oct. 2023 à 12:26
+-- Généré le : jeu. 16 nov. 2023 à 10:50
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `gestion_hotel`
+-- Base de données : `gestion-hotel`
 --
 
 -- --------------------------------------------------------
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `chambre` (
   `creer_le` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `maj_le` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`num_chambre`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `chambre`
@@ -68,12 +68,12 @@ CREATE TABLE IF NOT EXISTS `chambre` (
 
 INSERT INTO `chambre` (`num_chambre`, `cod_typ`, `lib_typ`, `details`, `personnes`, `superficies`, `pu`, `photos`, `est_actif`, `est_supprimer`, `creer_le`, `maj_le`) VALUES
 (1, 1, 'Solo', 'La chambre solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber. Elle a une superficie de 30m² et ne peut accueillir qu\'un seul voyageur.', '1', '30m²', 15000, '/soutenance/public/images/upload/Solo/Solo.jpg', 1, 0, '2023-10-13 17:47:09', '2023-10-16 08:38:12'),
-(2, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles.jpg', 1, 0, '2023-10-13 17:53:03', '2023-10-20 08:55:07'),
-(3, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples.jpg', 0, 1, '2023-10-13 17:53:23', '2023-10-20 08:38:25'),
-(4, 4, 'Suite', 'Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable. Elle a une superficie de 100m² et peut accueillir jusqu\'à cinq voyageurs.', '5', '100m²', 50000, '/soutenance/public/images/upload/Suite/Suites.jpg', 1, 0, '2023-10-13 17:53:36', '2023-10-17 15:12:01'),
+(2, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles.jpg', 1, 0, '2023-10-13 17:53:03', '2023-11-13 12:31:38'),
+(3, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples.jpg', 1, 0, '2023-10-13 17:53:23', '2023-11-13 13:18:40'),
+(4, 4, 'Suite', 'Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable. Elle a une superficie de 100m² et peut accueillir jusqu\'à cinq voyageurs.', '5', '100m²', 50000, '/soutenance/public/images/upload/Suite/Suites.jpg', 1, 0, '2023-10-13 17:53:36', '2023-11-13 12:32:32'),
 (5, 1, 'Solo', 'La chambre solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber. Elle a une superficie de 30m² et ne peut accueillir qu\'un seul voyageur.', '1', '30m²', 15000, '/soutenance/public/images/upload/Solo/Solo2.jpg', 1, 0, '2023-10-13 17:55:01', NULL),
 (6, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles2.jpg', 1, 0, '2023-10-13 17:55:15', NULL),
-(7, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples3.jpg', 1, 0, '2023-10-13 17:57:14', '2023-10-16 11:36:09'),
+(7, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples3.jpg', 1, 0, '2023-10-13 17:57:14', '2023-11-13 15:17:44'),
 (8, 4, 'Suite', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '5', '100m²', 50000, '/soutenance/public/images/upload/Triples/Suites3.jpg', 1, 0, '2023-10-13 17:57:29', '2023-10-13 17:06:05'),
 (9, 1, 'Solo', 'La chambre solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber. Elle a une superficie de 30m² et ne peut accueillir qu\'un seul voyageur.', '1', '30m²', 15000, '/soutenance/public/images/upload/Solo/Solo3.jpg', 1, 0, '2023-10-13 17:58:35', '2023-10-16 07:58:57'),
 (10, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles3.jpg', 1, 0, '2023-10-13 17:59:56', NULL),
@@ -88,7 +88,7 @@ INSERT INTO `chambre` (`num_chambre`, `cod_typ`, `lib_typ`, `details`, `personne
 (19, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples5.jpg', 1, 0, '2023-10-13 18:12:09', NULL),
 (20, 4, 'Suite', 'Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable. Elle a une superficie de 100m² et peut accueillir jusqu\'à cinq voyageurs.', '5', '100m²', 50000, '/soutenance/public/images/upload/Suite/Suite5.jpg', 1, 0, '2023-10-13 18:12:28', NULL),
 (21, 1, 'Solo', 'La chambre solo allie confort et fonctionnalité dans un esprit simple et chaleureux. La taille de la chambre et la vue sur la petite cour pavée rappellent Paris et ses ruelles d’antan. Devant le pupitre, le solitaire peut prendre la plume… Rien ne viendra le perturber. Elle a une superficie de 30m² et ne peut accueillir qu\'un seul voyageur.', '1', '30m²', 15000, '/soutenance/public/images/upload/Solo/Solo6.jpg', 1, 0, '2023-10-13 18:13:43', NULL),
-(22, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles4 (2).jpg', 1, 0, '2023-10-13 18:16:05', NULL),
+(22, 2, 'Doubles', 'Profitez du balcon et de la vue sur l\'esplanade. Cette chambre est conçue pour héberger deux personnes et est équipée d\'un grand lit standard (140-160*200) ou de deux lits simples (90*200) et a une superficie de 50m².', '2', '50m²', 25000, '/soutenance/public/images/upload/Doubles/Doubles4 (2).jpg', 1, 0, '2023-10-13 18:16:05', '2023-11-09 09:18:38'),
 (23, 3, 'Triples', 'Idéal pour les excursions en petits groupes. Elle est équipée de 3 couchages et peut donc accueillir 3 personnes. La configuration peut être 3 lits d\'une personne ou bien 1 lit double de 2 personnes et 1 d\'une personne avec un canapé et a une superficie de 70m².', '3', '70m²', 35000, '/soutenance/public/images/upload/Triples/Triples 5.jpg', 1, 0, '2023-10-13 18:17:01', NULL),
 (24, 4, 'Suite', 'Il possède généralement une salle de bain attenante, un salon et la plupart du temps, un coin repas avec une vue imprenable. Elle a une superficie de 100m² et peut accueillir jusqu\'à cinq voyageurs.', '5', '100m²', 50000, '/soutenance/public/images/upload/Suite/Suites5.jpg', 1, 0, '2023-10-13 18:17:29', NULL);
 
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `repas` (
   `creer_le` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `maj_le` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`cod_repas`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `repas`
@@ -275,15 +275,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `creer_le` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `maj_le` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
-
---
--- Déchargement des données de la table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `sexe`, `telephone`, `email`, `nom_utilisateur`, `avatar`, `profil`, `mot_passe`, `est_actif`, `est_supprimer`, `creer_le`, `maj_le`) VALUES
-(1, 'GNONHOUE', 'Fran&ccedil;ois', NULL, NULL, 'francois.gnonhoue@gmail.co', 'neon_229', 'Aucune_image', 'CLIENT', '6c3a4053dcac0b7068bff91cc765475ae7256801', 1, 0, '2023-10-20 11:56:52', NULL),
-(2, 'GNONHOUE', 'François ', 'Masculin', '62929439', 'francois.gnonhoue@gmail.com', 'FRANCHESCO', 'Aucune_image', 'ADMINISTRATEUR', 'f840a916ffd473dd637aa23000691527d1d2231c', 1, 0, '2023-10-20 12:03:07', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Contraintes pour les tables déchargées
