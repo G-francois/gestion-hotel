@@ -2988,36 +2988,6 @@ function supprimer_commande_administrateur(int $num_cmd): bool
 
 	return $supprimer_commande_administrateur;
 
-
-
-
-
-	$supprimer_commande = false;
-
-	$date = date("Y-m-d H:i:s");
-
-	$db = connect_db();
-
-	if (is_object($db)) {
-
-		$request = "UPDATE commande SET  est_actif = :est_actif, est_supprimer = :est_supprimer, maj_le = :maj_le WHERE num_cmd= :num_cmd";
-
-		$request_prepare = $db->prepare($request);
-
-		$request_execution = $request_prepare->execute(array(
-			'num_cmd' => $num_cmd,
-			'est_actif' => 0,
-			'est_supprimer' => 1,
-			'maj_le' => $date
-		));
-
-		if ($request_execution) {
-
-			$supprimer_commande = true;
-		}
-	}
-
-	return $supprimer_commande;
 }
 
 /**
@@ -3178,49 +3148,48 @@ function supprimer_messages(int $id): bool
 }
 
 
+/* function liste_reservations($page = null, $nom_acc = null, $typ_chambre = null): array
+{
+	$liste_reservations = [];
+	$nb_reservations_par_page = 10;
+	$db = connect_db();
+	if (is_object($db)) {
+		$conditions = [];
+		$params = [];
 
+		if (!is_null($page)) {
+			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
+			$params['page'] = $page;
+			$params['limit'] = $nb_reservations_par_page * $page;
 
-// function liste_reservations($page = null, $nom_acc = null, $typ_chambre = null): array
-// {
-// 	$liste_reservations = [];
-// 	$nb_reservations_par_page = 10;
-// 	$db = connect_db();
-// 	if (is_object($db)) {
-// 		$conditions = [];
-// 		$params = [];
+			if (!is_null($nom_acc)) {
+				$conditions[] = "a.nom_acc LIKE :nom_acc";
+				$params['nom_acc'] = '%' . $nom_acc . '%';
+			}
 
-// 		if (!is_null($page)) {
-// 			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
-// 			$params['page'] = $page;
-// 			$params['limit'] = $nb_reservations_par_page * $page;
+			if (!is_null($typ_chambre)) {
+				$conditions[] = "r.typ_chambre = :typ_chambre";
+				$params['typ_chambre'] = $typ_chambre;
+			}
+		} else {
+			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
+		}
 
-// 			if (!is_null($nom_acc)) {
-// 				$conditions[] = "a.nom_acc LIKE :nom_acc";
-// 				$params['nom_acc'] = '%' . $nom_acc . '%';
-// 			}
+		// Construire la condition WHERE
+		$whereClause = implode(' AND ', $conditions);
 
-// 			if (!is_null($typ_chambre)) {
-// 				$conditions[] = "r.typ_chambre = :typ_chambre";
-// 				$params['typ_chambre'] = $typ_chambre;
-// 			}
-// 		} else {
-// 			$conditions[] = "r.est_actif = 1 AND r.est_supprime = 0";
-// 		}
+		// Construire la requête SQL complète avec une jointure sur la table de listes d'accompagnateurs
+		$sql = "SELECT r.* FROM reservations r INNER JOIN listes_accompagnateurs_reservation a ON r.num_res = a.num_res
+            WHERE $whereClause ORDER BY r.num_res DESC LIMIT :page, :limit";
 
-// 		// Construire la condition WHERE
-// 		$whereClause = implode(' AND ', $conditions);
+		$stmt = $db->prepare($sql);
+		$stmt->execute($params);
 
-// 		// Construire la requête SQL complète avec une jointure sur la table de listes d'accompagnateurs
-// 		$sql = "SELECT r.* FROM reservations r INNER JOIN listes_accompagnateurs_reservation a ON r.num_res = a.num_res
-//             WHERE $whereClause ORDER BY r.num_res DESC LIMIT :page, :limit";
-
-// 		$stmt = $db->prepare($sql);
-// 		$stmt->execute($params);
-
-// 		$liste_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// 	}
-// 	return $liste_reservations;
-// }
+		$liste_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	return $liste_reservations;
+}
+ */
 
 
 /**
@@ -3235,7 +3204,7 @@ function recuperer_liste_client(): array
 
 	if (!is_null($db)) {
 
-		$requette = 'SELECT * FROM clt';
+		$requette = 'SELECT * FROM utilisateur';
 
 		$verifier_liste_client = $db->prepare($requette);
 
@@ -3273,6 +3242,103 @@ function recuperer_liste_des_reservations(): array
 		}
 	}
 	return $liste_des_reservations;
+}
+
+
+
+
+/**
+ * Cette fonction permet de supprimer une commande administrateur
+ *
+ * @param  int $num_cmd
+ * @return bool
+ */
+function supprimer_reservations_administrateur(int $num_res): bool
+{
+
+	$supprimer_reservations_administrateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM reservations WHERE num_res = :num_res';
+
+		$suppression_reussie = $db->prepare($requete);
+
+		$resultat = $suppression_reussie->execute([
+			'num_res' => $num_res,
+		]);
+
+		if ($resultat) {
+			$supprimer_reservations_administrateur = true;
+		}
+	}
+
+	return $supprimer_reservations_administrateur;
+
+}
+
+
+/**
+ * Cette fonction permet de supprimer une commande administrateur
+ *
+ * @param  int $num_cmd
+ * @return bool
+ */
+function supprimer_accompagnateur_administrateur(int $num_res): bool
+{
+
+	$supprimer_accompagnateur_administrateur = false;
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+		$requete = 'DELETE FROM listes_accompagnateurs_reservation WHERE num_res = :num_res';
+
+		$suppression_reussie = $db->prepare($requete);
+
+		$resultat = $suppression_reussie->execute([
+			'num_res' => $num_res,
+		]);
+
+		if ($resultat) {
+			$supprimer_accompagnateur_administrateur = true;
+		}
+	}
+
+	return $supprimer_accompagnateur_administrateur;
+
+}
+
+
+/**
+ * Cette fonction permet de récupérer la liste des accompagnateurs par le numero de reservation de la base de donnée.
+ *
+ * @return array $liste_accompagnateurs la liste_accompagnateurs
+ */
+function recuperer_liste_clients($num_res): array
+{
+
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requette = 'SELECT * FROM utiliusateur WHERE num_res = :num_res and est_supprimer = 0';
+
+		$verifier_liste_accompagnateurs = $db->prepare($requette);
+
+		$resultat = $verifier_liste_accompagnateurs->execute([
+			'num_res' => $num_res
+		]);
+
+		if ($resultat) {
+
+			$liste_accompagnateurs = $verifier_liste_accompagnateurs->fetchAll(PDO::FETCH_ASSOC);
+
+			// (var_dump($liste_accompagnateurs));
+		}
+	}
+	return $liste_accompagnateurs;
 }
 
 
