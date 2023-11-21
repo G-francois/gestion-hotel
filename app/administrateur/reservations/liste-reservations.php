@@ -83,11 +83,12 @@ include './app/commum/aside.php';
                             <?php
                             foreach ($liste_reservations as $reservation) {
                             ?>
+
                                 <tr>
                                     <!-- <td><input type="checkbox" name="selection[]" value="<?= $reservation['num_res']; ?>"></td> Case à cocher pour la sélection -->
                                     <td><?php echo $reservation['num_res']; ?></td>
                                     <td><?php echo $reservation['creer_le']; ?></td>
-                                    <td><?php echo "indisponible" ?></td>
+                                    <td><?php echo "Inconnue" ?></td>
                                     <td>
                                         <?= $reservation['deb_occ'] ?>
                                     </td>
@@ -99,11 +100,11 @@ include './app/commum/aside.php';
                                     <td>
                                         <div style="display: flex; align-items: center;">
                                             <!-- Button Détails modal -->
-                                            <i class="far fa-eye details-icon " style="margin-right: 20px;" data-bs-toggle="modal" data-bs-target="#exampleModal-<?= $reservation['num_res']; ?>" title="Voir les détails">
+                                            <i class="far fa-eye details-icon" style="margin-right: 20px;" data-toggle="modal" data-target="#details-reservation-<?= $reservation['num_res']; ?>" title="Voir les détails">
                                             </i>
 
                                             <!-- Modal Détails-->
-                                            <div class="modal fade" id="exampleModal-<?= $reservation['num_res']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="details-reservation-<?= $reservation["num_res"]; ?>" style="display: none;" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -111,7 +112,7 @@ include './app/commum/aside.php';
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
+                                                            <p><strong>Nom(s) & Contact Accompagnateur(s) : </strong> <br>
                                                                 <?php
                                                                 // Récupérer la liste des accompagnateurs pour cette réservation
                                                                 $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);

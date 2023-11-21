@@ -3323,7 +3323,7 @@ function recuperer_liste_clients($num_res): array
 
 	if (!is_null($db)) {
 
-		$requette = 'SELECT * FROM utiliusateur WHERE num_res = :num_res and est_supprimer = 0';
+		$requette = 'SELECT * FROM utilisateur WHERE num_res = :num_res and est_supprimer = 0';
 
 		$verifier_liste_accompagnateurs = $db->prepare($requette);
 

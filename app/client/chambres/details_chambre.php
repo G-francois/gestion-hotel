@@ -138,15 +138,16 @@ if (!empty($params[3])) {
                 <?php
                 if (check_if_user_connected_client()) {
                 ?>
-                  <h5 style=" text-align:center; margin-bottom: 20px;">
-                    Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>.
-                    Après cette réservation vous pouvez consulter
-                    <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
-                      la liste de vos réservations
-                    </a>.
-                  </h5>
 
                   <?php if ($chambre['lib_typ'] === 'Solo') { ?>
+                    <h5 style=" text-align:center; margin-bottom: 20px;">
+                      Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>.
+                      Après cette réservation vous pouvez consulter
+                      <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
+                        la liste de vos réservations
+                      </a>.
+                    </h5>
+
                     <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-solo" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
 
                       <div class="row">
@@ -203,6 +204,14 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Doubles') { ?>
+                    <h5 style=" text-align:center; margin-bottom: 20px;">
+                      Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>. Pour procéder à la réservation de ce type de chambre, veuillez fournir les informations d'un accompagnateur.
+                      Après cette réservation vous pouvez consulter
+                      <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
+                        la liste de vos réservations
+                      </a>.
+                    </h5>
+
                     <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-double" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="row">
                         <!-- Le champs nom accompagnateur -->
@@ -279,10 +288,18 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Triples') { ?>
+                    <h5 style=" text-align:center; margin-bottom: 20px;">
+                      Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>. Pour procéder à la réservation de ce type de chambre, veuillez fournir les informations d'un accompagnateur.
+                      Après cette réservation vous pouvez consulter
+                      <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
+                        la liste de vos réservations
+                      </a>.
+                    </h5>
+
                     <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-triple" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="col-md-6 mb-3">
                         <label for="nombre-accompagnateurs">Nombre d'accompagnateurs :</label>
-                        
+
                         <select name="nombre_accompagnateurs" id="nombre-accompagnateurs" class="form-control" onchange="toggleAccompagnateursFields()">
                           <option value="0">Aucun</option>
                           <?php
@@ -395,6 +412,14 @@ if (!empty($params[3])) {
                   <?php } ?>
 
                   <?php if ($chambre['lib_typ'] === 'Suite') { ?>
+                    <h5 style=" text-align:center; margin-bottom: 20px;">
+                      Réserver maintenant cher client <?= $_SESSION['utilisateur_connecter_client']['nom_utilisateur'] ?>. Pour procéder à la réservation de ce type de chambre, veuillez fournir les informations d'un accompagnateur.
+                      Après cette réservation vous pouvez consulter
+                      <a class="" href="<?= PATH_PROJECT ?>client/liste_des_reservations">
+                        la liste de vos réservations
+                      </a>.
+                    </h5>
+
                     <form action="<?= PATH_PROJECT . "client/chambres/traitement-reservation-suit" ?><?= !empty($params[3]) ? "/" . $params[3] : "" ?>" method="post" class="user">
                       <div class="col-md-6 mb-3">
                         <label for="nombre-accompagnateurs">Nombre d'accompagnateurs :</label>
@@ -585,45 +610,44 @@ if (!empty($params[3])) {
 
 <script>
   // Fonction pour afficher/cacher les ensembles de champs d'accompagnateurs en fonction du nombre sélectionné
- function toggleAccompagnateursFields() {
-  var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
+  function toggleAccompagnateursFields() {
+    var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
 
-  for (var i = 1; i <= 4; i++) {
-    var accompagnateurFields = document.getElementById("accompagnateur-" + i);
+    for (var i = 1; i <= 4; i++) {
+      var accompagnateurFields = document.getElementById("accompagnateur-" + i);
 
-    if (accompagnateurFields) {
-      // Vérifier si l'élément existe avant d'accéder à sa propriété style
-      if (i <= nombreAccompagnateurs) {
-        accompagnateurFields.style.display = "flex";
+      if (accompagnateurFields) {
+        // Vérifier si l'élément existe avant d'accéder à sa propriété style
+        if (i <= nombreAccompagnateurs) {
+          accompagnateurFields.style.display = "flex";
+        } else {
+          accompagnateurFields.style.display = "none";
+        }
       } else {
-        accompagnateurFields.style.display = "none";
+        console.error("Element not found: accompagnateur-" + i);
       }
-    } else {
-      console.error("Element not found: accompagnateur-" + i);
     }
   }
-}
 
 
-function toggleAccompagnateursFields() {
-  var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
+  function toggleAccompagnateursFields() {
+    var nombreAccompagnateurs = parseInt(document.getElementById("nombre-accompagnateurs").value);
 
-  for (var i = 1; i <3; i++) {
-    var accompagnateurFields = document.getElementById("accompagnateur-" + i);
+    for (var i = 1; i < 3; i++) {
+      var accompagnateurFields = document.getElementById("accompagnateur-" + i);
 
-    if (accompagnateurFields) {
-      // Vérifier si l'élément existe avant d'accéder à sa propriété style
-      if (i <= nombreAccompagnateurs) {
-        accompagnateurFields.style.display = "flex";
+      if (accompagnateurFields) {
+        // Vérifier si l'élément existe avant d'accéder à sa propriété style
+        if (i <= nombreAccompagnateurs) {
+          accompagnateurFields.style.display = "flex";
+        } else {
+          accompagnateurFields.style.display = "none";
+        }
       } else {
-        accompagnateurFields.style.display = "none";
+        console.error("Element not found: accompagnateur-" + i);
       }
-    } else {
-      console.error("Element not found: accompagnateur-" + i);
     }
   }
-}
-
 </script>
 
 <script>
