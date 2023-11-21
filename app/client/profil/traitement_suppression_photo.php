@@ -12,8 +12,8 @@ if (isset($_POST['supprimer_photo'])) {
     // Vérifie si le mot de passe fourni correspond au mot de passe de l'utilisateur connecté
     if (check_password_exist(($_POST['password']), $_SESSION['utilisateur_connecter_client']['id'])) {
 
-        // Met à jour l'avatar de l'utilisateur avec 'no_image'
-        if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_client']['id'], 'no_image')) {
+        // Met à jour l'avatar de l'utilisateur avec 'Aucune_image'
+        if (mise_a_jour_avatar($_SESSION['utilisateur_connecter_client']['id'], 'Aucune_image')) {
 
             // Récupère les nouvelles informations de l'utilisateur après la mise à jour
             $new_user_data = recuperer_mettre_a_jour_informations_utilisateur($_SESSION['utilisateur_connecter_client']['id']);
