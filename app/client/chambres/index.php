@@ -135,17 +135,31 @@ $types = liste_types();
           }
           ?>
 
+            <!-- <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <?php if ($page > 1) : ?>
+                  <li class="page-item"><a class="page-link" href="<?= PATH_PROJECT . 'client/chambres/index/' ?><?= $page - 1 ?>">Précédent</a></li>
+                <?php endif; ?>
+                <li class="page-item active"><a class="page-link" href="#"><?= $page ?></a></li>
+                <?php if (!empty($liste_chambres)) : ?>
+                  <li class="page-item"><a class="page-link" href="<?= PATH_PROJECT . 'client/chambres/index/' ?><?= $page + 1 ?>">Suivant</a></li>
+                <?php endif; ?>
+              </ul>
+            </nav> -->
+
+
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <?php if ($page > 1) : ?>
                 <li class="page-item"><a class="page-link" href="<?= PATH_PROJECT . 'client/chambres/index/' ?><?= $page - 1 ?>">Précédent</a></li>
               <?php endif; ?>
               <li class="page-item active"><a class="page-link" href="#"><?= $page ?></a></li>
-              <?php if (!empty($liste_chambres)) : ?>
+              <?php if (!empty($liste_chambres) && count($liste_chambres) == 9) : ?>
                 <li class="page-item"><a class="page-link" href="<?= PATH_PROJECT . 'client/chambres/index/' ?><?= $page + 1 ?>">Suivant</a></li>
               <?php endif; ?>
             </ul>
           </nav>
+
 
         <?php
         } else {
