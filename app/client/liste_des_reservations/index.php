@@ -96,7 +96,7 @@ include('./app/commum/header_.php');
                                     $afficherBoutonModifier = false;
                                 } else {
                                     // La date de fin de séjour n'est pas encore passée, n'affichez pas le bouton "Supprimer"
-                                    $afficherBoutonSupprimer = true;
+                                    $afficherBoutonSupprimer = false;
                                     // Récupérer le type de chambre pour cette réservation
                                     $type_chambre = recuperer_type_chambre_pour_affichage($reservation['num_chambre']);
                                     // Afficher le bouton "Modifier" uniquement si le type de chambre n'est pas 'Solo'
@@ -133,7 +133,26 @@ include('./app/commum/header_.php');
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
+                                                            <?php if ($type_chambre !== 'Solo') : ?>
+                                                                <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
+                                                                    <?php
+                                                                    // Récupérer la liste des accompagnateurs pour cette réservation
+                                                                    $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);
+
+                                                                    // die(var_dump($accompagnateurs_res));
+
+                                                                    if (empty($accompagnateurs_res)) {
+                                                                        echo '---';
+                                                                    } else {
+                                                                        foreach ($accompagnateurs_res as $accompagnateur) {
+                                                                            echo recuperer_info_accompagnateur($accompagnateur['num_acc'])['nom_acc'] . '   :  ' . recuperer_info_accompagnateur($accompagnateur['num_acc'])['contact'] . '<br>';
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </p>
+                                                            <?php endif; ?>
+
+                                                            <!-- <p><strong>Nom(s) & Contact Accompagnateur(s) </strong> <br>
                                                                 <?php
                                                                 // Récupérer la liste des accompagnateurs pour cette réservation
                                                                 $accompagnateurs_res = recuperer_liste_accompagnateurs($reservation['num_res']);
@@ -148,7 +167,7 @@ include('./app/commum/header_.php');
                                                                     }
                                                                 }
                                                                 ?>
-                                                            </p>
+                                                            </p> -->
 
                                                             <p>
                                                                 <strong>N° de Chambre : </strong>
@@ -270,7 +289,7 @@ include('./app/commum/header_.php');
                                             ?>
 
                                                 <!-- Button supprimer modal -->
-                                                <i class="far fa-trash supprimer-icon" data-bs-toggle="modal" data-bs-target="#exampleModal2-<?= $reservation['num_res']; ?>" title="Supprimer la réservation">
+                                                <i class="far fa-trash-alt supprimer-icon" data-bs-toggle="modal" data-bs-target="#exampleModal2-<?= $reservation['num_res']; ?>" title="Supprimer la réservation">
                                                 </i>
 
                                                 <!-- Modal supprimer -->
