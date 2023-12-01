@@ -64,10 +64,52 @@ if (isset($include_icm_header) && $include_icm_header) {
         .nav-link.active {
             color: #d9ba85;
             /* Couleur du texte */
-            padding: 5px 10px;
+            /* padding: 5px 10px; */
             /* Espacement interne pour une apparence du texte */
-            font-size: larger;
+            /* font-size: larger; */
             /* Taille du texte */
+        }
+    </style>
+
+    <style>
+        #hero {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/hero-bg.jpg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+
+        #hero2 {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/water-165219_1280.jpg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+
+        #hero3 {
+            width: 100%;
+            height: 100vh;
+            background: url("<?= PATH_PROJECT ?>public/images/BG-5.jpeg") top center;
+            background-size: cover;
+            position: relative;
+            padding: 0;
+        }
+
+        .about {
+            background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center;
+            background-size: cover;
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .events {
+            background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center no-repeat;
+            background-size: cover;
+            position: relative;
         }
     </style>
 
@@ -280,10 +322,52 @@ if (isset($include_icm_header) && $include_icm_header) {
                 .nav-link.active {
                     color: #d9ba85;
                     /* Couleur du texte */
-                    padding: 5px 10px;
+                    /* padding: 5px 10px; */
                     /* Espacement interne pour une apparence du texte */
-                    font-size: larger;
+                    /* font-size: larger; */
                     /* Taille du texte */
+                }
+            </style>
+
+            <style>
+                #hero {
+                    width: 100%;
+                    height: 100vh;
+                    background: url("<?= PATH_PROJECT ?>public/images/hero-bg.jpg") top center;
+                    background-size: cover;
+                    position: relative;
+                    padding: 0;
+                }
+
+                #hero2 {
+                    width: 100%;
+                    height: 100vh;
+                    background: url("<?= PATH_PROJECT ?>public/images/water-165219_1280.jpg") top center;
+                    background-size: cover;
+                    position: relative;
+                    padding: 0;
+                }
+
+                #hero3 {
+                    width: 100%;
+                    height: 100vh;
+                    background: url("<?= PATH_PROJECT ?>public/images/BG-5.jpeg") top center;
+                    background-size: cover;
+                    position: relative;
+                    padding: 0;
+                }
+
+                .about {
+                    background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center;
+                    background-size: cover;
+                    position: relative;
+                    padding: 80px 0;
+                }
+
+                .events {
+                    background: url("<?= PATH_PROJECT ?>public/images/about-bg.jpg") center center no-repeat;
+                    background-size: cover;
+                    position: relative;
                 }
             </style>
 

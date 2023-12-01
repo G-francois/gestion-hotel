@@ -3342,6 +3342,34 @@ function recuperer_liste_clients($num_res): array
 }
 
 
+/**
+ * Cette fonction permet de récupérer la liste des repas de la base de donnée.
+ *
+ * @return array $liste_repas La liste des chambre.
+ */
+function recuperer_infos_chambre()
+{
+	$db = connect_db();
+
+	if (!is_null($db)) {
+
+		$requete = 'SELECT * FROM chambre WHERE est_actif = 1';
+
+		$verifier_liste_chambre = $db->prepare($requete);
+
+		$resultat = $verifier_liste_chambre->execute();
+
+		$liste_chambre = array();
+
+		if ($resultat) {
+
+			$liste_chambre = $verifier_liste_chambre->fetchAll(PDO::FETCH_ASSOC);
+		}
+	}
+
+	return $liste_chambre;
+}
+
 /* <?php
 function recuperer_liste_repas() {
     // Utilisez votre propre logique pour établir la connexion à la base de données

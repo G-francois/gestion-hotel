@@ -2,7 +2,7 @@
 require "vendor/autoload.php";
 
 // PROJET VAR
-define('PATH_PROJECT', '/Soutenance/');
+define('PATH_PROJECT', '/soutenance/');
 
 // DATABASE ACCES
 define('DATABASE_HOST', 'localhost');

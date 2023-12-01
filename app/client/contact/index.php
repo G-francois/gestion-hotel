@@ -70,7 +70,7 @@ include('./app/commum/header_.php');
         <?php
         }
         ?>
-        
+
         <form action="<?= PATH_PROJECT ?>client/contact/traitement-contact" method="post" class="php-email-form">
           <?php
           if (!check_if_user_connected_client()) {
@@ -139,7 +139,11 @@ include('./app/commum/header_.php');
 
           <!-- Le champs message-->
           <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="8" placeholder="Veuillez entrer votre message" value="<?= (isset($donnees["message"]) && !empty($donnees["message"])) ? $donnees["message"] : ''; ?>" required></textarea>
+            <label for="inscription-corps">
+              Corps du message :
+              <span class="text-danger">(*)</span>
+            </label>
+            <textarea class="form-control" id="inscription-corps" name="message" rows="8" placeholder="Veuillez entrer votre message" value="<?= (isset($donnees["message"]) && !empty($donnees["message"])) ? $donnees["message"] : ''; ?>" required></textarea>
             <?php if (isset($erreurs["message"]) && !empty($erreurs["message"])) { ?>
               <span class="text-danger">
                 <?php echo $erreurs["message"]; ?>
@@ -161,7 +165,7 @@ include('./app/commum/header_.php');
     </div>
   </div>
 
-  
+
   <div data-aos="fade-up">
     <iframe style="border: 0; width: 100%; height: 450px; padding: 30px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
   </div>
